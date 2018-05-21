@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
 
 import java.util.List;
 
@@ -12,6 +13,9 @@ public interface ElementDao {
 
     @Insert
     void insertAllElements(Element element);
+
+    @Insert
+    void insertElement(Element element);
 
     @Delete
     void delete(Element element);
@@ -27,9 +31,19 @@ public interface ElementDao {
 
     @Query("SELECT COUNT(*) FROM element_table")
     int rowCount();
-    /*
-    @Query("SELECT COUNT(*) FROM element_table WHERE elementID LIKE elementID")
-    Element findElement(String elementID);
-    */
+
+    @Query("SELECT * FROM element_table WHERE elementID LIKE :findElementID")
+    public Cursor findElement(String findElementID);
+
+    @Query("SELECT COUNT(*) FROM element_table WHERE elementID LIKE :findElementID")
+    int rowHitCount(String findElementID);
+
+    @Query("SELECT * FROM ELEMENT_TABLE")
+    List<Element> getAll();
+
+    @Insert
+    void insertAll(Element... elements);
+
+
 }
 

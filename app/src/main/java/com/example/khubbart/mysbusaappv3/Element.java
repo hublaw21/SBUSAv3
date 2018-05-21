@@ -21,16 +21,19 @@ public class Element {
     }
 
     public String getElementID() {return elementID;}
-    public  void setElementID(String elementID) { this.elementID = elementID;}
+    public  void setElementID() { this.elementID = elementID;}
     public String getElementName() {return elementName;}
     public  void setElementName(String elementName) { this.elementName = elementName;}
 
-    public static Element[] populateElementTable(){
-        return new Element[]{
-                new Element("1T", "Single Toe"),
-                new Element("1S", "Single Salchow"),
-                new Element("1F", "Single Flip"),
-                new Element("1A", "Single Axel")
+    /*
+    public static Element [] populateElementTable() {
+        return new Element [] {
+            new Element("1T", "Single Toe"),
+            new Element("1S", "Single Salchow"),
+            new Element("1F", "Single Flip"),
+            new Element("1A", "Single Axel")
         };
     }
+    */
+
 }
