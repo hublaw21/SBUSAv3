@@ -17,18 +17,23 @@ public abstract class ElementDatabase extends RoomDatabase {
 
     private static ElementDatabase INSTANCE;
 
-    static ElementDatabase getInstance(final Context context) {
+    public static ElementDatabase getInstance(final Context context) {
         if (INSTANCE == null) {
             synchronized (ElementDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            ElementDatabase.class, "element_table")
+                            ElementDatabase.class,
+                            "element_table")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
+    }
+
+    public static void destroyInstance(){
+        INSTANCE = null;
     }
 
    /**

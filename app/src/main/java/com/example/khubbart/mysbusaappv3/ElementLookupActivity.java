@@ -39,7 +39,8 @@ public class ElementLookupActivity extends AppCompatActivity {
     public RadioGroup rgRevs;
     public String jumpCode = "T";
     public String revCode = "1";
-
+    public String[][] elementTable = {{"1F","Single Flip"},{"1S","Single Salchow"}};
+    public Integer elementTableRowCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +53,14 @@ public class ElementLookupActivity extends AppCompatActivity {
         buttonSubmit = findViewById(R.id.buttonSubmit);
         rgJump = findViewById(R.id.radioGroupJumps);
         rgRevs = findViewById(R.id.radioGroupRevs);
-
+        elementTableRowCount = getResources().getInteger(R.integer.elementTableRowCount);
         //whenever the activity is started, it reads data from database and stores it into local array list 'elements'
         final ElementDatabase elementDatabase = Room.databaseBuilder(getApplicationContext(),
                 ElementDatabase.class,
                 "element_table")
                 .allowMainThreadQueries() // take out for final
                 .build();
+
 
         rgJump.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -136,6 +138,7 @@ public class ElementLookupActivity extends AppCompatActivity {
     }
         public void updateElement(){
             elementCode = revCode + jumpCode;
+            elementCode = elementTable[1][1];
             textViewElementLookupResult.setText(elementCode);
            /*
             cursor = elementDatabase.elementDao().findElement(elementCode);
@@ -146,7 +149,8 @@ public class ElementLookupActivity extends AppCompatActivity {
                 newElementName = "Not Found";
             }
             */
-            textViewElementLookupResult.setText(newElementName);
+            //textViewElementLookupResult.setText(newElementName);
         }
+
 
 }
