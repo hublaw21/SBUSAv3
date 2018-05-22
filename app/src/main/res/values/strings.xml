@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MySBUSAAppV3</string>
+    <string name="jump_Axel">Axel</string>
+    <string name="jump_Toe">Toe</string>
+    <string name="jump_Loop">Loop</string>
+    <string name="jump_Flip">Flip</string>
+    <string name="jump_Lutz">Lutz</string>
+    <string name="jump_Salchow">Salchow</string>
+    <string name="single">Single</string>
+    <string name="duble">Double</string>
+    <string name="triple">Triple</string>
+    <string name="quad">Quad</string>
+
 </resources>

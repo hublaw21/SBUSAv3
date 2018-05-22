@@ -31,27 +31,7 @@ public abstract class ElementDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-/*
-    private static ElementDatabase buildDatabase (final Context context){
-        return Room.databaseBuilder(context,
-                ElementDatabase.class,
-                "element_table")
-                .addCallback(new Callback() {
-                    @Override
-                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                        super.onCreate(db);
-                        Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                getInstance(context).elementDao().insertAll(Element.populateElementTable());
-                            }
-                        });
-                    }
-                })
-                .build();
-    }
-*/
-    /**
+   /**
      * Override the onOpen method to populate the database.
      * For this sample, we clear the database every time it is created or opened.
      */
@@ -94,25 +74,4 @@ public abstract class ElementDatabase extends RoomDatabase {
             return null;
         }
     }
-    /*
-    public static Element populateElementTable() {
-        ElementDatabase.elementDao().insertElement(element("1T", "Single Toe"));
-        ,
-                new Element("1S", "Single Salchow"),
-                new Element("1F", "Single Flip"),
-                new Element("1A", "Single Axel")
-        };
-    }
-    */
-
-    /*
-    public static Element[] populateElementTable() {
-        return new Element[] {
-            new Element("1T", "Single Toe"),
-            new Element("1S", "Single Salchow"),
-            new Element("1F", "Single Flip"),
-            new Element("1A", "Single Axel")
-        };
-    }
-    */
 }

@@ -24,9 +24,6 @@ public interface ElementDao {
     void deleteAllElements();
 
     @Query("SELECT * FROM element_table ORDER BY elementID ASC")  //original working
-        //@Query("SELECT * from element_table ORDER BY element ASC")  //original working
-        // @Query("SELECT * from element_table ORDER BY elementID ASC") // first multi-field attempt
-        //LiveData<List<Element>> getAllElements();
     List<Element> getAllElements();
 
     @Query("SELECT COUNT(*) FROM element_table")
