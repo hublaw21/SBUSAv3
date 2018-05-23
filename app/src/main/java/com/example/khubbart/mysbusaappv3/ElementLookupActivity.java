@@ -22,6 +22,7 @@ import java.util.ListIterator;
 
 public class ElementLookupActivity extends AppCompatActivity {
 
+    /*
     public ElementDatabase elementDatabase;
     public List<Element> elements;
     public TextView textViewElementLookup01;
@@ -32,14 +33,18 @@ public class ElementLookupActivity extends AppCompatActivity {
     public Integer rowCount = -1;
     public Button buttonSubmit;
     public String newElementID;
-    public String newElementName;
-    public String elementCode;
     public Element element;
     public Cursor cursor;
+    */
+    public TextView textViewElementDetailName;
+    public TextView textViewElementDetailBaseValue;
+    public String elementCode;
+    public String newElementName;
+    public String newElementBaseValue;
     public RadioGroup rgJump;
     public RadioGroup rgRevs;
-    public String jumpCode;
-    public String revCode;
+    public String jumpCode = "T";
+    public String revCode = "1";
     public Integer i = 0;
     public Integer j;
     public String[][] elementTable = {
@@ -324,22 +329,25 @@ public class ElementLookupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
-        textViewElementLookup01 = findViewById(R.id.textView2);
-        textViewElementLookupResult = findViewById(R.id.textViewElementResult);
-        textView3 = findViewById(R.id.textView3);
-        edit_elementID = findViewById(R.id.edit_elementID);
+        //textViewElementLookup01 = findViewById(R.id.textView2);
+        //textViewElementLookupResult = findViewById(R.id.textViewElementResult);
+        //textView3 = findViewById(R.id.textView3);
+        //edit_elementID = findViewById(R.id.edit_elementID);
         //edit_elementName = findViewById(R.id.edit_elementName);
-        buttonSubmit = findViewById(R.id.buttonSubmit);
+        //buttonSubmit = findViewById(R.id.buttonSubmit);
+        textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
+        textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
         rgJump = findViewById(R.id.radioGroupJumps);
         rgRevs = findViewById(R.id.radioGroupRevs);
         //elementTableRowCount = getResources().getInteger(R.integer.elementTableRowCount);
         //whenever the activity is started, it reads data from database and stores it into local array list 'elements'
+        /*
         final ElementDatabase elementDatabase = Room.databaseBuilder(getApplicationContext(),
                 ElementDatabase.class,
                 "element_table")
                 .allowMainThreadQueries() // take out for final
                 .build();
-
+        */
 
         rgJump.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -397,6 +405,7 @@ public class ElementLookupActivity extends AppCompatActivity {
             }
         });
 
+        /*
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -415,22 +424,25 @@ public class ElementLookupActivity extends AppCompatActivity {
                 textViewElementLookupResult.setText(newElementName);
             }
         });
+        */
     }
         public void updateElement() {
             elementCode = revCode + jumpCode;
-            textViewElementLookup01.setText(elementCode);
+            //textViewElementLookup01.setText(elementCode);
             i = 0;
             while(i < elementTableRowCount){
                 if(elementTable[i][1].equals(elementCode)){
                     newElementName = elementTable[i][0];
-                    textViewElementLookupResult.setText(newElementName);
+                    textViewElementDetailName.setText(newElementName);
+                    newElementBaseValue = elementTable[i][5];
+                    textViewElementDetailBaseValue.setText(newElementBaseValue);
                     //i = elementTableRowCount;
-                    j=i;
+                    //j=i;
                 }
                 i = i + 1;
             }
-            textViewElementLookup01.setText(String.valueOf(i));
-            textView3.setText(String.valueOf(j));
+            //textViewElementLookup01.setText(String.valueOf(i));
+            //textView3.setText(String.valueOf(j));
 
             //textViewElementLookup01.setText(String.valueOf(i));
            /*
