@@ -38,9 +38,25 @@ public class ElementLookupActivity extends AppCompatActivity {
     */
     public TextView textViewElementDetailName;
     public TextView textViewElementDetailBaseValue;
+    public TextView textViewElementDetailV1Value;
+    public TextView textViewElementDetailV2Value;
+    public TextView textViewElementDetailGOEm3;
+    public TextView textViewElementDetailGOEm2;
+    public TextView textViewElementDetailGOEm1;
+    public TextView textViewElementDetailGOEp3;
+    public TextView textViewElementDetailGOEp2;
+    public TextView textViewElementDetailGOEp1;
     public String elementCode;
     public String newElementName;
     public String newElementBaseValue;
+    public String newElementV1Value;
+    public String newElementV2Value;
+    public String newElementGOEm3Value;
+    public String newElementGOEm2Value;
+    public String newElementGOEm1Value;
+    public String newElementGOEp1Value;
+    public String newElementGOEp2Value;
+    public String newElementGOEp3Value;
     public RadioGroup rgJump;
     public RadioGroup rgRevs;
     public String jumpCode = "T";
@@ -337,6 +353,14 @@ public class ElementLookupActivity extends AppCompatActivity {
         //buttonSubmit = findViewById(R.id.buttonSubmit);
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
+        textViewElementDetailV1Value = findViewById(R.id.elementDetailV1Value);
+        textViewElementDetailV2Value = findViewById(R.id.elementDetailV2Value);
+        textViewElementDetailGOEm3 = findViewById(R.id.elementDetailGOEm3);
+        textViewElementDetailGOEm2 = findViewById(R.id.elementDetailGOEm2);
+        textViewElementDetailGOEm1 = findViewById(R.id.elementDetailGOEm1);
+        textViewElementDetailGOEp1 = findViewById(R.id.elementDetailGOEp1);
+        textViewElementDetailGOEp2 = findViewById(R.id.elementDetailGOEp2);
+        textViewElementDetailGOEp3 = findViewById(R.id.elementDetailGOEp3);
         rgJump = findViewById(R.id.radioGroupJumps);
         rgRevs = findViewById(R.id.radioGroupRevs);
         //elementTableRowCount = getResources().getInteger(R.integer.elementTableRowCount);
@@ -433,9 +457,26 @@ public class ElementLookupActivity extends AppCompatActivity {
             while(i < elementTableRowCount){
                 if(elementTable[i][1].equals(elementCode)){
                     newElementName = elementTable[i][0];
-                    textViewElementDetailName.setText(newElementName);
                     newElementBaseValue = elementTable[i][5];
+                    newElementV1Value = elementTable[i][6];
+                    newElementV2Value = elementTable[i][7];
+                    newElementGOEm3Value = elementTable[i][10];
+                    newElementGOEm2Value = elementTable[i][9];
+                    newElementGOEm1Value = elementTable[i][8];
+                    newElementGOEp1Value = elementTable[i][4];
+                    newElementGOEp2Value = elementTable[i][3];
+                    newElementGOEp3Value = elementTable[i][2];
+                    textViewElementDetailName.setText(newElementName);
                     textViewElementDetailBaseValue.setText(newElementBaseValue);
+                    textViewElementDetailV1Value.setText(newElementV1Value);
+                    textViewElementDetailV2Value.setText(newElementV2Value);
+                    textViewElementDetailGOEm1.setText(newElementGOEm1Value);
+                    textViewElementDetailGOEm2.setText(newElementGOEm2Value);
+                    textViewElementDetailGOEm3.setText(newElementGOEm3Value);
+                    textViewElementDetailGOEp1.setText(newElementGOEp1Value);
+                    textViewElementDetailGOEp2.setText(newElementGOEp2Value);
+                    textViewElementDetailGOEp3.setText(newElementGOEp3Value);
+
                     //i = elementTableRowCount;
                     //j=i;
                 }

@@ -8,8 +8,8 @@
         android:id="@+id/row_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
-        android:background="#ed8404">
+        android:layout_marginTop="2dp"
+        android:background="@color/colorPrimaryDark">
 
         <TextView
             android:id="@+id/textViewElementDetailName"
@@ -17,46 +17,40 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="4dp"
             android:text="Row 1"
             android:textColor="#fff" />
     </TableRow>
 
     <TableRow
-        android:id="@+id/row_2"
+        android:id="@+id/rowBaseTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_weight=".4"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
             android:text="Base"
             android:textColor="#fff" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
             android:text="V1"
             android:textColor="#fff" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
             android:text="V2"
             android:textColor="#fff" />
     </TableRow>
@@ -65,128 +59,147 @@
         android:id="@+id/rowElementDetailBaseValues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/elementDetailBaseValue"
-            android:layout_width="match_parent"
+            android:layout_weight=".4"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
             android:textColor="#fff" />
 
         <TextView
             android:id="@+id/elementDetailV1Value"
-            android:layout_width="match_parent"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
             android:textColor="#fff" />
 
         <TextView
             android:id="@+id/elementDetailV2Value"
-            android:layout_width="match_parent"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
+            android:text="X"
             android:textColor="#fff" />
     </TableRow>
 
 
     <TableRow
-        android:id="@+id/row_3"
+        android:id="@+id/rowGOETitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
-            android:layout_weight="2"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
-            android:text="Row 3\nColumn 1"
+            android:text="GOE -3"
             android:textColor="#fff" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
-            android:text="Row 3\nColumn 2"
+            android:text="GOE -2"
             android:textColor="#fff" />
 
+        <TextView
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="GOE -1"
+            android:textColor="#fff" />
+
+        <TextView
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="GOE 1"
+            android:textColor="#fff" />
+
+        <TextView
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="GOE 2"
+            android:textColor="#fff" />
+
+        <TextView
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="GOE 3"
+            android:textColor="#fff" />
     </TableRow>
 
     <TableRow
-        android:id="@+id/row_4"
+        android:id="@+id/rowGOEValues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
+        android:background="@color/colorPrimary"
+        android:layout_weight="1">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/elementDetailGOEm3"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
-            android:text="Row 4\nColumn 1"
             android:textColor="#fff" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/elementDetailGOEm2"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:background="#ed8404"
             android:gravity="center"
-            android:padding="8dp"
-            android:text="Row 4\nColumn 2"
             android:textColor="#fff" />
 
+        <TextView
+            android:id="@+id/elementDetailGOEm1"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/elementDetailGOEp1"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/elementDetailGOEp2"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/elementDetailGOEp3"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#fff" />
     </TableRow>
 
-    <TableRow
-        android:id="@+id/row_5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ed8404"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Row 5\nColumn 1"
-            android:textColor="#fff" />
-
-    </TableRow>
-
-    <LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="ViralAndroid.com"
-            android:textColor="#666"
-            android:textSize="33sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 </TableLayout>
