@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MySBUSAAppV3</string>
+    <string name="app_name">SkaterBay USA Code Reference</string>
     <string name="jump_Axel">Axel</string>
     <string name="jump_Toe">Toe</string>
     <string name="jump_Loop">Loop</string>
@@ -10,16 +10,6 @@
     <string name="duble">Double</string>
     <string name="triple">Triple</string>
     <string name="quad">Quad</string>
-    <array name="e1F">
-        <item>"1F"</item>
-        <item>"Single Flip"</item>
-        <item>"A"</item>
-    </array>
-    <array name="e1S">
-        <item>"1S"</item>
-        <item>"Single Salchow"</item>
-        <item>"B"</item>
-    </array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
