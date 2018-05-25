@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ElementLookupActivity"></activity>
+        <activity android:name=".ElementLookupActivityTest"></activity>
     </application>
 
 </manifest>

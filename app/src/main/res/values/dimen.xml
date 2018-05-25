@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="narrowTable">2dp</dimen>
+    <dimen name="mediumTable">8dp</dimen>
+
+</resources>

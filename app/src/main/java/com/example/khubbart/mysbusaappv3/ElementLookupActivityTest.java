@@ -1,15 +1,15 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.support.design.widget.TabLayout;
 
 
-public class ElementLookupActivity extends AppCompatActivity {
+public class ElementLookupActivityTest extends AppCompatActivity {
 
     public TextView textViewElementDetailName;
     public TextView textViewElementDetailBaseValue;
@@ -319,7 +319,7 @@ public class ElementLookupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_element_lookup);
+        setContentView(R.layout.activity_element_lookup_test);
 
         //Adding toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -359,7 +359,7 @@ public class ElementLookupActivity extends AppCompatActivity {
 
         // End tabs setup
 
-
+        /*
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
         textViewElementDetailV1Value = findViewById(R.id.elementDetailV1Value);
@@ -372,8 +372,8 @@ public class ElementLookupActivity extends AppCompatActivity {
         textViewElementDetailGOEp3 = findViewById(R.id.elementDetailGOEp3);
         rgJump = findViewById(R.id.radioGroupJumps);
         rgRevs = findViewById(R.id.radioGroupRevs);
-
-
+        */
+        /*
         rgJump.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -453,6 +453,7 @@ public class ElementLookupActivity extends AppCompatActivity {
                 }
                 i = i + 1;
             }
-
+        }
+        */
     }
 }
