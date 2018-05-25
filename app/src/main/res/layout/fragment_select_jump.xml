@@ -1,13 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SelectJumpFragment"
+    android:orientation="vertical"
     android:background="@color/testGreen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/table_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TableRow
+            android:id="@+id/row_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/textViewElementDetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="Row 1"
+                android:textColor="#fff" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowBaseTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_weight=".4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Base"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="V1"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="V2"
+                android:textColor="#fff" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowElementDetailBaseValues"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/elementDetailBaseValue"
+                android:layout_weight=".4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailV1Value"
+                android:layout_weight=".3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailV2Value"
+                android:layout_weight=".3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="X"
+                android:textColor="#fff" />
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/rowGOETitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="GOE -3"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="GOE -2"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="GOE -1"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="GOE 1"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="GOE 2"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="GOE 3"
+                android:textColor="#fff" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowGOEValues"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/elementDetailGOEm3"
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailGOEm2"
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailGOEm1"
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailGOEp1"
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailGOEp2"
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/elementDetailGOEp3"
+                android:layout_weight=".15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#fff" />
+        </TableRow>
+
+    </TableLayout>
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
@@ -18,139 +224,108 @@
         android:textColor="@color/black"
         android:textSize="16dp"/>
 
-    <RadioGroup
-        android:id="@+id/radioGroupJumps"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/narrowTable"
-        android:checkedButton="@+id/radioButtonJump1"
-        android:gravity="left"
-        app:layout_constraintEnd_toStartOf="@id/radioGroupRevs"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle">
-
-        <RadioButton
-            android:id="@+id/radioButtonJump1"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Toe"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump2"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Salchow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButtonJump1" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump3"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Flip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButtonJump2" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump4"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Loop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButtonJump3" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump5"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Lutz"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButtonJump4" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump6"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Axel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButtonJump5" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroupRevs"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/narrowTable"
-        android:checkedButton="@+id/radioButtonRevs1"
-        android:gravity="left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioGroupJumps"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-        app:layout_constraintVertical_bias="0.0">
+        android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radioButtonRevs1"
-            android:layout_width="85dp"
+        <RadioGroup
+            android:id="@+id/radioGroupJumps"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/single"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:checkedButton="@+id/radioButtonJump1"
+            android:gravity="left">
 
-        <RadioButton
-            android:id="@+id/radioButtonRevs2"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/duble"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/radioButtonRevs1" />
+            <RadioButton
+                android:id="@+id/radioButtonJump1"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:gravity="start"
+                android:text="@string/jump_Toe" />
 
-        <RadioButton
-            android:id="@+id/radioButtonRevs3"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/triple"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/radioButtonRevs2" />
+            <RadioButton
+                android:id="@+id/radioButtonJump2"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:gravity="start"
+                android:text="@string/jump_Salchow" />
 
-        <RadioButton
-            android:id="@+id/radioButtonRevs4"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/quad"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/radioButtonRevs3" />
+            <RadioButton
+                android:id="@+id/radioButtonJump3"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:gravity="start"
+                android:text="@string/jump_Flip" />
 
+            <RadioButton
+                android:id="@+id/radioButtonJump4"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:gravity="start"
+                android:text="@string/jump_Loop" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/radioButtonJump5"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:gravity="start"
+                android:text="@string/jump_Lutz" />
 
-</android.support.constraint.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/radioButtonJump6"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:gravity="start"
+                android:text="@string/jump_Axel" />
+
+        </RadioGroup>
+
+                     <RadioGroup
+                        android:id="@+id/radioGroupRevs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:checkedButton="@+id/radioButtonRevs1"
+                        android:gravity="left">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonRevs1"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/narrowTable"
+                            android:gravity="start"
+                            android:text="@string/single" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonRevs2"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/narrowTable"
+                            android:gravity="start"
+                            android:text="@string/duble" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonRevs3"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/narrowTable"
+                            android:gravity="start"
+                            android:text="@string/triple" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonRevs4"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/narrowTable"
+                            android:gravity="start"
+                            android:text="@string/quad" />
+                    </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

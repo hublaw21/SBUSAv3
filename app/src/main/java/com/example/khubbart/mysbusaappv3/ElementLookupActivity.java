@@ -1,5 +1,6 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -370,10 +371,12 @@ public class ElementLookupActivity extends AppCompatActivity {
         textViewElementDetailGOEp1 = findViewById(R.id.elementDetailGOEp1);
         textViewElementDetailGOEp2 = findViewById(R.id.elementDetailGOEp2);
         textViewElementDetailGOEp3 = findViewById(R.id.elementDetailGOEp3);
+
         rgJump = findViewById(R.id.radioGroupJumps);
         rgRevs = findViewById(R.id.radioGroupRevs);
 
-
+        textViewElementDetailName.setText("Testing");
+/*
         rgJump.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -400,7 +403,8 @@ public class ElementLookupActivity extends AppCompatActivity {
                 updateElement();
             }
         });
-
+*/
+/*
         rgRevs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -422,6 +426,9 @@ public class ElementLookupActivity extends AppCompatActivity {
             }
         });
     }
+    */
+    /*
+
         public void updateElement() {
             elementCode = revCode + jumpCode;
             i = 0;
@@ -453,6 +460,6 @@ public class ElementLookupActivity extends AppCompatActivity {
                 }
                 i = i + 1;
             }
-
+*/
     }
 }
