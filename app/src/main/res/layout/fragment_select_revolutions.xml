@@ -6,20 +6,19 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".SelectJumpFragment">
+    tools:context=".SelectRevolutionsFragment">
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/textViewRevolutionsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Jumps"
-        android:textColor="@color/black"
-        android:textSize="16dp" />
+        android:padding="@dimen/narrowTable"
+        android:text="Revolutions"
+        android:textColor="#fff" />
 
     <RadioGroup
-        android:id="@+id/radioGroupJumps"
+        android:id="@+id/radioGroupRevs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/narrowTable"
@@ -27,53 +26,35 @@
         android:gravity="left">
 
         <RadioButton
-            android:id="@+id/radioButtonJump1"
+            android:id="@+id/radioButtonRevs1"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
             android:gravity="start"
-            android:text="@string/jump_Toe" />
+            android:text="@string/single" />
 
         <RadioButton
-            android:id="@+id/radioButtonJump2"
+            android:id="@+id/radioButtonRevs2"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
             android:gravity="start"
-            android:text="@string/jump_Salchow" />
+            android:text="@string/duble" />
 
         <RadioButton
-            android:id="@+id/radioButtonJump3"
+            android:id="@+id/radioButtonRevs3"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
             android:gravity="start"
-            android:text="@string/jump_Flip" />
+            android:text="@string/triple" />
 
         <RadioButton
-            android:id="@+id/radioButtonJump4"
+            android:id="@+id/radioButtonRevs4"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
             android:gravity="start"
-            android:text="@string/jump_Loop" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump5"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Lutz" />
-
-        <RadioButton
-            android:id="@+id/radioButtonJump6"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:gravity="start"
-            android:text="@string/jump_Axel" />
-
+            android:text="@string/quad" />
     </RadioGroup>
-
 </LinearLayout>

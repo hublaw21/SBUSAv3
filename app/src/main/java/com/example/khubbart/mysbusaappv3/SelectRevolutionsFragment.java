@@ -8,15 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
-import java.util.Objects;
 
+public class SelectRevolutionsFragment extends Fragment {
 
-public class SelectJumpFragment extends Fragment {
+    private OnChangeRevolutionsRadioButtonInteractionListener mListener;
+    public RadioGroup mRGRevs;
 
-    private OnChangeJumpRadioButtonInteractionListener mListener;
-    public RadioGroup mRGJump;
-
-    public SelectJumpFragment(){
+    public SelectRevolutionsFragment(){
     }
 
     @Override
@@ -24,12 +22,12 @@ public class SelectJumpFragment extends Fragment {
         ViewGroup container,
         Bundle savedInstanceState) {
 
-            View view = inflater.inflate(R.layout.fragment_select_jump,
+            View view = inflater.inflate(R.layout.fragment_select_revolutions,
                     container, false);
 
-            mRGJump = view.findViewById(R.id.radioGroupJumps);
+            mRGRevs = view.findViewById(R.id.radioGroupRevs);
 
-            mRGJump.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            mRGRevs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                     onRadioButtonChanged(checkedId);
@@ -41,18 +39,18 @@ public class SelectJumpFragment extends Fragment {
 
     public void onRadioButtonChanged(int id){
         if(mListener != null){
-            mListener.onChangeJumpRadioButtonInteraction(id);
+            mListener.onChangeRevolutionsRadioButtonInteraction(id);
         }
     }
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-        if(context instanceof OnChangeJumpRadioButtonInteractionListener) {
-            mListener = (OnChangeJumpRadioButtonInteractionListener) context;
+        if(context instanceof OnChangeRevolutionsRadioButtonInteractionListener) {
+            mListener = (OnChangeRevolutionsRadioButtonInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + "must implement OnChangeJumpRadioButtonInteractionListener");
+                    + "must implement OnChangeRevolutionsRadioButtonInteractionListener");
         }
     }
 
@@ -62,8 +60,8 @@ public class SelectJumpFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnChangeJumpRadioButtonInteractionListener{
-        public void onChangeJumpRadioButtonInteraction(int id);
+    public interface OnChangeRevolutionsRadioButtonInteractionListener{
+        public void onChangeRevolutionsRadioButtonInteraction(int id);
     }
 
 }

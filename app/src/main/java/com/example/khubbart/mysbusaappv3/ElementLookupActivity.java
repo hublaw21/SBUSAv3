@@ -1,16 +1,18 @@
 package com.example.khubbart.mysbusaappv3;
 
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.support.design.widget.TabLayout;
 
 
-public class ElementLookupActivity extends AppCompatActivity {
+public class ElementLookupActivity extends AppCompatActivity implements SelectJumpFragment.OnChangeJumpRadioButtonInteractionListener,SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener {
 
     public TextView textViewElementDetailName;
     public TextView textViewElementDetailBaseValue;
@@ -33,8 +35,8 @@ public class ElementLookupActivity extends AppCompatActivity {
     public String newElementGOEp1Value;
     public String newElementGOEp2Value;
     public String newElementGOEp3Value;
-    public RadioGroup rgJump;
-    public RadioGroup rgRevs;
+    //public RadioGroup rgJump;
+    //public RadioGroup rgRevs;
     public String jumpCode = "T";
     public String revCode = "1";
     public Integer i = 0;
@@ -61,7 +63,7 @@ public class ElementLookupActivity extends AppCompatActivity {
             {"Quad Toeloop", "4T", "3", "2", "1", "10.3", "8", "0", "-1.2", "-2.4", "-4"},
             {"Quad Salchow", "4S", "3", "2", "1", "10.5", "8.1", "0", "1.2", "-2.4", "-4"},
             {"Quad Loop", "4Lo", "3", "2", "1", "12", "8.4", "0", "1.2", "-2.4", "-4"},
-            {"Quad Flip", "4", "3", "2", "1", "12.3", "8.6", "8", "1.2", "-2.4", "-4"},
+            {"Quad Flip", "4F", "3", "2", "1", "12.3", "8.6", "8", "1.2", "-2.4", "-4"},
             {"Quad Lutz", "4Lz", "3", "2", "1", "13.6", "9.5", "8.4", "1.2", "-2.4", "-4"},
             {"Quad Axel", "4A", "3.6", "2.4", "1.2", "15", "10.5", "0", "-1.2", "-2.4", "-4"},
             {"Upright Level B", "USpB", "1.5", "1", "0.5", "1", "0", "0", "-0.3", "-0.6", "-0.9"},
@@ -321,7 +323,7 @@ public class ElementLookupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
-
+        /*
         //Adding toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -359,7 +361,11 @@ public class ElementLookupActivity extends AppCompatActivity {
         });
 
         // End tabs setup
+        */
 
+        // Set up fragments for selecting element criteria
+        //FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+        //SelectJumpFragment selectJumpFragment= new SelectJumpFragment();
 
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
@@ -372,94 +378,92 @@ public class ElementLookupActivity extends AppCompatActivity {
         textViewElementDetailGOEp2 = findViewById(R.id.elementDetailGOEp2);
         textViewElementDetailGOEp3 = findViewById(R.id.elementDetailGOEp3);
 
-        rgJump = findViewById(R.id.radioGroupJumps);
-        rgRevs = findViewById(R.id.radioGroupRevs);
-
-        textViewElementDetailName.setText("Testing");
-/*
-        rgJump.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.radioButtonJump1:
-                        jumpCode = "T";
-                        break;
-                    case R.id.radioButtonJump2:
-                        jumpCode = "S";
-                        break;
-                    case R.id.radioButtonJump3:
-                        jumpCode = "F";
-                        break;
-                    case R.id.radioButtonJump4:
-                        jumpCode = "Lo";
-                        break;
-                    case R.id.radioButtonJump5:
-                        jumpCode = "Lz";
-                        break;
-                    case R.id.radioButtonJump6:
-                        jumpCode = "A";
-                        break;
-                }
-                updateElement();
-            }
-        });
-*/
-/*
-        rgRevs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.radioButtonRevs1:
-                        revCode = "1";
-                        break;
-                    case R.id.radioButtonRevs2:
-                        revCode = "2";
-                        break;
-                    case R.id.radioButtonRevs3:
-                        revCode = "3";
-                        break;
-                    case R.id.radioButtonRevs4:
-                        revCode = "4";
-                        break;
-                }
-                updateElement();
-            }
-        });
     }
-    */
-    /*
 
-        public void updateElement() {
-            elementCode = revCode + jumpCode;
-            i = 0;
-            while(i < elementTableRowCount){
-                if(elementTable[i][1].equals(elementCode)){
-                    newElementName = elementTable[i][0];
-                    newElementBaseValue = elementTable[i][5];
-                    newElementV1Value = elementTable[i][6];
-                    newElementV2Value = elementTable[i][7];
-                    newElementGOEm3Value = elementTable[i][10];
-                    newElementGOEm2Value = elementTable[i][9];
-                    newElementGOEm1Value = elementTable[i][8];
-                    newElementGOEp1Value = elementTable[i][4];
-                    newElementGOEp2Value = elementTable[i][3];
-                    newElementGOEp3Value = elementTable[i][2];
-                    textViewElementDetailName.setText(newElementName);
-                    textViewElementDetailBaseValue.setText(newElementBaseValue);
-                    textViewElementDetailV1Value.setText(newElementV1Value);
-                    textViewElementDetailV2Value.setText(newElementV2Value);
-                    textViewElementDetailGOEm1.setText(newElementGOEm1Value);
-                    textViewElementDetailGOEm2.setText(newElementGOEm2Value);
-                    textViewElementDetailGOEm3.setText(newElementGOEm3Value);
-                    textViewElementDetailGOEp1.setText(newElementGOEp1Value);
-                    textViewElementDetailGOEp2.setText(newElementGOEp2Value);
-                    textViewElementDetailGOEp3.setText(newElementGOEp3Value);
+    @Override
+    public void onChangeRevolutionsRadioButtonInteraction(int id) {
+        switch (id) {
+            case R.id.radioButtonRevs1:
+                revCode = "1";
+                break;
+            case R.id.radioButtonRevs2:
+                revCode = "2";
+                break;
+            case R.id.radioButtonRevs3:
+                revCode = "3";
+                break;
+            case R.id.radioButtonRevs4:
+                revCode = "4";
+                break;
+        }
+        updateElement();
+    }
 
-                    //i = elementTableRowCount;
-                    //j=i;
-                }
-                i = i + 1;
+    @Override
+    public void onChangeJumpRadioButtonInteraction(int id) {
+        switch (id) {
+            case R.id.radioButtonJump1:
+                jumpCode = "T";
+                break;
+
+            case R.id.radioButtonJump2:
+                jumpCode = "S";
+                break;
+
+            case R.id.radioButtonJump3:
+                jumpCode = "F";
+                break;
+
+            case R.id.radioButtonJump4:
+                jumpCode = "Lo";
+                break;
+
+            case R.id.radioButtonJump5:
+                jumpCode = "Lz";
+                break;
+
+            case R.id.radioButtonJump6:
+                jumpCode = "A";
+                break;
+        }
+        updateElement();
+    }
+
+    public void updateElement() {
+        // Will need to create switch for each element type to do unique elementCode build for each
+        if (TextUtils.isEmpty(revCode)) revCode = "1";
+        if (TextUtils.isEmpty(jumpCode)) jumpCode = "J";
+        elementCode = revCode + jumpCode;
+        // end of switch area
+        i = 0;
+        while (i < elementTableRowCount) {
+            if (elementTable[i][1].equals(elementCode)) {
+                newElementName = elementTable[i][0];
+                newElementBaseValue = elementTable[i][5];
+                newElementV1Value = elementTable[i][6];
+                newElementV2Value = elementTable[i][7];
+                newElementGOEm3Value = elementTable[i][10];
+                newElementGOEm2Value = elementTable[i][9];
+                newElementGOEm1Value = elementTable[i][8];
+                newElementGOEp1Value = elementTable[i][4];
+                newElementGOEp2Value = elementTable[i][3];
+                newElementGOEp3Value = elementTable[i][2];
+                textViewElementDetailName.setText(newElementName);
+                textViewElementDetailBaseValue.setText(newElementBaseValue);
+                textViewElementDetailV1Value.setText(newElementV1Value);
+                textViewElementDetailV2Value.setText(newElementV2Value);
+                textViewElementDetailGOEm1.setText(newElementGOEm1Value);
+                textViewElementDetailGOEm2.setText(newElementGOEm2Value);
+                textViewElementDetailGOEm3.setText(newElementGOEm3Value);
+                textViewElementDetailGOEp1.setText(newElementGOEp1Value);
+                textViewElementDetailGOEp2.setText(newElementGOEp2Value);
+                textViewElementDetailGOEp3.setText(newElementGOEp3Value);
+
+                //i = elementTableRowCount;
+                //j=i;
             }
-*/
+            i = i + 1;
+        }
+
     }
 }
