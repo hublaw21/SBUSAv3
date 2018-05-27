@@ -4,5 +4,7 @@
     <dimen name="mediumTable">8dp</dimen>
     <dimen name="thinBorder">2dp</dimen>
     <dimen name="mediumBorder">4dp</dimen>
+    <dimen name="textLarge">35dp</dimen>
+    <dimen name="textMedium">20dp</dimen>
 
 </resources>

@@ -10,7 +10,18 @@
     <string name="duble">Double</string>
     <string name="triple">Triple</string>
     <string name="quad">Quad</string>
-
+    <string-array name="elementTypes">
+        <item>Select an Element Type</item>
+        <item>Jumps</item>
+        <item>Spins</item>
+        <item>Footwork</item>
+        <item>Lifts</item>
+        <item>Twists</item>
+        <item>Throws</item>
+        <item>Pairs Spins</item>
+        <item>Death Spirals</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_selected">Item Selected</string>
 </resources>

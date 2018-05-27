@@ -20,8 +20,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Row 1"
-            android:textColor="#fff" />
+            android:text="Element"
+            android:textSize="@dimen/textMedium"
+            android:textColor="@color/white" />
     </TableRow>
 
     <TableRow

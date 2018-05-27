@@ -7,14 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.support.design.widget.TabLayout;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 public class ElementLookupActivity extends AppCompatActivity implements
         SelectJumpFragment.OnChangeJumpRadioButtonInteractionListener,
-        SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener {
+        SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener,
+        AdapterView.OnItemSelectedListener{
 
+    public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
     public TextView textViewElementDetailBaseValue;
     public TextView textViewElementDetailV1Value;
@@ -27,6 +35,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public TextView textViewElementDetailGOEp1;
     public String elementCode;
     public String newElementName;
+    public String itemSelected;
     public String newElementBaseValue;
     public String newElementV1Value;
     public String newElementV2Value;
@@ -325,6 +334,14 @@ public class ElementLookupActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
 
+        Spinner spinElementTypeSelect = findViewById(R.id.spinnerElementTypeSelect);
+        spinElementTypeSelect.setOnItemSelectedListener(this);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.elementTypes, R.layout.my_spinner_style);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinElementTypeSelect.setAdapter(adapter);
+
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
         textViewElementDetailV1Value = findViewById(R.id.elementDetailV1Value);
@@ -335,6 +352,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         textViewElementDetailGOEp1 = findViewById(R.id.elementDetailGOEp1);
         textViewElementDetailGOEp2 = findViewById(R.id.elementDetailGOEp2);
         textViewElementDetailGOEp3 = findViewById(R.id.elementDetailGOEp3);
+        textViewItemSelected = findViewById(R.id.textViewSelected);
 
     }
 
@@ -423,5 +441,23 @@ public class ElementLookupActivity extends AppCompatActivity implements
             i = i + 1;
         }
 
+    }
+
+    //Spinner Action
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+        //Spinner action
+        textViewItemSelected.setText(Integer.toString(position));
+        String elementType = parent.getItemAtPosition(position).toString();
+        //Toast.makeText(getApplicationContext(), "Item number: " + position, Toast.LENGTH_LONG).show();
+
+        if(TextUtils.isEmpty(elementType)){
+            textViewItemSelected.setText(elementType);
+        };
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0){
+        //Spinnr action
     }
 }
