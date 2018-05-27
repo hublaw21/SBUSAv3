@@ -11,8 +11,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.support.design.widget.TabLayout;
 
-
-public class ElementLookupActivity extends AppCompatActivity implements SelectJumpFragment.OnChangeJumpRadioButtonInteractionListener,SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener {
+public class ElementLookupActivity extends AppCompatActivity implements
+        SelectJumpFragment.OnChangeJumpRadioButtonInteractionListener,
+        SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener {
 
     public TextView textViewElementDetailName;
     public TextView textViewElementDetailBaseValue;
@@ -323,49 +324,6 @@ public class ElementLookupActivity extends AppCompatActivity implements SelectJu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
-        /*
-        //Adding toolbar to the activity
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // Tabs setup
-
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Jumps"));
-        tabLayout.addTab(tabLayout.newTab().setText("Spins"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewPager = findViewById(R.id.pager);
-
-        final ElementLookupPagerAdapter adapter = new ElementLookupPagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-
-        viewPager.setAdapter(adapter);
-
-        viewPager.addOnPageChangeListener(new
-                TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-
-        // End tabs setup
-        */
-
-        // Set up fragments for selecting element criteria
-        //FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-        //SelectJumpFragment selectJumpFragment= new SelectJumpFragment();
 
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
@@ -438,7 +396,7 @@ public class ElementLookupActivity extends AppCompatActivity implements SelectJu
         i = 0;
         while (i < elementTableRowCount) {
             if (elementTable[i][1].equals(elementCode)) {
-                newElementName = elementTable[i][0];
+                newElementName = elementTable[i][0] + " - " + elementCode;
                 newElementBaseValue = elementTable[i][5];
                 newElementV1Value = elementTable[i][6];
                 newElementV2Value = elementTable[i][7];

@@ -2,5 +2,7 @@
 <resources>
     <dimen name="narrowTable">2dp</dimen>
     <dimen name="mediumTable">8dp</dimen>
+    <dimen name="thinBorder">2dp</dimen>
+    <dimen name="mediumBorder">4dp</dimen>
 
 </resources>
