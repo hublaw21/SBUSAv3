@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Creat Three arrays which MUST line up for each element -->
+    <string-array name="SOV_Code">
+        <item>1T</item>
+        <item>1S</item>
+        <item>1Lo</item>
+        <item>1F</item>
+        <item>1Lz</item>
+        <item>1A</item>
+        <item>2T</item>
+        <item>2S</item>
+        <item>2Lo</item>
+        <item>2F</item>
+        <item>2Lz</item>
+        <item>2A</item>
+        <item>3T</item>
+        <item>3S</item>
+        <item>3Lo</item>
+        <item>3F</item>
+        <item>3Lz</item>
+        <item>3A</item>
+        <item>4T</item>
+        <item>4S</item>
+        <item>4Lo</item>
+        <item>4F</item>
+        <item>4Lz</item>
+        <item>4A</item>
+        <item>USpB</item>
+        <item>USp1</item>
+        <item>USp2</item>
+        <item>USp3</item>
+        <item>USp4</item>
+        <item>LSpB</item>
+        <item>LSp1</item>
+        <item>LSp2</item>
+        <item>LSp3</item>
+        <item>LSp4</item>
+        <item>CSpB</item>
+        <item>CSp1</item>
+        <item>CSp2</item>
+        <item>CSp3</item>
+        <item>CSp4</item>
+        <item>SSpB</item>
+        <item>SSp1</item>
+        <item>SSp2</item>
+        <item>SSp3</item>
+        <item>SSp4</item>
+        <item>FUSpB</item>
+        <item>FUSp1</item>
+        <item>FUSp2</item>
+        <item>FUSp3</item>
+        <item>FUSp4</item>
+        <item>FLSpB</item>
+        <item>FLSp1</item>
+        <item>FLSp2</item>
+        <item>FLSp3</item>
+        <item>FLSp4</item>
+        <item>FCSpB</item>
+        <item>FCSp1</item>
+        <item>FCSp2</item>
+        <item>FCSp3</item>
+        <item>FCSp4</item>
+        <item>FSSpB</item>
+        <item>FSSp1</item>
+        <item>FSSp2</item>
+        <item>FSSp3</item>
+        <item>FSSp4</item>
+        <item>CUSpB</item>
+        <item>CUSp1</item>
+        <item>CUSp2</item>
+        <item>CUSp3</item>
+        <item>CUSp4</item>
+        <item>CLSpB</item>
+        <item>CLSp1</item>
+        <item>CLSp2</item>
+        <item>CLSp3</item>
+        <item>CLSp4</item>
+        <item>CCSpB</item>
+        <item>CCSp1</item>
+        <item>CCSp2</item>
+        <item>CCSp3</item>
+        <item>CCSp4</item>
+        <item>CSSpB</item>
+        <item>CSSp1</item>
+        <item>CSSp2</item>
+        <item>CSSp3</item>
+        <item>CSSp4</item>
+        <item>CoSpB</item>
+        <item>CoSp1</item>
+        <item>CoSp2</item>
+        <item>CoSp3</item>
+        <item>CoSp4</item>
+        <item>CCoSpB</item>
+        <item>CCoSp1</item>
+        <item>CCoSp2</item>
+        <item>CCoSp3</item>
+        <item>CCoSp4</item>
+        <item>StSqB</item>
+        <item>StSq1</item>
+        <item>StSq2</item>
+        <item>StSq3</item>
+        <item>StSq4</item>
+        <item>1LiB</item>
+        <item>1Li1</item>
+        <item>1Li2</item>
+        <item>1Li3</item>
+        <item>1Li4</item>
+        <item>2LiB</item>
+        <item>2Li1</item>
+        <item>2Li2</item>
+        <item>2Li3</item>
+        <item>2Li4</item>
+        <item>5BLiB</item>
+        <item>5BLi1</item>
+        <item>5BLi2</item>
+        <item>5BLi3</item>
+        <item>5BLi4</item>
+        <item>1TwB</item>
+        <item>1Tw1</item>
+        <item>1Tw2</item>
+        <item>1Tw3</item>
+        <item>1Tw4</item>
+        <item>2TwB</item>
+        <item>2Tw1</item>
+        <item>2Tw2</item>
+        <item>2Tw3</item>
+        <item>2Tw4</item>
+        <item>3TwB</item>
+        <item>3Tw1</item>
+        <item>3Tw2</item>
+        <item>3Tw3</item>
+        <item>3Tw4</item>
+        <item>4TwB</item>
+        <item>4Tw1</item>
+        <item>4Tw2</item>
+        <item>4Tw3</item>
+        <item>4Tw4</item>
+        <item>1TTh</item>
+        <item>1STh</item>
+        <item>1LoTh</item>
+        <item>1ATh</item>
+        <item>2TTh</item>
+        <item>2STh</item>
+        <item>2LoTh</item>
+        <item>2ATh</item>
+        <item>3TTh</item>
+        <item>3STh</item>
+        <item>3LoTh</item>
+        <item>3ATh</item>
+        <item>4TTh</item>
+        <item>4STh</item>
+        <item>4LoTh</item>
+        <item>PiF</item>
+        <item>PSpB</item>
+        <item>PSp1</item>
+        <item>PSp2</item>
+        <item>PSp3</item>
+        <item>PSp4</item>
+        <item>PCoSpB</item>
+        <item>PCoSp1</item>
+        <item>PCoSp2</item>
+        <item>PCoSp3</item>
+        <item>PCoSp4</item>
+        <item>ChSq</item>
+        <item>3LiB</item>
+        <item>3Li1</item>
+        <item>3Li2</item>
+        <item>3Li3</item>
+        <item>3Li4</item>
+        <item>4LiB</item>
+        <item>4Li1</item>
+        <item>4Li2</item>
+        <item>4Li3</item>
+        <item>4Li4</item>
+        <item>5TLiB</item>
+        <item>5TLi1</item>
+        <item>5TLi2</item>
+        <item>5TLi3</item>
+        <item>5TLi4</item>
+        <item>5ALiB</item>
+        <item>5ALi1</item>
+        <item>5ALi2</item>
+        <item>5ALi3</item>
+        <item>5ALi4</item>
+        <item>5SLiB</item>
+        <item>5SLi1</item>
+        <item>5SLi2</item>
+        <item>5SLi3</item>
+        <item>5SLi4</item>
+        <item>5RLiB</item>
+        <item>5RLi1</item>
+        <item>5RLi2</item>
+        <item>5RLi3</item>
+        <item>5RLi4</item>
+        <item>FiDsB</item>
+        <item>FiDs1</item>
+        <item>FiDs2</item>
+        <item>FiDs3</item>
+        <item>FiDs4</item>
+        <item>FoDsB</item>
+        <item>FoDs1</item>
+        <item>FoDs2</item>
+        <item>FoDs3</item>
+        <item>FoDs4</item>
+        <item>BiDsB</item>
+        <item>BiDs1</item>
+        <item>BiDs2</item>
+        <item>BiDs3</item>
+        <item>BiDs4</item>
+        <item>BoDsB</item>
+        <item>BoDs1</item>
+        <item>BoDs2</item>
+        <item>BoDs3</item>
+        <item>BoDs4</item>
+        <item>FCUSpB</item>
+        <item>FCUSp1</item>
+        <item>FCUSp2</item>
+        <item>FCUSp3</item>
+        <item>FCUSp4</item>
+        <item>FCLSpB</item>
+        <item>FCLSp1</item>
+        <item>FCLSp2</item>
+        <item>FCLSp3</item>
+        <item>FCLSp4</item>
+        <item>FCCSpB</item>
+        <item>FCCSp1</item>
+        <item>FCCSp2</item>
+        <item>FCCSp3</item>
+        <item>FCCSp4</item>
+        <item>FCSSpB</item>
+        <item>FCSSp1</item>
+        <item>FCSSp2</item>
+        <item>FCSSp3</item>
+        <item>FCSSp4</item>
+        <item>FCoSpB</item>
+        <item>FCoSp1</item>
+        <item>FCoSp2</item>
+        <item>FCoSp3</item>
+        <item>FCoSp4</item>
+        <item>FCCoSpB</item>
+        <item>FCCoSp1</item>
+        <item>FCCoSp2</item>
+        <item>FCCoSp3</item>
+        <item>FCCoSp4</item>
+    </string-array>
+    <string-array name="SOV_Name">
+        <item>Single Toeloop</item>
+        <item>Single Salchow</item>
+        <item>Single Loop</item>
+        <item>Single Flip</item>
+        <item>Single Lutz</item>
+        <item>Single Axel</item>
+        <item>Double Toeloop</item>
+        <item>Double Salchow</item>
+        <item>Double Loop</item>
+        <item>Double Flip</item>
+        <item>Double Lutz</item>
+        <item>Double Axel</item>
+        <item>Triple Toeloop</item>
+        <item>Triple Salchow</item>
+        <item>Triple Loop</item>
+        <item>Triple Flip</item>
+        <item>Triple Lutz</item>
+        <item>Triple Axel</item>
+        <item>Quad Toeloop</item>
+        <item>Quad Salchow</item>
+        <item>Quad Loop</item>
+        <item>Quad Flip</item>
+        <item>Quad Lutz</item>
+        <item>Quad Axel</item>
+        <item>Upright Level B - 1 position, no foot change</item>
+        <item>Upright Level 1 - 1 position, no foot change</item>
+        <item>Upright Level 2 - 1 position, no foot change</item>
+        <item>Upright Level 3 - 1 position, no foot change</item>
+        <item>Upright Level 4 - 1 position, no foot change</item>
+        <item>Layback Level B - 1 position, no foot change</item>
+        <item>Layback Level 1 - 1 position, no foot change</item>
+        <item>Layback Level 2 - 1 position, no foot change</item>
+        <item>Layback Level 3 - 1 position, no foot change</item>
+        <item>Layback Level 4 - 1 position, no foot change</item>
+        <item>Camel Level B - 1 position, no foot change</item>
+        <item>Camel Level 1 - 1 position, no foot change</item>
+        <item>Camel Level 2 - 1 position, no foot change</item>
+        <item>Camel Level 3 - 1 position, no foot change</item>
+        <item>Camel Level 4 - 1 position, no foot change</item>
+        <item>Sit Level B - 1 position, no foot change</item>
+        <item>Sit Level 1 - 1 position, no foot change</item>
+        <item>Sit Level 2 - 1 position, no foot change</item>
+        <item>Sit Level 3 - 1 position, no foot change</item>
+        <item>Sit Level 4 - 1 position, no foot change</item>
+        <item>Upright Level B - Flying, 1 position, no foot change</item>
+        <item>Upright Level 1 - Flying, 1 position, no foot change</item>
+        <item>Upright Level 2 - Flying, 1 position, no foot change</item>
+        <item>Upright Level 3 - Flying, 1 position, no foot change</item>
+        <item>Upright Level 4 - Flying, 1 position, no foot change</item>
+        <item>Layback Level B - Flying, 1 position, no foot change</item>
+        <item>Layback Level 1 - Flying, 1 position, no foot change</item>
+        <item>Layback Level 2 - Flying, 1 position, no foot change</item>
+        <item>Layback Level 3 - Flying, 1 position, no foot change</item>
+        <item>Layback Level 4 - Flying, 1 position, no foot change</item>
+        <item>Camel Level B - Flying, 1 position, no foot change</item>
+        <item>Camel Level 1 - Flying, 1 position, no foot change</item>
+        <item>Camel Level 2 - Flying, 1 position, no foot change</item>
+        <item>Camel Level 3 - Flying, 1 position, no foot change</item>
+        <item>Camel Level 4 - Flying, 1 position, no foot change</item>
+        <item>Sit Level B - Flying, 1 position, no foot change</item>
+        <item>Sit Level 1 - Flying, 1 position, no foot change</item>
+        <item>Sit Level 2 - Flying, 1 position, no foot change</item>
+        <item>Sit Level 3 - Flying, 1 position, no foot change</item>
+        <item>Sit Level 4 - Flying, 1 position, no foot change</item>
+        <item>Upright Level B - 1 posiiton, foot change</item>
+        <item>Upright Level 1 - 1 posiiton, foot change</item>
+        <item>Upright Level 2 - 1 posiiton, foot change</item>
+        <item>Upright Level 3 - 1 posiiton, foot change</item>
+        <item>Upright Level 4 - 1 posiiton, foot change</item>
+        <item>Layback Level B - 1 posiiton, foot change</item>
+        <item>Layback Level 1 - 1 posiiton, foot change</item>
+        <item>Layback Level 2 - 1 posiiton, foot change</item>
+        <item>Layback Level 3 - 1 posiiton, foot change</item>
+        <item>Layback Level 4 - 1 posiiton, foot change</item>
+        <item>Camel Level B - 1 posiiton, foot change</item>
+        <item>Camel Level 1 - 1 posiiton, foot change</item>
+        <item>Camel Level 2 - 1 posiiton, foot change</item>
+        <item>Camel Level 3 - 1 posiiton, foot change</item>
+        <item>Camel Level 4 - 1 posiiton, foot change</item>
+        <item>Sit Level B - 1 posiiton, foot change</item>
+        <item>Sit Level 1 - 1 posiiton, foot change</item>
+        <item>Sit Level 2 - 1 posiiton, foot change</item>
+        <item>Sit Level 3 - 1 posiiton, foot change</item>
+        <item>Sit Level 4 - 1 posiiton, foot change</item>
+        <item>Combination Spin Level B</item>
+        <item>Combination Spin Level 1</item>
+        <item>Combination Spin Level 2</item>
+        <item>Combination Spin Level 3</item>
+        <item>Combination Spin Level 4</item>
+        <item>Combination Spin Level B, foot change</item>
+        <item>Combination Spin Level 1, foot change</item>
+        <item>Combination Spin Level 2, foot change</item>
+        <item>Combination Spin Level 3, foot change</item>
+        <item>Combination Spin Level 4, foot change</item>
+        <item>Steps - Level B</item>
+        <item>Steps - Level 1</item>
+        <item>Steps - Level 2</item>
+        <item>Steps - Level 3</item>
+        <item>Steps - Level 4</item>
+        <item>Group 1 Level B</item>
+        <item>Group 1 Level 1</item>
+        <item>Group 1 Level 2</item>
+        <item>Group 1 Level 3</item>
+        <item>Group 1 Level 4</item>
+        <item>Group 2 Level B</item>
+        <item>Group 2 Level 1</item>
+        <item>Group 2 Level 2</item>
+        <item>Group 2 Level 3</item>
+        <item>Group 2 Level 4</item>
+        <item>Group 5 Level B Backward Lasso</item>
+        <item>Group 5 Level 1 Backward Lasso</item>
+        <item>Group 5 Level 2 Backward Lasso</item>
+        <item>Group 5 Level 3 Backward Lasso</item>
+        <item>Group 5 Level 4 Backward Lasso</item>
+        <item>Twist - Single Level B</item>
+        <item>Twist - Single Level 1</item>
+        <item>Twist - Single Level 2</item>
+        <item>Twist - Single Level 3</item>
+        <item>Twist - Single Level 4</item>
+        <item>Twist - Double Level B</item>
+        <item>Twist - Double Level 1</item>
+        <item>Twist - Double Level 2</item>
+        <item>Twist - Double Level 3</item>
+        <item>Twist - Double Level 4</item>
+        <item>Twist - Triple Level B</item>
+        <item>Twist - Triple Level 1</item>
+        <item>Twist - Triple Level 2</item>
+        <item>Twist - Triple Level 3</item>
+        <item>Twist - Triple Level 4</item>
+        <item>Twist - Quad Level B</item>
+        <item>Twist - Quad Level 1</item>
+        <item>Twist - Quad Level 2</item>
+        <item>Twist - Quad Level 3</item>
+        <item>Twist - Quad Level 4</item>
+        <item>Throw - Single ToeLoop</item>
+        <item>Throw - Single Salchow</item>
+        <item>Throw - Single Loop</item>
+        <item>Throw - Single Axel</item>
+        <item>Throw - Double Toeloop</item>
+        <item>Throw - Double Salchow</item>
+        <item>Throw - Double Loop</item>
+        <item>Throw - Double Axel</item>
+        <item>Throw - Triple Toeloop</item>
+        <item>Throw - Triple Salchow</item>
+        <item>Throw - Triple Loop</item>
+        <item>Throw - Triple Axel</item>
+        <item>Throw - Quad Toeloop</item>
+        <item>Throw - Quad Salchow</item>
+        <item>Throw - Quad Loop</item>
+        <item>Pivot Figure</item>
+        <item>Pair Spin Level B</item>
+        <item>Pair Spin Level 1</item>
+        <item>Pair Spin Level 2</item>
+        <item>Pair Spin Level 3</item>
+        <item>Pair Spin Level 4</item>
+        <item>Pair Combo Spin Level B</item>
+        <item>Pair Combo Spin Level 1</item>
+        <item>Pair Combo Spin Level 2</item>
+        <item>Pair Combo Spin Level 3</item>
+        <item>Pair Combo Spin Level 4</item>
+        <item>Choreo Sequence</item>
+        <item>Group 3 Level B</item>
+        <item>Group 3 Level 1</item>
+        <item>Group 3 Level 2</item>
+        <item>Group 3 Level 3</item>
+        <item>Group 3 Level 4</item>
+        <item>Group 4 Level B</item>
+        <item>Group 4 Level 1</item>
+        <item>Group 4 Level 2</item>
+        <item>Group 4 Level 3</item>
+        <item>Group 4 Level 4</item>
+        <item>Group 5 Level B Toe</item>
+        <item>Group 5 Level 1 Toe</item>
+        <item>Group 5 Level 2 Toe</item>
+        <item>Group 5 Level 3 Toe</item>
+        <item>Group 5 Level 4 Toe</item>
+        <item>Group 5 Level B Axel</item>
+        <item>Group 5 Level 1 Axel</item>
+        <item>Group 5 Level 2 Axel</item>
+        <item>Group 5 Level 3 Axel</item>
+        <item>Group 5 Level 4 Axel</item>
+        <item>Group 5 Level B Step in Lasso</item>
+        <item>Group 5 Level 1 Step in Lasso</item>
+        <item>Group 5 Level 2 Step in Lasso</item>
+        <item>Group 5 Level 3 Step in Lasso</item>
+        <item>Group 5 Level 4 Step in Lasso</item>
+        <item>Group 5 Level B Reverse Lasso</item>
+        <item>Group 5 Level 1 Reverse Lasso</item>
+        <item>Group 5 Level 2 Reverse Lasso</item>
+        <item>Group 5 Level 3 Reverse Lasso</item>
+        <item>Group 5 Level 4 Reverse Lasso</item>
+        <item>Death Spiral - Level B Forward inside</item>
+        <item>Death Spiral - Level 1 Forward inside</item>
+        <item>Death Spiral - Level 2 Forward inside</item>
+        <item>Death Spiral - Level 3 Forward inside</item>
+        <item>Death Spiral - Level 4 Forward inside</item>
+        <item>Death Spiral - Level B Forward outside</item>
+        <item>Death Spiral - Level 1 Forward outside</item>
+        <item>Death Spiral - Level 2 Forward outside</item>
+        <item>Death Spiral - Level 3 Forward outside</item>
+        <item>Death Spiral - Level 4 Forward outside</item>
+        <item>Death Spiral - Level B Backward inside</item>
+        <item>Death Spiral - Level 1 Backward inside</item>
+        <item>Death Spiral - Level 2 Backward inside</item>
+        <item>Death Spiral - Level 3 Backward inside</item>
+        <item>Death Spiral - Level 4 Backward inside</item>
+        <item>Death Spiral - Level B Backward outside</item>
+        <item>Death Spiral - Level 1 Backward outside</item>
+        <item>Death Spiral - Level 2 Backward outside</item>
+        <item>Death Spiral - Level 3 Backward outside</item>
+        <item>Death Spiral - Level 4 Backward outside</item>
+        <item>Upright Level B - Flying, 1 posiiton, foot change</item>
+        <item>Upright Level 1 - 1 posiiton, foot change</item>
+        <item>Upright Level 2 - 1 posiiton, foot change</item>
+        <item>Upright Level 3 - 1 posiiton, foot change</item>
+        <item>Upright Level 4 - 1 posiiton, foot change</item>
+        <item>Layback Level B - 1 posiiton, foot change</item>
+        <item>Layback Level 1 - 1 posiiton, foot change</item>
+        <item>Layback Level 2 - 1 posiiton, foot change</item>
+        <item>Layback Level 3 - 1 posiiton, foot change</item>
+        <item>Layback Level 4 - 1 posiiton, foot change</item>
+        <item>Camel Level B - 1 posiiton, foot change</item>
+        <item>Camel Level 1 - 1 posiiton, foot change</item>
+        <item>Camel Level 2 - 1 posiiton, foot change</item>
+        <item>Camel Level 3 - 1 posiiton, foot change</item>
+        <item>Camel Level 4 - 1 posiiton, foot change</item>
+        <item>Sit Level B - 1 posiiton, foot change</item>
+        <item>Sit Level 1 - 1 posiiton, foot change</item>
+        <item>Sit Level 2 - 1 posiiton, foot change</item>
+        <item>Sit Level 3 - 1 posiiton, foot change</item>
+        <item>Sit Level 4 - 1 posiiton, foot change</item>
+        <item>Combination Spin Level B Flying</item>
+        <item>Combination Spin Level 1 Flying</item>
+        <item>Combination Spin Level 2 Flying</item>
+        <item>Combination Spin Level 3 Flying</item>
+        <item>Combination Spin Level 4 Flying</item>
+        <item>Combination Spin Level B, foot change Flying</item>
+        <item>Combination Spin Level 1, foot change Flying</item>
+        <item>Combination Spin Level 2, foot change Flying</item>
+        <item>Combination Spin Level 3, foot change Flying</item>
+        <item>Combination Spin Level 4, foot change Flying</item>
+    </string-array>
+    <string-array name="SOV_Base">
+        <item>0.4</item>
+        <item>0.4</item>
+        <item>0.5</item>
+        <item>0.5</item>
+        <item>0.6</item>
+        <item>1.1</item>
+        <item>1.3</item>
+        <item>1.3</item>
+        <item>1.7</item>
+        <item>1.8</item>
+        <item>2.1</item>
+        <item>3.3</item>
+        <item>4.2</item>
+        <item>4.3</item>
+        <item>4.9</item>
+        <item>5.3</item>
+        <item>5.9</item>
+        <item>8</item>
+        <item>9.5</item>
+        <item>9.7</item>
+        <item>10.5</item>
+        <item>11</item>
+        <item>11.5</item>
+        <item>12.5</item>
+        <item>1</item>
+        <item>1.2</item>
+        <item>1.5</item>
+        <item>1.9</item>
+        <item>2.4</item>
+        <item>1.2</item>
+        <item>1.5</item>
+        <item>1.9</item>
+        <item>2.4</item>
+        <item>2.7</item>
+        <item>1.1</item>
+        <item>1.4</item>
+        <item>1.8</item>
+        <item>2.3</item>
+        <item>2.6</item>
+        <item>1.1</item>
+        <item>1.3</item>
+        <item>1.6</item>
+        <item>2.1</item>
+        <item>2.5</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.4</item>
+        <item>2.9</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.4</item>
+        <item>2.9</item>
+        <item>3.2</item>
+        <item>1.6</item>
+        <item>1.9</item>
+        <item>2.3</item>
+        <item>2.8</item>
+        <item>3.2</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.3</item>
+        <item>2.6</item>
+        <item>3</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.4</item>
+        <item>2.9</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.4</item>
+        <item>2.9</item>
+        <item>3.2</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.3</item>
+        <item>2.8</item>
+        <item>3.2</item>
+        <item>1.6</item>
+        <item>1.9</item>
+        <item>2.3</item>
+        <item>2.6</item>
+        <item>3</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>1.5</item>
+        <item>1.8</item>
+        <item>2.6</item>
+        <item>3.3</item>
+        <item>3.9</item>
+        <item>1.4</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>1.9</item>
+        <item>2.1</item>
+        <item>1.5</item>
+        <item>1.9</item>
+        <item>2.3</item>
+        <item>2.7</item>
+        <item>3.1</item>
+        <item>5</item>
+        <item>5.4</item>
+        <item>5.8</item>
+        <item>6.2</item>
+        <item>6.5</item>
+        <item>0.9</item>
+        <item>1.1</item>
+        <item>1.3</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>2.6</item>
+        <item>2.8</item>
+        <item>3</item>
+        <item>3.2</item>
+        <item>3.4</item>
+        <item>4.8</item>
+        <item>5.1</item>
+        <item>5.4</item>
+        <item>5.7</item>
+        <item>6</item>
+        <item>6.4</item>
+        <item>6.8</item>
+        <item>7.2</item>
+        <item>7.6</item>
+        <item>8</item>
+        <item>1.1</item>
+        <item>1.1</item>
+        <item>1.4</item>
+        <item>2.2</item>
+        <item>2.5</item>
+        <item>2.5</item>
+        <item>2.8</item>
+        <item>4</item>
+        <item>4.4</item>
+        <item>4.4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6.5</item>
+        <item>6.5</item>
+        <item>7</item>
+        <item>2.2</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>4</item>
+        <item>4.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>3.9</item>
+        <item>4.3</item>
+        <item>4.7</item>
+        <item>5.1</item>
+        <item>3.5</item>
+        <item>3.9</item>
+        <item>4.3</item>
+        <item>4.7</item>
+        <item>5.1</item>
+        <item>4.6</item>
+        <item>5</item>
+        <item>5.4</item>
+        <item>5.8</item>
+        <item>6.2</item>
+        <item>5.4</item>
+        <item>5.8</item>
+        <item>6.2</item>
+        <item>6.6</item>
+        <item>7</item>
+        <item>4.6</item>
+        <item>5</item>
+        <item>5.4</item>
+        <item>5.8</item>
+        <item>6.2</item>
+        <item>5.4</item>
+        <item>5.8</item>
+        <item>6.2</item>
+        <item>6.6</item>
+        <item>7</item>
+        <item>2.6</item>
+        <item>2.9</item>
+        <item>3.2</item>
+        <item>3.5</item>
+        <item>3.8</item>
+        <item>3.1</item>
+        <item>3.5</item>
+        <item>3.9</item>
+        <item>4.3</item>
+        <item>4.7</item>
+        <item>2.6</item>
+        <item>2.9</item>
+        <item>3.2</item>
+        <item>3.5</item>
+        <item>3.8</item>
+        <item>3.1</item>
+        <item>3.5</item>
+        <item>3.9</item>
+        <item>4.3</item>
+        <item>4.7</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.4</item>
+        <item>2.9</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.4</item>
+        <item>2.9</item>
+        <item>3.2</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.3</item>
+        <item>2.8</item>
+        <item>3.2</item>
+        <item>1.6</item>
+        <item>1.9</item>
+        <item>2.3</item>
+        <item>2.6</item>
+        <item>3</item>
+        <item>1.5</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>1.7</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+    </string-array>
+
+</resources>

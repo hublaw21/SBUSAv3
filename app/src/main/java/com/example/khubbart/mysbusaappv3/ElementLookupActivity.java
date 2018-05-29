@@ -1,38 +1,26 @@
 package com.example.khubbart.mysbusaappv3;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.support.design.widget.TabLayout;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class ElementLookupActivity extends AppCompatActivity implements
         SelectJumpFragment.OnChangeJumpRadioButtonInteractionListener,
         SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener,
-        AdapterView.OnItemSelectedListener{
+        AdapterView.OnItemSelectedListener {
 
     public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
     public TextView textViewElementDetailBaseValue;
-    public TextView textViewElementDetailV1Value;
-    public TextView textViewElementDetailV2Value;
-    public TextView textViewElementDetailGOEm3;
-    public TextView textViewElementDetailGOEm2;
-    public TextView textViewElementDetailGOEm1;
-    public TextView textViewElementDetailGOEp3;
-    public TextView textViewElementDetailGOEp2;
-    public TextView textViewElementDetailGOEp1;
+    public TextView[] textViewElementDetailGOE = new TextView[11];
     public String elementCode;
     public String newElementName;
     public String itemSelected;
@@ -49,8 +37,20 @@ public class ElementLookupActivity extends AppCompatActivity implements
     //public RadioGroup rgRevs;
     public String jumpCode = "T";
     public String revCode = "1";
+    public String[] SOVCode;
+    public String[] SOVName;
+    public String[] SOVBase;
     public Integer i = 0;
     public Integer j;
+    public Integer resID;
+    public String textViewID;
+    public Integer currentElementIndex;
+    public String currentElementName;
+    public String currentElementBase;
+    public Double currentBase;
+    public Double factorGOE;
+    public Double[] currentGOE = new Double[11];
+    public String[] currentGOEString = new String[11];
     public String[][] elementTable = {
             {"Single Toeloop", "1T", "0.6", "0.4", "0.2", "0.4", "0.3", "0", "-0.1", "-0.2", "-0.3"},
             {"Single Salchow", "1S", "0.6", "0.4", "0.2", "0.4", "0.3", "0", "-0.1", "-0.2", "-0.3"},
@@ -342,18 +342,37 @@ public class ElementLookupActivity extends AppCompatActivity implements
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinElementTypeSelect.setAdapter(adapter);
 
+        //Get SOV Table 2018 - Three matched arrays
+        Resources resources = getResources();
+        SOVCode = resources.getStringArray(R.array.SOV_Code);
+        SOVName = resources.getStringArray(R.array.SOV_Name);
+        SOVBase = resources.getStringArray(R.array.SOV_Base);
+
+        textViewItemSelected = findViewById(R.id.textViewSelected);
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
-        textViewElementDetailV1Value = findViewById(R.id.elementDetailV1Value);
-        textViewElementDetailV2Value = findViewById(R.id.elementDetailV2Value);
-        textViewElementDetailGOEm3 = findViewById(R.id.elementDetailGOEm3);
-        textViewElementDetailGOEm2 = findViewById(R.id.elementDetailGOEm2);
-        textViewElementDetailGOEm1 = findViewById(R.id.elementDetailGOEm1);
-        textViewElementDetailGOEp1 = findViewById(R.id.elementDetailGOEp1);
-        textViewElementDetailGOEp2 = findViewById(R.id.elementDetailGOEp2);
-        textViewElementDetailGOEp3 = findViewById(R.id.elementDetailGOEp3);
-        textViewItemSelected = findViewById(R.id.textViewSelected);
 
+        /*textViewElementDetailGOE[0] = findViewById(R.id.elementDetailGOE0);
+        textViewElementDetailGOE[1] = findViewById(R.id.elementDetailGOE1;
+        textViewElementDetailGOE[2] = findViewById(R.id.elementDetailGOE2);
+        textViewElementDetailGOE[3] = findViewById(R.id.elementDetailGOE3);
+        textViewElementDetailGOE[4] = findViewById(R.id.elementDetailGOE4);
+        textViewElementDetailGOE[6] = findViewById(R.id.elementDetailGGOE6);
+        textViewElementDetailGOE[7] = findViewById(R.id.elementDetailGOE7);
+        textViewElementDetailGOE[8] = findViewById(R.id.elementDetailGOE8);
+        textViewElementDetailGOE[9] = findViewById(R.id.elementDetailGOE9);
+        textViewElementDetailGOE[10] = findViewById(R.id.elementDetailGOE10);
+        */
+
+        for(i=0; i<11; i++){
+            textViewID = "elementDetailGOE" + i;
+            if (i != 5) {
+                // Do not do for 5, that is base value
+                resID = getResources().getIdentifier(textViewID, "id", getPackageName());
+                //textViewElementDetailGOE[i] = findViewById(resID);
+                textViewElementDetailGOE[i] = findViewById(resID);
+            }
+        }
     }
 
     @Override
@@ -408,14 +427,38 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public void updateElement() {
         // Will need to create switch for each element type to do unique elementCode build for each
         if (TextUtils.isEmpty(revCode)) revCode = "1";
-        if (TextUtils.isEmpty(jumpCode)) jumpCode = "J";
+        if (TextUtils.isEmpty(jumpCode)) jumpCode = "T";
         elementCode = revCode + jumpCode;
+        currentElementIndex = Arrays.asList(SOVCode).indexOf(elementCode);
+        // Need to add error checker for code not found
+        currentElementName = Arrays.asList(SOVName).get(currentElementIndex);
+        currentElementBase = Arrays.asList(SOVBase).get(currentElementIndex);
+        textViewElementDetailName.setText(currentElementName + " - " + elementCode);
+        textViewElementDetailBaseValue.setText(currentElementBase);
+
+        currentBase = Double.valueOf(currentElementBase);
+        factorGOE = -.5;
+        for (i = 0; i < 11; i++) {
+            if (i != 5){
+                // Do not do for 5, that is base value
+                currentGOE[i] = factorGOE * currentBase;
+                currentGOEString[i] = String.format("%.2f", currentGOE[i]);
+                textViewElementDetailGOE[i].setText(currentGOEString[i]);
+            };
+            factorGOE = factorGOE + .1;
+        }
+
         // end of switch area
+
+        // Old display area
+        /*
         i = 0;
         while (i < elementTableRowCount) {
             if (elementTable[i][1].equals(elementCode)) {
-                newElementName = elementTable[i][0] + " - " + elementCode;
-                newElementBaseValue = elementTable[i][5];
+                //newElementName = elementTable[i][0] + " - " + elementCode;
+                //newElementBaseValue = elementTable[i][5];
+                newElementName = currentElementName;
+                newElementBaseValue = currentElementBase;
                 newElementV1Value = elementTable[i][6];
                 newElementV2Value = elementTable[i][7];
                 newElementGOEm3Value = elementTable[i][10];
@@ -440,24 +483,26 @@ public class ElementLookupActivity extends AppCompatActivity implements
             }
             i = i + 1;
         }
+        */
 
     }
 
     //Spinner Action
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //Spinner action
         textViewItemSelected.setText(Integer.toString(position));
         String elementType = parent.getItemAtPosition(position).toString();
         //Toast.makeText(getApplicationContext(), "Item number: " + position, Toast.LENGTH_LONG).show();
 
-        if(TextUtils.isEmpty(elementType)){
+        if (TextUtils.isEmpty(elementType)) {
             textViewItemSelected.setText(elementType);
-        };
+        }
+        ;
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> arg0){
+    public void onNothingSelected(AdapterView<?> arg0) {
         //Spinnr action
     }
 }
