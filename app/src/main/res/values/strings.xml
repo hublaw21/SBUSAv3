@@ -10,6 +10,17 @@
     <string name="duble">Double</string>
     <string name="triple">Triple</string>
     <string name="quad">Quad</string>
+    <string name="level_B">B</string>
+    <string name="level_1">1</string>
+    <string name="level_2">2</string>
+    <string name="level_3">3</string>
+    <string name="level_4">4</string>
+    <string name="spin_Upright">Upright</string>
+    <string name="spin_Layback">Layback</string>
+    <string name="spin_Camel">Camel</string>
+    <string name="spin_Sit">Sit</string>
+    <string name="spin_Combination">Combination
+    </string>
     <string-array name="elementTypes">
         <item>Select an Element Type</item>
         <item>Jumps</item>
