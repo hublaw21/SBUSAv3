@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".SelectLevelFragment">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:gravity="center"
+        android:text="Level"
+        android:textColor="@color/white" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupLevels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/narrowTable"
+        android:checkedButton="@+id/radioButtonLevel1"
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        android:gravity="start">
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:text="@string/level_B"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonLevel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:text="@string/level_1" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:text="@string/level_2" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:text="@string/level_3" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevel4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:text="@string/level_4" />
+
+    </RadioGroup>
+
+</LinearLayout>

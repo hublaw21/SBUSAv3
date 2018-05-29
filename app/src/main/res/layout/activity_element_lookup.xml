@@ -16,13 +16,6 @@
         android:dropDownSelector="@color/colorPrimary"
         android:spinnerMode="dialog" />
 
-    <TextView
-        android:id="@+id/textViewSelected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/item_selected" />
-
-
     <fragment
         android:id="@+id/fragmentElementDetail"
         android:name="com.example.khubbart.mysbusaappv3.ElementDetailFragment"
@@ -32,11 +25,41 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/thinBorder"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <FrameLayout
+            android:id="@+id/container0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumBorder">
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumBorder">
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumBorder">
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumBorder">
+        </FrameLayout>
+
+
+        <!--
         <fragment
             android:id="@+id/fragmentSelectJump"
             android:name="com.example.khubbart.mysbusaappv3.SelectJumpFragment"
@@ -50,6 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/mediumBorder"/>
+           -->
+
     </LinearLayout>
 
 </LinearLayout>
