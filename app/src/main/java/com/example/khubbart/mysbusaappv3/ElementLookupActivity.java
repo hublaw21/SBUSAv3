@@ -21,7 +21,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener,
         SelectSpinNameFragment.OnChangeSpinNameRadioButtonInteractionListener,
         SelectLevelFragment.OnChangeLevelRadioButtonInteractionListener,
-        SelectSpinSwitchFragment.OnChangeSpinSwitchInteractionListener,
+        SelectFlyingSwitchFragment.OnChangeFlyingSwitchInteractionListener,
         AdapterView.OnItemSelectedListener {
 
     public TextView textViewItemSelected;
@@ -216,7 +216,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
     // Flying Switch Listener
     @Override
-    public void onChangeSpinSwitchInteraction(boolean isFlying) {
+    public void onChangeFlyingSwitchInteraction(boolean isFlying) {
         if(isFlying) {
             elementCodeParts[0] = "F";
         } else {
@@ -277,7 +277,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     elementCodeParts[3] = "B";
                     fragment[2] = new SelectSpinNameFragment();
                     fragment[3] = new SelectLevelFragment();
-                    fragment[1] = new SelectSpinSwitchFragment();
+                    fragment[1] = new SelectFlyingSwitchFragment();
                     break;
                 default:
                     // add the rest as coded
