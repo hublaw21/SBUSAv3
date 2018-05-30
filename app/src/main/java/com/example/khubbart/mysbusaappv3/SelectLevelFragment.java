@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 
 public class SelectLevelFragment extends Fragment {
 
-    //private OnChangeLevelRadioButtonInteractionListener mListener;
+    private OnChangeLevelRadioButtonInteractionListener mListener;
     public RadioGroup mRGLevel;
 
     public SelectLevelFragment(){
@@ -25,7 +25,6 @@ public class SelectLevelFragment extends Fragment {
             View view = inflater.inflate(R.layout.fragment_select_level,
                     container, false);
 
-            /*
             mRGLevel = view.findViewById(R.id.radioGroupLevels);
 
             mRGLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -34,11 +33,9 @@ public class SelectLevelFragment extends Fragment {
                     onRadioButtonChanged(checkedId);
                 }
             });
-            */
 
             return view;
     }
-    /*
     public void onRadioButtonChanged(int id){
         if(mListener != null){
             mListener.onChangeLevelRadioButtonInteraction(id);
@@ -65,5 +62,4 @@ public class SelectLevelFragment extends Fragment {
     public interface OnChangeLevelRadioButtonInteractionListener{
         public void onChangeLevelRadioButtonInteraction(int id);
     }
-    */
 }

@@ -19,6 +19,8 @@ import java.util.Arrays;
 public class ElementLookupActivity extends AppCompatActivity implements
         SelectJumpFragment.OnChangeJumpRadioButtonInteractionListener,
         SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener,
+        SelectSpinNameFragment.OnChangeSpinNameRadioButtonInteractionListener,
+        SelectLevelFragment.OnChangeLevelRadioButtonInteractionListener,
         AdapterView.OnItemSelectedListener {
 
     public TextView textViewItemSelected;
@@ -26,6 +28,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public TextView textViewElementDetailBaseValue;
     public TextView[] textViewElementDetailGOE = new TextView[11];
     public String elementCode;
+    public String[] elementCodeParts;
     public String newElementName;
     public String itemSelected;
     public String jumpCode = "T";
@@ -36,6 +39,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public Integer i = 0;
     public Integer resID;
     public String textViewID;
+    public String containerID;
     public Integer currentSOVIndex;
     public Integer currentElementTypeIndex = 0; //This should be the same as the spinner position
     public String currentElementName;
@@ -44,7 +48,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public Double factorGOE;
     public Double[] currentGOE = new Double[11];
     public String[] currentGOEString = new String[11];
-    //public Fragment fragment;
+    public Fragment[] fragment = new Fragment[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,64 +89,19 @@ public class ElementLookupActivity extends AppCompatActivity implements
         // get fragment manager, start transaction
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Fragment[] fragment = new Fragment[4];
         //Toast.makeText(getApplicationContext(), "Item number: " + position, Toast.LENGTH_LONG).show();
         // add
         /*if(position == 2){
             fragment = new SelectSpinNameFragment();
         }
         */
-        switch (currentElementTypeIndex) {
-            case 0:
-                // No element selected
-                break;
-            case 1:
-                //Jumps
-                fragment[0] = new EmptyFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container0, fragment[0]);
-                ft.commit();
-
-                fragment[1] = new SelectJumpFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container1, fragment[1]);
-                ft.commit();
-
-                fragment[2] = new SelectRevolutionsFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container2, fragment[2]);
-                ft.commit();
-
-                fragment[3] = new EmptyFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container3, fragment[3]);
-                ft.commit();
-                break;
-            case 2:
-                //Spins
-                fragment[1] = new SelectSpinNameFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container0, fragment[1]);
-                ft.commit();
-
-                fragment[1] = new SelectLevelFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container1, fragment[1]);
-                ft.commit();
-
-                fragment[2] = new SelectSpinSwitchesFragment();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container2, fragment[2]);
-                ft.commit();
-
-                fragment[3] = new EmptyFragment();
-                ft = fm.beginTransaction();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.container3, fragment[3]);
-                ft.commit();
-                break;
-            default:
-                //no good select
+       for(i=0; i<4; i++){
+           ft = fm.beginTransaction();
+           containerID = "container" + i;
+           resID = getResources().getIdentifier(containerID, "id", getPackageName());
+           ft.replace(R.id.container1, fragment[1]); // this needs to do all of them.
+           //ft.replace(resID, fragment[i]);
+           ft.commit();
         }
 
         // alternatively add it with a tag
@@ -161,26 +120,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
         ft.commit();
         */
     };
-
-    //
-    @Override
-    public void onChangeRevolutionsRadioButtonInteraction(int id) {
-        switch (id) {
-            case R.id.radioButtonRevs1:
-                revCode = "1";
-                break;
-            case R.id.radioButtonRevs2:
-                revCode = "2";
-                break;
-            case R.id.radioButtonRevs3:
-                revCode = "3";
-                break;
-            case R.id.radioButtonRevs4:
-                revCode = "4";
-                break;
-        }
-        updateElement();
-    }
 
     @Override
     public void onChangeJumpRadioButtonInteraction(int id) {
@@ -206,6 +145,75 @@ public class ElementLookupActivity extends AppCompatActivity implements
         }
         updateElement();
     }
+
+    //
+    @Override
+    public void onChangeRevolutionsRadioButtonInteraction(int id) {
+        switch (id) {
+            case R.id.radioButtonRevs1:
+                revCode = "1";
+                break;
+            case R.id.radioButtonRevs2:
+                revCode = "2";
+                break;
+            case R.id.radioButtonRevs3:
+                revCode = "3";
+                break;
+            case R.id.radioButtonRevs4:
+                revCode = "4";
+                break;
+        }
+        updateElement();
+    }
+
+
+    // Spin Name Listener - second part of element code
+    @Override
+    public void onChangeSpinNameRadioButtonInteraction(int id) {
+        switch (id) {
+            case R.id.radioButtonSpinName1:
+                elementCodeParts[1] = "C";
+                break;
+            case R.id.radioButtonSpinName2:
+                elementCodeParts[1] = "L";
+                break;
+            case R.id.radioButtonSpinName3:
+                elementCodeParts[1] = "S";
+                break;
+            case R.id.radioButtonSpinName4:
+                elementCodeParts[1] = "U";
+                break;
+            case R.id.radioButtonSpinName5:
+                elementCodeParts[1] = "Co";
+                break;
+        }
+        //updateElement();
+    }
+
+    // Level Listener - ___ part of element code
+    @Override
+    public void onChangeLevelRadioButtonInteraction(int id) {
+        switch (id) {
+            case R.id.radioButtonLevelB:
+                elementCodeParts[2] = "B";
+                break;
+            case R.id.radioButtonLevel1:
+                elementCodeParts[2] = "1";
+                break;
+            case R.id.radioButtonLevel2:
+                elementCodeParts[2] = "2";
+                break;
+            case R.id.radioButtonLevel3:
+                elementCodeParts[2] = "3";
+                break;
+            case R.id.radioButtonLevel4:
+                elementCodeParts[2] = "4";
+                break;
+        }
+        //updateElement();
+    }
+
+
 
     public void updateElement() {
         // Will need to create switch for each element type to do unique elementCode build for each
@@ -237,13 +245,33 @@ public class ElementLookupActivity extends AppCompatActivity implements
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //Spinner action
-        //String elementType = parent.getItemAtPosition(position).toString(); - Incase you want to pull the text from spinner
-        currentElementTypeIndex = position;
-        FragmentChange(currentElementTypeIndex);
+        //String elementType = parent.getItemAtPosition(position).toString(); - In case you want to pull the text from spinner
+        if (currentElementTypeIndex != position) {
+            //prepare fragments and allow for default to avoid crashes
+            Arrays.fill(fragment, new EmptyFragment()); // set all cells to empty
+            switch (position) {
+                case 0:
+                    // No further action needed
+                    break;
+                case 1:
+                    fragment[1] = new SelectJumpFragment();
+                    fragment[2] = new SelectRevolutionsFragment();
+                    break;
+                case 2:
+                    fragment[0] = new SelectSpinNameFragment();
+                    fragment[1] = new SelectLevelFragment();
+                    fragment[2] = new SelectSpinSwitchesFragment();
+                    break;
+                default:
+                    // add the rest as coded
+            }
+            currentElementTypeIndex = position;
+            FragmentChange(currentElementTypeIndex);
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
         //Spinner action - no selection
-    }
+    };
 }

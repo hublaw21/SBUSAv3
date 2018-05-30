@@ -11,8 +11,8 @@ import android.widget.RadioGroup;
 
 public class SelectSpinNameFragment extends Fragment {
 
-    //private OnChangeSpinNameRadioButtonInteractionListener mListener;
-    //public RadioGroup mRGSpinName;
+    private OnChangeSpinNameRadioButtonInteractionListener mListener;
+    public RadioGroup mRGSpinName;
 
     public SelectSpinNameFragment(){
     }
@@ -25,7 +25,6 @@ public class SelectSpinNameFragment extends Fragment {
             View view = inflater.inflate(R.layout.fragment_select_spin_name,
                     container, false);
 
-            /*
             mRGSpinName = view.findViewById(R.id.radioGroupSpinNames);
 
             mRGSpinName.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -34,10 +33,10 @@ public class SelectSpinNameFragment extends Fragment {
                     onRadioButtonChanged(checkedId);
                 }
             });
-            */
+
             return view;
     }
-    /*
+
     public void onRadioButtonChanged(int id){
         if(mListener != null){
             mListener.onChangeSpinNameRadioButtonInteraction(id);
@@ -64,5 +63,4 @@ public class SelectSpinNameFragment extends Fragment {
     public interface OnChangeSpinNameRadioButtonInteractionListener{
         public void onChangeSpinNameRadioButtonInteraction(int id);
     }
-    */
 }
