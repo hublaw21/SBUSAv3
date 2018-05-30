@@ -76,7 +76,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         //textViewItemSelected = findViewById(R.id.textViewSelected);
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
-        for(i=0; i<11; i++){
+        for (i = 0; i < 11; i++) {
             textViewID = "elementDetailGOE" + i;
             if (i != 5) {
                 // Do not do for 5, that is base value
@@ -87,62 +87,46 @@ public class ElementLookupActivity extends AppCompatActivity implements
     }
 
     //Trading out fragments
-    private void FragmentChange(Integer currentElementTypeIndex){
+    private void FragmentChange(Integer currentElementTypeIndex) {
         // get fragment manager, start transaction
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         //Toast.makeText(getApplicationContext(), "Item number: " + position, Toast.LENGTH_LONG).show();
         // add
-        /*if(position == 2){
-            fragment = new SelectSpinNameFragment();
-        }
-        */
-       for(i=0; i<4; i++){
-           ft = fm.beginTransaction();
-           containerID = "container" + i;
-           resID = getResources().getIdentifier(containerID, "id", getPackageName());
-           ft.replace(R.id.container1, fragment[1]); // this needs to do all of them.
-           //ft.replace(resID, fragment[i]);
-           ft.commit();
-        }
 
-        // alternatively add it with a tag
-        // trx.add(R.id.your_placehodler, new YourFragment(), "detail");
-        //ft.commit();
+        for (i = 0; i < 4; i++) {
+            ft = fm.beginTransaction();
+            containerID = "container" + i;
+            resID = getResources().getIdentifier(containerID, "id", getPackageName());
+            //ft.replace(R.id.container1, fragment[1]); // this needs to do all of them.
+            ft.replace(resID, fragment[i]);
+            //ft[i].replace(getResources().getIdentifier(containerID, "id", getPackageName()), fragment[i]);
+            ft.commit();
+        }
+    }
 
-        // replace
-        //FragmentTransaction ft = fm.beginTransaction();
-        //ft.replace(R.id.container01, new SelectSpinFragment());
-        //ft.commit();
-        /*
-        // remove
-        Fragment fragment = fm.findFragmentById(R.id.container01);
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(fragment);
-        ft.commit();
-        */
-    };
+    ;
 
     @Override
     public void onChangeJumpRadioButtonInteraction(int id) {
         switch (id) {
             case R.id.radioButtonJump1:
-                jumpCode = "T";
+                elementCodeParts[1] = "T";
                 break;
             case R.id.radioButtonJump2:
-                jumpCode = "S";
+                elementCodeParts[1] = "S";
                 break;
             case R.id.radioButtonJump3:
-                jumpCode = "F";
+                elementCodeParts[1] = "F";
                 break;
             case R.id.radioButtonJump4:
-                jumpCode = "Lo";
+                elementCodeParts[1] = "Lo";
                 break;
             case R.id.radioButtonJump5:
-                jumpCode = "Lz";
+                elementCodeParts[1] = "Lz";
                 break;
             case R.id.radioButtonJump6:
-                jumpCode = "A";
+                elementCodeParts[1] = "A";
                 break;
         }
         updateElement();
@@ -153,16 +137,16 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public void onChangeRevolutionsRadioButtonInteraction(int id) {
         switch (id) {
             case R.id.radioButtonRevs1:
-                revCode = "1";
+                elementCodeParts[0] = "1";
                 break;
             case R.id.radioButtonRevs2:
-                revCode = "2";
+                elementCodeParts[0] = "2";
                 break;
             case R.id.radioButtonRevs3:
-                revCode = "3";
+                elementCodeParts[0] = "3";
                 break;
             case R.id.radioButtonRevs4:
-                revCode = "4";
+                elementCodeParts[0] = "4";
                 break;
         }
         updateElement();
@@ -188,7 +172,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "CoSp";
                 break;
         }
-        //updateElement();
+        updateElement();
     }
 
     // Level Listener - ___ part of element code
@@ -211,43 +195,47 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[2] = "4";
                 break;
         }
-        //updateElement();
+        updateElement();
     }
 
     // Flying Switch Listener
     @Override
     public void onChangeFlyingSwitchInteraction(boolean isFlying) {
-        if(isFlying) {
+        if (isFlying) {
             elementCodeParts[0] = "F";
         } else {
             elementCodeParts[0] = "";
         }
-        //updateElement();
+        updateElement();
     }
 
 
-
     public void updateElement() {
-        elementCode = elementCodeParts[0]+ elementCodeParts[1]+elementCodeParts[2]+elementCodeParts[3];
+        elementCode = elementCodeParts[0] + elementCodeParts[1] + elementCodeParts[2] + elementCodeParts[3];
         currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
         // Need to add error checker for code not found
-        currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
-        currentElementBase = Arrays.asList(SOVBase).get(currentSOVIndex);
-        textViewElementDetailName.setText(currentElementName + " - " + elementCode);
-        textViewElementDetailBaseValue.setText(currentElementBase);
+        if (currentSOVIndex < 0) {
+            //Error
+            Toast.makeText(getApplicationContext(), "elementCode: **" + elementCode + "** currentSOVIndex: " + currentSOVIndex, Toast.LENGTH_LONG).show();
+        } else {
+            currentElementBase = Arrays.asList(SOVBase).get(currentSOVIndex);
+            currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
+            textViewElementDetailName.setText(currentElementName + " - " + elementCode);
+            textViewElementDetailBaseValue.setText(currentElementBase);
 
-        currentBase = Double.valueOf(currentElementBase);
-        factorGOE = -.5;
-        for (i = 0; i < 11; i++) {
-            if (i != 5){
-                // Do not do for 5, that is base value
-                currentGOE[i] = factorGOE * currentBase;
-                currentGOEString[i] = String.format("%.2f", currentGOE[i]);
-                textViewElementDetailGOE[i].setText(currentGOEString[i]);
-            };
-            factorGOE = factorGOE + .1;
+            currentBase = Double.valueOf(currentElementBase);
+            factorGOE = -.5;
+            for (i = 0; i < 11; i++) {
+                if (i != 5) {
+                    // Do not do for 5, that is base value
+                    currentGOE[i] = factorGOE * currentBase;
+                    currentGOEString[i] = String.format("%.2f", currentGOE[i]);
+                    textViewElementDetailGOE[i].setText(currentGOEString[i]);
+                }
+                ;
+                factorGOE = factorGOE + .1;
+            }
         }
-        // end of switch area
     }
 
     //Spinner Action
@@ -267,17 +255,21 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     elementCodeParts[1] = "T";
                     elementCodeParts[2] = "";
                     elementCodeParts[3] = "";
+                    fragment[0] = new EmptyFragmentLeft();
                     fragment[1] = new SelectJumpFragment();
                     fragment[2] = new SelectRevolutionsFragment();
+                    fragment[3] = new EmptyFragmentRight();
+
                     break;
                 case 2:
                     elementCodeParts[0] = "";
                     elementCodeParts[1] = "";
                     elementCodeParts[2] = "USp";
                     elementCodeParts[3] = "B";
+                    fragment[0] = new EmptyFragmentLeft();
+                    fragment[1] = new SelectFlyingSwitchFragment();
                     fragment[2] = new SelectSpinNameFragment();
                     fragment[3] = new SelectLevelFragment();
-                    fragment[1] = new SelectFlyingSwitchFragment();
                     break;
                 default:
                     // add the rest as coded
@@ -290,5 +282,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
         //Spinner action - no selection
-    };
+    }
+
+    ;
 }
