@@ -13,6 +13,7 @@ public class SelectRevolutionsFragment extends Fragment {
 
     private OnChangeRevolutionsRadioButtonInteractionListener mListener;
     public RadioGroup mRGRevs;
+    public String tempCode;
 
     public SelectRevolutionsFragment(){
     }
@@ -38,8 +39,22 @@ public class SelectRevolutionsFragment extends Fragment {
     }
 
     public void onRadioButtonChanged(int id){
+        switch (id) {
+            case R.id.radioButtonRevs1:
+                tempCode = "1";
+                break;
+            case R.id.radioButtonRevs2:
+                tempCode = "2";
+                break;
+            case R.id.radioButtonRevs3:
+                tempCode = "3";
+                break;
+            case R.id.radioButtonRevs4:
+                tempCode = "4";
+                break;
+        }
         if(mListener != null){
-            mListener.onChangeRevolutionsRadioButtonInteraction(id);
+            mListener.onChangeRevolutionsRadioButtonInteraction(tempCode);
         }
     }
 
@@ -61,7 +76,7 @@ public class SelectRevolutionsFragment extends Fragment {
     }
 
     public interface OnChangeRevolutionsRadioButtonInteractionListener{
-        public void onChangeRevolutionsRadioButtonInteraction(int id);
+        public void onChangeRevolutionsRadioButtonInteraction(String tempCode);
     }
 
 }

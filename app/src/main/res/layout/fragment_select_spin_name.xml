@@ -25,6 +25,7 @@
         android:checkedButton="@+id/radioButtonSpinName1"
         android:textColor="@color/white"
         android:buttonTint="@color/white"
+        android:checked="true"
         android:gravity="start">
 
         <RadioButton

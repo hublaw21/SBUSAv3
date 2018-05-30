@@ -8,16 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
-import java.util.Objects;
-
-
-public class SelectJumpFragment extends Fragment {
+/*
+public class SelectJumpFragmentBU extends Fragment {
 
     private OnChangeJumpRadioButtonInteractionListener mListener;
     public RadioGroup mRGJump;
-    public String tempCode;
 
-    public SelectJumpFragment(){
+    public SelectJumpFragmentBU(){
     }
 
     @Override
@@ -41,30 +38,8 @@ public class SelectJumpFragment extends Fragment {
     }
 
     public void onRadioButtonChanged(int id){
-        tempCode = "";
-        switch (id) {
-            case R.id.radioButtonJump1:
-                tempCode = "T";
-                break;
-            case R.id.radioButtonJump2:
-                tempCode  = "S";
-                break;
-            case R.id.radioButtonJump3:
-                tempCode  = "F";
-                break;
-            case R.id.radioButtonJump4:
-                tempCode  = "Lo";
-                break;
-            case R.id.radioButtonJump5:
-                tempCode  = "Lz";
-                break;
-            case R.id.radioButtonJump6:
-                tempCode  = "A";
-                break;
-        }
-
         if(mListener != null){
-            mListener.onChangeJumpRadioButtonInteraction(tempCode);
+            mListener.onChangeJumpRadioButtonInteraction(id);
         }
     }
 
@@ -86,7 +61,8 @@ public class SelectJumpFragment extends Fragment {
     }
 
     public interface OnChangeJumpRadioButtonInteractionListener{
-        public void onChangeJumpRadioButtonInteraction(String tempCode);
+        public void onChangeJumpRadioButtonInteraction(int id);
     }
 
 }
+*/

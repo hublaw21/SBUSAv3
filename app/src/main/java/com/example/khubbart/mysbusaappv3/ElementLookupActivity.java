@@ -51,6 +51,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public String[] currentGOEString = new String[11];
     public Fragment[] fragment = new Fragment[4];
     public Boolean isFlying;
+    public String tempCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,98 +104,36 @@ public class ElementLookupActivity extends AppCompatActivity implements
             //ft[i].replace(getResources().getIdentifier(containerID, "id", getPackageName()), fragment[i]);
             ft.commit();
         }
-    }
-
-    ;
-
-    @Override
-    public void onChangeJumpRadioButtonInteraction(int id) {
-        switch (id) {
-            case R.id.radioButtonJump1:
-                elementCodeParts[1] = "T";
-                break;
-            case R.id.radioButtonJump2:
-                elementCodeParts[1] = "S";
-                break;
-            case R.id.radioButtonJump3:
-                elementCodeParts[1] = "F";
-                break;
-            case R.id.radioButtonJump4:
-                elementCodeParts[1] = "Lo";
-                break;
-            case R.id.radioButtonJump5:
-                elementCodeParts[1] = "Lz";
-                break;
-            case R.id.radioButtonJump6:
-                elementCodeParts[1] = "A";
-                break;
-        }
+        // Call an update to clear screen of any old data/seed new element data
         updateElement();
     }
 
-    //
+    // Get Jump Name
     @Override
-    public void onChangeRevolutionsRadioButtonInteraction(int id) {
-        switch (id) {
-            case R.id.radioButtonRevs1:
-                elementCodeParts[0] = "1";
-                break;
-            case R.id.radioButtonRevs2:
-                elementCodeParts[0] = "2";
-                break;
-            case R.id.radioButtonRevs3:
-                elementCodeParts[0] = "3";
-                break;
-            case R.id.radioButtonRevs4:
-                elementCodeParts[0] = "4";
-                break;
-        }
+    public void onChangeJumpRadioButtonInteraction(String tempCode) {
+        elementCodeParts[3] = tempCode;
+        // Probably add an if to check for throw and then add 'Th'
         updateElement();
     }
 
-    // Spin Name Listener - second part of element code
+    // Get Number of Revolutions
     @Override
-    public void onChangeSpinNameRadioButtonInteraction(int id) {
-        switch (id) {
-            case R.id.radioButtonSpinName1:
-                elementCodeParts[1] = "CSp";
-                break;
-            case R.id.radioButtonSpinName2:
-                elementCodeParts[1] = "LSp";
-                break;
-            case R.id.radioButtonSpinName3:
-                elementCodeParts[1] = "SSp";
-                break;
-            case R.id.radioButtonSpinName4:
-                elementCodeParts[1] = "USp";
-                break;
-            case R.id.radioButtonSpinName5:
-                elementCodeParts[1] = "CoSp";
-                break;
-        }
+    public void onChangeRevolutionsRadioButtonInteraction(String tempCode) {
+        elementCodeParts[2] = tempCode;
         updateElement();
     }
 
-    // Level Listener - ___ part of element code
+    // Get Spin Name
     @Override
-    public void onChangeLevelRadioButtonInteraction(int id) {
-        switch (id) {
-            case R.id.radioButtonLevelB:
-                elementCodeParts[2] = "B";
-                break;
-            case R.id.radioButtonLevel1:
-                elementCodeParts[2] = "1";
-                break;
-            case R.id.radioButtonLevel2:
-                elementCodeParts[2] = "2";
-                break;
-            case R.id.radioButtonLevel3:
-                elementCodeParts[2] = "3";
-                break;
-            case R.id.radioButtonLevel4:
-                elementCodeParts[2] = "4";
-                break;
-        }
+    public void onChangeSpinNameRadioButtonInteraction(String tempCode) {
+        elementCodeParts[2] = tempCode;
+        updateElement();
+    }
+
+    // Get Level
+    @Override
+    public void onChangeLevelRadioButtonInteraction(String tempCode) {
+        elementCodeParts[3] = tempCode;
         updateElement();
     }
 
@@ -251,10 +190,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     // No further action needed
                     break;
                 case 1:
-                    elementCodeParts[0] = "1";
-                    elementCodeParts[1] = "T";
-                    elementCodeParts[2] = "";
-                    elementCodeParts[3] = "";
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "";
+                    elementCodeParts[2] = "1";
+                    elementCodeParts[3] = "T";
                     fragment[0] = new EmptyFragmentLeft();
                     fragment[1] = new SelectJumpFragment();
                     fragment[2] = new SelectRevolutionsFragment();
@@ -266,8 +205,8 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     elementCodeParts[1] = "";
                     elementCodeParts[2] = "USp";
                     elementCodeParts[3] = "B";
-                    fragment[0] = new EmptyFragmentLeft();
-                    fragment[1] = new SelectFlyingSwitchFragment();
+                    fragment[0] = new SelectFlyingSwitchFragment();
+                    fragment[1] = new EmptyFragmentLeft();
                     fragment[2] = new SelectSpinNameFragment();
                     fragment[3] = new SelectLevelFragment();
                     break;

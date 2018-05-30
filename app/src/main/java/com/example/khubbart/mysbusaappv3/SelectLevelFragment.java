@@ -13,6 +13,7 @@ public class SelectLevelFragment extends Fragment {
 
     private OnChangeLevelRadioButtonInteractionListener mListener;
     public RadioGroup mRGLevel;
+    public String tempCode;
 
     public SelectLevelFragment(){
     }
@@ -37,8 +38,25 @@ public class SelectLevelFragment extends Fragment {
             return view;
     }
     public void onRadioButtonChanged(int id){
+        switch (id) {
+            case R.id.radioButtonLevelB:
+                tempCode = "B";
+                break;
+            case R.id.radioButtonLevel1:
+                tempCode = "1";
+                break;
+            case R.id.radioButtonLevel2:
+                tempCode = "2";
+                break;
+            case R.id.radioButtonLevel3:
+                tempCode = "3";
+                break;
+            case R.id.radioButtonLevel4:
+                tempCode = "4";
+                break;
+        }
         if(mListener != null){
-            mListener.onChangeLevelRadioButtonInteraction(id);
+            mListener.onChangeLevelRadioButtonInteraction(tempCode);
         }
     }
 
@@ -60,6 +78,6 @@ public class SelectLevelFragment extends Fragment {
     }
 
     public interface OnChangeLevelRadioButtonInteractionListener{
-        public void onChangeLevelRadioButtonInteraction(int id);
+        public void onChangeLevelRadioButtonInteraction(String tempCode);
     }
 }

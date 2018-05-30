@@ -13,6 +13,7 @@ public class SelectSpinNameFragment extends Fragment {
 
     private OnChangeSpinNameRadioButtonInteractionListener mListener;
     public RadioGroup mRGSpinName;
+    public String tempCode;
 
     public SelectSpinNameFragment(){
     }
@@ -38,8 +39,25 @@ public class SelectSpinNameFragment extends Fragment {
     }
 
     public void onRadioButtonChanged(int id){
+        switch (id) {
+            case R.id.radioButtonSpinName1:
+                tempCode = "CSp";
+                break;
+            case R.id.radioButtonSpinName2:
+                tempCode = "LSp";
+                break;
+            case R.id.radioButtonSpinName3:
+                tempCode = "SSp";
+                break;
+            case R.id.radioButtonSpinName4:
+                tempCode = "USp";
+                break;
+            case R.id.radioButtonSpinName5:
+                tempCode = "CoSp";
+                break;
+        }
         if(mListener != null){
-            mListener.onChangeSpinNameRadioButtonInteraction(id);
+            mListener.onChangeSpinNameRadioButtonInteraction(tempCode);
         }
     }
 
@@ -61,6 +79,6 @@ public class SelectSpinNameFragment extends Fragment {
     }
 
     public interface OnChangeSpinNameRadioButtonInteractionListener{
-        public void onChangeSpinNameRadioButtonInteraction(int id);
+        public void onChangeSpinNameRadioButtonInteraction(String tempCode);
     }
 }
