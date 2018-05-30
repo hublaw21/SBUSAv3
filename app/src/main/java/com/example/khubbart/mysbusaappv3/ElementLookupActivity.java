@@ -21,6 +21,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SelectRevolutionsFragment.OnChangeRevolutionsRadioButtonInteractionListener,
         SelectSpinNameFragment.OnChangeSpinNameRadioButtonInteractionListener,
         SelectLevelFragment.OnChangeLevelRadioButtonInteractionListener,
+        SelectSpinSwitchFragment.OnChangeSpinSwitchInteractionListener,
         AdapterView.OnItemSelectedListener {
 
     public TextView textViewItemSelected;
@@ -28,7 +29,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public TextView textViewElementDetailBaseValue;
     public TextView[] textViewElementDetailGOE = new TextView[11];
     public String elementCode;
-    public String[] elementCodeParts;
+    public String[] elementCodeParts = new String[4];
     public String newElementName;
     public String itemSelected;
     public String jumpCode = "T";
@@ -49,6 +50,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public Double[] currentGOE = new Double[11];
     public String[] currentGOEString = new String[11];
     public Fragment[] fragment = new Fragment[4];
+    public Boolean isFlying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_element_lookup);
 
 
-        //Sett up spinner for selecting element type
+        //Set up spinner for selecting element type
         Spinner spinElementTypeSelect = findViewById(R.id.spinnerElementTypeSelect);
         spinElementTypeSelect.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -166,25 +168,24 @@ public class ElementLookupActivity extends AppCompatActivity implements
         updateElement();
     }
 
-
     // Spin Name Listener - second part of element code
     @Override
     public void onChangeSpinNameRadioButtonInteraction(int id) {
         switch (id) {
             case R.id.radioButtonSpinName1:
-                elementCodeParts[1] = "C";
+                elementCodeParts[1] = "CSp";
                 break;
             case R.id.radioButtonSpinName2:
-                elementCodeParts[1] = "L";
+                elementCodeParts[1] = "LSp";
                 break;
             case R.id.radioButtonSpinName3:
-                elementCodeParts[1] = "S";
+                elementCodeParts[1] = "SSp";
                 break;
             case R.id.radioButtonSpinName4:
-                elementCodeParts[1] = "U";
+                elementCodeParts[1] = "USp";
                 break;
             case R.id.radioButtonSpinName5:
-                elementCodeParts[1] = "Co";
+                elementCodeParts[1] = "CoSp";
                 break;
         }
         //updateElement();
@@ -213,13 +214,21 @@ public class ElementLookupActivity extends AppCompatActivity implements
         //updateElement();
     }
 
+    // Flying Switch Listener
+    @Override
+    public void onChangeSpinSwitchInteraction(boolean isFlying) {
+        if(isFlying) {
+            elementCodeParts[0] = "F";
+        } else {
+            elementCodeParts[0] = "";
+        }
+        //updateElement();
+    }
+
 
 
     public void updateElement() {
-        // Will need to create switch for each element type to do unique elementCode build for each
-        if (TextUtils.isEmpty(revCode)) revCode = "1";
-        if (TextUtils.isEmpty(jumpCode)) jumpCode = "T";
-        elementCode = revCode + jumpCode;
+        elementCode = elementCodeParts[0]+ elementCodeParts[1]+elementCodeParts[2]+elementCodeParts[3];
         currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
         // Need to add error checker for code not found
         currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
@@ -254,13 +263,21 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     // No further action needed
                     break;
                 case 1:
+                    elementCodeParts[0] = "1";
+                    elementCodeParts[1] = "T";
+                    elementCodeParts[2] = "";
+                    elementCodeParts[3] = "";
                     fragment[1] = new SelectJumpFragment();
                     fragment[2] = new SelectRevolutionsFragment();
                     break;
                 case 2:
-                    fragment[0] = new SelectSpinNameFragment();
-                    fragment[1] = new SelectLevelFragment();
-                    fragment[2] = new SelectSpinSwitchesFragment();
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "";
+                    elementCodeParts[2] = "USp";
+                    elementCodeParts[3] = "B";
+                    fragment[2] = new SelectSpinNameFragment();
+                    fragment[3] = new SelectLevelFragment();
+                    fragment[1] = new SelectSpinSwitchFragment();
                     break;
                 default:
                     // add the rest as coded

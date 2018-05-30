@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".SelectSpinSwitchesFragment">
+    tools:context=".SelectSpinSwitchFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -74,6 +74,4 @@
             android:textOn="Yes" />
 
     </LinearLayout>
-
-
 </LinearLayout>
