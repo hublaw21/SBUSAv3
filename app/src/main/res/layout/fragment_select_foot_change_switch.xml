@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".SelectFootChangeSwitchFragment">
 
     <TextView
@@ -25,8 +25,7 @@
         android:layout_margin="@dimen/mediumBorder"
         android:layout_weight=".5"
         android:checked="false"
-        android:text="Foot Change"
-        android:textOff="No"
-        android:textOn="Yes" />
+        android:textOff="No Change"
+        android:textOn="Foot Change" />
 
 </LinearLayout>

@@ -34,6 +34,7 @@
     <string name="outside">Outside</string>
     <string name="pairs_spin">Pairs Spin</string>
     <string name="pairs_combo_spin">Pairs Combination Spin</string>
+    <string name="pivot">Pivot</string>
     <string name="steps">Steps</string>
     <string name="choreo">Choreo Sequence</string>
     <string-array name="elementTypes">

@@ -5,24 +5,26 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".SelectFlyingSwitchFragment">
+    tools:context=".SelectDeathSpiralFrontBackSwitchFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:gravity="center"
-        android:text="Flying Entry"
+        android:text="Direction"
         android:textColor="@color/white" />
 
     <ToggleButton
-        android:id="@+id/toggleButtonFlyingEntry"
+        android:id="@+id/toggleButtonFrontBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:layout_weight=".5"
         android:checked="false"
-        android:textOff="Not"
-        android:textOn="Flying" />
+        android:gravity="center"
+        android:text="Direction"
+        android:textOff="Forward"
+        android:textOn="Backward" />
 
 </LinearLayout>

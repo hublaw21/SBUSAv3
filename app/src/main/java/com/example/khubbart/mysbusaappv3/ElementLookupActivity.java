@@ -25,6 +25,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SelectFootChangeSwitchFragment.OnChangeFootChangeSwitchInteractionListener,
         SelectGroupFragment.OnChangeGroupRadioButtonInteractionListener,
         SelectLiftNameFragment.OnChangeLiftNameRadioButtonInteractionListener,
+        SelectDeathSpiralInOutSwitchFragment.OnChangeInOutSwitchInteractionListener,
+        SelectDeathSpiralFrontBackSwitchFragment.OnChangeFrontBackSwitchInteractionListener,
+        SelectPairSpinNameFragment.OnChangePairSpinNameRadioButtonInteractionListener,
+        SelectStepNameFragment.OnChangeStepNameRadioButtonInteractionListener,
         AdapterView.OnItemSelectedListener {
 
     public TextView textViewItemSelected;
@@ -140,6 +144,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     // Get Level
     @Override
     public void onChangeLevelRadioButtonInteraction(String tempCode) {
+        if (elementCodeParts[1] != "5" && currentElementTypeIndex == 4) elementCodeParts[2] = "Li"; //In case Group 5 name is checked
         elementCodeParts[3] = tempCode;
         updateElement();
     }
@@ -180,6 +185,42 @@ public class ElementLookupActivity extends AppCompatActivity implements
         updateElement();
     }
 
+    // In Out Switch Listener
+    @Override
+    public void onChangeInOutSwitchInteraction(boolean isOut) {
+        if (isOut) {
+            elementCodeParts[2] = "oDs";
+        } else {
+            elementCodeParts[2] = "iDs";
+        }
+        updateElement();
+    }
+    // Front Back Switch Listener
+    @Override
+    public void onChangeFrontBackSwitchInteraction(boolean isBack) {
+        if (isBack) {
+            elementCodeParts[1] = "B";
+        } else {
+            elementCodeParts[1] = "F";
+        }
+        updateElement();
+    }
+
+    // Get Pair Spin Name
+    @Override
+    public void onChangePairSpinNameRadioButtonInteraction(String tempCode) {
+        elementCodeParts[2] = tempCode;
+        if(elementCodeParts[2] == "PiF")elementCodeParts[3] = "";
+        updateElement();
+    }
+    // Get Step Name
+    @Override
+    public void onChangeStepNameRadioButtonInteraction(String tempCode) {
+        if(elementCodeParts[2] == "StSq") elementCodeParts[3]="";
+        elementCodeParts[2] = tempCode;
+        updateElement();
+    }
+
 
     public void updateElement() {
         elementCode = elementCodeParts[0] + elementCodeParts[1] + elementCodeParts[2] + elementCodeParts[3];
@@ -187,7 +228,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         // Need to add error checker for code not found
         if (currentSOVIndex < 0) {
             //Error
-            Toast.makeText(getApplicationContext(), "elementCode: **" + elementCode + "** currentSOVIndex: " + currentSOVIndex, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "elementCode: **" + elementCode + "** currentSOVIndex: " + currentSOVIndex, Toast.LENGTH_LONG).show();
         } else {
             currentElementBase = Arrays.asList(SOVBase).get(currentSOVIndex);
             currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
@@ -239,8 +280,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     elementCodeParts[1] = "";
                     elementCodeParts[2] = "USp";
                     elementCodeParts[3] = "B";
-                    //fragment[0] = new SelectFlyingSwitchFragment();
-                    //fragment[1] = new SelectFootChangeSwitchFragment();
                     fragment[0] = new EmptyFragment();
                     fragment[1] = new SwithContainerFragment();
                     fragment[2] = new SelectSpinNameFragment();
@@ -249,7 +288,14 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
                 case 3:
                     //Footwork
-
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "";
+                    elementCodeParts[2] = "StSq";
+                    elementCodeParts[3] = "B";
+                    fragment[0] = new EmptyFragment();
+                    fragment[1] = new EmptyFragment();
+                    fragment[2] = new SelectStepNameFragment();
+                    fragment[3] = new SelectLevelFragment();
                     break;
 
                 case 4:
@@ -268,7 +314,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     // Twists
                     elementCodeParts[0] = "";
                     elementCodeParts[1] = "";
-                    elementCodeParts[2] = "Single";
+                    elementCodeParts[2] = "1Tw";
                     elementCodeParts[3] = "B";
                     fragment[0] = new EmptyFragmentLeft();
                     fragment[1] = new EmptyFragmentRight();
@@ -290,12 +336,27 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
                 case 7:
                     // Pairs Spins
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "";
+                    elementCodeParts[2] = "PSp";
+                    elementCodeParts[3] = "B";
+                    fragment[0] = new EmptyFragment();
+                    fragment[1] = new EmptyFragment();
+                    fragment[2] = new SelectPairSpinNameFragment();
+                    fragment[3] = new SelectLevelFragment();
 
                     break;
 
                 case 8:
                     // Death Spirals
-
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "F";
+                    elementCodeParts[2] = "iDs";
+                    elementCodeParts[3] = "B";
+                    fragment[0] = new EmptyFragmentLeft();
+                    fragment[1] = new SelectDeathSpiralFrontBackSwitchFragment();
+                    fragment[2] = new SelectDeathSpiralInOutSwitchFragment();
+                    fragment[3] = new SelectLevelFragment();
                     break;
 
                 default:
