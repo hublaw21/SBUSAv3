@@ -22,6 +22,9 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SelectSpinNameFragment.OnChangeSpinNameRadioButtonInteractionListener,
         SelectLevelFragment.OnChangeLevelRadioButtonInteractionListener,
         SelectFlyingSwitchFragment.OnChangeFlyingSwitchInteractionListener,
+        SelectFootChangeSwitchFragment.OnChangeFootChangeSwitchInteractionListener,
+        SelectGroupFragment.OnChangeGroupRadioButtonInteractionListener,
+        SelectLiftNameFragment.OnChangeLiftNameRadioButtonInteractionListener,
         AdapterView.OnItemSelectedListener {
 
     public TextView textViewItemSelected;
@@ -113,6 +116,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public void onChangeJumpRadioButtonInteraction(String tempCode) {
         elementCodeParts[3] = tempCode;
         // Probably add an if to check for throw and then add 'Th'
+        if(currentElementTypeIndex == 6) elementCodeParts[3] += "Th";
         updateElement();
     }
 
@@ -120,6 +124,9 @@ public class ElementLookupActivity extends AppCompatActivity implements
     @Override
     public void onChangeRevolutionsRadioButtonInteraction(String tempCode) {
         elementCodeParts[2] = tempCode;
+        if(currentElementTypeIndex == 5) elementCodeParts[2] += "Tw";
+        updateElement();
+
         updateElement();
     }
 
@@ -145,6 +152,31 @@ public class ElementLookupActivity extends AppCompatActivity implements
         } else {
             elementCodeParts[0] = "";
         }
+        updateElement();
+    }
+
+    // Foot Change Switch Listener
+    @Override
+    public void onChangeFootChangeSwitchInteraction(boolean isFootChange) {
+        if (isFootChange) {
+            elementCodeParts[1] = "C";
+        } else {
+            elementCodeParts[1] = "";
+        }
+        updateElement();
+    }
+    // Get Group
+    @Override
+    public void onChangeGroupRadioButtonInteraction(String tempCode) {
+        elementCodeParts[1] = tempCode;
+        if (elementCodeParts[1] != "5") elementCodeParts[2] = "Li"; //In case Group 5 name is checked
+        updateElement();
+    }
+
+    // Get Lift Name
+    @Override
+    public void onChangeLiftNameRadioButtonInteraction(String tempCode) {
+        elementCodeParts[2] = tempCode;
         updateElement();
     }
 
@@ -190,6 +222,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     // No further action needed
                     break;
                 case 1:
+                    // Jumps
                     elementCodeParts[0] = "";
                     elementCodeParts[1] = "";
                     elementCodeParts[2] = "1";
@@ -198,18 +231,73 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     fragment[1] = new SelectJumpFragment();
                     fragment[2] = new SelectRevolutionsFragment();
                     fragment[3] = new EmptyFragmentRight();
-
                     break;
+
                 case 2:
+                    // Spins
                     elementCodeParts[0] = "";
                     elementCodeParts[1] = "";
                     elementCodeParts[2] = "USp";
                     elementCodeParts[3] = "B";
-                    fragment[0] = new SelectFlyingSwitchFragment();
-                    fragment[1] = new EmptyFragmentLeft();
+                    //fragment[0] = new SelectFlyingSwitchFragment();
+                    //fragment[1] = new SelectFootChangeSwitchFragment();
+                    fragment[0] = new EmptyFragment();
+                    fragment[1] = new SwithContainerFragment();
                     fragment[2] = new SelectSpinNameFragment();
                     fragment[3] = new SelectLevelFragment();
                     break;
+
+                case 3:
+                    //Footwork
+
+                    break;
+
+                case 4:
+                    // Lifts
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "1";
+                    elementCodeParts[2] = "Li";
+                    elementCodeParts[3] = "B";
+                    fragment[0] = new EmptyFragmentLeft();
+                    fragment[1] = new SelectGroupFragment();
+                    fragment[2] = new SelectLiftNameFragment();
+                    fragment[3] = new SelectLevelFragment();
+                    break;
+
+                case 5:
+                    // Twists
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "";
+                    elementCodeParts[2] = "Single";
+                    elementCodeParts[3] = "B";
+                    fragment[0] = new EmptyFragmentLeft();
+                    fragment[1] = new EmptyFragmentRight();
+                    fragment[2] = new SelectRevolutionsFragment();
+                    fragment[3] = new SelectLevelFragment();
+                    break;
+
+                case 6:
+                    // Throws
+                    elementCodeParts[0] = "";
+                    elementCodeParts[1] = "";
+                    elementCodeParts[2] = "1";
+                    elementCodeParts[3] = "T";
+                    fragment[0] = new EmptyFragmentLeft();
+                    fragment[1] = new SelectJumpFragment();
+                    fragment[2] = new SelectRevolutionsFragment();
+                    fragment[3] = new EmptyFragmentRight();
+                    break;
+
+                case 7:
+                    // Pairs Spins
+
+                    break;
+
+                case 8:
+                    // Death Spirals
+
+                    break;
+
                 default:
                     // add the rest as coded
             }

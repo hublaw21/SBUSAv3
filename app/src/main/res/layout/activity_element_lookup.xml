@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -34,46 +34,26 @@
             android:id="@+id/container0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumBorder">
-        </FrameLayout>
+            android:layout_margin="@dimen/mediumBorder"></FrameLayout>
 
         <FrameLayout
             android:id="@+id/container1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumBorder">
-        </FrameLayout>
+            android:layout_margin="@dimen/mediumBorder"></FrameLayout>
+
 
         <FrameLayout
             android:id="@+id/container2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumBorder">
-        </FrameLayout>
+            android:layout_margin="@dimen/mediumBorder"></FrameLayout>
 
         <FrameLayout
             android:id="@+id/container3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumBorder">
-        </FrameLayout>
-
-
-        <!--
-        <fragment
-            android:id="@+id/fragmentSelectJump"
-            android:name="com.example.khubbart.mysbusaappv3.SelectJumpFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumBorder"/>
-
-        <fragment
-            android:id="@+id/fragmentSelectRevelution"
-            android:name="com.example.khubbart.mysbusaappv3.SelectRevolutionsFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/mediumBorder"/>
-           -->
+            android:layout_margin="@dimen/mediumBorder"></FrameLayout>
 
     </LinearLayout>
 
