@@ -21,8 +21,28 @@
             android:gravity="center"
             android:padding="4dp"
             android:text="Element"
-            android:textSize="@dimen/textMedium"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textMedium" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/textViewElementCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="Code"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textMedium" />
+
     </TableRow>
 
     <TableRow
@@ -34,18 +54,18 @@
         android:background="@color/colorPrimary">
 
         <TextView
-            android:layout_weight=".5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".5"
             android:gravity="right"
             android:text="Base Value: "
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailBaseValue"
-            android:layout_weight=".5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".5"
             android:gravity="left"
             android:textColor="@color/white" />
 
@@ -55,46 +75,46 @@
         android:id="@+id/rowGOEpTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_marginTop="2dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE +1"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE +2"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE +3"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE +4"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE +5"
             android:textColor="@color/white" />
@@ -105,46 +125,46 @@
         android:id="@+id/rowGOEpValues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/elementDetailGOE6"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE7"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE8"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE9"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE10"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
@@ -154,46 +174,46 @@
         android:id="@+id/rowGOEnTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_marginTop="2dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE -1"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE -2"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE -3"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE -4"
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="GOE -5"
             android:textColor="@color/white" />
@@ -204,46 +224,46 @@
         android:id="@+id/rowGOEnValues"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/elementDetailGOE4"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE3"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE2"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE1"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/elementDetailGOE0"
-            android:layout_weight=".2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".2"
             android:gravity="center"
             android:textColor="@color/white" />
 

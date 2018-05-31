@@ -33,6 +33,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
     public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
+    public TextView textViewElementCode;
     public TextView textViewElementDetailBaseValue;
     public TextView[] textViewElementDetailGOE = new TextView[11];
     public String elementCode;
@@ -83,6 +84,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         // Set up textviews for element detail fragment
         //textViewItemSelected = findViewById(R.id.textViewSelected);
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
+        textViewElementCode = findViewById(R.id.textViewElementCode);
         textViewElementDetailBaseValue = findViewById(R.id.elementDetailBaseValue);
         for (i = 0; i < 11; i++) {
             textViewID = "elementDetailGOE" + i;
@@ -232,7 +234,8 @@ public class ElementLookupActivity extends AppCompatActivity implements
         } else {
             currentElementBase = Arrays.asList(SOVBase).get(currentSOVIndex);
             currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
-            textViewElementDetailName.setText(currentElementName + " - " + elementCode);
+            textViewElementDetailName.setText(currentElementName);
+            textViewElementCode.setText(elementCode);
             textViewElementDetailBaseValue.setText(currentElementBase);
 
             currentBase = Double.valueOf(currentElementBase);
