@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_foreground_sbusa_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!--
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -18,7 +19,7 @@
             </intent-filter>
         </activity>
         -->
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -28,7 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ElementLookupActivity"></activity>
+        <activity android:name=".ElementLookupActivity" />
+        <activity android:name=".LogInActivity"></activity>
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
