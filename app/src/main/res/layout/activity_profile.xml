@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumTable">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/mediumTable">
+
+            <TextView
+                android:id="@+id/textViewFirstNameTitle"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mediumTable"
+                android:layout_weight="2"
+                android:text="First Name:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textViewFirstName"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="Kevin"
+                android:textAlignment="textStart" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/mediumTable">
+
+            <TextView
+                android:id="@+id/textViewLastNameTitle"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mediumTable"
+                android:layout_weight="2"
+                android:text="Last Name:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textViewLastName"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="Hubbart"
+                android:textAlignment="textStart" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/mediumTable">
+
+            <TextView
+                android:id="@+id/textViewClubTitle"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mediumTable"
+                android:layout_weight="2"
+                android:text="Club:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textViewClub"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="TBSA"
+                android:textAlignment="textStart" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/mediumTable">
+
+            <TextView
+                android:id="@+id/textViewCoachTitle"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mediumTable"
+                android:layout_weight="2"
+                android:text="Coach:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textViewCoach"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="Alex"
+                android:textAlignment="textStart" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/mediumTable">
+
+            <TextView
+                android:id="@+id/textVieweMailTitle"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/mediumTable"
+                android:layout_weight="2"
+                android:text="eMail:"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textVieweMail"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="myemail"
+                android:textAlignment="textStart" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</LinearLayout>
