@@ -8,6 +8,12 @@
     android:orientation="vertical"
     tools:context=".ProfileActivity">
 
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:hint="Your Name" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -18,43 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/mediumTable">
-
-            <TextView
-                android:id="@+id/textViewFirstNameTitle"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/mediumTable"
-                android:layout_weight="2"
-                android:text="First Name:"
-                android:textAlignment="textEnd" />
-
-            <TextView
-                android:id="@+id/textViewFirstName"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:text="Kevin"
-                android:textAlignment="textStart" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/mediumTable">
-
-            <TextView
-                android:id="@+id/textViewLastNameTitle"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/mediumTable"
-                android:layout_weight="2"
-                android:text="Last Name:"
-                android:textAlignment="textEnd" />
-
-            <TextView
-                android:id="@+id/textViewLastName"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:text="Hubbart"
-                android:textAlignment="textStart" />
 
         </TableRow>
 
@@ -75,7 +44,7 @@
                 android:id="@+id/textViewClub"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                android:text="TBSA"
+                android:hint="Your Club"
                 android:textAlignment="textStart" />
 
         </TableRow>
@@ -90,14 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/mediumTable"
                 android:layout_weight="2"
-                android:text="Coach:"
+                android:hint="Your Coach:"
                 android:textAlignment="textEnd" />
 
             <TextView
                 android:id="@+id/textViewCoach"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                android:text="Alex"
+                android:hint="Your Coach"
                 android:textAlignment="textStart" />
 
         </TableRow>
@@ -112,14 +81,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/mediumTable"
                 android:layout_weight="2"
-                android:text="eMail:"
+                android:text="email:"
                 android:textAlignment="textEnd" />
 
             <TextView
                 android:id="@+id/textVieweMail"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                android:text="myemail"
+                android:hint="Your email"
                 android:textAlignment="textStart" />
 
         </TableRow>

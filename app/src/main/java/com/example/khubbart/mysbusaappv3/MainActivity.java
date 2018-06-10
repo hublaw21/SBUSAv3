@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mCurrentUserUID = currentFirebaseUser.getUid();
         final GlobalClass globalClass = (GlobalClass)getApplicationContext();
         globalClass.setCurrentUserUID(mCurrentUserUID);
-        Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
 
         buttonMain01.setOnClickListener(new View.OnClickListener() {
             @Override
