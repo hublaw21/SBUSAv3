@@ -27,5 +27,53 @@ public class Program {
         this.skaterUID = skaterUID;
         this.elements = elements;
     }
+
+    public String getCompetition() {
+        return Competition;
+    }
+
+    public void setCompetition(String competition) {
+        Competition = competition;
+    }
+
+    public String getDiscipline() {
+        return Discipline;
+    }
+
+    public void setDiscipline(String discipline) {
+        Discipline = discipline;
+    }
+
+    public String getLevel() {
+        return Level;
+    }
+
+    public void setLevel(String level) {
+        Level = level;
+    }
+
+    public String getSegment() {
+        return Segment;
+    }
+
+    public void setSegment(String segment) {
+        Segment = segment;
+    }
+
+    public String getSkaterUID() {
+        return skaterUID;
+    }
+
+    public void setSkaterUID(String skaterUID) {
+        this.skaterUID = skaterUID;
+    }
+
+    public String getElements() {
+        return elements;
+    }
+
+    public void setElements(String elements) {
+        this.elements = elements;
+    }
 }
 

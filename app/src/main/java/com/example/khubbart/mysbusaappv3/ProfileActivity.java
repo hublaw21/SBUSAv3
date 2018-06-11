@@ -79,6 +79,9 @@ public class ProfileActivity extends AppCompatActivity {
         });
         */
         // Try to query for this users userUID in ther skatrer profile
+
+
+        /*
         Query query = crDb.whereEqualTo("skaterUID", mCurrentUserUID);
         DocumentReference user = crDb.document(query.get());
         //query.get().then(function(querySnapshot) {
@@ -105,6 +108,8 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        */
 
     }
     /*

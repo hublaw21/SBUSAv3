@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button buttonMain01;
     Button buttonMainProfile;
+    Button buttonMainGenerateSampleData;
     Button buttonMainLogOut;
     public String mCurrentUserUID;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonMain01 = (Button) findViewById(R.id.buttonMain01);
         buttonMainProfile = (Button) findViewById(R.id.buttonMainProfile);
+        buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
         buttonMainLogOut = (Button) findViewById(R.id.buttonMainLogOut);
 
         // Retreive and set into variable the current users firebase UID
@@ -48,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
+
+/*      //Use for temporary button to go to add sample data activity
+        buttonMainGenerateSampleData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SampleDataGenerator.class);
+                startActivity(myIntent);
+            }
+        });
+*/
+
 
         buttonMainLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
