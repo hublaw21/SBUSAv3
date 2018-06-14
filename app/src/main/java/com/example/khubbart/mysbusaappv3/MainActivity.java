@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonMain01;
     Button buttonMainProfile;
     Button buttonMainGenerateSampleData;
+    Button buttonMainProgramSelect;
     Button buttonMainLogOut;
     public String mCurrentUserUID;
 
@@ -25,13 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
         buttonMain01 = (Button) findViewById(R.id.buttonMain01);
         buttonMainProfile = (Button) findViewById(R.id.buttonMainProfile);
-        buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
+        //buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
+        buttonMainProgramSelect = (Button) findViewById(R.id.buttonMainProgramSelect);
         buttonMainLogOut = (Button) findViewById(R.id.buttonMainLogOut);
 
         // Retreive and set into variable the current users firebase UID
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mCurrentUserUID = currentFirebaseUser.getUid();
-        final GlobalClass globalClass = (GlobalClass)getApplicationContext();
+        final GlobalClass globalClass = (GlobalClass) getApplicationContext();
         globalClass.setCurrentUserUID(mCurrentUserUID);
         // Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
 
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-/*      //Use for temporary button to go to add sample data activity
+        /*
+        //Use for temporary button to go to add sample data activity
         buttonMainGenerateSampleData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,10 +62,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-*/
+        */
+
+        buttonMainProgramSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, ProgramSelectActivity.class);
+                startActivity(myIntent);
+            }
+        });
 
 
-        buttonMainLogOut.setOnClickListener(new View.OnClickListener() {
+        buttonMainLogOut.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();

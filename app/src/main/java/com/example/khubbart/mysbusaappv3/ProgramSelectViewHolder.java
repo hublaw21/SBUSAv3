@@ -6,14 +6,14 @@ import android.widget.TextView;
 
 public class ProgramSelectViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView programSelectItemTextView;
+    public TextView programSelectItemTextView;
 
-    public ProgramSelectViewHolder(final View itemView){
+    public ProgramSelectViewHolder(final View itemView) {
         super(itemView);
-        programSelectItemTextView = itemView.findViewById(R.id.program_select_item_text);
+        programSelectItemTextView = itemView.findViewById(R.id.program_select_competition_item_text);
     }
 
-    public void bindData(final ProgramSelectViewModel viewModel){
-        programSelectItemTextView.setText(viewModel.getProgramSelectItemText());
+    public void bindData(final ProgramSelectViewModel viewModel) {
+        programSelectItemTextView.setText(viewModel.getProgramSelectCompetitionText());
     }
 }

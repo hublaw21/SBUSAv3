@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <TextView
-        android:id="@+id/program_select_item_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Program Name" />
-</FrameLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/program_select_competition_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Competition Name" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/program_select_discipline_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Discipline" />
+
+        <TextView
+            android:id="@+id/program_select_level_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Level" />
+
+        <TextView
+            android:id="@+id/program_select_segment_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Segment" />
+
+    </TableRow>
+</TableLayout>
