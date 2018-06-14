@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.EventListener;
 import java.util.List;
 
-public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdapter.PSViewHolder> {
+public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdapter.PSViewHolder>
+    implements EventListener<QuerySnapshot>{
 
     private List<Program> programs;
 
