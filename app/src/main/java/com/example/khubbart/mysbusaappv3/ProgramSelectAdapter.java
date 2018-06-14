@@ -13,8 +13,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.EventListener;
 import java.util.List;
 
-public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdapter.PSViewHolder>
-    implements EventListener<QuerySnapshot>{
+public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdapter.PSViewHolder> {
 
     private List<Program> programs;
 

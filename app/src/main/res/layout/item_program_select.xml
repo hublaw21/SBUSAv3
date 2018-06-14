@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
     android:layout_margin="8dp">
 
     <TableRow
@@ -11,8 +12,10 @@
 
         <TextView
             android:id="@+id/program_select_competition_item_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
             tools:text="Competition Name" />
     </TableRow>
 
@@ -22,20 +25,23 @@
 
         <TextView
             android:id="@+id/program_select_discipline_item_text"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight=".3"
             tools:text="Discipline" />
 
         <TextView
             android:id="@+id/program_select_level_item_text"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight=".3"
             tools:text="Level" />
 
         <TextView
             android:id="@+id/program_select_segment_item_text"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight=".3"
             tools:text="Segment" />
 
     </TableRow>
