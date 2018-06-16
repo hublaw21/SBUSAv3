@@ -1,6 +1,7 @@
 package com.example.khubbart.mysbusaappv3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,9 +25,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class ProgramSelectActivity extends AppCompatActivity {
+public class ProgramSelectActivity extends AppCompatActivity implements ProgramSelectItem {
 
     private FirebaseFirestore db;
     private CollectionReference skatersCollectionDb;
@@ -40,7 +43,9 @@ public class ProgramSelectActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private static List<Program> programs = new ArrayList<>();
     private static List<Program> programList = new ArrayList<>();
+    private static List documentIdList;
     public String mCurrentUserUID;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,17 @@ public class ProgramSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_program_select);
         mTextViewName = findViewById(R.id.textViewProgramSelectName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
+
+        //Get the skaterUID
+        Intent intentExtras = getIntent();
+        Bundle extrasBundle = intentExtras.getExtras();
+        if (extrasBundle.isEmpty()) {
+            // deal with empty bundle
+        } else {
+            // get the UID
+            mCurrentUserUID = extrasBundle.getString("skaterUID", "Missing UID");
+        }
+
 
         // Set up db, recycler and get initial list of programs
         init();
@@ -64,19 +80,14 @@ public class ProgramSelectActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         skatersCollectionDb = db.collection("Skaters");
         programCollectionDb = db.collection("Programs");
-
-        // Get current user UID
-        final GlobalClass globalClass = (GlobalClass) getApplicationContext();
-        mCurrentUserUID = globalClass.getCurrentUserUID();
-        //mTextViewID.setText(mCurrentUserUID); // For checking only, eliminate from final
     }
 
-    private void initRecycler(){
+    private void initRecycler() {
         // Setup recyclerview for selecting program
         recyclerView = findViewById(R.id.recyclerViewProgramSelect);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ProgramSelectAdapter(programs);
+        adapter = new ProgramSelectAdapter(programs, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -91,11 +102,11 @@ public class ProgramSelectActivity extends AppCompatActivity {
                             // Handle empty
                             Toast.makeText(getApplicationContext(), "Error getting data but Success!!!", Toast.LENGTH_LONG).show();
                         } else {
-                            //List<Program> programList = new ArrayList<>();
+                            //this works
                             programs = documentSnapshots.toObjects(Program.class);
                             programList.addAll(programs);
-                            // So how do I get this to recycler?
-                            initRecycler();
+                            initRecycler(); //call here to force it to load the first time to activity
+                            // Trying to save DocumentID for programs
                         }
                     }
                 })
@@ -105,5 +116,21 @@ public class ProgramSelectActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    //Get program selected
+    @Override
+    public void userItemClick(int position) {
+        //Send to program view activity with data
+        /*
+        Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("skaterUID",mCurrentUserUID);
+        bundle.putString("skaterUID",mCurrentUserUID);
+        intentBundle.putExtras(bundle);
+        startActivity(intentBundle);
+        */
+        this.position = position;
+        Toast.makeText(this, "Clicked: " + programs.get(position).getCompetition(), Toast.LENGTH_LONG).show();
     }
 }

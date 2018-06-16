@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mCurrentUserUID = currentFirebaseUser.getUid();
         final GlobalClass globalClass = (GlobalClass) getApplicationContext();
         globalClass.setCurrentUserUID(mCurrentUserUID);
-        Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
 
         buttonMain01.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
         buttonMainProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(myIntent);
+                Intent intentBundle = new Intent(MainActivity.this, ProfileActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("skaterUID",mCurrentUserUID);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
             }
         });
 
@@ -67,8 +70,11 @@ public class MainActivity extends AppCompatActivity {
         buttonMainProgramSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, ProgramSelectActivity.class);
-                startActivity(myIntent);
+                Intent intentBundle = new Intent(MainActivity.this, ProgramSelectActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("skaterUID",mCurrentUserUID);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
             }
         });
 
