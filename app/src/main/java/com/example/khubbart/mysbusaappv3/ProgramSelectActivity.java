@@ -13,18 +13,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.Program;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.api.core.ApiFuture;
+import com.google.api.core.ApiFutures;
+import com.google.api.core.ApiFutureCallback;
+import com.google.api.core.ApiFunction;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -93,9 +95,18 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
 
     // Query and load skaters programs
     private void getListPrograms() {
-        //Query query = programCollectionDb.whereEqualTo("skaterUID", mCurrentUserUID)
+        //Trying to get id into list of programs
+
+            ApiFuture<QuerySnapshot> program =
+                    db.collection("Programs").whereEqualTo("skaterUID", mCurrentUserUID).get();
+            List<QueryDocumentSnapshot> programs = program.get().getDocuments();
+            for (DocumentSnapshot programList : programs) {
+                System.out.println(programList.getId() + " => " + programList.toObject(Program.class));
+            }
+        //This works for list of programs
+        /*
         programCollectionDb.whereEqualTo("skaterUID", mCurrentUserUID).get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
                         if (documentSnapshots.isEmpty()) {
@@ -106,7 +117,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                             programs = documentSnapshots.toObjects(Program.class);
                             programList.addAll(programs);
                             initRecycler(); //call here to force it to load the first time to activity
-                            // Trying to save DocumentID for programs
                         }
                     }
                 })
@@ -116,6 +126,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                         Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
                     }
                 });
+        */
     }
 
     //Get program selected
@@ -131,6 +142,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         startActivity(intentBundle);
         */
         this.position = position;
-        Toast.makeText(this, "Clicked: " + programs.get(position).getCompetition(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Clicked: " + programs.get(position).getCompetition(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Clicked: " + programList.get(position).getDocumentID(), Toast.LENGTH_LONG).show();
     }
 }
