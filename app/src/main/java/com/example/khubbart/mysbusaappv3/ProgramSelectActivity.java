@@ -13,20 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.Program;
-import com.google.api.core.ApiFuture;
-import com.google.api.core.ApiFutures;
-import com.google.api.core.ApiFutureCallback;
-import com.google.api.core.ApiFunction;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -43,11 +41,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static List<Program> programs = new ArrayList<>();
+    //private static List<Program> programs = new ArrayList<>();
+    private List<Program> programs;
     private static List<Program> programList = new ArrayList<>();
     private static List documentIdList;
     public String mCurrentUserUID;
+    public String selectedProgramID;
     private int position;
+    public int programCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         mTextViewName = findViewById(R.id.textViewProgramSelectName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
 
-        //Get the skaterUID
+        //Get the userID
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
         if (extrasBundle.isEmpty()) {
             // deal with empty bundle
         } else {
             // get the UID
-            mCurrentUserUID = extrasBundle.getString("skaterUID", "Missing UID");
+            mCurrentUserUID = extrasBundle.getString("userID");
         }
 
 
@@ -90,23 +91,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ProgramSelectAdapter(programs, this);
+        //adapter = new ProgramSelectAdapter(programList, this); // using this causes duplicate entries in list
         recyclerView.setAdapter(adapter);
     }
 
     // Query and load skaters programs
     private void getListPrograms() {
-        //Trying to get id into list of programs
-
-            ApiFuture<QuerySnapshot> program =
-                    db.collection("Programs").whereEqualTo("skaterUID", mCurrentUserUID).get();
-            List<QueryDocumentSnapshot> programs = program.get().getDocuments();
-            for (DocumentSnapshot programList : programs) {
-                System.out.println(programList.getId() + " => " + programList.toObject(Program.class));
-            }
-        //This works for list of programs
-        /*
-        programCollectionDb.whereEqualTo("skaterUID", mCurrentUserUID).get()
-            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        programCollectionDb.whereEqualTo("userID", mCurrentUserUID).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
                         if (documentSnapshots.isEmpty()) {
@@ -114,9 +106,18 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                             Toast.makeText(getApplicationContext(), "Error getting data but Success!!!", Toast.LENGTH_LONG).show();
                         } else {
                             //this works
-                            programs = documentSnapshots.toObjects(Program.class);
-                            programList.addAll(programs);
+                            programs = documentSnapshots.toObjects(Program.class); // load for adapter
+                            // load for selecting
+                            for (DocumentSnapshot documentSnapshot : documentSnapshots){
+                                Program program = documentSnapshot.toObject(Program.class);
+                                program.setDocumentID(documentSnapshot.getId());
+                                programList.add(program);
+                            }
+                            //programCount = documentSnapshots.size();
+                            //selectedProgramID = documentSnapshots.toString();
+                            //Toast.makeText(getApplicationContext(), "Results: " + selectedProgramID, Toast.LENGTH_LONG).show();
                             initRecycler(); //call here to force it to load the first time to activity
+                            // Trying to save DocumentID for programs
                         }
                     }
                 })
@@ -126,7 +127,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                         Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
                     }
                 });
-        */
     }
 
     //Get program selected
@@ -136,13 +136,19 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         /*
         Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("skaterUID",mCurrentUserUID);
-        bundle.putString("skaterUID",mCurrentUserUID);
+        bundle.putString("userID",mCurrentUserUID);
+        bundle.putString("userID",mCurrentUserUID);
         intentBundle.putExtras(bundle);
         startActivity(intentBundle);
         */
         this.position = position;
-        //Toast.makeText(this, "Clicked: " + programs.get(position).getCompetition(), Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "Clicked: " + programList.get(position).getDocumentID(), Toast.LENGTH_LONG).show();
+        selectedProgramID = programList.get(position).getDocumentID();
+        Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("userID",mCurrentUserUID);
+        bundle.putString("programID",selectedProgramID);
+        intentBundle.putExtras(bundle);
+        startActivity(intentBundle);
+        //Toast.makeText(this, "Clicked: " + programList.get(position).getDocumentID(), Toast.LENGTH_LONG).show();
     }
 }

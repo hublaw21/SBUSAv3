@@ -2,34 +2,39 @@ package com.example.khubbart.mysbusaappv3.Model;
 
 import com.google.firebase.firestore.Exclude;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Program {
     private String Competition;
     private String Discipline;
     private String Level;
     private String Segment;
-    private String skaterUID; // This must be inserted at creation to associate it with the proper skater
-    private String elements; // SHould I list seperately or do an array?
+    private String userID; // This must be inserted at creation to associate it with the proper skater
+    //private String elements; // Until Firestore supports subcolelction arrays, need to make this the id to the subcollection
+    private String[] elements;
     @Exclude private String documentID;// The id for referencing the program document that should not be saved with it
 
     // Required No Argument Constructor
 
     public Program() {
+        String[] eTemp = new String[] {"E1", "E2"};
         this.Competition = "Competition";
         this.Discipline = "Discipline";
         this.Level = "Level";
-        this.Segment = "Segnment";
-        this.skaterUID = "skaterUID";
-        this.elements = "elements";
+        this.Segment = "Segment";
+        this.userID = "userID";
+        this.elements = eTemp;
         this.documentID = "Doc ID";
 
     }
 
-    public Program(String Competition, String Discipline, String Level, String Segment, String skaterUID, String elements, String documentID) {
+    public Program(String Competition, String Discipline, String Level, String Segment, String userID, String[] elements, String documentID) {
         this.Competition = Competition;
         this.Discipline = Discipline;
         this.Level = Level;
         this.Segment = Segment;
-        this.skaterUID = skaterUID;
+        this.userID = userID;
         this.elements = elements;
         this.documentID = documentID;
     }
@@ -66,19 +71,19 @@ public class Program {
         Segment = segment;
     }
 
-    public String getSkaterUID() {
-        return skaterUID;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setSkaterUID(String skaterUID) {
-        this.skaterUID = skaterUID;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
-    public String getElements() {
+    public String[] getElements() {
         return elements;
     }
 
-    public void setElements(String elements) {
+    public void setElements(String[] elements) {
         this.elements = elements;
     }
 

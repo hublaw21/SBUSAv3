@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonMainProgramSelect;
     Button buttonMainLogOut;
     public String mCurrentUserUID;
+    public String skaterName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentBundle = new Intent(MainActivity.this, ProfileActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("skaterUID",mCurrentUserUID);
+                bundle.putString("userID",mCurrentUserUID);
                 intentBundle.putExtras(bundle);
                 startActivity(intentBundle);
             }
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentBundle = new Intent(MainActivity.this, ProgramSelectActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("skaterUID",mCurrentUserUID);
+                bundle.putString("userID",mCurrentUserUID);
                 intentBundle.putExtras(bundle);
                 startActivity(intentBundle);
             }
