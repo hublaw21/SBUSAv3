@@ -12,24 +12,27 @@ public class Program {
     private String Segment;
     private String userID; // This must be inserted at creation to associate it with the proper skater
     //private String elements; // Until Firestore supports subcolelction arrays, need to make this the id to the subcollection
-    private String[] elements;
+    //private String[] elements;
+    private Array elements;
+    private Array eTemp;
     @Exclude private String documentID;// The id for referencing the program document that should not be saved with it
 
     // Required No Argument Constructor
 
     public Program() {
-        String[] eTemp = new String[] {"E1", "E2"};
+        //String[] eTemp = new String[] {"E1", "E2"};
+        //eTemp.add(0) = "E1";
         this.Competition = "Competition";
         this.Discipline = "Discipline";
         this.Level = "Level";
         this.Segment = "Segment";
         this.userID = "userID";
-        this.elements = eTemp;
+        this.elements = null;
         this.documentID = "Doc ID";
 
     }
 
-    public Program(String Competition, String Discipline, String Level, String Segment, String userID, String[] elements, String documentID) {
+    public Program(String Competition, String Discipline, String Level, String Segment, String userID, Array elements, String documentID) {
         this.Competition = Competition;
         this.Discipline = Discipline;
         this.Level = Level;
@@ -79,11 +82,11 @@ public class Program {
         this.userID = userID;
     }
 
-    public String[] getElements() {
+    public Array getElements() {
         return elements;
     }
 
-    public void setElements(String[] elements) {
+    public void setElements(Array elements) {
         this.elements = elements;
     }
 

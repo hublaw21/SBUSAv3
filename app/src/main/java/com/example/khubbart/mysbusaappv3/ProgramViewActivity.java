@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khubbart.mysbusaappv3.Model.ElementArray;
 import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -25,6 +26,7 @@ public class ProgramViewActivity extends AppCompatActivity {
 
     //public List<Program> program;
     public List<Program> program = new ArrayList<>();
+    //public List<ElementArray> elementArrayList = new ArrayList<>();
 
     //private List<Program> qProgram;
     //private static List<Program> qProgram = new ArrayList<>();
@@ -89,8 +91,9 @@ public class ProgramViewActivity extends AppCompatActivity {
                 Program qProgram = documentSnapshot.toObject(Program.class);
                 program.add(qProgram);
                 mCompetitionNameTextView.setText(program.get(0).getCompetition());
-                String eString = program.get(0).getElements().toString();
-                mCompetitionDescriptionTextView.setText(eString);
+                //ElementArray elementArray = program.get(0).getElements().toString();
+                //mCompetitionDescriptionTextView.setText(eString);
+                //Flatten this by creating an elements collection with the program id as a searchable field plus the elements, then just do a second pull
 //mCompetitionDescriptionTextView.setText(program.getLevel() + " " + program.getDiscipline() + " " + program.getSegment() + " Program");
                 //String eString = Array.toString(program.getElements());
                 //mCompetitionDescriptionTextView.setText.(program.getElements());
