@@ -11,10 +11,10 @@ public class Program {
     private String Level;
     private String Segment;
     private String userID; // This must be inserted at creation to associate it with the proper skater
-    //private String elements; // Until Firestore supports subcolelction arrays, need to make this the id to the subcollection
+    private String elementsID; // Until Firestore supports subcolelction arrays, need to make this the id to the seperate collection
     //private String[] elements;
-    private Array elements;
-    private Array eTemp;
+    //private Array elements;
+    //private Array eTemp;
     @Exclude private String documentID;// The id for referencing the program document that should not be saved with it
 
     // Required No Argument Constructor
@@ -27,18 +27,18 @@ public class Program {
         this.Level = "Level";
         this.Segment = "Segment";
         this.userID = "userID";
-        this.elements = null;
+        this.elementsID = null;
         this.documentID = "Doc ID";
 
     }
 
-    public Program(String Competition, String Discipline, String Level, String Segment, String userID, Array elements, String documentID) {
+    public Program(String Competition, String Discipline, String Level, String Segment, String userID, String elementsID, String documentID) {
         this.Competition = Competition;
         this.Discipline = Discipline;
         this.Level = Level;
         this.Segment = Segment;
         this.userID = userID;
-        this.elements = elements;
+        this.elementsID = elementsID;
         this.documentID = documentID;
     }
 
@@ -82,12 +82,12 @@ public class Program {
         this.userID = userID;
     }
 
-    public Array getElements() {
-        return elements;
+    public String getElementsID() {
+        return elementsID;
     }
 
-    public void setElements(Array elements) {
-        this.elements = elements;
+    public void setElementsID(String elementsID) {
+        this.elementsID = elementsID;
     }
 
     public String getDocumentID() {return documentID;}

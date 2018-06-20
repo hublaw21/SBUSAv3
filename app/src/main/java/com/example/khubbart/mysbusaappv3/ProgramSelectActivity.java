@@ -2,6 +2,7 @@ package com.example.khubbart.mysbusaappv3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     private CollectionReference programCollectionDb;
     public TextView mTextViewName;
     public TextView mTextViewID;
-
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -97,6 +97,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
 
     // Query and load skaters programs
     private void getListPrograms() {
+        //query
         programCollectionDb.whereEqualTo("userID", mCurrentUserUID).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -120,6 +121,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                             // Trying to save DocumentID for programs
                         }
                     }
+                    // Add persistent data to sharedpreferences
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
