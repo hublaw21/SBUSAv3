@@ -1,6 +1,7 @@
 package com.example.khubbart.mysbusaappv3.Model;
 
 public class ElementArray {
+    public String ProgramDocumentID;
     public String E00;
     public String E01;
     public String E02;
@@ -17,7 +18,8 @@ public class ElementArray {
 
 // Required No Argument Constructor
      ElementArray() {
-        this.E00 = "";
+         this.ProgramDocumentID = "";
+         this.E00 = "";
         this.E01 = "";
         this.E02 = "";
         this.E03 = "";
@@ -32,9 +34,10 @@ public class ElementArray {
         this.E12 = "";
     }
 
-    ElementArray(String e00, String e01,String e02,String e03,String e04,String e05,
+    ElementArray(String programDocumentID, String e00, String e01,String e02,String e03,String e04,String e05,
                  String e06, String e07,String e08,String e09,String e10,String e11, String e12) {
-        this.E00 = e00;
+         this.ProgramDocumentID = programDocumentID;
+         this.E00 = e00;
         this.E00 = e01;
         this.E00 = e02;
         this.E00 = e03;
@@ -49,6 +52,13 @@ public class ElementArray {
         this.E00 = e12;
      }
 
+    public String getProgramDocumentID() {
+        return ProgramDocumentID;
+    }
+
+    public void setProgramDocumentID(String programDocumentID) {
+        ProgramDocumentID = programDocumentID;
+    }
 
     public String getE00() {
         return E00;
