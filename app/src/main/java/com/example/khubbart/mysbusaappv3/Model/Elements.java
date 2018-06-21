@@ -1,20 +1,20 @@
 package com.example.khubbart.mysbusaappv3.Model;
 
 public class Elements {
-    public String ProgramDocumentID;
-    public String E00;
-    public String E01;
-    public String E02;
-    public String E03;
-    public String E04;
-    public String E05;
-    public String E06;
-    public String E07;
-    public String E08;
-    public String E09;
-    public String E10;
-    public String E11;
-    public String E12;
+    private String ProgramDocumentID;
+    private String E00;
+    private String E01;
+    private String E02;
+    private String E03;
+    private String E04;
+    private String E05;
+    private String E06;
+    private String E07;
+    private String E08;
+    private String E09;
+    private String E10;
+    private String E11;
+    private String E12;
 
 // Required No Argument Constructor
      Elements() {

@@ -2,6 +2,7 @@ package com.example.khubbart.mysbusaappv3;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -17,7 +18,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProgramViewActivity extends AppCompatActivity {
@@ -52,6 +55,10 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String mCurrentUserID;
     public String mCurrentProgramID;
     public String elementID;
+    public String mElementCode;
+    public String[] SOVCode;
+    public String[] SOVName;
+    public String[] SOVBase;
 
 
     @Override
@@ -69,6 +76,8 @@ public class ProgramViewActivity extends AppCompatActivity {
         mElementBaseValueO2TextView = findViewById(R.id.elementRow02elementBaseValue);
 
         db = FirebaseFirestore.getInstance();
+        //Load SOV
+        getSOV();
 
         //Get the userID and programID
         Intent intentExtras = getIntent();
@@ -135,12 +144,12 @@ public class ProgramViewActivity extends AppCompatActivity {
         elementCollection = db.collection("Elements");
         */
 
-                //ElementArray elementArray = program.get(0).getElements().toString();
-                //mCompetitionDescriptionTextView.setText(eString);
-                //Flatten this by creating an elements collection with the program id as a searchable field plus the elements, then just do a second pull
-                //mCompetitionDescriptionTextView.setText(program.getLevel() + " " + program.getDiscipline() + " " + program.getSegment() + " Program");
-                //String eString = Array.toString(program.getElements());
-                //mCompetitionDescriptionTextView.setText.(program.getElements());
+        //ElementArray elementArray = program.get(0).getElements().toString();
+        //mCompetitionDescriptionTextView.setText(eString);
+        //Flatten this by creating an elements collection with the program id as a searchable field plus the elements, then just do a second pull
+        //mCompetitionDescriptionTextView.setText(program.getLevel() + " " + program.getDiscipline() + " " + program.getSegment() + " Program");
+        //String eString = Array.toString(program.getElements());
+        //mCompetitionDescriptionTextView.setText.(program.getElements());
                 /*
                 mElementIDO1TextView.setText(program.getCompetition());
                 mElementNameO1TextView.setText(program.getCompetition());
@@ -154,12 +163,12 @@ public class ProgramViewActivity extends AppCompatActivity {
 
     }
 
-    public void getElements(){
+    public void getElements() {
         final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         final SharedPreferences.Editor editor = sp.edit();
 
         //Get program basics
-        elementID = sp. getString(ELEMENT_ID_KEY, null);
+        elementID = sp.getString(ELEMENT_ID_KEY, null);
         if (elementID != null) {
             textViewForTesting.setText(elementID);
         } else {
@@ -169,24 +178,61 @@ public class ProgramViewActivity extends AppCompatActivity {
         elementRef = db.collection("Elements").document(elementID);
 
         Task<DocumentSnapshot> documentSnapshotTask = elementRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-           @Override
+            @Override
             public void onSuccess(final DocumentSnapshot documentSnapshot) {
                 //initializing shared preferences to save results of query
                 //SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
                 //SharedPreferences.Editor editor = sp.edit();
                 Elements qElements = documentSnapshot.toObject(Elements.class);
                 elements.add(qElements);
-                mElementIDO1TextView.setText(elements.get(0).getE00());
-                mElementIDO2TextView.setText(elements.get(0).getE01());
-                //Save persistent data
-                //editor.putString(ELEMENT_ID_KEY, elementID);
-                //editor.apply();
+                int eCount = elements.size();
+                for(int i=0; i<eCount; i++) {
+                    //work on dynamic getter name
+                    String tempCode = "get(" + i +").getE0" + i + "()";
+                    Method method = null;
+                    method = elements.tempCode;
+                    mElementCode = tempCode;
+                    //mElementCode = elements.get(i).getE00();
+                    int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
+                    //String temp = String.valueOf(currentSOVIndex);
+                    //mElementNameO1TextView.setText(temp);
+                    mElementIDO1TextView.setText(mElementCode);
+                    /*
+                    mElementIDO2TextView.setText(elements.get(0).getE01());
+                    mElementNameO1TextView.setText(Arrays.asList(SOVName).get(currentSOVIndex));
+                    mElementBaseValueO1TextView.setText(Arrays.asList(SOVBase).get(currentSOVIndex));
+                    */
+                    //Save persistent data
+                    //editor.putString(ELEMENT_ID_KEY, elementID);
+                    //editor.apply();
+                }
             }
         });
 
     }
 
-    private void showData(){
+    private void showData() {
 
     }
+
+    public void getSOV() {
+        //Get SOV Table 2018 - Three matched arrays
+        Resources resources = getResources();
+        SOVCode = resources.getStringArray(R.array.SOV_Code);
+        SOVName = resources.getStringArray(R.array.SOV_Name);
+        SOVBase = resources.getStringArray(R.array.SOV_Base);
+    }
+
+    public void getElementInfo(String mElementCode) {
+        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
+        // Need to add error checker for code not found
+        if (currentSOVIndex < 0) {
+            //Error
+            //Toast.makeText(getApplicationContext(), "elementCode: **" + elementCode + "** currentSOVIndex: " + currentSOVIndex, Toast.LENGTH_LONG).show();
+        } else {
+            String currentElementBase = Arrays.asList(SOVBase).get(currentSOVIndex);
+            String currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
+        }
+    }
+
 }
