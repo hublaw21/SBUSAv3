@@ -56,13 +56,13 @@ public class ProgramViewActivity extends AppCompatActivity {
     public TextView mElementIDO2TextView;
     public TextView mElementNameO2TextView;
     public TextView mElementBaseValueO2TextView;
-    public TextView[] mElementIDTextView;
-    public TextView[] mElementNameTextView;
-    public TextView[] mElementBaseValueTextView;
+    public TextView[] mElementIDTextView = new TextView[13];
+    public TextView[] mElementNameTextView = new TextView[13];
+    public TextView[] mElementBaseValueTextView = new TextView[13];
     public String mCurrentUserID;
     public String mCurrentProgramID;
     public String elementID;
-    public String mElementCode;
+    public String[] mElementCode = new String[13];
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
@@ -75,19 +75,47 @@ public class ProgramViewActivity extends AppCompatActivity {
         mCompetitionNameTextView = findViewById(R.id.textViewCompetition);
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
         textViewForTesting = findViewById(R.id.textViewForTesting);
-        mElementIDO0TextView = findViewById(R.id.elementRow00elementID);
-        mElementNameO0TextView = findViewById(R.id.elementRow00elementName);
-        mElementBaseValueO0TextView = findViewById(R.id.elementRow00elementBaseValue);
-        mElementIDO1TextView = findViewById(R.id.elementRow01elementID);
-        mElementNameO1TextView = findViewById(R.id.elementRow01elementName);
-        mElementBaseValueO1TextView = findViewById(R.id.elementRow01elementBaseValue);
-        mElementIDO2TextView = findViewById(R.id.elementRow02elementID);
-        mElementNameO2TextView = findViewById(R.id.elementRow02elementName);
-        mElementBaseValueO2TextView = findViewById(R.id.elementRow02elementBaseValue);
-
         mElementIDTextView[0] = findViewById(R.id.elementRow00elementID);
         mElementIDTextView[1] = findViewById(R.id.elementRow01elementID);
         mElementIDTextView[2] = findViewById(R.id.elementRow02elementID);
+        mElementIDTextView[3] = findViewById(R.id.elementRow03elementID);
+        mElementIDTextView[4] = findViewById(R.id.elementRow04elementID);
+        mElementIDTextView[5] = findViewById(R.id.elementRow05elementID);
+        mElementIDTextView[6] = findViewById(R.id.elementRow06elementID);
+        mElementIDTextView[7] = findViewById(R.id.elementRow07elementID);
+        mElementIDTextView[8] = findViewById(R.id.elementRow08elementID);
+        mElementIDTextView[9] = findViewById(R.id.elementRow09elementID);
+        mElementIDTextView[10] = findViewById(R.id.elementRow10elementID);
+        mElementIDTextView[11] = findViewById(R.id.elementRow11elementID);
+        mElementIDTextView[12] = findViewById(R.id.elementRow12elementID);
+
+        mElementNameTextView[0] = findViewById(R.id.elementRow00elementName);
+        mElementNameTextView[1] = findViewById(R.id.elementRow01elementName);
+        mElementNameTextView[2] = findViewById(R.id.elementRow02elementName);
+        mElementNameTextView[3] = findViewById(R.id.elementRow03elementName);
+        mElementNameTextView[4] = findViewById(R.id.elementRow04elementName);
+        mElementNameTextView[5] = findViewById(R.id.elementRow05elementName);
+        mElementNameTextView[6] = findViewById(R.id.elementRow06elementName);
+        mElementNameTextView[7] = findViewById(R.id.elementRow07elementName);
+        mElementNameTextView[8] = findViewById(R.id.elementRow08elementName);
+        mElementNameTextView[9] = findViewById(R.id.elementRow09elementName);
+        mElementNameTextView[10] = findViewById(R.id.elementRow10elementName);
+        mElementNameTextView[11] = findViewById(R.id.elementRow11elementName);
+        mElementNameTextView[12] = findViewById(R.id.elementRow12elementName);
+
+        mElementBaseValueTextView[0] = findViewById(R.id.elementRow00elementBaseValue);
+        mElementBaseValueTextView[1] = findViewById(R.id.elementRow01elementBaseValue);
+        mElementBaseValueTextView[2] = findViewById(R.id.elementRow02elementBaseValue);
+        mElementBaseValueTextView[3] = findViewById(R.id.elementRow03elementBaseValue);
+        mElementBaseValueTextView[4] = findViewById(R.id.elementRow04elementBaseValue);
+        mElementBaseValueTextView[5] = findViewById(R.id.elementRow05elementBaseValue);
+        mElementBaseValueTextView[6] = findViewById(R.id.elementRow06elementBaseValue);
+        mElementBaseValueTextView[7] = findViewById(R.id.elementRow07elementBaseValue);
+        mElementBaseValueTextView[8] = findViewById(R.id.elementRow08elementBaseValue);
+        mElementBaseValueTextView[9] = findViewById(R.id.elementRow09elementBaseValue);
+        mElementBaseValueTextView[10] = findViewById(R.id.elementRow10elementBaseValue);
+        mElementBaseValueTextView[11] = findViewById(R.id.elementRow11elementBaseValue);
+        mElementBaseValueTextView[12] = findViewById(R.id.elementRow12elementBaseValue);
 
         db = FirebaseFirestore.getInstance();
         //Load SOV
@@ -188,51 +216,56 @@ public class ProgramViewActivity extends AppCompatActivity {
         } else {
             textViewForTesting.setText("No elementID value");
         }
-
         elementRef = db.collection("Elements").document(elementID);
 
         Task<DocumentSnapshot> documentSnapshotTask = elementRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
             @Override
             public void onSuccess(final DocumentSnapshot documentSnapshot) {
                 //initializing shared preferences to save results of query
                 //SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
                 //SharedPreferences.Editor editor = sp.edit();
+
                 Elements qElements = documentSnapshot.toObject(Elements.class);
                 elements.add(qElements);
-                int eCount = elements.size();
-                for (int i = 0; i < eCount; i++) {
-                    //It is easier to do this than to figure out dynamic getter name
-                    switch (i) {
-                        case 0:
-                            mElementCode = elements.get(i).getE00();
-                            break;
-                        case 1:
-                            mElementCode = elements.get(i).getE01();
-                            break;
-                        case 2:
-                            mElementCode = elements.get(i).getE02();
-                            break;
-                        default:
-                            mElementCode = null;
-                            break;
-
-                    }
-
-                    // Once we have the correct elementcode, we can do the magic
-                    if(mElementCode != null) {
-                        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
-                        mElementIDTextView[i].setText(mElementCode);
-                        mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
-                        mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
+                int eCount = 0;
+                mElementCode[0] = elements.get(0).getE00();
+                mElementCode[1] = elements.get(0).getE01();
+                mElementCode[2] = elements.get(0).getE02();
+                mElementCode[3] = elements.get(0).getE03();
+                mElementCode[4] = elements.get(0).getE04();
+                mElementCode[5] = elements.get(0).getE05();
+                mElementCode[6] = elements.get(0).getE06();
+                mElementCode[7] = elements.get(0).getE07();
+                mElementCode[8] = elements.get(0).getE08();
+                mElementCode[9] = elements.get(0).getE09();
+                mElementCode[10] = elements.get(0).getE10();
+                mElementCode[11] = elements.get(0).getE11();
+                mElementCode[12] = elements.get(0).getE12();
+                for (int i = 0; i < 13; i++) {
+                    if (mElementCode[i] != null) {
+                        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode[i]);
+                        mElementIDTextView[i].setText(mElementCode[i]);
+                        if (currentSOVIndex > 0) {
+                            mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
+                            mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
+                        }
+                    } else {
+                        mElementIDTextView[i].setText("Code");
+                        mElementNameTextView[i].setText(" ");
+                        mElementBaseValueTextView[i].setText(" ");
                     }
                 }
             }
+
         });
+
 
     }
 
-    private void showData() {
-
+    private void showData(String mElementCode, int i) {
+        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
+        mElementIDTextView[i].setText(String.valueOf(currentSOVIndex));
     }
 
     public void getSOV() {

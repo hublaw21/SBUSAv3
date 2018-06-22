@@ -34,10 +34,10 @@ public class Elements {
         this.E12 = "";
     }
 
-    Elements(String programDocumentID, String E00, String e01,String e02,String e03,String e04,String e05,
+    Elements(String programDocumentID, String e00, String e01,String e02,String e03,String e04,String e05,
                  String e06, String e07,String e08,String e09,String e10,String e11, String e12) {
         this.ProgramDocumentID = programDocumentID;
-        this.E00 = E00;
+        this.E00 = e00;
         this.E00 = e01;
         this.E00 = e02;
         this.E00 = e03;
@@ -60,21 +60,13 @@ public class Elements {
         ProgramDocumentID = programDocumentID;
     }
 
-    public String getE00() {
-        return E00;
-    }
+    public String getE00() {return E00;}
 
-    public void setE00(String E00) {
-        E00 = E00;
-    }
+    public void setE00(String e00) {E00 = e00;}
 
-    public String getE01() {
-        return E01;
-    }
+    public String getE01() {return E01;}
 
-    public void setE01(String e01) {
-        E01 = e01;
-    }
+    public void setE01(String e01) {E01 = e01;}
 
     public String getE02() {
         return E02;
