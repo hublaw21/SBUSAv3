@@ -16,6 +16,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.protobuf.GeneratedMessageLite;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -46,12 +47,18 @@ public class ProgramViewActivity extends AppCompatActivity {
     public TextView mCompetitionNameTextView;
     public TextView mCompetitionDescriptionTextView;
     public TextView textViewForTesting;
+    public TextView mElementIDO0TextView;
+    public TextView mElementNameO0TextView;
+    public TextView mElementBaseValueO0TextView;
     public TextView mElementIDO1TextView;
     public TextView mElementNameO1TextView;
     public TextView mElementBaseValueO1TextView;
     public TextView mElementIDO2TextView;
     public TextView mElementNameO2TextView;
     public TextView mElementBaseValueO2TextView;
+    public TextView[] mElementIDTextView;
+    public TextView[] mElementNameTextView;
+    public TextView[] mElementBaseValueTextView;
     public String mCurrentUserID;
     public String mCurrentProgramID;
     public String elementID;
@@ -68,12 +75,19 @@ public class ProgramViewActivity extends AppCompatActivity {
         mCompetitionNameTextView = findViewById(R.id.textViewCompetition);
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
         textViewForTesting = findViewById(R.id.textViewForTesting);
+        mElementIDO0TextView = findViewById(R.id.elementRow00elementID);
+        mElementNameO0TextView = findViewById(R.id.elementRow00elementName);
+        mElementBaseValueO0TextView = findViewById(R.id.elementRow00elementBaseValue);
         mElementIDO1TextView = findViewById(R.id.elementRow01elementID);
         mElementNameO1TextView = findViewById(R.id.elementRow01elementName);
         mElementBaseValueO1TextView = findViewById(R.id.elementRow01elementBaseValue);
         mElementIDO2TextView = findViewById(R.id.elementRow02elementID);
         mElementNameO2TextView = findViewById(R.id.elementRow02elementName);
         mElementBaseValueO2TextView = findViewById(R.id.elementRow02elementBaseValue);
+
+        mElementIDTextView[0] = findViewById(R.id.elementRow00elementID);
+        mElementIDTextView[1] = findViewById(R.id.elementRow01elementID);
+        mElementIDTextView[2] = findViewById(R.id.elementRow02elementID);
 
         db = FirebaseFirestore.getInstance();
         //Load SOV
@@ -186,25 +200,31 @@ public class ProgramViewActivity extends AppCompatActivity {
                 Elements qElements = documentSnapshot.toObject(Elements.class);
                 elements.add(qElements);
                 int eCount = elements.size();
-                for(int i=0; i<eCount; i++) {
-                    //work on dynamic getter name
-                    String tempCode = "get(" + i +").getE0" + i + "()";
-                    Method method = null;
-                    method = elements.tempCode;
-                    mElementCode = tempCode;
-                    //mElementCode = elements.get(i).getE00();
-                    int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
-                    //String temp = String.valueOf(currentSOVIndex);
-                    //mElementNameO1TextView.setText(temp);
-                    mElementIDO1TextView.setText(mElementCode);
-                    /*
-                    mElementIDO2TextView.setText(elements.get(0).getE01());
-                    mElementNameO1TextView.setText(Arrays.asList(SOVName).get(currentSOVIndex));
-                    mElementBaseValueO1TextView.setText(Arrays.asList(SOVBase).get(currentSOVIndex));
-                    */
-                    //Save persistent data
-                    //editor.putString(ELEMENT_ID_KEY, elementID);
-                    //editor.apply();
+                for (int i = 0; i < eCount; i++) {
+                    //It is easier to do this than to figure out dynamic getter name
+                    switch (i) {
+                        case 0:
+                            mElementCode = elements.get(i).getE00();
+                            break;
+                        case 1:
+                            mElementCode = elements.get(i).getE01();
+                            break;
+                        case 2:
+                            mElementCode = elements.get(i).getE02();
+                            break;
+                        default:
+                            mElementCode = null;
+                            break;
+
+                    }
+
+                    // Once we have the correct elementcode, we can do the magic
+                    if(mElementCode != null) {
+                        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
+                        mElementIDTextView[i].setText(mElementCode);
+                        mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
+                        mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
+                    }
                 }
             }
         });
