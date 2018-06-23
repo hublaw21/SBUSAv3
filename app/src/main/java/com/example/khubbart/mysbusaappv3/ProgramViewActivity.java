@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.Elements;
 import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,10 +39,13 @@ public class ProgramViewActivity extends AppCompatActivity {
     private static final String SHARED_PREF_NAME = "mysharedpref";
     private static final String ELEMENT_ID_KEY = "elementIdKey";
 
+    public RecyclerView recyclerView;
+
 
     //public List<Program> program;
     public List<Program> program = new ArrayList<>();
     public List<Elements> elements = new ArrayList<>();
+    public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
     //public List<ElementArray> elementArrayList = new ArrayList<>();
 
     //private List<Program> qProgram;
@@ -63,9 +70,12 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String mCurrentProgramID;
     public String elementID;
     public String[] mElementCode = new String[13];
+    public String mElementName;
+    public String mElementBaseValue;
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
+
 
 
     @Override
@@ -75,6 +85,15 @@ public class ProgramViewActivity extends AppCompatActivity {
         mCompetitionNameTextView = findViewById(R.id.textViewCompetition);
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
         textViewForTesting = findViewById(R.id.textViewForTesting);
+
+        // Initialize Recyclerview for element info
+        ElementInfoArrayAdapter elementInfoArrayAdapter = new ElementInfoArrayAdapter(R.layout.activity_program_view, elementInfoList);
+        recyclerView = findViewById(R.id.elementinfo_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(elementInfoArrayAdapter);
+
+        /*
         mElementIDTextView[0] = findViewById(R.id.elementRow00elementID);
         mElementIDTextView[1] = findViewById(R.id.elementRow01elementID);
         mElementIDTextView[2] = findViewById(R.id.elementRow02elementID);
@@ -116,6 +135,7 @@ public class ProgramViewActivity extends AppCompatActivity {
         mElementBaseValueTextView[10] = findViewById(R.id.elementRow10elementBaseValue);
         mElementBaseValueTextView[11] = findViewById(R.id.elementRow11elementBaseValue);
         mElementBaseValueTextView[12] = findViewById(R.id.elementRow12elementBaseValue);
+        */
 
         db = FirebaseFirestore.getInstance();
         //Load SOV
@@ -218,6 +238,9 @@ public class ProgramViewActivity extends AppCompatActivity {
         }
         elementRef = db.collection("Elements").document(elementID);
 
+        //DocumentSnapshot documentSnapshot = elementRef.get();
+        //This works
+
         Task<DocumentSnapshot> documentSnapshotTask = elementRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
             @Override
@@ -245,16 +268,23 @@ public class ProgramViewActivity extends AppCompatActivity {
                 for (int i = 0; i < 13; i++) {
                     if (mElementCode[i] != null) {
                         int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode[i]);
-                        mElementIDTextView[i].setText(mElementCode[i]);
+                        mCompetitionDescriptionTextView.setText("In Cycle");
+                        //mElementIDTextView[i].setText(mElementCode[i]);
                         if (currentSOVIndex > 0) {
-                            mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
-                            mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
+                            mElementName  = Arrays.asList(SOVName).get(currentSOVIndex);
+                            mElementBaseValue = Arrays.asList(SOVBase).get(currentSOVIndex);
+                            //mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
+                            //mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
                         }
+                        elementInfoList.add(new ElementInfo(mElementCode[i], mElementName, mElementBaseValue));
+                        recyclerView.setAdapter(elementInfoArrayAdapter);
+
                     } else {
-                        mElementIDTextView[i].setText("Code");
-                        mElementNameTextView[i].setText(" ");
-                        mElementBaseValueTextView[i].setText(" ");
+                        //mElementIDTextView[i].setText("Code");
+                        //mElementNameTextView[i].setText(" ");
+                        //mElementBaseValueTextView[i].setText(" ");
                     }
+
                 }
             }
 
