@@ -19,19 +19,19 @@ public class Elements {
 // Required No Argument Constructor
      Elements() {
          this.ProgramDocumentID = "";
-         this.E00 = "";
-        this.E01 = "";
-        this.E02 = "";
-        this.E03 = "";
-        this.E04 = "";
-        this.E05 = "";
-        this.E06 = "";
-        this.E07 = "";
-        this.E08 = "";
-        this.E09 = "";
-        this.E10 = "";
-        this.E11 = "";
-        this.E12 = "";
+         this.E00 =  null;
+        this.E01 =  null;
+        this.E02 =  null;
+        this.E03 =  null;
+        this.E04 =  null;
+        this.E05 =  null;
+        this.E06 =  null;
+        this.E07 =   null;
+         this.E08 =   null;
+         this.E09 =  null;
+        this.E10 =  null;
+        this.E11 =  null;
+        this.E12 = null;
     }
 
     Elements(String programDocumentID, String e00, String e01,String e02,String e03,String e04,String e05,

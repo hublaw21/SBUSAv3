@@ -31,12 +31,28 @@
         android:textAlignment="center"
         android:text="TextView3"/>
 
+    <!--
     <android.support.v7.widget.RecyclerView
         android:id="@+id/elementinfo_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         />
+     -->
+
+    <Button
+        android:id="@+id/buttonProgramView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <FrameLayout
+        android:id="@+id/elementInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+
     <!--
     <TableLayout
         android:id="@+id/programElementsTable"
