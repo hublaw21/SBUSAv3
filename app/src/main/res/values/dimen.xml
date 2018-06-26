@@ -2,7 +2,9 @@
 <resources>
     <dimen name="narrowTable">2dp</dimen>
     <dimen name="mediumTable">8dp</dimen>
+    <dimen name="largeTable">16dp</dimen>
     <dimen name="thinBorder">2dp</dimen>
+    <dimen name="sideBorder">12dp</dimen>
     <dimen name="mediumBorder">4dp</dimen>
     <dimen name="textLarge">35dp</dimen>
     <dimen name="textMedium">20dp</dimen>
@@ -10,4 +12,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- For standard buttons -->
+    <dimen name="disabled_alpha_default">8dp</dimen>
+    <dimen name="button_capsule_default_height">48dp</dimen>
+
+
 </resources>

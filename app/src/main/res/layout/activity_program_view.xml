@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,352 +22,579 @@
         android:textAlignment="center"
         android:text="TextView2"/>
 
-
     <TextView
-        android:id="@+id/textViewForTesting"
+        android:id="@+id/technicalTotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="TextView3"/>
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/sideBorder"
+        android:background="@color/colorPrimaryDark"
+        android:textAlignment="textEnd"
+        android:text="Total Base Value: 0.00"
+        android:textColor="@color/white" />
 
-    <!--
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/elementinfo_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        />
-     -->
-
-    <Button
-        android:id="@+id/buttonProgramView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
-    <FrameLayout
-        android:id="@+id/elementInfoContainer"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </FrameLayout>
 
-
-    <!--
-    <TableLayout
-        android:id="@+id/programElementsTable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumTable">
-
-        <TableRow
-            android:id="@+id/elementRow00"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <TableLayout
+            android:id="@+id/programElementsTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/mediumTable">
+
+
+            <TableRow
+                android:id="@+id/elementRow00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
+
+                <Button
+                    android:id="@+id/buttonRow00"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <!--
             <TextView
                 android:id="@+id/elementRow00elementID"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/narrowTable"
+                android:text="button" />
+             -->
 
-            <TextView
-                android:id="@+id/elementRow00elementName"
+                <TextView
+                    android:id="@+id/elementRow00elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow00elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow01"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow00elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
+                <Button
+                    android:id="@+id/buttonRow01"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
 
-        <TableRow
-            android:id="@+id/elementRow01"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+                <!--
             <TextView
                 android:id="@+id/elementRow01elementID"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/narrowTable"
+                android:text="button" />
+                -->
 
-            <TextView
-                android:id="@+id/elementRow01elementName"
+                <TextView
+                    android:id="@+id/elementRow01elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow01elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow02"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow01elementBaseValue"
+                <Button
+                    android:id="@+id/buttonRow02"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow02elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow02elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow03"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-        <TableRow
-            android:id="@+id/elementRow02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/buttonRow03"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/elementRow02elementID"
+                <TextView
+                    android:id="@+id/elementRow03elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow03elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow04"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow02elementName"
+                <Button
+                    android:id="@+id/buttonRow04"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow04elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow04elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow05"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow02elementBaseValue"
+                <Button
+                    android:id="@+id/buttonRow05"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow05elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow05elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow06"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/elementRow03"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow03elementID"
+                <Button
+                    android:id="@+id/buttonRow06"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow06elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow06elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow07"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow03elementName"
+                <Button
+                    android:id="@+id/buttonRow07"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow07elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow07elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow08"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow03elementBaseValue"
+                <Button
+                    android:id="@+id/buttonRow08"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow08elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow08elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow09"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-        <TableRow
-            android:id="@+id/elementRow04"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/buttonRow09"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/elementRow04elementID"
+                <TextView
+                    android:id="@+id/elementRow09elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow09elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow10"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow04elementName"
+                <Button
+                    android:id="@+id/buttonRow10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow10elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow10elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow11"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/elementRow04elementBaseValue"
+                <Button
+                    android:id="@+id/buttonRow11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/elementRow11elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/elementRow11elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elementRow12"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/narrowTable"
+                android:background="@color/colorPrimaryDark">
 
-        <TableRow
-            android:id="@+id/elementRow05"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/buttonRow12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="3"
+                    android:text="Add"
+                    android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/elementRow05elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
+                <TextView
+                    android:id="@+id/elementRow12elementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="6"
+                    android:text="Required Element"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/elementRow05elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
+                <TextView
+                    android:id="@+id/elementRow12elementBaseValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_weight="1.5"
+                    android:text="0.00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/elementRow05elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/elementRow06"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/elementRow06elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow06elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow06elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/elementRow07"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/elementRow07elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow07elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow07elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/elementRow08"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/elementRow08elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow08elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow08elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/elementRow09"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/elementRow09elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow09elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow09elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/elementRow10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/elementRow10elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow10elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow10elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/elementRow11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/elementRow11elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow11elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow11elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/elementRow12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/elementRow12elementID"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementID" />
-
-            <TextView
-                android:id="@+id/elementRow12elementName"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:text="elementName" />
-
-            <TextView
-                android:id="@+id/elementRow12elementBaseValue"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="elementBaseValue" />
-        </TableRow>
-
-    </TableLayout>
-    -->
 </LinearLayout>

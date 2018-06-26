@@ -7,6 +7,11 @@
     <color name="white">#ffffff</color>
     <color name="testGreen">#0ded1c</color>
 
+    <!--For buttons -->
+    <color name="branding_color_primary">#3F51B5</color>
+    <color name="branding_color_primary_dark">#303F9F</color>
+    <color name="button_text_default">#ffffff</color>
+
     <color name="material_deep_purple_50">#EDE7F6</color>
     <color name="material_deep_purple_500">#673AB7</color>
     <color name="material_deep_purple_700">#512DA8</color>

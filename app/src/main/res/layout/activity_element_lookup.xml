@@ -7,6 +7,35 @@
     android:orientation="vertical"
     tools:context="com.example.khubbart.mysbusaappv3.ElementLookupActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSingles"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/mediumTable"
+                android:textOn="Singles"
+                android:textOff="Not Singles"
+                android:checked="true"
+                style="@style/AppTheme.Widget.Button.Capsule"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonPairs"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/mediumTable"
+                android:textOn="Pairs"
+                android:textOff="Not Pairs"
+                android:checked="false" />
+
+    </LinearLayout>
+
+
     <Spinner
         android:id="@+id/spinnerElementTypeSelect"
         android:layout_width="match_parent"
@@ -56,5 +85,6 @@
             android:layout_margin="@dimen/mediumBorder"></FrameLayout>
 
     </LinearLayout>
+
 
 </LinearLayout>

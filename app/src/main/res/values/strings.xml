@@ -38,7 +38,6 @@
     <string name="steps">Steps</string>
     <string name="choreo">Choreo Sequence</string>
     <string-array name="elementTypes">
-        <item>Select an Element Type</item>
         <item>Jumps</item>
         <item>Spins</item>
         <item>Footwork</item>

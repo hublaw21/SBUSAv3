@@ -1,19 +1,16 @@
 package com.example.khubbart.mysbusaappv3;
 
-import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +24,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.protobuf.GeneratedMessageLite;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,42 +34,26 @@ import java.util.List;
 public class ProgramViewActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
-    private CollectionReference skatersCollectionDb;
     private DocumentReference programRef;
-    private CollectionReference elementCollection;
     private DocumentReference elementRef;
 
     private static final String SHARED_PREF_NAME = "mysharedpref";
     private static final String ELEMENT_ID_KEY = "elementIdKey";
-
-    public RecyclerView recyclerView;
-
-    public Button testButton;
-
-    //public List<Program> program;
     public List<Program> program = new ArrayList<>();
     public List<Elements> elements = new ArrayList<>();
     public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
+
     public int requiredElements;
-    public String containerID;
     public int resID;
-    //public List<ElementArray> elementArrayList = new ArrayList<>();
+    public int i;
+    public int num;
 
-    //private List<Program> qProgram;
-    //private static List<Program> qProgram = new ArrayList<>();
-
+    public Button elementButton[] = new Button[13];
+    public Button tempButton;
     public TextView mCompetitionNameTextView;
     public TextView mCompetitionDescriptionTextView;
+    public TextView mTechnicalTotalTextView;
     public TextView textViewForTesting;
-    public TextView mElementIDO0TextView;
-    public TextView mElementNameO0TextView;
-    public TextView mElementBaseValueO0TextView;
-    public TextView mElementIDO1TextView;
-    public TextView mElementNameO1TextView;
-    public TextView mElementBaseValueO1TextView;
-    public TextView mElementIDO2TextView;
-    public TextView mElementNameO2TextView;
-    public TextView mElementBaseValueO2TextView;
     public TextView[] mElementIDTextView = new TextView[13];
     public TextView[] mElementNameTextView = new TextView[13];
     public TextView[] mElementBaseValueTextView = new TextView[13];
@@ -86,7 +66,15 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
-    public String testText;
+    public double technicalTotal;
+    public String tempString;
+    public String tempRowID;
+    public String tempRowName;
+    public String tempRowBase;
+    public String tempButtonString;
+    public String tElementCode;
+
+    NumberFormat numberFormat = new DecimalFormat("###.00");
 
 
     @Override
@@ -95,71 +83,41 @@ public class ProgramViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_program_view);
         mCompetitionNameTextView = findViewById(R.id.textViewCompetition);
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
-
-        //Temporary for testing
-        textViewForTesting = findViewById(R.id.textViewForTesting);
-        testButton = findViewById(R.id.buttonProgramView);
-        requiredElements = 3; // For final version, this must be imported with program to establish how many fragments to open
-
-        // Initialize Recyclerview for element info
-        /*
-        Called from method to forcer initial load
-        ElementInfoArrayAdapter elementInfoArrayAdapter = new ElementInfoArrayAdapter(R.layout.activity_program_view, elementInfoList);
-        recyclerView = findViewById(R.id.elementinfo_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(elementInfoArrayAdapter);
-        */
-
-        /*
-        mElementIDTextView[0] = findViewById(R.id.elementRow00elementID);
-        mElementIDTextView[1] = findViewById(R.id.elementRow01elementID);
-        mElementIDTextView[2] = findViewById(R.id.elementRow02elementID);
-        mElementIDTextView[3] = findViewById(R.id.elementRow03elementID);
-        mElementIDTextView[4] = findViewById(R.id.elementRow04elementID);
-        mElementIDTextView[5] = findViewById(R.id.elementRow05elementID);
-        mElementIDTextView[6] = findViewById(R.id.elementRow06elementID);
-        mElementIDTextView[7] = findViewById(R.id.elementRow07elementID);
-        mElementIDTextView[8] = findViewById(R.id.elementRow08elementID);
-        mElementIDTextView[9] = findViewById(R.id.elementRow09elementID);
-        mElementIDTextView[10] = findViewById(R.id.elementRow10elementID);
-        mElementIDTextView[11] = findViewById(R.id.elementRow11elementID);
-        mElementIDTextView[12] = findViewById(R.id.elementRow12elementID);
-
-        mElementNameTextView[0] = findViewById(R.id.elementRow00elementName);
-        mElementNameTextView[1] = findViewById(R.id.elementRow01elementName);
-        mElementNameTextView[2] = findViewById(R.id.elementRow02elementName);
-        mElementNameTextView[3] = findViewById(R.id.elementRow03elementName);
-        mElementNameTextView[4] = findViewById(R.id.elementRow04elementName);
-        mElementNameTextView[5] = findViewById(R.id.elementRow05elementName);
-        mElementNameTextView[6] = findViewById(R.id.elementRow06elementName);
-        mElementNameTextView[7] = findViewById(R.id.elementRow07elementName);
-        mElementNameTextView[8] = findViewById(R.id.elementRow08elementName);
-        mElementNameTextView[9] = findViewById(R.id.elementRow09elementName);
-        mElementNameTextView[10] = findViewById(R.id.elementRow10elementName);
-        mElementNameTextView[11] = findViewById(R.id.elementRow11elementName);
-        mElementNameTextView[12] = findViewById(R.id.elementRow12elementName);
-
-        mElementBaseValueTextView[0] = findViewById(R.id.elementRow00elementBaseValue);
-        mElementBaseValueTextView[1] = findViewById(R.id.elementRow01elementBaseValue);
-        mElementBaseValueTextView[2] = findViewById(R.id.elementRow02elementBaseValue);
-        mElementBaseValueTextView[3] = findViewById(R.id.elementRow03elementBaseValue);
-        mElementBaseValueTextView[4] = findViewById(R.id.elementRow04elementBaseValue);
-        mElementBaseValueTextView[5] = findViewById(R.id.elementRow05elementBaseValue);
-        mElementBaseValueTextView[6] = findViewById(R.id.elementRow06elementBaseValue);
-        mElementBaseValueTextView[7] = findViewById(R.id.elementRow07elementBaseValue);
-        mElementBaseValueTextView[8] = findViewById(R.id.elementRow08elementBaseValue);
-        mElementBaseValueTextView[9] = findViewById(R.id.elementRow09elementBaseValue);
-        mElementBaseValueTextView[10] = findViewById(R.id.elementRow10elementBaseValue);
-        mElementBaseValueTextView[11] = findViewById(R.id.elementRow11elementBaseValue);
-        mElementBaseValueTextView[12] = findViewById(R.id.elementRow12elementBaseValue);
-        */
-
+        mTechnicalTotalTextView = findViewById(R.id.technicalTotal);
+        requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
         db = FirebaseFirestore.getInstance();
+
+        elementButton[0] = findViewById(R.id.buttonRow00);
+        elementButton[1] = findViewById(R.id.buttonRow01);
+
+
+        //Set view variables
+        for (int i = 0; i < 13; i++) {
+            if (i < 10) {
+                tempRowID = "elementRow0" + i + "elementID";
+                tempRowName = "elementRow0" + i + "elementName";
+                tempRowBase = "elementRow0" + i + "elementBaseValue";
+                tempButtonString = "buttonRow0" + i;
+            } else {
+                tempRowID = "elementRow" + i + "elementID";
+                tempRowName = "elementRow" + i + "elementName";
+                tempRowBase = "elementRow" + i + "elementBaseValue";
+                tempButtonString = "buttonRow" + i;
+            }
+            resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
+            mElementIDTextView[i] = findViewById(resID);
+            resID = getResources().getIdentifier(tempRowName, "id", getPackageName());
+            mElementNameTextView[i] = findViewById(resID);
+            resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
+            mElementBaseValueTextView[i] = findViewById(resID);
+            resID = getResources().getIdentifier(tempButtonString, "id", getPackageName());
+            elementButton[i] = findViewById(resID);
+        }
+
         //Load SOV
         getSOV();
 
-        //Get the userID and programID
+        //Get the userID and programID from sending activity
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
         if (extrasBundle.isEmpty()) {
@@ -169,117 +127,146 @@ public class ProgramViewActivity extends AppCompatActivity {
             mCurrentUserID = extrasBundle.getString("userID");
             mCurrentProgramID = extrasBundle.getString("programID");
             //Toast.makeText(getApplicationContext(), mCurrentUserID + " " + mCurrentProgramID, Toast.LENGTH_LONG).show();
-            init();
+            init();  // Call the initiation method here, to ensure the IDs have been pulled
         }
 
-
         //Try adding a button and have this implement in the onclick method to see if the values are making it back to the main thread.
-        testButton.setOnClickListener(new View.OnClickListener() {
+        //Set up button listeners for changing elements
+
+        elementButton[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentChange(requiredElements);
+                //showPickElementDialog();
             }
         });
 
-        /*
-        mCompetitionNameTextView.setText(program.get(0).getCompetition());
-        String eString = program.get(0).getElements().toString();
-        mCompetitionDescriptionTextView.setText(eString);
-        */
+        elementButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+        elementButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
 
-        // Get specific program info
-        //init();
+        elementButton[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+        elementButton[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        elementButton[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+        elementButton[6].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        elementButton[7].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+        elementButton[8].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        elementButton[9].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        elementButton[10].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        elementButton[11].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+        elementButton[12].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //Set popups for adding/changing elements
     }
 
-    // Need to setup on click for selecting a program
 
-    // Initialize database and ?recyclerview
+    // Initialize database
     public void init() {
-        //db = FirebaseFirestore.getInstance();
+        // Do I neeed these?
         final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         final SharedPreferences.Editor editor = sp.edit();
 
-        //skatersCollectionDb = db.collection("Skaters");
         //Get program basics
         programRef = db.collection("Programs").document(mCurrentProgramID);
         Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(final DocumentSnapshot documentSnapshot) {
-                //initializing shared preferences to save results of query
-                //SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-                //SharedPreferences.Editor editor = sp.edit();
                 Program qProgram = documentSnapshot.toObject(Program.class);
                 program.add(qProgram);
                 mCompetitionNameTextView.setText(program.get(0).getCompetition());
                 String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
                 mCompetitionDescriptionTextView.setText(tempText);
                 String elementID = program.get(0).getElementsID();
-                //textViewForTesting.setText(elementID);
-                //Save persistent data
                 editor.putString(ELEMENT_ID_KEY, elementID);
                 editor.apply();
                 getElements();
             }
         });
-        //initializing shared preferences to save results of query
-        //SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-        /*
-        elementID = sp. getString(ELEMENT_ID_KEY, null);
-        if (elementID != null) {
-            textViewForTesting.setText(elementID);
-        } else {
-            textViewForTesting.setText("No elementID value");
-        }
-        // Get the element details
-        elementCollection = db.collection("Elements");
-        */
-
-        //ElementArray elementArray = program.get(0).getElements().toString();
-        //mCompetitionDescriptionTextView.setText(eString);
-        //Flatten this by creating an elements collection with the program id as a searchable field plus the elements, then just do a second pull
-        //mCompetitionDescriptionTextView.setText(program.getLevel() + " " + program.getDiscipline() + " " + program.getSegment() + " Program");
-        //String eString = Array.toString(program.getElements());
-        //mCompetitionDescriptionTextView.setText.(program.getElements());
-                /*
-                mElementIDO1TextView.setText(program.getCompetition());
-                mElementNameO1TextView.setText(program.getCompetition());
-                mElementBaseValueO1TextView.setText(program.getCompetition());
-                mElementIDO2TextView.setText(program.getCompetition());
-                mElementIDO1TextView.setText(program.getCompetition());
-                mElementIDO1TextView.setText(program.getCompetition());
-                mElementIDO1TextView.setText(program.getCompetition());
-                */
-
-
     }
 
     public void getElements() {
+
         final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         final SharedPreferences.Editor editor = sp.edit();
 
-        //Get program basics
+        //Get elements by documentID
         elementID = sp.getString(ELEMENT_ID_KEY, null);
         if (elementID != null) {
-            //textViewForTesting.setText(elementID);
+            //Do nothing, element's documentID found
         } else {
             textViewForTesting.setText("No elementID value");
         }
+
         elementRef = db.collection("Elements").document(elementID);
 
-        //DocumentSnapshot documentSnapshot = elementRef.get();
-        //This works
-
-        //Task<DocumentSnapshot> documentSnapshotTask = elementRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            //public void onSuccess(final DocumentSnapshot documentSnapshot) {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
-                    //initializing shared preferences to save results of query
-                    //SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-                    //SharedPreferences.Editor editor = sp.edit();
-
                     Elements qElements = documentSnapshot.toObject(Elements.class);
                     elements.add(qElements);
                     int eCount = 0;
@@ -296,49 +283,58 @@ public class ProgramViewActivity extends AppCompatActivity {
                     mElementCode[10] = elements.get(0).getE10();
                     mElementCode[11] = elements.get(0).getE11();
                     mElementCode[12] = elements.get(0).getE12();
-                    for (int i = 0; i < 13; i++) {
+                    technicalTotal = 0;
+                    for (int i = 0; i < requiredElements; i++) {
                         if (mElementCode[i] != null) {
+                            // Get the index to look up the element
                             int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode[i]);
-                            //mCompetitionDescriptionTextView.setText("In Cycle");
-                            //mCompetitionDescriptionTextView.setText(String.valueOf(currentSOVIndex));
-                            //textViewForTesting.setText(mElementCode[1]);
-
-                            //mElementIDTextView[i].setText(mElementCode[i]);
+                            //Ultimately, need to make the elementID a button, or make the row a button
                             if (currentSOVIndex > 0) {
                                 mElementName = Arrays.asList(SOVName).get(currentSOVIndex);
                                 mElementBaseValue = Arrays.asList(SOVBase).get(currentSOVIndex);
-                                //mCompetitionDescriptionTextView.setText(mElementName);
-                                //mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
-                                //mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
+                                technicalTotal += Double.valueOf(mElementBaseValue);
+                                num = i;
+                                tElementCode = mElementCode[i];
+                                changeButton(num, tElementCode);
+                                //mElementIDTextView[i].setText(mElementCode[i]);
+                                mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
+                                mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
                                 elementInfoList.add(new ElementInfo(mElementCode[i], mElementName, mElementBaseValue));
+                            } else {
+                                //Add info for unentered required elements
                             }
-                            //recyclerView.setAdapter(elementInfoArrayAdapter);
 
                         } else {
-                            //mElementIDTextView[i].setText("Code");
-                            //mElementNameTextView[i].setText(" ");
-                            //mElementBaseValueTextView[i].setText(" ");
-                            //mCompetitionDescriptionTextView.setText("Null - " + String.valueOf(i));
-
+                            // Put buttons into blanks rows
+                            if (i < 10) {
+                                tempString = "elementRow0" + i;
+                            } else {
+                                tempString = "elementRow" + i;
+                            }
+                            int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+                            TableRow tr = findViewById(resID);
+                            // put button in here
                         }
-
                     }
-                    // Call Recycler view from here to force inital load
-                    int tempCount = elementInfoList.size();
-                    mCompetitionDescriptionTextView.setText(String.valueOf(tempCount));
-                    //initRecyclerView();
+                    // Set the initial totalTechnical
+                    tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
+                    mTechnicalTotalTextView.setText(tempString);
+                    // Hide rows not used for the program
+                    for (i = requiredElements; i < 13; i++) {
+                        if (i < 10) {
+                            tempString = "elementRow0" + i;
+                        } else {
+                            tempString = "elementRow" + i;
+                        }
+                        int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+                        TableRow tr = findViewById(resID);
+                        tr.setVisibility(View.GONE);
+                    }
                 }
             }
-
         });
-
-
     }
 
-    private void showData(String mElementCode, int i) {
-        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
-        mElementIDTextView[i].setText(String.valueOf(currentSOVIndex));
-    }
 
     public void getSOV() {
         //Get SOV Table 2018 - Three matched arrays
@@ -360,51 +356,35 @@ public class ProgramViewActivity extends AppCompatActivity {
         }
     }
 
+    public void changeButton(int num, String tElementCode) {
+        // Change the button text to match element code
+        if (num < 10) {
+            tempString = "buttonRow0" + num;
+        } else {
+            tempString = "buttonRow" + num;
+        }
+        int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+        tempButton = findViewById(resID);
+        if (tempButton != null) tempButton.setText(tElementCode);
+        // put button in here
+    }
+
     /*
-    public void initRecyclerView(){
-        // Initialize Recyclerview for element info
-        ElementInfoArrayAdapter elementInfoArrayAdapter = new ElementInfoArrayAdapter(R.layout.activity_program_view, elementInfoList);
-        recyclerView = findViewById(R.id.row_elementinfo_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(elementInfoArrayAdapter);
+    private void showPickElementDialog() {
+        String[] singleChoiceItems = getResources().getStringArray(R.array.elementTypes);
+        int itemSelected = 0;
+        new AlertDialog.Builder(this)
+                .setTitle("Select Element Type")
+                .setSingleChoiceItems(singleChoiceItems, itemSelected, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int selectedIndex) {
+                        Toast.makeText(getApplicationContext(), "index: " + selectedIndex, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setPositiveButton("Ok", null)
+                .setNegativeButton("Cancel", null)
+                .show();
     }
     */
 
-    //Opening fragments based on the number of elements required for program
-    private void FragmentChange(Integer requiredElements) {
-        // get fragment manager, start transaction
-        android.app.FragmentManager fm = getFragmentManager();
-        android.app.FragmentTransaction ft = fm.beginTransaction();
-        //Toast.makeText(getApplicationContext(), "Item number: " + position, Toast.LENGTH_LONG).show();
-        // testing the popup fragments
-        int i = 1;
-        containerID = "container" + i;
-        //int containerIDint  = find(R.id.elementInfoContainer);
-        String fragName = "ElementInfo0" + i + "Fragment()";
-        Fragment eFragment = fm.findFragmentByTag(fragName);
-        resID = getResources().getIdentifier(containerID, "id", getPackageName());
-        //ft.replace(R.id.elementInfoContainer, new ElementInfo01Fragment());
-        //Fragment eFragment = getFragmentManager().findFragmentById(resID);
-        if (eFragment != null) {
-            ft.replace(R.id.elementInfoContainer, eFragment);
-            textViewForTesting.setText(String.valueOf(resID));
-        } else {
-            textViewForTesting.setText("Must be Null - " + fragName);
-        }
-        // end testing
-        /*
-        for (int i = 0; i < requiredElements; i++) {
-            ft = fm.beginTransaction();
-            containerID = "container" + i;
-            resID = getResources().getIdentifier(containerID, "id", getPackageName());
-            //ft.replace(R.id.container1, fragment[1]); // this needs to do all of them.
-            ft.replace(resID, fragment[i]);
-            //ft[i].replace(getResources().getIdentifier(containerID, "id", getPackageName()), fragment[i]);
-            ft.commit();
-        }
-        // Call an update to clear screen of any old data/seed new element data
-        updateElement();
-        */
-    }
 }
