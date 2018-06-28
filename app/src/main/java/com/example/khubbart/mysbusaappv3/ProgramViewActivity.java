@@ -8,8 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +75,7 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String tempRowName;
     public String tempRowBase;
     public String tempButtonString;
+    public String tempElementButton;
     public String tElementCode;
 
     NumberFormat numberFormat = new DecimalFormat("###.00");
@@ -85,10 +89,12 @@ public class ProgramViewActivity extends AppCompatActivity {
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
         mTechnicalTotalTextView = findViewById(R.id.technicalTotal);
         requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
+        final RelativeLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
+
         db = FirebaseFirestore.getInstance();
 
-        elementButton[0] = findViewById(R.id.buttonRow00);
-        elementButton[1] = findViewById(R.id.buttonRow01);
+        //elementButton[0] = findViewById(R.id.buttonRow00);
+        //elementButton[1] = findViewById(R.id.buttonRow01);
 
 
         //Set view variables
@@ -97,12 +103,12 @@ public class ProgramViewActivity extends AppCompatActivity {
                 tempRowID = "elementRow0" + i + "elementID";
                 tempRowName = "elementRow0" + i + "elementName";
                 tempRowBase = "elementRow0" + i + "elementBaseValue";
-                tempButtonString = "buttonRow0" + i;
+                tempElementButton = "buttonRow0" + i;
             } else {
                 tempRowID = "elementRow" + i + "elementID";
                 tempRowName = "elementRow" + i + "elementName";
                 tempRowBase = "elementRow" + i + "elementBaseValue";
-                tempButtonString = "buttonRow" + i;
+                tempElementButton = "buttonRow" + i;
             }
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             mElementIDTextView[i] = findViewById(resID);
@@ -110,7 +116,7 @@ public class ProgramViewActivity extends AppCompatActivity {
             mElementNameTextView[i] = findViewById(resID);
             resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
             mElementBaseValueTextView[i] = findViewById(resID);
-            resID = getResources().getIdentifier(tempButtonString, "id", getPackageName());
+            resID = getResources().getIdentifier(tempElementButton, "id", getPackageName());
             elementButton[i] = findViewById(resID);
         }
 
@@ -135,91 +141,92 @@ public class ProgramViewActivity extends AppCompatActivity {
 
         elementButton[0].setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //showPickElementDialog();
-            }
+            public void onClick(View v) {changeButtonDialog(0);}
         });
 
         elementButton[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 1;
+                changeButtonDialog(num);}
         });
+
         elementButton[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 2;
+                changeButtonDialog(num);}
         });
 
         elementButton[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 3;
+                changeButtonDialog(num);}
         });
         elementButton[4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 4;
+                changeButtonDialog(num);}
         });
 
         elementButton[5].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 5;
+                changeButtonDialog(num);}
         });
         elementButton[6].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 6;
+                changeButtonDialog(num);}
         });
 
         elementButton[7].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 7;
+                changeButtonDialog(num);}
         });
         elementButton[8].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 8;
+                changeButtonDialog(num);}
         });
 
         elementButton[9].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 9;
+                changeButtonDialog(num);}
         });
 
         elementButton[10].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 10;
+                changeButtonDialog(num);}
         });
 
         elementButton[11].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 1 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 11;
+                changeButtonDialog(num);}
         });
         elementButton[12].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Element Button 0 Clicked", Toast.LENGTH_LONG).show();
-            }
+                num = 12;
+                changeButtonDialog(num);}
         });
 
         //Set popups for adding/changing elements
+        //Dialog Box for entering/changing element codes
+
     }
 
 
@@ -295,7 +302,8 @@ public class ProgramViewActivity extends AppCompatActivity {
                                 technicalTotal += Double.valueOf(mElementBaseValue);
                                 num = i;
                                 tElementCode = mElementCode[i];
-                                changeButton(num, tElementCode);
+                                elementButton[i].setText(tElementCode);
+                                //changeButton(num, tElementCode);
                                 //mElementIDTextView[i].setText(mElementCode[i]);
                                 mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
                                 mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
@@ -344,24 +352,36 @@ public class ProgramViewActivity extends AppCompatActivity {
         SOVBase = resources.getStringArray(R.array.SOV_Base);
     }
 
-    public void getElementInfo(String mElementCode) {
-        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode);
+    public void getElementInfo(String tElementCode, int gNum) {
+        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(tElementCode);
         // Need to add error checker for code not found
-        if (currentSOVIndex < 0) {
-            //Error
-            //Toast.makeText(getApplicationContext(), "elementCode: **" + elementCode + "** currentSOVIndex: " + currentSOVIndex, Toast.LENGTH_LONG).show();
+        if (currentSOVIndex > 0) {
+            mElementName = Arrays.asList(SOVName).get(currentSOVIndex);
+            mElementBaseValue = Arrays.asList(SOVBase).get(currentSOVIndex);
+            //Need to work on updating tech total
+            technicalTotal += Double.valueOf(mElementBaseValue);
+            mElementCode[gNum] = tElementCode;
+            changeButton(gNum, tElementCode);
+            mElementNameTextView[gNum].setText(mElementName);
+            mElementBaseValueTextView[gNum].setText(mElementBaseValue);
+            elementInfoList.add(new ElementInfo(mElementCode[gNum], mElementName, mElementBaseValue));
         } else {
-            String currentElementBase = Arrays.asList(SOVBase).get(currentSOVIndex);
-            String currentElementName = Arrays.asList(SOVName).get(currentSOVIndex);
+            //Add info for unentered required elements
+            mElementCode[gNum] = null;
+            tElementCode = "Add";
+            changeButton(gNum, tElementCode);
+            mElementNameTextView[gNum].setText("Element code not found");
+            mElementBaseValueTextView[gNum].setText("0.00");
+            //elementInfoList.add(new ElementInfo(mElementCode[num], mElementName, mElementBaseValue)); // Do I keep adding or replace, do I even need if I am putting in array?
         }
     }
 
-    public void changeButton(int num, String tElementCode) {
+    public void changeButton(int cNum, String tElementCode) {
         // Change the button text to match element code
-        if (num < 10) {
-            tempString = "buttonRow0" + num;
+        if (cNum < 10) {
+            tempString = "buttonRow0" + cNum;
         } else {
-            tempString = "buttonRow" + num;
+            tempString = "buttonRow" + cNum;
         }
         int resID = getResources().getIdentifier(tempString, "id", getPackageName());
         tempButton = findViewById(resID);
@@ -369,22 +389,56 @@ public class ProgramViewActivity extends AppCompatActivity {
         // put button in here
     }
 
-    /*
-    private void showPickElementDialog() {
-        String[] singleChoiceItems = getResources().getStringArray(R.array.elementTypes);
-        int itemSelected = 0;
-        new AlertDialog.Builder(this)
-                .setTitle("Select Element Type")
-                .setSingleChoiceItems(singleChoiceItems, itemSelected, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int selectedIndex) {
-                        Toast.makeText(getApplicationContext(), "index: " + selectedIndex, Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setPositiveButton("Ok", null)
-                .setNegativeButton("Cancel", null)
-                .show();
-    }
-    */
+    public void changeButtonDialog(final int tNum) {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_change_element, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        Button submitButton = (Button) dialogView.findViewById(R.id.dialog_change_element_submit_button);
+        Button lookupButton = (Button) dialogView.findViewById(R.id.dialog_change_element_lookup_button);
+        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_change_element_cancel_button);
+        final EditText editTextElementCode = (EditText) dialogView.findViewById(R.id.edittext_change_element_code);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+
+        // Set submit button click listener
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                String tElementCode = editTextElementCode.getText().toString();
+                //int ttNum = tNum; // needs to track element number from list
+                getElementInfo(tElementCode, tNum);
+            }
+        });
+
+        // Set lookup button click listener
+        lookupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Need to add looup routine here
+
+                // Dismiss/cancel the alert dialog
+                dialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {dialog.dismiss();}
+        });
+
+        // Display the custom alert dialog on interface
+        dialog.show();
+    }
 }

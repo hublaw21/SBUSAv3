@@ -65,7 +65,7 @@
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
                     android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/white" />
 
                 <!--
             <TextView
@@ -117,7 +117,7 @@
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
                     android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/white" />
 
                 <!--
             <TextView
@@ -168,8 +168,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add" />
 
                 <TextView
                     android:id="@+id/elementRow02elementName"
@@ -208,8 +207,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow03elementName"
@@ -248,8 +246,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add" />
 
                 <TextView
                     android:id="@+id/elementRow04elementName"
@@ -288,8 +285,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add" />
 
                 <TextView
                     android:id="@+id/elementRow05elementName"
@@ -328,8 +324,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow06elementName"
@@ -368,8 +363,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow07elementName"
@@ -408,8 +402,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow08elementName"
@@ -448,8 +441,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add" />
 
                 <TextView
                     android:id="@+id/elementRow09elementName"
@@ -488,8 +480,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow10elementName"
@@ -528,8 +519,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add" />
 
                 <TextView
                     android:id="@+id/elementRow11elementName"
@@ -568,8 +558,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:text="Add" />
 
                 <TextView
                     android:id="@+id/elementRow12elementName"

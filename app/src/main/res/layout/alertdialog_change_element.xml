@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_change_element"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/mediumTable"
+    tools:context=".ProgramViewActivity"
+    android:background="#e9f1ba"
+    >
+    <TextView
+        android:id="@+id/dialog_change_element_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Element Code"
+        android:padding="@dimen/narrowTable"
+        android:background="#d5dda6"
+        android:textSize="@dimen/textMedium"
+        />
+    <EditText
+        android:id="@+id/edittext_change_element_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="If unsure, click 'Lookup'"
+        android:textSize="@dimen/textMedium"
+        android:layout_below="@id/dialog_change_element_title"
+        />
+    <Button
+        android:id="@+id/dialog_change_element_submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_alignParentRight="true"
+        android:background="#dde5ad"
+        android:layout_below="@id/edittext_change_element_code"
+        />
+    <Button
+        android:id="@+id/dialog_change_element_lookup_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lookup"
+        android:layout_toLeftOf="@id/dialog_change_element_submit_button"
+        android:background="#dde5ad"
+        android:layout_marginRight="3dp"
+        android:layout_alignBaseline="@id/dialog_change_element_submit_button"
+        />
+    <Button
+        android:id="@+id/dialog_change_element_cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_alignParentLeft="true"
+        android:background="#dde5ad"
+        android:layout_marginRight="3dp"
+        android:layout_alignBaseline="@id/dialog_change_element_submit_button"
+        />
+</RelativeLayout>
