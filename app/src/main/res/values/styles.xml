@@ -38,7 +38,7 @@
     <style name="AppTheme.Widget" />
 
     <style name="AppTheme.Widget.Button">
-        <item name="android:background">@drawable/button_default</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:textColor">@color/button_text_default</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
         <item name="android:minHeight">48dip</item>

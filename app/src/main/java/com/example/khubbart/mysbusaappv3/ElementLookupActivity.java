@@ -11,8 +11,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.Arrays;
 
@@ -30,6 +32,8 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SelectPairSpinNameFragment.OnChangePairSpinNameRadioButtonInteractionListener,
         SelectStepNameFragment.OnChangeStepNameRadioButtonInteractionListener,
         AdapterView.OnItemSelectedListener {
+
+    public ToggleButton selectDisciplineToggleButton;
 
     public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
@@ -66,6 +70,27 @@ public class ElementLookupActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
 
+        //Set up Discipline toggle buttons
+        selectDisciplineToggleButton = (ToggleButton) findViewById(R.id.toggleButtonDiscipline);
+        selectDisciplineToggleButton.setChecked(true); // set the current state of a toggle button
+        selectDisciplineToggleButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(selectDisciplineToggleButton.isChecked()){
+                    //Singles
+                    //int resID = getResources().getIdentifier("pairsElementRow"tempString, "id", getPackageName());
+                    TableRow tr = findViewById(R.id.pairsElementsRow);
+                    tr.setVisibility(View.GONE);
+                } else {
+                    //Pairs
+                    TableRow tr = findViewById(R.id.pairsElementsRow);
+                    tr.setVisibility(View.VISIBLE);
+                }
+            }
+
+        });
+
+        //NEED TO WRITE NEW LOGIC for toggle buttons instead of spinner.
 
         //Set up spinner for selecting element type
         Spinner spinElementTypeSelect = findViewById(R.id.spinnerElementTypeSelect);
@@ -95,6 +120,21 @@ public class ElementLookupActivity extends AppCompatActivity implements
             }
         }
     }
+
+    //Top Button Row - Discipline
+    // Discipline Toggles (x2) Listener
+    /*
+    @Override
+    public void onChangeSinglesSwitchInteraction(boolean isSingles) {
+        if (isSingles) {
+            //Turn off pairs button
+            elementCodeParts[0] = "F";
+        } else {
+            elementCodeParts[0] = "";
+        }
+        updateElement();
+    }
+    */
 
     //Trading out fragments
     private void FragmentChange(Integer currentElementTypeIndex) {

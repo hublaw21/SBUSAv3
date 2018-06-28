@@ -14,35 +14,26 @@
         android:background="@color/colorPrimaryDark">
 
         <TextView
-            android:id="@+id/textViewElementDetailName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="Element"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textMedium" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/row_2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp"
-        android:background="@color/colorPrimaryDark">
-
-        <TextView
             android:id="@+id/textViewElementCode"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:gravity="center"
+            android:layout_weight="2"
+            android:textAlignment="textStart"
             android:padding="4dp"
             android:text="Code"
             android:textColor="@color/white"
             android:textSize="@dimen/textMedium" />
 
+        <TextView
+            android:id="@+id/textViewElementDetailName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:textAlignment="textStart"
+            android:padding="4dp"
+            android:text="Element"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textMedium" />
     </TableRow>
 
     <TableRow

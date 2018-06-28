@@ -59,7 +59,7 @@
         android:layout_marginTop="8dp"
         android:text="Select a Program"
         android:layout_gravity="center"
-        android:theme="@style/Widget.AppCompat.Button"/>
+        android:theme="@style/Widget.AppCompat.Button.Colored"/>
 
     <Button
         android:id="@+id/buttonMainLogOut"
@@ -72,6 +72,6 @@
         android:layout_marginTop="8dp"
         android:text="Logout"
         android:layout_gravity="center"
-        android:theme="@style/Widget.AppCompat.Button"/>
+        android:theme="@style/Widget.AppCompat.Button.Colored"/>
 
 </LinearLayout>

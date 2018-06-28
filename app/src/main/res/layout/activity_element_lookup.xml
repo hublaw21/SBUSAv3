@@ -7,33 +7,108 @@
     android:orientation="vertical"
     tools:context="com.example.khubbart.mysbusaappv3.ElementLookupActivity">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-            <ToggleButton
-                android:id="@+id/toggleButtonSingles"
+        <TableRow>
+        <TextView
+            android:id="@+id/textViewDisciplineTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="5"
+            android:textAlignment="center"
+            android:text="Select Discipline" />
+
+        <ToggleButton
+                android:id="@+id/toggleButtonDiscipline"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/mediumTable"
+                android:layout_margin="@dimen/narrowTable"
                 android:textOn="Singles"
-                android:textOff="Not Singles"
-                android:checked="true"
-                style="@style/AppTheme.Widget.Button.Capsule"/>
+                android:textOff="Pairs"
+                android:checked="true"/>
+    </TableRow>
+        <TableRow>
 
             <ToggleButton
-                android:id="@+id/toggleButtonPairs"
+                android:id="@+id/toggleButtonJump"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/mediumTable"
-                android:textOn="Pairs"
-                android:textOff="Not Pairs"
-                android:checked="false" />
+                android:layout_margin="@dimen/narrowTable"
+                android:textOn="Jump"
+                android:textOff="Jump"
+                android:checked="true"/>
 
-    </LinearLayout>
+            <ToggleButton
+                android:id="@+id/toggleButtonSpin"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:textOn="Spin"
+                android:textOff="Spin"
+                android:checked="false"/>
+
+            <ToggleButton
+            android:id="@+id/toggleButtonSteps"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:textOn="Steps"
+            android:textOff="Steps"
+            android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/pairsElementsRow">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLift"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:textOn="Lift"
+                android:textOff="Lift"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonTwist"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:textOn="Twist"
+                android:textOff="Twist"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonThrow"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:textOn="Throw"
+                android:textOff="Throw"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSpiral"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/narrowTable"
+                android:textOn="Spiral"
+                android:textOff="Spiral"
+                android:checked="false"/>
+        </TableRow>
+
+    </TableLayout>
 
 
     <Spinner
