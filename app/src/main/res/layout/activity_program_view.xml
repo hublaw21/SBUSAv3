@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:theme="@style/AppTheme.Elements"
     tools:context=".ProgramViewActivity">
 
     <TextView
@@ -12,26 +13,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/textMedium"
-        android:textAlignment="center"
-        android:text="TextView1"/>
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/textViewProgramDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="TextView2"/>
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/buttonSaveProgram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textMedium"
+        android:background="@drawable/button_box_default"
+        android:text="Save" />
 
     <TextView
         android:id="@+id/technicalTotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/sideBorder"
-        android:background="@color/colorPrimaryDark"
-        android:textAlignment="textEnd"
-        android:text="Total Base Value: 0.00"
-        android:textColor="@color/white" />
+        android:textSize="@dimen/textMedium"
+        android:background="@drawable/dark_box_default_shape"
+        android:text="Total Base Value: 0.00"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -44,542 +48,436 @@
         <TableLayout
             android:id="@+id/programElementsTable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/mediumTable">
+            android:layout_height="wrap_content">
 
 
             <TableRow
                 android:id="@+id/elementRow00"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow00"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/white" />
-
-                <!--
-            <TextView
-                android:id="@+id/elementRow00elementID"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:layout_margin="@dimen/narrowTable"
-                android:text="button" />
-             -->
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow00elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow00elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow01"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow01"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add"
-                    android:textColor="@color/white" />
-
-                <!--
-            <TextView
-                android:id="@+id/elementRow01elementID"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:layout_margin="@dimen/narrowTable"
-                android:text="button" />
-                -->
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow01elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow01elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow02"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow02"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add" />
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow02elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow02elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow03"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow03"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
+                    android:background="@drawable/button_box_default"
                     android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow03elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow03elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow04"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow04"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add" />
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow04elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow04elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow05"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow05"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add" />
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow05elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow05elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow06"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow06"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
+                    android:background="@drawable/button_box_default"
                     android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow06elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow06elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow07"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow07"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
+                    android:background="@drawable/button_box_default"
                     android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow07elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow07elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow08"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow08"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
+                    android:background="@drawable/button_box_default"
                     android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow08elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow08elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow09"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow09"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add" />
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow09elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow09elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow10"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow10"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
+                    android:background="@drawable/button_box_default"
                     android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow10elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow10elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow11"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow11"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add" />
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow11elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow11elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/elementRow12"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/narrowTable"
-                android:background="@color/colorPrimaryDark">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonRow12"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="3"
-                    android:text="Add" />
+                    android:background="@drawable/button_box_default"
+                    android:text="Add"/>
 
                 <TextView
                     android:id="@+id/elementRow12elementName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
                     android:layout_weight="6"
-                    android:text="Required Element"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/dark_box_squared_shape"
+                    android:text="Required Element"/>
 
                 <TextView
                     android:id="@+id/elementRow12elementBaseValue"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/narrowTable"
+                    android:layout_marginLeft="0dp"
                     android:layout_weight="1.5"
+                    android:background="@drawable/dark_box_squared_shape"
                     android:text="0.00"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd"/>
             </TableRow>
 
         </TableLayout>

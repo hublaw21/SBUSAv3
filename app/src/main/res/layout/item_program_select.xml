@@ -4,14 +4,13 @@
     android:id="@+id/program_select_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@color/colorAccent">
+    android:layout_margin="8dp">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@color/colorAccent">
+        android:layout_margin="@dimen/narrowTable"
+        android:background="@drawable/button_box_default">
 
         <TableRow
             android:layout_width="match_parent"
@@ -22,7 +21,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/white"
                 android:textAlignment="center"
+                android:layout_marginTop="@dimen/narrowTable"
                 tools:text="Competition Name" />
         </TableRow>
 
@@ -33,22 +34,31 @@
             <TextView
                 android:id="@+id/program_select_discipline_item_text"
                 android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight=".3"
+                android:textColor="@color/white"
                 android:textAlignment="center"
+                android:layout_marginBottom="@dimen/narrowTable"
                 tools:text="Discipline" />
 
             <TextView
                 android:id="@+id/program_select_level_item_text"
                 android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight=".3"
+                android:textColor="@color/white"
                 android:textAlignment="center"
+                android:layout_marginBottom="@dimen/narrowTable"
                 tools:text="Level" />
 
             <TextView
                 android:id="@+id/program_select_segment_item_text"
                 android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight=".3"
+                android:textColor="@color/white"
                 android:textAlignment="center"
+                android:layout_marginBottom="@dimen/narrowTable"
                 tools:text="Segment" />
 
         </TableRow>

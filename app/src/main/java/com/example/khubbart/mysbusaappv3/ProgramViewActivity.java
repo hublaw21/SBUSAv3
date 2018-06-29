@@ -1,5 +1,6 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,7 @@ public class ProgramViewActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private DocumentReference programRef;
     private DocumentReference elementRef;
+    private String elementID;
 
     private static final String SHARED_PREF_NAME = "mysharedpref";
     private static final String ELEMENT_ID_KEY = "elementIdKey";
@@ -52,6 +54,7 @@ public class ProgramViewActivity extends AppCompatActivity {
     public int num;
 
     public Button elementButton[] = new Button[13];
+    public Button saveButton;
     public Button tempButton;
     public TextView mCompetitionNameTextView;
     public TextView mCompetitionDescriptionTextView;
@@ -62,10 +65,9 @@ public class ProgramViewActivity extends AppCompatActivity {
     public TextView[] mElementBaseValueTextView = new TextView[13];
     public String mCurrentUserID;
     public String mCurrentProgramID;
-    public String elementID;
     public String[] mElementCode = new String[13];
-    public String mElementName;
-    public String mElementBaseValue;
+    public String[] mElementName = new String[13];
+    public String[] mElementBaseValue = new String[13];
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
@@ -88,16 +90,13 @@ public class ProgramViewActivity extends AppCompatActivity {
         mCompetitionNameTextView = findViewById(R.id.textViewCompetition);
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
         mTechnicalTotalTextView = findViewById(R.id.technicalTotal);
+        saveButton = findViewById(R.id.buttonSaveProgram);
         requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
         final RelativeLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
 
         db = FirebaseFirestore.getInstance();
 
-        //elementButton[0] = findViewById(R.id.buttonRow00);
-        //elementButton[1] = findViewById(R.id.buttonRow01);
-
-
-        //Set view variables
+         //Set view variables
         for (int i = 0; i < 13; i++) {
             if (i < 10) {
                 tempRowID = "elementRow0" + i + "elementID";
@@ -132,128 +131,221 @@ public class ProgramViewActivity extends AppCompatActivity {
             // get the info
             mCurrentUserID = extrasBundle.getString("userID");
             mCurrentProgramID = extrasBundle.getString("programID");
-            //Toast.makeText(getApplicationContext(), mCurrentUserID + " " + mCurrentProgramID, Toast.LENGTH_LONG).show();
-            init();  // Call the initiation method here, to ensure the IDs have been pulled
+            //Might want to implement as a separate thread
+            init(mCurrentProgramID);  // Call the initiation method here, to ensure the IDs have been pulled
         }
 
-        //Try adding a button and have this implement in the onclick method to see if the values are making it back to the main thread.
         //Set up button listeners for changing elements
 
         elementButton[0].setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {changeButtonDialog(0);}
+            public void onClick(View v) {
+                changeButtonDialog(0);
+            }
         });
 
         elementButton[1].setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                num = 1;
-                changeButtonDialog(num);}
+            public void onClick(View v) {changeButtonDialog(1);
+            }
         });
 
         elementButton[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 2;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
         elementButton[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 3;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
         elementButton[4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 4;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
         elementButton[5].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 5;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
         elementButton[6].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 6;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
         elementButton[7].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 7;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
         elementButton[8].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 8;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
         elementButton[9].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 9;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
         elementButton[10].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 10;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
         elementButton[11].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 11;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
         elementButton[12].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = 12;
-                changeButtonDialog(num);}
+                changeButtonDialog(num);
+            }
         });
 
-        //Set popups for adding/changing elements
-        //Dialog Box for entering/changing element codes
-
-    }
-
-
-    // Initialize database
-    public void init() {
-        // Do I neeed these?
-        final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sp.edit();
-
-        //Get program basics
-        programRef = db.collection("Programs").document(mCurrentProgramID);
-        Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        //Setup Save Button
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(final DocumentSnapshot documentSnapshot) {
-                Program qProgram = documentSnapshot.toObject(Program.class);
-                program.add(qProgram);
-                mCompetitionNameTextView.setText(program.get(0).getCompetition());
-                String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
-                mCompetitionDescriptionTextView.setText(tempText);
-                String elementID = program.get(0).getElementsID();
-                editor.putString(ELEMENT_ID_KEY, elementID);
-                editor.apply();
-                getElements();
+            public void onClick(View v) {
+                //Save elements to firestore
+                UpdateElements();
             }
         });
     }
 
+
+    // Initialize database, pull program and elements
+    public void init(String iCurrentProgramID) {
+        // Do I neeed these?
+        final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sp.edit();
+        if (iCurrentProgramID == null) {
+            // Deal with new/null program
+        } else {
+            //Get program basics
+            programRef = db.collection("Programs").document(mCurrentProgramID);
+            Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(final DocumentSnapshot documentSnapshot) {
+                    Program qProgram = documentSnapshot.toObject(Program.class);
+                    program.add(qProgram);
+                    mCompetitionNameTextView.setText(program.get(0).getCompetition());
+                    String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
+                    mCompetitionDescriptionTextView.setText(tempText);
+                    elementID = program.get(0).getElementsID();
+                    elementRef = db.collection("Elements").document(elementID);
+
+                    elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                Elements qElements = documentSnapshot.toObject(Elements.class);
+                                elements.add(qElements);
+                                int eCount = 0;
+                                mElementCode[0] = elements.get(0).getE00();
+                                mElementCode[1] = elements.get(0).getE01();
+                                mElementCode[2] = elements.get(0).getE02();
+                                mElementCode[3] = elements.get(0).getE03();
+                                mElementCode[4] = elements.get(0).getE04();
+                                mElementCode[5] = elements.get(0).getE05();
+                                mElementCode[6] = elements.get(0).getE06();
+                                mElementCode[7] = elements.get(0).getE07();
+                                mElementCode[8] = elements.get(0).getE08();
+                                mElementCode[9] = elements.get(0).getE09();
+                                mElementCode[10] = elements.get(0).getE10();
+                                mElementCode[11] = elements.get(0).getE11();
+                                mElementCode[12] = elements.get(0).getE12();
+                                technicalTotal = 0;
+                                for (int i = 0; i < requiredElements; i++) {
+                                    if (mElementCode[i] != null) {
+                                        getElementInfo(mElementCode[i], i);
+                                  }
+                                }
+                                // Set the initial totalTechnical
+                                tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
+                                mTechnicalTotalTextView.setText(tempString);
+                                // Hide rows not used for the program
+                                for (i = requiredElements; i < 13; i++) {
+                                    if (i < 10) {
+                                        tempString = "elementRow0" + i;
+                                    } else {
+                                        tempString = "elementRow" + i;
+                                    }
+                                    int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+                                    TableRow tr = findViewById(resID);
+                                    tr.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    });
+                    // Why do I need to save this here?
+                    /*
+                    editor.putString(ELEMENT_ID_KEY, elementID);
+                    editor.apply();
+                    getElements();
+                    */
+                }
+            });
+        }
+    }
+
+    private void UpdateElements(){
+        //elementRef should still be good
+        elementRef.update("E00", mElementCode[0]);
+        elementRef.update("E01", mElementCode[1]);
+        elementRef.update("E02", mElementCode[2]);
+        elementRef.update("E03", mElementCode[3]);
+        elementRef.update("E04", mElementCode[4]);
+        elementRef.update("E05", mElementCode[5]);
+        elementRef.update("E06", mElementCode[6]);
+        elementRef.update("E07", mElementCode[7]);
+        elementRef.update("E08", mElementCode[8]);
+        elementRef.update("E09", mElementCode[9]);
+        elementRef.update("E10", mElementCode[10]);
+        elementRef.update("E11", mElementCode[11]);
+        elementRef.update("E12", mElementCode[12])
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(ProgramViewActivity.this, "Updated Successfully",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /*
     public void getElements() {
 
         final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
@@ -293,13 +385,15 @@ public class ProgramViewActivity extends AppCompatActivity {
                     technicalTotal = 0;
                     for (int i = 0; i < requiredElements; i++) {
                         if (mElementCode[i] != null) {
+                            getElementInfo(mElementCode[i], i);
+                            /*
                             // Get the index to look up the element
                             int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode[i]);
                             //Ultimately, need to make the elementID a button, or make the row a button
                             if (currentSOVIndex > 0) {
-                                mElementName = Arrays.asList(SOVName).get(currentSOVIndex);
-                                mElementBaseValue = Arrays.asList(SOVBase).get(currentSOVIndex);
-                                technicalTotal += Double.valueOf(mElementBaseValue);
+                                mElementName[i] = Arrays.asList(SOVName).get(currentSOVIndex);
+                                mElementBaseValue[i] = Arrays.asList(SOVBase).get(currentSOVIndex);
+                                technicalTotal += Double.valueOf(mElementBaseValue[i]);
                                 num = i;
                                 tElementCode = mElementCode[i];
                                 elementButton[i].setText(tElementCode);
@@ -307,21 +401,12 @@ public class ProgramViewActivity extends AppCompatActivity {
                                 //mElementIDTextView[i].setText(mElementCode[i]);
                                 mElementNameTextView[i].setText(Arrays.asList(SOVName).get(currentSOVIndex));
                                 mElementBaseValueTextView[i].setText(Arrays.asList(SOVBase).get(currentSOVIndex));
-                                elementInfoList.add(new ElementInfo(mElementCode[i], mElementName, mElementBaseValue));
+                                elementInfoList.add(new ElementInfo(mElementCode[i], mElementName[i], mElementBaseValue[i]));
                             } else {
                                 //Add info for unentered required elements
                             }
-
-                        } else {
-                            // Put buttons into blanks rows
-                            if (i < 10) {
-                                tempString = "elementRow0" + i;
-                            } else {
-                                tempString = "elementRow" + i;
-                            }
-                            int resID = getResources().getIdentifier(tempString, "id", getPackageName());
-                            TableRow tr = findViewById(resID);
-                            // put button in here
+                            */
+    /*
                         }
                     }
                     // Set the initial totalTechnical
@@ -342,7 +427,7 @@ public class ProgramViewActivity extends AppCompatActivity {
             }
         });
     }
-
+    */
 
     public void getSOV() {
         //Get SOV Table 2018 - Three matched arrays
@@ -356,24 +441,28 @@ public class ProgramViewActivity extends AppCompatActivity {
         int currentSOVIndex = Arrays.asList(SOVCode).indexOf(tElementCode);
         // Need to add error checker for code not found
         if (currentSOVIndex > 0) {
-            mElementName = Arrays.asList(SOVName).get(currentSOVIndex);
-            mElementBaseValue = Arrays.asList(SOVBase).get(currentSOVIndex);
-            //Need to work on updating tech total
-            technicalTotal += Double.valueOf(mElementBaseValue);
+            mElementName[gNum] = Arrays.asList(SOVName).get(currentSOVIndex);
+            if (mElementBaseValue[gNum] != null)
+                technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
+            mElementBaseValue[gNum] = Arrays.asList(SOVBase).get(currentSOVIndex);
+            technicalTotal += Double.valueOf(mElementBaseValue[gNum]); // Add in new value
             mElementCode[gNum] = tElementCode;
             changeButton(gNum, tElementCode);
-            mElementNameTextView[gNum].setText(mElementName);
-            mElementBaseValueTextView[gNum].setText(mElementBaseValue);
-            elementInfoList.add(new ElementInfo(mElementCode[gNum], mElementName, mElementBaseValue));
+            mElementNameTextView[gNum].setText(mElementName[gNum]);
+            mElementBaseValueTextView[gNum].setText(mElementBaseValue[gNum]);
+            elementInfoList.add(new ElementInfo(mElementCode[gNum], mElementName[gNum], mElementBaseValue[gNum]));
         } else {
             //Add info for unentered required elements
             mElementCode[gNum] = null;
             tElementCode = "Add";
             changeButton(gNum, tElementCode);
             mElementNameTextView[gNum].setText("Element code not found");
+            technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
             mElementBaseValueTextView[gNum].setText("0.00");
             //elementInfoList.add(new ElementInfo(mElementCode[num], mElementName, mElementBaseValue)); // Do I keep adding or replace, do I even need if I am putting in array?
         }
+        tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
+        mTechnicalTotalTextView.setText(tempString);
     }
 
     public void changeButton(int cNum, String tElementCode) {
@@ -435,7 +524,9 @@ public class ProgramViewActivity extends AppCompatActivity {
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {dialog.dismiss();}
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
         });
 
         // Display the custom alert dialog on interface
