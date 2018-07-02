@@ -5,34 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:theme="@style/AppTheme.Elements"
     tools:context=".MainActivity"
     >
 
     <Button
         android:id="@+id/buttonMain01"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Element Lookup"
-        android:layout_gravity="center"
-        android:theme="@style/Widget.AppCompat.Button"/>
+        android:background="@drawable/button_box_default"
+        android:textSize="@dimen/textLarge"
+        android:layout_margin="16dp"
+        android:text="Element Lookup"/>
 
     <Button
         android:id="@+id/buttonMainProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Profile"
-        android:layout_gravity="center"
-        android:theme="@style/Widget.AppCompat.Button"/>
+        android:background="@drawable/button_box_default"
+        android:textSize="@dimen/textLarge"
+        android:layout_margin="16dp"
+        android:text="Profile"/>
 
     <!--
     <Button
@@ -50,28 +43,20 @@
 
     <Button
         android:id="@+id/buttonMainProgramSelect"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Select a Program"
-        android:layout_gravity="center"
-        android:theme="@style/Widget.AppCompat.Button.Colored"/>
+        android:background="@drawable/button_box_default"
+        android:textSize="@dimen/textLarge"
+        android:layout_margin="16dp"
+        android:text="Select a Program"/>
 
     <Button
         android:id="@+id/buttonMainLogOut"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Logout"
-        android:layout_gravity="center"
-        android:theme="@style/Widget.AppCompat.Button.Colored"/>
+        android:background="@drawable/button_box_default"
+        android:textSize="@dimen/textLarge"
+        android:layout_margin="16dp"
+        android:text="Logout"/>
 
 </LinearLayout>

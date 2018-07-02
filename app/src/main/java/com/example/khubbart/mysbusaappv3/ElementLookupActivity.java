@@ -1,19 +1,14 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.content.res.Resources;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Arrays;
@@ -30,10 +25,13 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SelectDeathSpiralInOutSwitchFragment.OnChangeInOutSwitchInteractionListener,
         SelectDeathSpiralFrontBackSwitchFragment.OnChangeFrontBackSwitchInteractionListener,
         SelectPairSpinNameFragment.OnChangePairSpinNameRadioButtonInteractionListener,
-        SelectStepNameFragment.OnChangeStepNameRadioButtonInteractionListener,
-        AdapterView.OnItemSelectedListener {
+        SelectStepNameFragment.OnChangeStepNameRadioButtonInteractionListener
+        //, AdapterView.OnItemSelectedListener
+{
 
     public ToggleButton selectDisciplineToggleButton;
+    public ToggleButton elementTypeToggleButton[] = new ToggleButton[7];
+    public int elementTypePointer = 0; // Use to select element type, preset to jump
 
     public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
@@ -73,14 +71,19 @@ public class ElementLookupActivity extends AppCompatActivity implements
         //Set up Discipline toggle buttons
         selectDisciplineToggleButton = (ToggleButton) findViewById(R.id.toggleButtonDiscipline);
         selectDisciplineToggleButton.setChecked(true); // set the current state of a toggle button
-        selectDisciplineToggleButton.setOnClickListener(new View.OnClickListener(){
+        selectDisciplineToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(selectDisciplineToggleButton.isChecked()){
+            public void onClick(View view) {
+                if (selectDisciplineToggleButton.isChecked()) {
                     //Singles
                     //int resID = getResources().getIdentifier("pairsElementRow"tempString, "id", getPackageName());
                     TableRow tr = findViewById(R.id.pairsElementsRow);
                     tr.setVisibility(View.GONE);
+                    if (elementTypePointer > 2) { // Reset pointer if changing to singles with pairs element selected
+                        elementTypeToggleButton[elementTypePointer].setChecked(false);
+                        elementTypePointer = 0;
+                        elementTypeToggleButton[elementTypePointer].setChecked(true);
+                    }
                 } else {
                     //Pairs
                     TableRow tr = findViewById(R.id.pairsElementsRow);
@@ -90,8 +93,74 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
         });
 
-        //NEED TO WRITE NEW LOGIC for toggle buttons instead of spinner.
+        // Set up Element Type toggle buttons - in array
+        elementTypeToggleButton[0] = findViewById(R.id.toggleButtonJump);
+        elementTypeToggleButton[1] = findViewById(R.id.toggleButtonSpin);
+        elementTypeToggleButton[2] = findViewById(R.id.toggleButtonSteps);
+        elementTypeToggleButton[3] = findViewById(R.id.toggleButtonLift);
+        elementTypeToggleButton[4] = findViewById(R.id.toggleButtonTwist);
+        elementTypeToggleButton[5] = findViewById(R.id.toggleButtonThrow);
+        elementTypeToggleButton[6] = findViewById(R.id.toggleButtonSpiral);
 
+        elementTypeToggleButton[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 0;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+        elementTypeToggleButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 1;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+        elementTypeToggleButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 2;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+        elementTypeToggleButton[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 3;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+        elementTypeToggleButton[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 4;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+        elementTypeToggleButton[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 5;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+        elementTypeToggleButton[6].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                elementTypePointer = 6;
+                ElementTypeChange(elementTypePointer);
+            }
+        });
+
+
+        //NEED TO WRITE NEW LOGIC for toggle buttons instead of spinner.
+        /*
         //Set up spinner for selecting element type
         Spinner spinElementTypeSelect = findViewById(R.id.spinnerElementTypeSelect);
         spinElementTypeSelect.setOnItemSelectedListener(this);
@@ -99,6 +168,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 this, R.array.elementTypes, R.layout.my_spinner_style);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinElementTypeSelect.setAdapter(adapter);
+        */
 
         //Get SOV Table 2018 - Three matched arrays
         Resources resources = getResources();
@@ -120,21 +190,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
             }
         }
     }
-
-    //Top Button Row - Discipline
-    // Discipline Toggles (x2) Listener
-    /*
-    @Override
-    public void onChangeSinglesSwitchInteraction(boolean isSingles) {
-        if (isSingles) {
-            //Turn off pairs button
-            elementCodeParts[0] = "F";
-        } else {
-            elementCodeParts[0] = "";
-        }
-        updateElement();
-    }
-    */
 
     //Trading out fragments
     private void FragmentChange(Integer currentElementTypeIndex) {
@@ -162,7 +217,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public void onChangeJumpRadioButtonInteraction(String tempCode) {
         elementCodeParts[3] = tempCode;
         // Probably add an if to check for throw and then add 'Th'
-        if(currentElementTypeIndex == 6) elementCodeParts[3] += "Th";
+        if (currentElementTypeIndex == 5) elementCodeParts[3] += "Th";
         updateElement();
     }
 
@@ -170,9 +225,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     @Override
     public void onChangeRevolutionsRadioButtonInteraction(String tempCode) {
         elementCodeParts[2] = tempCode;
-        if(currentElementTypeIndex == 5) elementCodeParts[2] += "Tw";
-        updateElement();
-
+        if (currentElementTypeIndex == 4) elementCodeParts[2] += "Tw";
         updateElement();
     }
 
@@ -186,7 +239,8 @@ public class ElementLookupActivity extends AppCompatActivity implements
     // Get Level
     @Override
     public void onChangeLevelRadioButtonInteraction(String tempCode) {
-        if (elementCodeParts[1] != "5" && currentElementTypeIndex == 4) elementCodeParts[2] = "Li"; //In case Group 5 name is checked
+        if (elementCodeParts[1] != "5" && currentElementTypeIndex == 4)
+            elementCodeParts[2] = "Li"; //In case Group 5 name is checked
         elementCodeParts[3] = tempCode;
         updateElement();
     }
@@ -212,11 +266,13 @@ public class ElementLookupActivity extends AppCompatActivity implements
         }
         updateElement();
     }
+
     // Get Group
     @Override
     public void onChangeGroupRadioButtonInteraction(String tempCode) {
         elementCodeParts[1] = tempCode;
-        if (elementCodeParts[1] != "5") elementCodeParts[2] = "Li"; //In case Group 5 name is checked
+        if (elementCodeParts[1] != "5")
+            elementCodeParts[2] = "Li"; //In case Group 5 name is checked
         updateElement();
     }
 
@@ -237,6 +293,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         }
         updateElement();
     }
+
     // Front Back Switch Listener
     @Override
     public void onChangeFrontBackSwitchInteraction(boolean isBack) {
@@ -252,13 +309,14 @@ public class ElementLookupActivity extends AppCompatActivity implements
     @Override
     public void onChangePairSpinNameRadioButtonInteraction(String tempCode) {
         elementCodeParts[2] = tempCode;
-        if(elementCodeParts[2] == "PiF")elementCodeParts[3] = "";
+        if (elementCodeParts[2] == "PiF") elementCodeParts[3] = "";
         updateElement();
     }
+
     // Get Step Name
     @Override
     public void onChangeStepNameRadioButtonInteraction(String tempCode) {
-        if(elementCodeParts[2] == "StSq") elementCodeParts[3]="";
+        if (elementCodeParts[2] == "StSq") elementCodeParts[3] = "";
         elementCodeParts[2] = tempCode;
         updateElement();
     }
@@ -294,6 +352,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     }
 
     //Spinner Action
+    /*
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //Spinner action
@@ -409,11 +468,126 @@ public class ElementLookupActivity extends AppCompatActivity implements
             FragmentChange(currentElementTypeIndex);
         }
     }
+    */
 
+    //Element Toggles Change Action
+    //@Override
+    public void ElementTypeChange(int elementTypePointer) {
+        //Change toggle buttons
+        elementTypeToggleButton[currentElementTypeIndex].setChecked(false); // Turn off previous toggle
+        elementTypeToggleButton[elementTypePointer].setChecked(true); // Turn on new toggle, just inc case re-clciked the same button
+        currentElementTypeIndex = elementTypePointer;
+
+        //prepare fragments and allow for default to avoid crashes
+        Arrays.fill(fragment, new EmptyFragment()); // set all cells to empty
+        switch (currentElementTypeIndex) {
+            case 0:
+                // Jumps
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "";
+                elementCodeParts[2] = "1";
+                elementCodeParts[3] = "T";
+                fragment[0] = new EmptyFragmentLeft();
+                fragment[1] = new SelectJumpFragment();
+                fragment[2] = new SelectRevolutionsFragment();
+                fragment[3] = new EmptyFragmentRight();
+                break;
+
+            case 1:
+                // Spins
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "";
+                elementCodeParts[2] = "USp";
+                elementCodeParts[3] = "B";
+                fragment[0] = new EmptyFragment();
+                fragment[1] = new SwithContainerFragment();
+                fragment[2] = new SelectSpinNameFragment();
+                fragment[3] = new SelectLevelFragment();
+                break;
+
+            case 2:
+                //Footwork
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "";
+                elementCodeParts[2] = "StSq";
+                elementCodeParts[3] = "B";
+                fragment[0] = new EmptyFragment();
+                fragment[1] = new EmptyFragment();
+                fragment[2] = new SelectStepNameFragment();
+                fragment[3] = new SelectLevelFragment();
+                break;
+
+            case 3:
+                // Lifts
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "1";
+                elementCodeParts[2] = "Li";
+                elementCodeParts[3] = "B";
+                fragment[0] = new EmptyFragmentLeft();
+                fragment[1] = new SelectGroupFragment();
+                fragment[2] = new SelectLiftNameFragment();
+                fragment[3] = new SelectLevelFragment();
+                break;
+
+            case 4:
+                // Twists
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "";
+                elementCodeParts[2] = "1Tw";
+                elementCodeParts[3] = "B";
+                fragment[0] = new EmptyFragmentLeft();
+                fragment[1] = new EmptyFragmentRight();
+                fragment[2] = new SelectRevolutionsFragment();
+                fragment[3] = new SelectLevelFragment();
+                break;
+
+            case 5:
+                // Throws
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "";
+                elementCodeParts[2] = "1";
+                elementCodeParts[3] = "T";
+                fragment[0] = new EmptyFragmentLeft();
+                fragment[1] = new SelectJumpFragment();
+                fragment[2] = new SelectRevolutionsFragment();
+                fragment[3] = new EmptyFragmentRight();
+                break;
+
+            case 6:
+                // Death Spirals
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "F";
+                elementCodeParts[2] = "iDs";
+                elementCodeParts[3] = "B";
+                fragment[0] = new EmptyFragmentLeft();
+                fragment[1] = new SelectDeathSpiralFrontBackSwitchFragment();
+                fragment[2] = new SelectDeathSpiralInOutSwitchFragment();
+                fragment[3] = new SelectLevelFragment();
+                break;
+
+            case 7:
+                // Pairs Spins - news ro rewrite for toggles
+                elementCodeParts[0] = "";
+                elementCodeParts[1] = "";
+                elementCodeParts[2] = "PSp";
+                elementCodeParts[3] = "B";
+                fragment[0] = new EmptyFragment();
+                fragment[1] = new EmptyFragment();
+                fragment[2] = new SelectPairSpinNameFragment();
+                fragment[3] = new SelectLevelFragment();
+
+                break;
+
+            default:
+                // add the rest as coded
+        }
+        FragmentChange(currentElementTypeIndex);
+    }
+
+    /*
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
         //Spinner action - no selection
     }
-
-    ;
+    */
 }

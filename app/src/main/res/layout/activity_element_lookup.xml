@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:theme="@style/AppTheme.Elements"
     tools:context="com.example.khubbart.mysbusaappv3.ElementLookupActivity">
+    <!--
+    <Spinner
+        android:id="@+id/spinnerElementTypeSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:background="@color/colorPrimary"
+        android:dropDownSelector="@color/colorPrimary"
+        android:spinnerMode="dialog" />
+     -->
+
+    <fragment
+        android:id="@+id/fragmentElementDetail"
+        android:name="com.example.khubbart.mysbusaappv3.ElementDetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TableRow>
-        <TextView
-            android:id="@+id/textViewDisciplineTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:layout_weight="5"
-            android:textAlignment="center"
-            android:text="Select Discipline" />
-
-        <ToggleButton
+            <!-- Dummy text views on sides to achieve 50% coverage -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2.5"
+                android:layout_height="wrap_content"/>
+         <ToggleButton
                 android:id="@+id/toggleButtonDiscipline"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
-                android:textOn="Singles"
+            android:background="@drawable/button_box_default"
+            android:textOn="Singles"
                 android:textOff="Pairs"
-                android:checked="true"/>
+            android:checked="true"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2.5"
+                android:layout_height="wrap_content"/>
     </TableRow>
         <TableRow>
 
@@ -38,7 +55,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
                 android:textOn="Jump"
                 android:textOff="Jump"
                 android:checked="true"/>
@@ -48,7 +66,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
                 android:textOn="Spin"
                 android:textOff="Spin"
                 android:checked="false"/>
@@ -58,21 +77,24 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
-            android:textOn="Steps"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Steps"
             android:textOff="Steps"
             android:checked="false"/>
         </TableRow>
 
         <TableRow
-            android:id="@+id/pairsElementsRow">
+            android:id="@+id/pairsElementsRow"
+            android:visibility="gone">
 
             <ToggleButton
                 android:id="@+id/toggleButtonLift"
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
                 android:textOn="Lift"
                 android:textOff="Lift"
                 android:checked="false"/>
@@ -82,7 +104,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
                 android:textOn="Twist"
                 android:textOff="Twist"
                 android:checked="false"/>
@@ -92,7 +115,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
                 android:textOn="Throw"
                 android:textOff="Throw"
                 android:checked="false"/>
@@ -102,30 +126,14 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/narrowTable"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
                 android:textOn="Spiral"
                 android:textOff="Spiral"
                 android:checked="false"/>
         </TableRow>
 
     </TableLayout>
-
-
-    <Spinner
-        android:id="@+id/spinnerElementTypeSelect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:background="@color/colorPrimary"
-        android:dropDownSelector="@color/colorPrimary"
-        android:spinnerMode="dialog" />
-
-    <fragment
-        android:id="@+id/fragmentElementDetail"
-        android:name="com.example.khubbart.mysbusaappv3.ElementDetailFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
