@@ -32,6 +32,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public ToggleButton selectDisciplineToggleButton;
     public ToggleButton elementTypeToggleButton[] = new ToggleButton[7];
     public int elementTypePointer = 0; // Use to select element type, preset to jump
+    public TableRow tr[] = new TableRow[11];
 
     public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
@@ -77,8 +78,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 if (selectDisciplineToggleButton.isChecked()) {
                     //Singles
                     //int resID = getResources().getIdentifier("pairsElementRow"tempString, "id", getPackageName());
-                    TableRow tr = findViewById(R.id.pairsElementsRow);
-                    tr.setVisibility(View.GONE);
+                    tr[0].setVisibility(View.GONE);
                     if (elementTypePointer > 2) { // Reset pointer if changing to singles with pairs element selected
                         elementTypeToggleButton[elementTypePointer].setChecked(false);
                         elementTypePointer = 0;
@@ -86,12 +86,24 @@ public class ElementLookupActivity extends AppCompatActivity implements
                     }
                 } else {
                     //Pairs
-                    TableRow tr = findViewById(R.id.pairsElementsRow);
-                    tr.setVisibility(View.VISIBLE);
+                    tr[0].setVisibility(View.VISIBLE);
                 }
             }
 
         });
+
+        //Set button rows
+        tr[0] = findViewById(R.id.pairsElementsRow);
+        tr[1] = findViewById(R.id.jumpNamesRow01);
+        tr[2] = findViewById(R.id.jumpNamesRow02);
+        tr[3] = findViewById(R.id.revsCountRow);
+        tr[4] = findViewById(R.id.spinNamesRow01);
+        tr[5] = findViewById(R.id.spinNamesRow02);
+        tr[6] = findViewById(R.id.levelCountRow);
+        tr[7] = findViewById(R.id.spinEntryRow);
+        tr[8] = findViewById(R.id.groupNameRow);
+        tr[9] = findViewById(R.id.group5LiftNameRow);
+        tr[10] = findViewById(R.id.spiralTypeRow);
 
         // Set up Element Type toggle buttons - in array
         elementTypeToggleButton[0] = findViewById(R.id.toggleButtonJump);
@@ -106,6 +118,16 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 0;
+                tr[1].setVisibility(View.VISIBLE);
+                tr[2].setVisibility(View.VISIBLE);
+                tr[3].setVisibility(View.VISIBLE);
+                tr[4].setVisibility(View.GONE);
+                tr[5].setVisibility(View.GONE);
+                tr[6].setVisibility(View.GONE);
+                tr[7].setVisibility(View.GONE);
+                tr[8].setVisibility(View.GONE);
+                tr[9].setVisibility(View.GONE);
+                tr[10].setVisibility(View.GONE);
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -114,6 +136,16 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 1;
+                tr[1].setVisibility(View.GONE);
+                tr[2].setVisibility(View.GONE);
+                tr[3].setVisibility(View.GONE);
+                tr[4].setVisibility(View.VISIBLE);
+                tr[5].setVisibility(View.VISIBLE);
+                tr[6].setVisibility(View.VISIBLE);
+                tr[7].setVisibility(View.VISIBLE);
+                tr[8].setVisibility(View.GONE);
+                tr[9].setVisibility(View.GONE);
+                tr[10].setVisibility(View.GONE);
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -122,6 +154,16 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 2;
+                tr[1].setVisibility(View.GONE);
+                tr[2].setVisibility(View.GONE);
+                tr[3].setVisibility(View.GONE);
+                tr[4].setVisibility(View.GONE);
+                tr[5].setVisibility(View.GONE);
+                tr[6].setVisibility(View.VISIBLE);
+                tr[7].setVisibility(View.GONE);
+                tr[8].setVisibility(View.VISIBLE);
+                tr[9].setVisibility(View.VISIBLE);
+                tr[10].setVisibility(View.GONE);
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -154,6 +196,17 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 6;
+                tr[1].setVisibility(View.GONE);
+                tr[2].setVisibility(View.GONE);
+                tr[3].setVisibility(View.GONE);
+                tr[4].setVisibility(View.GONE);
+                tr[5].setVisibility(View.GONE);
+                tr[6].setVisibility(View.VISIBLE);
+                tr[7].setVisibility(View.GONE);
+                tr[8].setVisibility(View.GONE);
+                tr[9].setVisibility(View.GONE);
+                tr[10].setVisibility(View.VISIBLE);
+
                 ElementTypeChange(elementTypePointer);
             }
         });

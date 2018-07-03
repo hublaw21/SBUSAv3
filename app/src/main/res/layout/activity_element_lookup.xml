@@ -133,6 +133,458 @@
                 android:checked="false"/>
         </TableRow>
 
+        <TableRow
+            android:id="@+id/revsCountRow"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSingle"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Single"
+                android:textOff="Single"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonDouble"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Double"
+                android:textOff="Double"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonTriple"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Triple"
+                android:textOff="Triple"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonQuad"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Quad"
+                android:textOff="Quad"
+                android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/spinEntryRow"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSpinEntry"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Flying Entry"
+                android:textOff="Skating Entry"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonFootChange"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Foot Change"
+                android:textOff="No Foot Change"
+                android:checked="false"/>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/jumpNamesRow01"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonToe"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Toe"
+                android:textOff="Toe"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSalchow"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Salchow"
+                android:textOff="Salchow"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonFlip"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Flip"
+                android:textOff="Flip"
+                android:checked="false"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/jumpNamesRow02"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLoop"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Loop"
+                android:textOff="Loop"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLutz"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Lutz"
+                android:textOff="Lutz"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonAxel"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Axel"
+                android:textOff="Axel"
+                android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/spinNamesRow01"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonCamel"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Camel"
+                android:textOff="Camel"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLayback"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Layback"
+                android:textOff="Layback"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSit"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Sit"
+                android:textOff="Sit"
+                android:checked="false"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/spinNamesRow02"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonUpright"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Upright"
+                android:textOff="Upright"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonCombo"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Combo"
+                android:textOff="Combo"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonPairsSpin"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Pairs Spin"
+                android:textOff="Pairs Spin"
+                android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/stepNameRow"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonStepName"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Step Sequence"
+                android:textOff="Choreo Sequence"
+                android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/groupNameRow"
+            android:visibility="gone">
+            <ToggleButton
+                android:id="@+id/toggleButtonGroup1"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Group 1"
+                android:textOff="Group 1"
+                android:checked="false"/>
+
+
+            <ToggleButton
+                android:id="@+id/toggleButtonGroup2"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Group 2"
+                android:textOff="Group 2"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonGroup3"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Group 3"
+                android:textOff="Group 3"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonGroup4"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Group 4"
+                android:textOff="Group 4"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonGroup5"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Group 5"
+                android:textOff="Group 5"
+                android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/group5LiftNameRow"
+            android:visibility="gone">
+            <ToggleButton
+                android:id="@+id/toggleButtonBackwardsLasso"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Backwards Lasso"
+                android:textOff="Backwards Lasso"
+                android:checked="false"/>
+
+
+            <ToggleButton
+                android:id="@+id/toggleButtonReverseLasso"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Reverse Lasso"
+                android:textOff="Reverse Lasso"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonStepInLasso"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Step In Lasso"
+                android:textOff="Step In Lasso"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonToeLift"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Toe Lift"
+                android:textOff="Toe Lift"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonAxelLift"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Axel Lift"
+                android:textOff="Axel Lift"
+                android:checked="false"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/spiralTypeRow"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:id="@+id/toggleButtonSpiralDirection"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Backward"
+                android:textOff="Forward"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonEdge"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Outside"
+                android:textOff="Inside"
+                android:checked="false"/>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/levelCountRow"
+            android:visibility="gone">
+            <ToggleButton
+                android:id="@+id/toggleButtonLevelB"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Level B"
+                android:textOff="Level B"
+                android:checked="false"/>
+
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLevel1"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Level 1"
+                android:textOff="Level 1"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLevel2"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Level 2"
+                android:textOff="Level 2"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLevel3"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Level 3"
+                android:textOff="Level 3"
+                android:checked="false"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonLevel4"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_button_box_default"
+                android:textColor="@color/white"
+                android:textOn="Level 4"
+                android:textOff="Level 4"
+                android:checked="false"/>
+        </TableRow>
+
+
     </TableLayout>
 
     <LinearLayout
