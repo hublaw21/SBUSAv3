@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define which rows to show for each element type in lookup -->
+    <string-array name="elementPickRowMap">
+        <!-- Binary for each row 0-10, row 11 is singles/pairs.  Whe read row = position 0, which is jump pointer -->
+        <!-- Order of elements jump, spins, steps, lifts, twists, throw, spirals -->
+        <item>"11100000000</item>
+        <item>"00011100001</item>
+        <item>"00000010001</item>
+        <item>"00000001001</item>
+        <item>"10000000001</item>
+        <item>"11100000000</item>
+        <item>"00000000011</item>
+    </string-array>
+
+</resources>

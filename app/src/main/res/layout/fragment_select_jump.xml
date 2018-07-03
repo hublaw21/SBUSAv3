@@ -26,6 +26,10 @@
         android:textColor="@color/white"
         android:buttonTint="@color/white"
         android:gravity="start">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButtonJump1"
@@ -33,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
             android:gravity="center_vertical"
+            android:background="@drawable/toggle_button_box_default"
             android:textColor="@color/white"
             android:buttonTint="@color/white"
             android:checked="true"
@@ -44,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
             android:gravity="center_vertical"
+            android:background="@drawable/toggle_button_box_default"
             android:textColor="@color/white"
             android:buttonTint="@color/white"
             android:text="@string/jump_Salchow" />
@@ -87,6 +93,7 @@
             android:textColor="@color/white"
             android:buttonTint="@color/white"
             android:text="@string/jump_Axel" />
+        </LinearLayout>
 
     </RadioGroup>
 

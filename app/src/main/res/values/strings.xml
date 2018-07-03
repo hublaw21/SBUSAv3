@@ -47,6 +47,10 @@
         <item>Pairs Spins</item>
         <item>Death Spirals</item>
     </string-array>
+
+    <!-- Testing for suncing button names -->
+    <string name="toggle_Button_Jump">toggle_Button_Jump</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_selected">Item Selected</string>

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public ToggleButton selectDisciplineToggleButton;
     public ToggleButton elementTypeToggleButton[] = new ToggleButton[7];
     public int elementTypePointer = 0; // Use to select element type, preset to jump
-    public TableRow tr[] = new TableRow[11];
+    public TableRow tr[] = new TableRow[12];
 
     public TextView textViewItemSelected;
     public TextView textViewElementDetailName;
@@ -48,7 +49,13 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
+    public String[] tElementRowMap;
+    public char[] rowMap = new char[11];
+    public Boolean[][] elementRowMap = new Boolean[7][11];
     public Integer i = 0;
+    public int j;
+    public int tempNum;
+    public String tempString;
     public Integer resID;
     public String textViewID;
     public String containerID;
@@ -69,41 +76,39 @@ public class ElementLookupActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
 
-        //Set up Discipline toggle buttons
-        selectDisciplineToggleButton = (ToggleButton) findViewById(R.id.toggleButtonDiscipline);
-        selectDisciplineToggleButton.setChecked(true); // set the current state of a toggle button
-        selectDisciplineToggleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (selectDisciplineToggleButton.isChecked()) {
-                    //Singles
-                    //int resID = getResources().getIdentifier("pairsElementRow"tempString, "id", getPackageName());
-                    tr[0].setVisibility(View.GONE);
-                    if (elementTypePointer > 2) { // Reset pointer if changing to singles with pairs element selected
-                        elementTypeToggleButton[elementTypePointer].setChecked(false);
-                        elementTypePointer = 0;
-                        elementTypeToggleButton[elementTypePointer].setChecked(true);
-                    }
-                } else {
-                    //Pairs
-                    tr[0].setVisibility(View.VISIBLE);
-                }
-            }
-
-        });
-
         //Set button rows
-        tr[0] = findViewById(R.id.pairsElementsRow);
+        tr[0] = findViewById(R.id.revsCountRow);
         tr[1] = findViewById(R.id.jumpNamesRow01);
         tr[2] = findViewById(R.id.jumpNamesRow02);
-        tr[3] = findViewById(R.id.revsCountRow);
+        tr[3] = findViewById(R.id.spinEntryRow);
         tr[4] = findViewById(R.id.spinNamesRow01);
         tr[5] = findViewById(R.id.spinNamesRow02);
-        tr[6] = findViewById(R.id.levelCountRow);
-        tr[7] = findViewById(R.id.spinEntryRow);
-        tr[8] = findViewById(R.id.groupNameRow);
-        tr[9] = findViewById(R.id.group5LiftNameRow);
-        tr[10] = findViewById(R.id.spiralTypeRow);
+        tr[6] = findViewById(R.id.stepNameRow);
+        tr[7] = findViewById(R.id.groupNameRow);
+        tr[8] = findViewById(R.id.group5LiftNameRow);
+        tr[9] = findViewById(R.id.spiralTypeRow);
+        tr[10] = findViewById(R.id.levelCountRow);
+        tr[11] = findViewById(R.id.pairsElementsRow);
+
+        //Get SOV Table 2018 - Three matched arrays
+        Resources resources = getResources();
+        SOVCode = resources.getStringArray(R.array.SOV_Code);
+        SOVName = resources.getStringArray(R.array.SOV_Name);
+        SOVBase = resources.getStringArray(R.array.SOV_Base);
+        tElementRowMap = resources.getStringArray(R.array.elementPickRowMap);
+        //Convert element pick row map
+        for(i=0; i<7; ++i){
+            rowMap = tElementRowMap[i].toCharArray();
+            for(j=0; j<11; ++j){
+                tempString = String.valueOf(rowMap[j]);
+                if(tempString.equals("1")){
+                    elementRowMap[i][j] = true;
+                } else {
+                    elementRowMap[i][j] = false;
+                }
+            }
+        }
+
 
         // Set up Element Type toggle buttons - in array
         elementTypeToggleButton[0] = findViewById(R.id.toggleButtonJump);
@@ -114,20 +119,36 @@ public class ElementLookupActivity extends AppCompatActivity implements
         elementTypeToggleButton[5] = findViewById(R.id.toggleButtonThrow);
         elementTypeToggleButton[6] = findViewById(R.id.toggleButtonSpiral);
 
+        //Set up Discipline toggle buttons
+        selectDisciplineToggleButton = (ToggleButton) findViewById(R.id.toggleButtonDiscipline);
+        selectDisciplineToggleButton.setChecked(true); // set the current state of a toggle button
+        selectDisciplineToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempNum = view.getId();
+                Toast.makeText(getApplicationContext(), "resID: " + tempNum + "  buttonID: " + selectDisciplineToggleButton.getId(), Toast.LENGTH_LONG).show();
+                if (selectDisciplineToggleButton.isChecked()) {
+                    //Singles
+                    //int resID = getResources().getIdentifier("pairsElementRow"tempString, "id", getPackageName());
+                    tr[11].setVisibility(View.GONE);
+                    if (elementTypePointer > 2) { // Reset pointer if changing to singles with pairs element selected
+                        elementTypeToggleButton[elementTypePointer].setChecked(false);
+                        elementTypePointer = 0;
+                        elementTypeToggleButton[elementTypePointer].setChecked(true);
+                    }
+                } else {
+                    //Pairs
+                    tr[11].setVisibility(View.VISIBLE);
+                }
+            }
+
+        });
+
+
         elementTypeToggleButton[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 elementTypePointer = 0;
-                tr[1].setVisibility(View.VISIBLE);
-                tr[2].setVisibility(View.VISIBLE);
-                tr[3].setVisibility(View.VISIBLE);
-                tr[4].setVisibility(View.GONE);
-                tr[5].setVisibility(View.GONE);
-                tr[6].setVisibility(View.GONE);
-                tr[7].setVisibility(View.GONE);
-                tr[8].setVisibility(View.GONE);
-                tr[9].setVisibility(View.GONE);
-                tr[10].setVisibility(View.GONE);
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -136,16 +157,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 1;
-                tr[1].setVisibility(View.GONE);
-                tr[2].setVisibility(View.GONE);
-                tr[3].setVisibility(View.GONE);
-                tr[4].setVisibility(View.VISIBLE);
-                tr[5].setVisibility(View.VISIBLE);
-                tr[6].setVisibility(View.VISIBLE);
-                tr[7].setVisibility(View.VISIBLE);
-                tr[8].setVisibility(View.GONE);
-                tr[9].setVisibility(View.GONE);
-                tr[10].setVisibility(View.GONE);
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -154,16 +165,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 2;
-                tr[1].setVisibility(View.GONE);
-                tr[2].setVisibility(View.GONE);
-                tr[3].setVisibility(View.GONE);
-                tr[4].setVisibility(View.GONE);
-                tr[5].setVisibility(View.GONE);
-                tr[6].setVisibility(View.VISIBLE);
-                tr[7].setVisibility(View.GONE);
-                tr[8].setVisibility(View.VISIBLE);
-                tr[9].setVisibility(View.VISIBLE);
-                tr[10].setVisibility(View.GONE);
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -196,17 +197,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 elementTypePointer = 6;
-                tr[1].setVisibility(View.GONE);
-                tr[2].setVisibility(View.GONE);
-                tr[3].setVisibility(View.GONE);
-                tr[4].setVisibility(View.GONE);
-                tr[5].setVisibility(View.GONE);
-                tr[6].setVisibility(View.VISIBLE);
-                tr[7].setVisibility(View.GONE);
-                tr[8].setVisibility(View.GONE);
-                tr[9].setVisibility(View.GONE);
-                tr[10].setVisibility(View.VISIBLE);
-
                 ElementTypeChange(elementTypePointer);
             }
         });
@@ -223,11 +213,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
         spinElementTypeSelect.setAdapter(adapter);
         */
 
-        //Get SOV Table 2018 - Three matched arrays
-        Resources resources = getResources();
-        SOVCode = resources.getStringArray(R.array.SOV_Code);
-        SOVName = resources.getStringArray(R.array.SOV_Name);
-        SOVBase = resources.getStringArray(R.array.SOV_Base);
 
         // Set up textviews for element detail fragment
         //textViewItemSelected = findViewById(R.id.textViewSelected);
@@ -243,6 +228,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
             }
         }
     }
+
 
     //Trading out fragments
     private void FragmentChange(Integer currentElementTypeIndex) {
@@ -376,6 +362,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
 
     public void updateElement() {
+
         elementCode = elementCodeParts[0] + elementCodeParts[1] + elementCodeParts[2] + elementCodeParts[3];
         currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
         // Need to add error checker for code not found
@@ -403,6 +390,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
             }
         }
     }
+
 
     //Spinner Action
     /*
@@ -528,8 +516,18 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public void ElementTypeChange(int elementTypePointer) {
         //Change toggle buttons
         elementTypeToggleButton[currentElementTypeIndex].setChecked(false); // Turn off previous toggle
-        elementTypeToggleButton[elementTypePointer].setChecked(true); // Turn on new toggle, just inc case re-clciked the same button
+        elementTypeToggleButton[elementTypePointer].setChecked(true); // Turn on new toggle, just inc case re-clicked the same button
         currentElementTypeIndex = elementTypePointer;
+        if(elementTypePointer < 3) tr[11].setVisibility(View.GONE);  //Close pairs elements, if necessary
+        //set-reset rows
+        for (j=0; j<11; ++j){
+            if(elementRowMap[elementTypePointer][j]) {
+                tr[j].setVisibility(View.VISIBLE);
+            } else {
+                tr[j].setVisibility(View.GONE);
+            }
+        }
+
 
         //prepare fragments and allow for default to avoid crashes
         Arrays.fill(fragment, new EmptyFragment()); // set all cells to empty
@@ -635,6 +633,8 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 // add the rest as coded
         }
         FragmentChange(currentElementTypeIndex);
+
+
     }
 
     /*
