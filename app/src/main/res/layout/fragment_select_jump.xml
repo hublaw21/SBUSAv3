@@ -1,100 +1,108 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".SelectJumpFragment">
+-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".SelectJumpFragment">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:gravity="center"
-        android:text="Jumps"
-        android:textColor="@color/white" />
 
     <RadioGroup
         android:id="@+id/radioGroupJumps"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/narrowTable"
-        android:checkedButton="@+id/radioButtonJump1"
-        android:textColor="@color/white"
-        android:buttonTint="@color/white"
-        android:gravity="start">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:background="@drawable/button_box_default"
+        android:orientation="horizontal">
+
 
         <RadioButton
             android:id="@+id/radioButtonJump1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
-            android:gravity="center_vertical"
+            android:layout_weight="1"
             android:background="@drawable/toggle_button_box_default"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
+            android:button="@drawable/toggle_button_box_default"
             android:checked="true"
-            android:text="@string/jump_Toe" />
+            android:gravity="center_vertical"
+            android:text="Toe"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonJump2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
-            android:gravity="center_vertical"
+            android:layout_weight="1"
             android:background="@drawable/toggle_button_box_default"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/jump_Salchow" />
+            android:button="@drawable/toggle_button_box_default"
+            android:gravity="center_vertical"
+            android:text="Salchow"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonJump3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/jump_Flip" />
+            android:text="Flip"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonJump4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/jump_Loop" />
+            android:text="@string/jump_Loop"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonJump5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/jump_Lutz" />
+            android:text="@string/jump_Lutz"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonJump6"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/jump_Axel" />
-        </LinearLayout>
-
+            android:text="@string/jump_Axel"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
     </RadioGroup>
 
-</LinearLayout>
+</TableLayout>

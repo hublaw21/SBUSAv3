@@ -2,81 +2,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
+    android:background="@drawable/button_box_default"
+    android:orientation="horizontal"
     tools:context=".SelectGroupFragment">
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:gravity="center"
-        android:text="Group"
-        android:textColor="@color/white" />
 
     <RadioGroup
         android:id="@+id/radioGroupGroups"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/narrowTable"
-        android:checkedButton="@+id/radioButtonGroup1"
-        android:textColor="@color/white"
-        android:buttonTint="@color/white"
-        android:gravity="start">
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButtonGroup1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
-            android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:checked="true"
-            android:text="@string/group_1" />
+            android:gravity="center_vertical"
+            android:text="Group 1"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonGroup2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/group_2" />
+            android:text="Group 2"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonGroup3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/group_3" />
+            android:text="Group 3"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonGroup4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/group_4" />
+            android:text="Group 4"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonGroup5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:text="@string/group_5"/>
+            android:text="Group 5"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
     </RadioGroup>
 

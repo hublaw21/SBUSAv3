@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
+    android:background="@drawable/button_box_default"
+    android:orientation="horizontal"
     tools:context=".SelectFlyingSwitchFragment">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:gravity="center"
-        android:text="Flying Entry"
-        android:textColor="@color/white" />
 
     <ToggleButton
         android:id="@+id/toggleButtonFlyingEntry"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
-        android:layout_weight=".5"
+        android:layout_weight="1"
         android:checked="false"
-        android:textOff="Not"
+        android:background="@drawable/toggle_button_box_default"
+        android:button="@drawable/toggle_button_box_default"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textOff="Not Flying"
         android:textOn="Flying" />
 
+    <ToggleButton
+        android:id="@+id/toggleButtonFootChange"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:layout_weight="1"
+        android:checked="false"
+        android:background="@drawable/toggle_button_box_default"
+        android:button="@drawable/toggle_button_box_default"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textOff="No Foot Change"
+        android:textOn="Foot Change" />
 </LinearLayout>

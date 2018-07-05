@@ -3,8 +3,10 @@
     <!--
     <item android:drawable="@drawable/toggle_button_on_shape"/>
     -->
-    <item android:state_checked="true"
-        android:drawable="@drawable/toggle_button_on_shape"/>
-    <item android:state_checked="false"
-        android:drawable="@drawable/toggle_button_off_shape"/>
+    <item
+        android:drawable="@drawable/toggle_button_on_shape"
+        android:state_checked="true" />
+    <item
+        android:drawable="@drawable/toggle_button_off_shape"
+        android:state_checked="false"/>
 </selector>

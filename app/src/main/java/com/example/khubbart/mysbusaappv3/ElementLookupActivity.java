@@ -76,6 +76,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_lookup);
 
+        /*
         //Set button rows
         tr[0] = findViewById(R.id.revsCountRow);
         tr[1] = findViewById(R.id.jumpNamesRow01);
@@ -88,6 +89,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         tr[8] = findViewById(R.id.group5LiftNameRow);
         tr[9] = findViewById(R.id.spiralTypeRow);
         tr[10] = findViewById(R.id.levelCountRow);
+        */
         tr[11] = findViewById(R.id.pairsElementsRow);
 
         //Get SOV Table 2018 - Three matched arrays
@@ -95,6 +97,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SOVCode = resources.getStringArray(R.array.SOV_Code);
         SOVName = resources.getStringArray(R.array.SOV_Name);
         SOVBase = resources.getStringArray(R.array.SOV_Base);
+        /*
         tElementRowMap = resources.getStringArray(R.array.elementPickRowMap);
         //Convert element pick row map
         for(i=0; i<7; ++i){
@@ -108,6 +111,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 }
             }
         }
+        */
 
 
         // Set up Element Type toggle buttons - in array
@@ -125,8 +129,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
         selectDisciplineToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tempNum = view.getId();
-                Toast.makeText(getApplicationContext(), "resID: " + tempNum + "  buttonID: " + selectDisciplineToggleButton.getId(), Toast.LENGTH_LONG).show();
                 if (selectDisciplineToggleButton.isChecked()) {
                     //Singles
                     //int resID = getResources().getIdentifier("pairsElementRow"tempString, "id", getPackageName());
@@ -242,9 +244,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
             ft = fm.beginTransaction();
             containerID = "container" + i;
             resID = getResources().getIdentifier(containerID, "id", getPackageName());
-            //ft.replace(R.id.container1, fragment[1]); // this needs to do all of them.
             ft.replace(resID, fragment[i]);
-            //ft[i].replace(getResources().getIdentifier(containerID, "id", getPackageName()), fragment[i]);
             ft.commit();
         }
         // Call an update to clear screen of any old data/seed new element data
@@ -519,6 +519,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
         elementTypeToggleButton[elementTypePointer].setChecked(true); // Turn on new toggle, just inc case re-clicked the same button
         currentElementTypeIndex = elementTypePointer;
         if(elementTypePointer < 3) tr[11].setVisibility(View.GONE);  //Close pairs elements, if necessary
+        /*
         //set-reset rows
         for (j=0; j<11; ++j){
             if(elementRowMap[elementTypePointer][j]) {
@@ -527,7 +528,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 tr[j].setVisibility(View.GONE);
             }
         }
-
+        */
 
         //prepare fragments and allow for default to avoid crashes
         Arrays.fill(fragment, new EmptyFragment()); // set all cells to empty
@@ -538,9 +539,9 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "";
                 elementCodeParts[2] = "1";
                 elementCodeParts[3] = "T";
-                fragment[0] = new EmptyFragmentLeft();
+                fragment[0] = new SelectRevolutionsFragment();
                 fragment[1] = new SelectJumpFragment();
-                fragment[2] = new SelectRevolutionsFragment();
+                fragment[2] = new EmptyFragmentRight();
                 fragment[3] = new EmptyFragmentRight();
                 break;
 
@@ -550,10 +551,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "";
                 elementCodeParts[2] = "USp";
                 elementCodeParts[3] = "B";
-                fragment[0] = new EmptyFragment();
-                fragment[1] = new SwithContainerFragment();
-                fragment[2] = new SelectSpinNameFragment();
-                fragment[3] = new SelectLevelFragment();
+                fragment[0] = new SelectFlyingSwitchFragment();
+                fragment[1] = new SelectSpinNameFragment();
+                fragment[2] = new SelectLevelFragment();
+                fragment[3] = new EmptyFragment();
                 break;
 
             case 2:
@@ -562,10 +563,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "";
                 elementCodeParts[2] = "StSq";
                 elementCodeParts[3] = "B";
-                fragment[0] = new EmptyFragment();
-                fragment[1] = new EmptyFragment();
-                fragment[2] = new SelectStepNameFragment();
-                fragment[3] = new SelectLevelFragment();
+                fragment[0] = new SelectStepNameFragment();
+                fragment[1] = new SelectLevelFragment();
+                fragment[2] = new EmptyFragment();
+                fragment[3] = new EmptyFragment();
                 break;
 
             case 3:
@@ -574,10 +575,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "1";
                 elementCodeParts[2] = "Li";
                 elementCodeParts[3] = "B";
-                fragment[0] = new EmptyFragmentLeft();
-                fragment[1] = new SelectGroupFragment();
-                fragment[2] = new SelectLiftNameFragment();
-                fragment[3] = new SelectLevelFragment();
+                fragment[0] = new SelectGroupFragment();
+                fragment[1] = new SelectLiftNameFragment();
+                fragment[2] = new SelectLevelFragment();
+                fragment[3] = new EmptyFragment();
                 break;
 
             case 4:
@@ -586,10 +587,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "";
                 elementCodeParts[2] = "1Tw";
                 elementCodeParts[3] = "B";
-                fragment[0] = new EmptyFragmentLeft();
-                fragment[1] = new EmptyFragmentRight();
-                fragment[2] = new SelectRevolutionsFragment();
-                fragment[3] = new SelectLevelFragment();
+                fragment[0] = new SelectRevolutionsFragment();
+                fragment[1] = new SelectLevelFragment();
+                fragment[2] = new EmptyFragment();
+                fragment[3] = new EmptyFragment();
                 break;
 
             case 5:
@@ -598,10 +599,10 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "";
                 elementCodeParts[2] = "1";
                 elementCodeParts[3] = "T";
-                fragment[0] = new EmptyFragmentLeft();
+                fragment[0] = new SelectRevolutionsFragment();
                 fragment[1] = new SelectJumpFragment();
-                fragment[2] = new SelectRevolutionsFragment();
-                fragment[3] = new EmptyFragmentRight();
+                fragment[2] = new EmptyFragment();
+                fragment[3] = new EmptyFragment();
                 break;
 
             case 6:
@@ -610,10 +611,11 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[1] = "F";
                 elementCodeParts[2] = "iDs";
                 elementCodeParts[3] = "B";
-                fragment[0] = new EmptyFragmentLeft();
-                fragment[1] = new SelectDeathSpiralFrontBackSwitchFragment();
-                fragment[2] = new SelectDeathSpiralInOutSwitchFragment();
-                fragment[3] = new SelectLevelFragment();
+                fragment[0] = new SelectDeathSpiralFrontBackSwitchFragment();
+                fragment[1] = new SelectLevelFragment();
+                fragment[2] = new EmptyFragmentLeft();
+                fragment[3] = new EmptyFragmentLeft();
+
                 break;
 
             case 7:
