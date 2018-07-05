@@ -6,16 +6,6 @@
     android:orientation="vertical"
     android:theme="@style/AppTheme.Elements"
     tools:context="com.example.khubbart.mysbusaappv3.ElementLookupActivity">
-    <!--
-    <Spinner
-        android:id="@+id/spinnerElementTypeSelect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:background="@color/colorPrimary"
-        android:dropDownSelector="@color/colorPrimary"
-        android:spinnerMode="dialog" />
-     -->
 
     <fragment
         android:id="@+id/fragmentElementDetail"

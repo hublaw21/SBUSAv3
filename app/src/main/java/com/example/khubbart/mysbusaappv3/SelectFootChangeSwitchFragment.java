@@ -16,7 +16,6 @@ public class SelectFootChangeSwitchFragment extends Fragment {
 
     private OnChangeFootChangeSwitchInteractionListener mListener;
     public ToggleButton footChangeButton;
-
     public SelectFootChangeSwitchFragment(){}
 
     @Override
@@ -24,7 +23,7 @@ public class SelectFootChangeSwitchFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
-            View view = inflater.inflate(R.layout.fragment_select_foot_change_switch,
+            View view = inflater.inflate(R.layout.fragment_select_flying_switch,
                     container, false);
 
             footChangeButton = view.findViewById(R.id.toggleButtonFootChange);
