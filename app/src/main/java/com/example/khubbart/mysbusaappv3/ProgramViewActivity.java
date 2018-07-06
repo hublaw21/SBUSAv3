@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -52,6 +53,8 @@ public class ProgramViewActivity extends AppCompatActivity {
     public int resID;
     public int i;
     public int num;
+    public int eStart;
+    public int eEnd;
 
     public Button elementButton[] = new Button[13];
     public Button saveButton;
@@ -73,12 +76,16 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String[] SOVBase;
     public double technicalTotal;
     public String tempString;
+    public String tempTrimmedString;
+    public Double tempComboTotal;
     public String tempRowID;
     public String tempRowName;
     public String tempRowBase;
     public String tempButtonString;
     public String tempElementButton;
     public String tElementCode;
+    public String[] comboCode = new String[4];
+    public char[] elementCodeCArray;
 
     NumberFormat numberFormat = new DecimalFormat("###.00");
 
@@ -92,11 +99,11 @@ public class ProgramViewActivity extends AppCompatActivity {
         mTechnicalTotalTextView = findViewById(R.id.technicalTotal);
         saveButton = findViewById(R.id.buttonSaveProgram);
         requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
-        final RelativeLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
+        final LinearLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
 
         db = FirebaseFirestore.getInstance();
 
-         //Set view variables
+        //Set view variables
         for (int i = 0; i < 13; i++) {
             if (i < 10) {
                 tempRowID = "elementRow0" + i + "elementID";
@@ -146,7 +153,8 @@ public class ProgramViewActivity extends AppCompatActivity {
 
         elementButton[1].setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {changeButtonDialog(1);
+            public void onClick(View v) {
+                changeButtonDialog(1);
             }
         });
 
@@ -291,7 +299,7 @@ public class ProgramViewActivity extends AppCompatActivity {
                                 for (int i = 0; i < requiredElements; i++) {
                                     if (mElementCode[i] != null) {
                                         getElementInfo(mElementCode[i], i);
-                                  }
+                                    }
                                 }
                                 // Set the initial totalTechnical
                                 tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
@@ -321,7 +329,7 @@ public class ProgramViewActivity extends AppCompatActivity {
         }
     }
 
-    private void UpdateElements(){
+    private void UpdateElements() {
         //elementRef should still be good
         elementRef.update("E00", mElementCode[0]);
         elementRef.update("E01", mElementCode[1]);
@@ -336,13 +344,13 @@ public class ProgramViewActivity extends AppCompatActivity {
         elementRef.update("E10", mElementCode[10]);
         elementRef.update("E11", mElementCode[11]);
         elementRef.update("E12", mElementCode[12])
-                 .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(ProgramViewActivity.this, "Updated Successfully",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(ProgramViewActivity.this, "Updated Successfully",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     /*
@@ -452,17 +460,67 @@ public class ProgramViewActivity extends AppCompatActivity {
             mElementBaseValueTextView[gNum].setText(mElementBaseValue[gNum]);
             elementInfoList.add(new ElementInfo(mElementCode[gNum], mElementName[gNum], mElementBaseValue[gNum]));
         } else {
+            //Check for combo or change to unfound
+            checkForComboJump(tElementCode, gNum);
+
             //Add info for unentered required elements
+            /*
             mElementCode[gNum] = null;
             tElementCode = "Add";
             changeButton(gNum, tElementCode);
             mElementNameTextView[gNum].setText("Element code not found");
             technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
             mElementBaseValueTextView[gNum].setText("0.00");
+            */
             //elementInfoList.add(new ElementInfo(mElementCode[num], mElementName, mElementBaseValue)); // Do I keep adding or replace, do I even need if I am putting in array?
         }
         tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
         mTechnicalTotalTextView.setText(tempString);
+    }
+
+    public void checkForComboJump(String tElementCode, int gNum) {
+        tempTrimmedString = tElementCode.replaceAll("\\s+", ""); //Trim any spaces
+        elementCodeCArray = tempTrimmedString.toCharArray();
+        num = 0;
+        eStart = 0;
+        eEnd = 0;
+        tempComboTotal = 0.0;
+        for (i = 0; i < elementCodeCArray.length; i++) {
+            tempString = String.copyValueOf(elementCodeCArray, i, 1);
+            if (tempString.equals("+")) {
+                //We have a combo
+                eEnd = i; // IN substring, end position is not included in extract
+                comboCode[num] = tempTrimmedString.substring(eStart, eEnd);
+                int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
+                if (currentSOVIndex > 0)
+                    tempComboTotal += Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
+                num = num + 1;
+                eStart = i + 1;
+            }
+        }
+        if (tempComboTotal > 0) {
+            //Add last item of combo
+            comboCode[num] = tempTrimmedString.substring(eStart); // This should take it thru the end
+            int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
+            if (currentSOVIndex > 0)
+                tempComboTotal += Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
+            mElementCode[gNum] = "Combo";
+            tElementCode = "Combo";
+            mElementName[gNum] = tempTrimmedString;
+            mElementBaseValue[gNum] = String.valueOf(tempComboTotal);
+        } else {
+            //Add info for non-combo and not found code
+            mElementCode[gNum] = null;
+            mElementName[gNum] = tElementCode + " not found";
+            tElementCode = "Add";
+            changeButton(gNum, tElementCode);
+            technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
+            mElementBaseValueTextView[gNum].setText("0.00");
+        }
+
+        changeButton(gNum, tElementCode);
+        mElementNameTextView[gNum].setText(mElementName[gNum]);
+        mElementBaseValueTextView[gNum].setText(mElementBaseValue[gNum]);
     }
 
     public void changeButton(int cNum, String tElementCode) {

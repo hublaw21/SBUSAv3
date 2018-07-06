@@ -16,8 +16,11 @@ public class SelectDeathSpiralInOutSwitchFragment extends Fragment {
 
     private OnChangeInOutSwitchInteractionListener mListener;
     public ToggleButton inOutButton;
-
     public SelectDeathSpiralInOutSwitchFragment(){}
+
+    private SelectDeathSpiralFrontBackSwitchFragment.OnChangeFrontBackSwitchInteractionListener m2Listener;
+    public ToggleButton frontBackButton;
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater,
@@ -28,13 +31,20 @@ public class SelectDeathSpiralInOutSwitchFragment extends Fragment {
                     container, false);
 
             inOutButton = view.findViewById(R.id.toggleButtonInOut);
-
             inOutButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isInOut) {
                     onInOutButtonChanged(isInOut);
                 }
             });
+
+        frontBackButton = view.findViewById(R.id.toggleButtonFrontBack);
+        frontBackButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isFrontBack) {
+                onFrontBackButtonChanged(isFrontBack);
+            }
+        });
 
             return view;
     }
@@ -45,6 +55,11 @@ public class SelectDeathSpiralInOutSwitchFragment extends Fragment {
         }
     }
 
+    public void onFrontBackButtonChanged(boolean isFrontBack){
+        if(m2Listener != null){
+            m2Listener.onChangeFrontBackSwitchInteraction(isFrontBack);
+        }
+    }
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -53,6 +68,13 @@ public class SelectDeathSpiralInOutSwitchFragment extends Fragment {
         } else {
             throw new RuntimeException(context.toString()
                     + "must implement OnChangeInOutSwitchInteractionListener");
+        }
+
+        if(context instanceof SelectDeathSpiralFrontBackSwitchFragment.OnChangeFrontBackSwitchInteractionListener) {
+            m2Listener = (SelectDeathSpiralFrontBackSwitchFragment.OnChangeFrontBackSwitchInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + "must implement OnChangeFrontBackSwitchInteractionListener");
         }
     }
 
@@ -64,6 +86,10 @@ public class SelectDeathSpiralInOutSwitchFragment extends Fragment {
 
     public interface OnChangeInOutSwitchInteractionListener{
         public void onChangeInOutSwitchInteraction(boolean isInOut);
+    }
+
+    public interface OnChangeFrontBackSwitchInteractionListener{
+        public void onChangeFrontBackSwitchInteraction(boolean isFrontBack);
     }
 
 }

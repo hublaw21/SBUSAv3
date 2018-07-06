@@ -1,58 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialog_change_element"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_capsule_default"
+    android:orientation="vertical"
     android:padding="@dimen/mediumTable"
-    tools:context=".ProgramViewActivity"
-    android:background="#e9f1ba"
-    >
+    tools:context=".ProgramViewActivity">
+
     <TextView
         android:id="@+id/dialog_change_element_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Element Code"
+        android:background="@color/colorAccent"
         android:padding="@dimen/narrowTable"
-        android:background="#d5dda6"
-        android:textSize="@dimen/textMedium"
-        />
+        android:textColor="@color/white"
+        android:text="Enter Element Code"
+        android:textAlignment="center"
+        android:textSize="@dimen/textMedium" />
+
     <EditText
         android:id="@+id/edittext_change_element_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_box_default"
+        android:textColor="@color/white"
+        android:textAlignment="center"
         android:hint="If unsure, click 'Lookup'"
-        android:textSize="@dimen/textMedium"
-        android:layout_below="@id/dialog_change_element_title"
-        />
-    <Button
-        android:id="@+id/dialog_change_element_submit_button"
-        android:layout_width="wrap_content"
+        android:textSize="@dimen/textMedium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OK"
-        android:layout_alignParentRight="true"
-        android:background="#dde5ad"
-        android:layout_below="@id/edittext_change_element_code"
-        />
-    <Button
-        android:id="@+id/dialog_change_element_lookup_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lookup"
-        android:layout_toLeftOf="@id/dialog_change_element_submit_button"
-        android:background="#dde5ad"
-        android:layout_marginRight="3dp"
-        android:layout_alignBaseline="@id/dialog_change_element_submit_button"
-        />
-    <Button
-        android:id="@+id/dialog_change_element_cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:layout_alignParentLeft="true"
-        android:background="#dde5ad"
-        android:layout_marginRight="3dp"
-        android:layout_alignBaseline="@id/dialog_change_element_submit_button"
-        />
-</RelativeLayout>
+        android:padding="@dimen/mediumTable"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_change_element_cancel_button"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:padding="@dimen/mediumTable"
+            android:layout_margin="@dimen/mediumBorder"
+            android:layout_weight="1"
+            android:background="@drawable/button_box_default_shape"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/dialog_change_element_lookup_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/mediumTable"
+            android:layout_margin="@dimen/mediumBorder"
+            android:background="@drawable/button_box_default_shape"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Lookup" />
+
+        <Button
+            android:id="@+id/dialog_change_element_submit_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/mediumTable"
+            android:layout_margin="@dimen/mediumBorder"
+            android:background="@drawable/button_box_default_shape"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="OK" />
+
+    </LinearLayout>
+</LinearLayout>

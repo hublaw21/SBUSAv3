@@ -15,11 +15,11 @@ public class SelectFlyingSwitchFragment extends Fragment {
     private OnChangeFlyingSwitchInteractionListener mListener;
     public ToggleButton flyingButton;
 
-    public SelectFlyingSwitchFragment() {
-    }
-
     private SelectFootChangeSwitchFragment.OnChangeFootChangeSwitchInteractionListener m2Listener;
     public ToggleButton footChangeButton;
+
+    public SelectFlyingSwitchFragment() {
+    }
 
     @Override
     public View onCreateView(final LayoutInflater inflater,
