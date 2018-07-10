@@ -37,6 +37,7 @@
     <string name="pivot">Pivot</string>
     <string name="steps">Steps</string>
     <string name="choreo">Choreo Sequence</string>
+
     <string-array name="elementTypes">
         <item>Jumps</item>
         <item>Spins</item>
@@ -48,7 +49,36 @@
         <item>Death Spirals</item>
     </string-array>
 
-    <!-- Testing for suncing button names -->
+    <string-array name="disciplines">
+        <item>@string/ladies</item>
+        <item>@string/men</item>
+        <item>@string/pairs</item>
+    </string-array>
+    <string name="ladies">Ladies</string>
+    <string name="men">Men</string>
+    <string name="pairs">Pairs</string>
+
+    <string-array name="segments">
+        <item>@string/shortprogram</item>
+        <item>@string/free</item>
+    </string-array>
+    <string name="shortprogram">Short Program</string>
+    <string name="free">Free Skate</string>
+
+    <string-array name="levels">
+        <item>@string/senior</item>
+        <item>@string/junior</item>
+        <item>@string/novice</item>
+        <item>@string/intermediate</item>
+        <item>@string/juvenile</item>
+    </string-array>
+    <string name="senior">Senior</string>
+    <string name="junior">Junior</string>
+    <string name="novice">Novice</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="juvenile">Juvenile</string>
+
+    <!-- Testing for syncing button names -->
     <string name="toggle_Button_Jump">toggle_Button_Jump</string>
 
     <!-- TODO: Remove or change this placeholder text -->

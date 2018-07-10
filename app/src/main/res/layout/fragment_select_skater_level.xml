@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_box_default"
+    android:orientation="horizontal"
+    tools:context=".SelectSkaterLevelFragment">
+
+    <RadioGroup
+        android:id="@+id/radioGroupSkaterLevels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/mediumBorder"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonSenior"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
+            android:checked="true"
+            android:gravity="center_vertical"
+            android:text="@string/senior"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radioButtonJunior"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
+            android:gravity="center_vertical"
+            android:text="@string/junior"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radioButtonNovice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
+            android:gravity="center_vertical"
+            android:text="@string/novice"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radioButtonIntermediate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
+            android:gravity="center_vertical"
+            android:text="@string/intermediate"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radioButtonJuvenile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/narrowTable"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_button_box_default"
+            android:button="@drawable/toggle_button_box_default"
+            android:gravity="center_vertical"
+            android:text="@string/juvenile"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+    </RadioGroup>
+
+</LinearLayout>

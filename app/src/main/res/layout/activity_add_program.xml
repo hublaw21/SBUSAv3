@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewProgramAddName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Skater Name Here"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textViewProgramAddCompetitionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Competition Name"
+        android:textAlignment="center" />
+
+    <fragment
+        android:id="@+id/fragmentDiscipline"
+        android:name="com.example.khubbart.mysbusaappv3.SelectDisciplineFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"/>
+
+    <fragment
+        android:id="@+id/fragmentSKaterLevel"
+        android:name="com.example.khubbart.mysbusaappv3.SelectSkaterLevelFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"/>
+
+    <fragment
+        android:id="@+id/fragmentSegment"
+        android:name="com.example.khubbart.mysbusaappv3.SelectSegmentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"/>
+
+    <fragment
+        android:id="@+id/fragment7"
+        android:name="com.example.khubbart.mysbusaappv3.ButtonBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"/>
+
+</LinearLayout>

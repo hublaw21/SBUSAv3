@@ -13,15 +13,24 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:backgroundTint="@color/colorAccent"
-        android:text="UID"
+        android:text="Skater Name Here"
         android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/newProgramButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_box_default"
+        android:layout_margin="@dimen/largeTable"
+        android:textAlignment="center"
+        android:text="Add a New Program" />
 
     <TextView
         android:id="@+id/textViewProgramSelectTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
-        android:text="Select Program to View"
+        android:text="Or Select a Program to View"
         android:textAlignment="center" />
 
     <android.support.v7.widget.RecyclerView

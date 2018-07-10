@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     private CollectionReference programCollectionDb;
     public TextView mTextViewName;
     public TextView mTextViewID;
+    public Button mAddProgram;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -56,6 +59,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         setContentView(R.layout.activity_program_select);
         mTextViewName = findViewById(R.id.textViewProgramSelectName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
+        mAddProgram = findViewById(R.id.newProgramButton);
 
         //Get the userID
         Intent intentExtras = getIntent();
@@ -66,6 +70,13 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
             // get the UID
             mCurrentUserUID = extrasBundle.getString("userID");
         }
+
+        mAddProgram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addProgram();
+            }
+        });
 
 
         // Set up db, recycler and get initial list of programs
@@ -129,6 +140,13 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                         Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    //Add new program
+    public void addProgram(){
+        //Call routine to set up new program
+        Intent myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
+        startActivity(myIntent);
     }
 
     //Get program selected

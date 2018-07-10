@@ -37,7 +37,8 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" />
         <activity android:name=".ProgramSelectActivity" />
-        <activity android:name=".ProgramViewActivity"></activity>
+        <activity android:name=".ProgramViewActivity" />
+        <activity android:name=".AddProgramActivity"></activity>
     </application>
 
 </manifest>
