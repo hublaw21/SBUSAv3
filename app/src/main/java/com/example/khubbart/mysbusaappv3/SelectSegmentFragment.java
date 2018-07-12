@@ -12,8 +12,8 @@ import android.widget.RadioGroup;
 public class SelectSegmentFragment extends Fragment {
 
     private OnChangeSegmentRadioButtonInteractionListener mListener;
-    public RadioGroup mRGLevel;
-    public String tempCode;
+    public RadioGroup mRGSegment;
+    public int tempIndex;
 
     public SelectSegmentFragment(){
     }
@@ -26,25 +26,27 @@ public class SelectSegmentFragment extends Fragment {
             View view = inflater.inflate(R.layout.fragment_select_segment,
                     container, false);
 
-            mRGLevel = view.findViewById(R.id.radioGroupSegments);
+            mRGSegment = view.findViewById(R.id.radioGroupSegments);
 
-            mRGLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            mRGSegment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                    onRadioButtonChanged(checkedId);
-                }
+                    int selectedId = mRGSegment.getCheckedRadioButtonId();
+                    onRadioButtonChanged(selectedId);  //I only need this for manipulations before returning info
+            }
             });
 
             return view;
     }
 
-    public void onRadioButtonChanged(int id){
+    public void onRadioButtonChanged(int mSelectedID){
         //adjust this for selecting or returning skater level
-        tempCode = "test";
+        View selectedButton = mRGSegment.findViewById(mSelectedID);
+        int buttonIndex = mRGSegment.indexOfChild(selectedButton);
+        tempIndex = buttonIndex;
 
         if(mListener != null){
-            mListener.onChangeSegmentRadioButtonInteraction(tempCode);
+            mListener.onChangeSegmentRadioButtonInteraction(tempIndex);
         }
     }
 
@@ -57,7 +59,7 @@ public class SelectSegmentFragment extends Fragment {
             mListener = (OnChangeSegmentRadioButtonInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + "must implement OnChangeLevelRadioButtonInteractionListener");
+                    + "must implement OnChangeSegmentRadioButtonInteractionListener");
         }
     }
 
@@ -68,7 +70,7 @@ public class SelectSegmentFragment extends Fragment {
     }
 
     public interface OnChangeSegmentRadioButtonInteractionListener{
-        public void onChangeSegmentRadioButtonInteraction(String tempCode);
+        public void onChangeSegmentRadioButtonInteraction(int tempIndex);
     }
 
 }

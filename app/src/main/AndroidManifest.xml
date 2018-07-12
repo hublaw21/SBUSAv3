@@ -39,6 +39,7 @@
         <activity android:name=".ProgramSelectActivity" />
         <activity android:name=".ProgramViewActivity" />
         <activity android:name=".AddProgramActivity"></activity>
+        <activity android:name=".TestArrayActivity"></activity>
     </application>
 
 </manifest>

@@ -57,7 +57,6 @@ public class ButtonBarFragment extends Fragment {
             public void onClick(View v) {
                 tempCode="OK";
                 Toast.makeText(getApplicationContext(), "Button Bar Retrun Top: " + tempCode, Toast.LENGTH_LONG).show();
-
             }
         });
 
@@ -77,6 +76,7 @@ public class ButtonBarFragment extends Fragment {
                 tempCode="OK";
                 break;
             default:
+                Toast.makeText(getApplicationContext(), "Button Bar Default: " + tempCode, Toast.LENGTH_LONG).show();
                 tempCode=null;
         }
     }
@@ -88,7 +88,7 @@ public class ButtonBarFragment extends Fragment {
     /*
     public void onRadioButtonChanged(int id) {
         //adjust this for selecting or returning skater level
-        tempCode = "test";
+        tempCode = "test2";
 
         if (mListener != null) {
             mListener.onChangeDisciplineRadioButtonInteraction(tempCode);

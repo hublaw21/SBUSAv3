@@ -13,7 +13,7 @@ public class SelectSkaterLevelFragment extends Fragment {
 
     private OnChangeSkaterLevelRadioButtonInteractionListener mListener;
     public RadioGroup mRGLevel;
-    public String tempCode;
+    public int tempIndex;
 
     public SelectSkaterLevelFragment(){
     }
@@ -31,20 +31,20 @@ public class SelectSkaterLevelFragment extends Fragment {
             mRGLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                    onRadioButtonChanged(checkedId);
+                    int selectedId = mRGLevel.getCheckedRadioButtonId();
+                    onRadioButtonChanged(selectedId);  //I only need this for manipulations before returning info
                 }
             });
-
             return view;
     }
 
-    public void onRadioButtonChanged(int id){
-        //adjust this for selecting or returning skater level
-        tempCode = "test";
+    public void onRadioButtonChanged(int mSelectedID){
+        View selectedButton = mRGLevel.findViewById(mSelectedID);
+        int buttonIndex = mRGLevel.indexOfChild(selectedButton);
+        tempIndex = buttonIndex;
 
         if(mListener != null){
-            mListener.onChangeSkaterLevelRadioButtonInteraction(tempCode);
+            mListener.onChangeSkaterLevelRadioButtonInteraction(tempIndex);
         }
     }
 
@@ -68,7 +68,7 @@ public class SelectSkaterLevelFragment extends Fragment {
     }
 
     public interface OnChangeSkaterLevelRadioButtonInteractionListener{
-        public void onChangeSkaterLevelRadioButtonInteraction(String tempCode);
+        public void onChangeSkaterLevelRadioButtonInteraction(int tempIndex);
     }
 
 }

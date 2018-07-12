@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Test Multi-Dimensional Array Saves -->
+    <string-array name="test2DArray">
+        <item>"Part 1","Part 2"</item>
+        <item>"Part A", "Part B"</item>
+    </string-array>
+
+</resources>

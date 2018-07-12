@@ -10,13 +10,12 @@
             android:id="@+id/buttonBarCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
+            android:layout_margin="@dimen/largeTable"
             android:layout_weight="1"
-            android:background="@drawable/toggle_button_box_default"
-            android:button="@drawable/toggle_button_box_default"
+            android:background="@drawable/button_capsule_default"
             android:checked="true"
             android:gravity="center_vertical"
-            android:text="@string/ladies"
+            android:text="@string/cancel"
             android:textAlignment="center"
             android:textColor="@color/white" />
 
@@ -24,12 +23,11 @@
             android:id="@+id/buttonBarMaybe"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
+            android:layout_margin="@dimen/largeTable"
             android:layout_weight="1"
-            android:background="@drawable/toggle_button_box_default"
-            android:button="@drawable/toggle_button_box_default"
+            android:background="@drawable/button_capsule_default"
             android:gravity="center_vertical"
-            android:text="@string/men"
+            android:text="@string/maybe"
             android:textAlignment="center"
             android:textColor="@color/white" />
 
@@ -37,12 +35,11 @@
             android:id="@+id/buttonBarOK"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/narrowTable"
+            android:layout_margin="@dimen/largeTable"
             android:layout_weight="1"
-            android:background="@drawable/toggle_button_box_default"
-            android:button="@drawable/toggle_button_box_default"
+            android:background="@drawable/button_capsule_default"
             android:gravity="center_vertical"
-            android:text="@string/pairs"
+            android:text="@string/okay"
             android:textAlignment="center"
             android:textColor="@color/white" />
 

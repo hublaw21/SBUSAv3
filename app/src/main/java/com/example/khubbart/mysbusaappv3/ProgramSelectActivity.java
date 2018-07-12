@@ -50,6 +50,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     private static List documentIdList;
     public String mCurrentUserUID;
     public String selectedProgramID;
+    public String mSkaterName;
     private int position;
     public int programCount;
 
@@ -57,10 +58,21 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_select);
-        mTextViewName = findViewById(R.id.textViewProgramSelectName);
+
+
+        mTextViewName = findViewById(R.id.textViewProgramSelectSkaterName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
         mAddProgram = findViewById(R.id.newProgramButton);
 
+        // Get current userID - for fetching if using Global Class
+        GlobalClass globalClass = ((GlobalClass)getApplicationContext());
+        mCurrentUserUID = globalClass.getCurrentUserUID();
+        mSkaterName = globalClass.getSkaterName();
+        mTextViewName.setText(mSkaterName);
+        //Toast.makeText(this, "Name: " + mSkaterName, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Name: " + mSkaterName + " UID: " + mCurrentUserUID, Toast.LENGTH_SHORT).show();
+
+        /*
         //Get the userID
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
@@ -70,6 +82,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
             // get the UID
             mCurrentUserUID = extrasBundle.getString("userID");
         }
+        */
 
         mAddProgram.setOnClickListener(new View.OnClickListener() {
             @Override

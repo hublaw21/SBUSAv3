@@ -24,6 +24,17 @@
         android:text="Competition Name"
         android:textAlignment="center" />
 
+    <TextView
+        android:id="@+id/textViewProgramAddDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/black"
+        android:text=""
+        android:textAlignment="center" />
+
+
     <fragment
         android:id="@+id/fragmentDiscipline"
         android:name="com.example.khubbart.mysbusaappv3.SelectDisciplineFragment"
@@ -51,5 +62,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"/>
+
+    <TextView
+        android:id="@+id/textViewTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView" />
 
 </LinearLayout>

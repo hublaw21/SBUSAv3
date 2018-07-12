@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Creat Three arrays which MUST line up for each element -->
+    <!-- Create Three arrays which MUST line up for each element -->
     <string-array name="SOV_Code">
         <item>1T</item>
         <item>1S</item>

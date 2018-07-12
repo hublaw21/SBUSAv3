@@ -58,6 +58,16 @@
     <string name="men">Men</string>
     <string name="pairs">Pairs</string>
 
+    <string-array name="options">
+        <item>@string/cancel</item>
+        <item>@string/maybe</item>
+        <item>@string/okay</item>
+    </string-array>
+    <string name="cancel">Cancel</string>
+    <string name="maybe">Maybe</string>
+    <string name="okay">OK</string>
+
+
     <string-array name="segments">
         <item>@string/shortprogram</item>
         <item>@string/free</item>

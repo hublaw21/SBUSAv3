@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/AppTheme.Elements"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewSkaterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="@dimen/textLarge"
+        android:text="Skaters Name" />
 
     <Button
         android:id="@+id/buttonMain01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_box_default"
-        android:textSize="@dimen/textLarge"
         android:layout_margin="16dp"
-        android:text="Element Lookup"/>
+        android:background="@drawable/button_box_default"
+        android:text="Element Lookup"
+        android:textSize="@dimen/textLarge" />
 
     <Button
         android:id="@+id/buttonMainProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_box_default"
-        android:textSize="@dimen/textLarge"
         android:layout_margin="16dp"
-        android:text="Profile"/>
+        android:background="@drawable/button_box_default"
+        android:text="Profile"
+        android:textSize="@dimen/textLarge" />
 
-    <!--
+
     <Button
         android:id="@+id/buttonMainSDG"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_box_default"
         android:text="Sample Data Generator"
-        android:layout_gravity="center"/>
-    -->
+        android:textSize="@dimen/textLarge" />
+
 
     <Button
         android:id="@+id/buttonMainProgramSelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_box_default"
-        android:textSize="@dimen/textLarge"
         android:layout_margin="16dp"
-        android:text="Select a Program"/>
+        android:background="@drawable/button_box_default"
+        android:text="Select a Program"
+        android:textSize="@dimen/textLarge" />
 
     <Button
         android:id="@+id/buttonMainLogOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_box_default"
-        android:textSize="@dimen/textLarge"
         android:layout_margin="16dp"
-        android:text="Logout"/>
+        android:background="@drawable/button_box_default"
+        android:text="Logout"
+        android:textSize="@dimen/textLarge" />
 
 </LinearLayout>
