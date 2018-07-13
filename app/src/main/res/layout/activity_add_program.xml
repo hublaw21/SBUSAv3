@@ -7,22 +7,26 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewProgramAddName"
+        android:id="@+id/textViewProgramAddSkaterName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/black"
+        android:textSize="@dimen/textLarge"
         android:text="Skater Name Here"
         android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/textViewProgramAddCompetitionName"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteCompetitionName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/light_box_default_shape"
         android:layout_margin="@dimen/mediumBorder"
-        android:backgroundTint="@color/colorAccent"
-        android:text="Competition Name"
-        android:textAlignment="center" />
+        android:hint="Competition Name Lookup"
+        android:textColorHint="@color/colorAccent"
+        android:textAlignment="center">
+        <requestFocus/>
+    </AutoCompleteTextView>
 
     <TextView
         android:id="@+id/textViewProgramAddDescription"
@@ -33,7 +37,6 @@
         android:textColor="@color/black"
         android:text=""
         android:textAlignment="center" />
-
 
     <fragment
         android:id="@+id/fragmentDiscipline"
@@ -62,12 +65,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"/>
-
-    <TextView
-        android:id="@+id/textViewTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="TextView" />
 
 </LinearLayout>

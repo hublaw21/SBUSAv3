@@ -1,8 +1,11 @@
 package com.example.khubbart.mysbusaappv3;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +17,13 @@ public class AddProgramActivity extends AppCompatActivity
 
     public String tempCode;
     public String mProgramDescription;
-    public String mLevel;
-    public TextView mTextViewTest;
+    public String mCurrentUserUID;
+    public String mSkaterName;
+    public TextView textViewSkaterName;
     public TextView mTextViewProgramDescription;
     public int[] programIndexes = new int[4]; // 0-competition, 1-discipline, 2-level, 3-segment
     public String[] programDescription = new String[4]; // 0-competition, 1-discipline, 2-level, 3-segment
+    public String[] competitionName;
     public String[] discipline = new String[3];
     public String[] level = new String[5];
     public String[] segment = new String[2];
@@ -29,13 +34,27 @@ public class AddProgramActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_program);
-        mTextViewTest = findViewById(R.id.textViewTest);
+        textViewSkaterName = findViewById(R.id.textViewProgramAddSkaterName);
         mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
-        mTextViewTest.setText("tempCode2");
         Resources resources = getResources();
+        competitionName = resources.getStringArray(R.array.competitionNamesArray);
         discipline = resources.getStringArray(R.array.disciplines);
         level = resources.getStringArray(R.array.levels);
         segment = resources.getStringArray(R.array.segments);
+        //Create an instance of ArrayAdapter containing competition names
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_competition_name, competitionName);
+        //Get instance of Autocomplete
+        AutoCompleteTextView actv = findViewById(R.id.autoCompleteCompetitionName);
+        actv.setThreshold(1);  //Will start from int characters
+        actv.setAdapter(adapter);
+        actv.setTextColor(Color.BLACK);
+
+        // Get current userID - for fetching if using Global Class
+        GlobalClass globalClass = ((GlobalClass)getApplicationContext());
+        mCurrentUserUID = globalClass.getCurrentUserUID();
+        mSkaterName = globalClass.getSkaterName();
+        textViewSkaterName.setText(mSkaterName);
+
 
     }
 

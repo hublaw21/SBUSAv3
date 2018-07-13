@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="competitionNamesArray">
+        <item>Cannon TX Open</item>
+        <item>Skate Milwaukee </item>
+        <item>Kathy Slack Troy Summer Comp</item>
+        <item>Vail Invitational</item>
+        <item>Dogwood Open</item>
+        <item>Skate St. Paul</item>
+        <item>Cactus Classic</item>
+        <item>Sunshine Inv.</item>
+        <item>Skate Detroit</item>
+        <item>Skate Wilmington</item>
+        <item>Sun Valley Champs</item>
+        <item>Philadelphia Summer Champs</item>
+        <item>Philadelphia Summer International (SR Singles/Pairs)</item>
+        <item>CO Champs</item>
+        <item>US Collegiate Champs</item>
+        <item>DuPage Open</item>
+        <item>Robin Lee Midwest Open</item>
+        <item>Scott Hamilton Inv</item>
+        <item>Silicon Valley</item>
+        <item>Fraser Classic</item>
+        <item>Skate Green Bay</item>
+        <item>Cranberry Open</item>
+        <item>Hershey Open</item>
+        <item>Dance-Pairs Chicago</item>
+        <item>Miami Open</item>
+        <item>Orange City Open</item>
+        <item>PNIC Champs</item>
+        <item>Top of the World</item>
+        <item>Skate Chautauqua</item>
+        <item>Wichita Mid-Continent</item>
+        <item>MN State Champs</item>
+        <item>Cup of Colorado</item>
+        <item>Skate San Francisco</item>
+        <item>Copper Cup</item>
+        <item>Potomac Open</item>
+        <item>Onyx FS Challenge</item>
+        <item>Skate Pittsburgh</item>
+        <item>Sherwood Inv</item>
+        <item>Moran Memorial</item>
+        <item>Battle of the Blades</item>
+        <item>Skate the Lake</item>
+        <item>Hidden Valley</item>
+    </string-array>
+
+    <string-array name="competitionLocationArray">
+        <item>Farmers Branch TX</item>
+        <item>Milwaukee WI</item>
+        <item>Troy OH</item>
+        <item>Vail CO</item>
+        <item>Raleigh NC</item>
+        <item>Richfield MN</item>
+        <item>Scottsdale AZ</item>
+        <item>Mentor OH</item>
+        <item>Bloomfield Hills MI</item>
+        <item>Wilmington DE</item>
+        <item>Sun Valley ID</item>
+        <item>Aston PA</item>
+        <item>Aston PA</item>
+        <item>Westminster CO</item>
+        <item>Adrian MI</item>
+        <item>Vernon Hills IL</item>
+        <item>Minneapolis MN</item>
+        <item>Antioch TN</item>
+        <item>Redwood City CA</item>
+        <item>Fraser MI</item>
+        <item>De Pere WI</item>
+        <item>Hyannis MA</item>
+        <item>Hershey PA</item>
+        <item>Geneva IL</item>
+        <item>Miami FL</item>
+        <item>Yorba Linda CA</item>
+        <item>Renton WA</item>
+        <item>Anchorage AK</item>
+        <item>Jamestown NY</item>
+        <item>Wichita KS</item>
+        <item>Bloomington MN</item>
+        <item>Centennial CO</item>
+        <item>San Francisco CA</item>
+        <item>Bountiful UT</item>
+        <item>Ashburn VA</item>
+        <item>Rochester MI</item>
+        <item>Pittsburgh PA</item>
+        <item>Sherwood OR</item>
+        <item>Hackensack NJ</item>
+        <item>Fort Wayne IN</item>
+        <item>Pleasant Prairie WI</item>
+        <item>Escondido CA</item>
+    </string-array>
+
+    <string-array name="competitionDatesArray">
+        <item>Jul 13-15</item>
+        <item>Jul 11-15</item>
+        <item>Jul 12-15</item>
+        <item>Jul 12-15</item>
+        <item>Jul 13-15</item>
+        <item>Jul 12-15</item>
+        <item>Jul 12-15</item>
+        <item>Jul 14-15</item>
+        <item>Jul 17-21</item>
+        <item>Jul 18-22</item>
+        <item>Jul 18-22</item>
+        <item>Jul 30-Aug 5</item>
+        <item>Aug 1-5</item>
+        <item>Aug 2-4</item>
+        <item>Aug 2-4</item>
+        <item>Aug 3-5</item>
+        <item>Aug 3-5</item>
+        <item>Aug 3-5</item>
+        <item>Aug 4</item>
+        <item>Aug 4-5</item>
+        <item>Aug 4-5</item>
+        <item>Aug 9-11</item>
+        <item>Aug 9-12</item>
+        <item>Aug 10-12</item>
+        <item>Aug 10-12</item>
+        <item>Aug 10-12</item>
+        <item>Aug 10-12</item>
+        <item>Aug 10-11</item>
+        <item>Aug 11-12</item>
+        <item>Aug 10-12</item>
+        <item>Aug 16-18</item>
+        <item>Aug 17-19</item>
+        <item>Aug 17-19</item>
+        <item>Aug 16-18</item>
+        <item>Aug 17-18</item>
+        <item>Aug 17-18</item>
+        <item>Aug 18-19</item>
+        <item>Aug 17-19</item>
+        <item>Aug 24-26</item>
+        <item>Aug 24-26</item>
+        <item>Aug 24-26</item>
+        <item>Aug 25-26</item>
+    </string-array>
+
+    <string-array name="competitionsHostArray">
+        <item>Lone Star FSC</item>
+        <item>Wisconsin FSC</item>
+        <item>Troy SC</item>
+        <item>SC of Vail</item>
+        <item>Triangle FSC</item>
+        <item>St Paul FSC</item>
+        <item>Coyotes SC of AZ</item>
+        <item>Mentor FSC</item>
+        <item>Detroit SC</item>
+        <item>SC of Wilmington</item>
+        <item>Sun Valley FSC</item>
+        <item>Iceworks SC</item>
+        <item>USFS/Iceworks SC</item>
+        <item>Rocky Mtn FSC/MHFSA</item>
+        <item>Adrian College</item>
+        <item>DuPage FSC</item>
+        <item>FSC Minneapolis</item>
+        <item>S Hamilton SC</item>
+        <item>Peninsula SC</item>
+        <item>Fraser FSC</item>
+        <item>Gtr Green Bay FSC</item>
+        <item>Yarmouth IC</item>
+        <item>Hershey FSC</item>
+        <item>Skating Council of IL</item>
+        <item>Miami FSC</item>
+        <item>Orange Cty FSC</item>
+        <item>Cascade Valley FSC</item>
+        <item>Alaska Assn of FS</item>
+        <item>Jamestown FSC</item>
+        <item>Wichita FSC</item>
+        <item>Twin City FSA</item>
+        <item>Colorado SC</item>
+        <item>SC of SF</item>
+        <item>Utah FSC</item>
+        <item>Washington FSC</item>
+        <item>Onyx-Suburban SA</item>
+        <item>Pittsburgh FSC</item>
+        <item>Carousel Sherwood FSC</item>
+        <item>Ice House of NJ FSC</item>
+        <item>Fort Wayne ISC</item>
+        <item>Cutting Edge FSC</item>
+        <item>North County FSC</item>
+    </string-array>
+</resources>

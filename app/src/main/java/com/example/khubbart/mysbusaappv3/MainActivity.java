@@ -41,26 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         buttonMain01 = (Button) findViewById(R.id.buttonMain01);
         buttonMainProfile = (Button) findViewById(R.id.buttonMainProfile);
-        buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
+        //buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
         buttonMainProgramSelect = (Button) findViewById(R.id.buttonMainProgramSelect);
         buttonMainLogOut = (Button) findViewById(R.id.buttonMainLogOut);
         textViewSkaterName = findViewById(R.id.textViewSkaterName);
 
-        // Retreive and set into variable the current users firebase UID
-        //FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        //mCurrentUserUID = currentFirebaseUser.getUid();
-        //final GlobalClass globalClass = (GlobalClass) getApplicationContext();
-        //globalClass.setCurrentUserUID(mCurrentUserUID);
-        //Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
         gatherUserData();
-
-        // Get current userID - for fetching if using Global Class
-        //GlobalClass globalClass = ((GlobalClass)getApplicationContext());
-        //mCurrentUserUID = globalClass.getCurrentUserUID();
-        //mSkaterName = globalClass.getSkaterName();
-        //Toast.makeText(this, "Name: " + mSkaterName, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, "Name: " + mSkaterName + " UID: " + mCurrentUserUID, Toast.LENGTH_SHORT).show();
-
 
         buttonMain01.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Use for temporary button to go to add sample data activity
+        /*
         buttonMainGenerateSampleData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-
+        */
 
         buttonMainProgramSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +133,6 @@ public class MainActivity extends AppCompatActivity {
                 textViewSkaterName.setText(mName);
             }
         });
-        Toast.makeText(this, "Login - Name: " + mName + " UID: " + mUID, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Login - Name: " + mName + " UID: " + mUID, Toast.LENGTH_SHORT).show();
     }
 }
