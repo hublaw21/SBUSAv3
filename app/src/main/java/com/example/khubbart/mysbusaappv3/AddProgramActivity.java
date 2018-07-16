@@ -9,6 +9,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khubbart.mysbusaappv3.Model.Competition;
+import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddProgramActivity extends AppCompatActivity
     implements SelectSkaterLevelFragment.OnChangeSkaterLevelRadioButtonInteractionListener,
         SelectDisciplineFragment.OnChangeDisciplineRadioButtonInteractionListener,
@@ -19,14 +30,23 @@ public class AddProgramActivity extends AppCompatActivity
     public String mProgramDescription;
     public String mCurrentUserUID;
     public String mSkaterName;
+    public String mCompetitionName;
+    public String[] CompetitionsList;
+    //public Program mProgram;
+    public int mCompetitionNameIndex;
     public TextView textViewSkaterName;
     public TextView mTextViewProgramDescription;
+    public TextView mTextViewGetData;
+    public AutoCompleteTextView actv;
     public int[] programIndexes = new int[4]; // 0-competition, 1-discipline, 2-level, 3-segment
     public String[] programDescription = new String[4]; // 0-competition, 1-discipline, 2-level, 3-segment
     public String[] competitionName;
     public String[] discipline = new String[3];
     public String[] level = new String[5];
     public String[] segment = new String[2];
+    private FirebaseFirestore db;
+    private CollectionReference programRef;
+    public Resources resources;
 
 
 
@@ -36,15 +56,22 @@ public class AddProgramActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_program);
         textViewSkaterName = findViewById(R.id.textViewProgramAddSkaterName);
         mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
+        mTextViewGetData = findViewById(R.id.textViewGetData);
+        db = FirebaseFirestore.getInstance();
+        programRef = db.collection("Programs");
+
+        //Get array data from resources.  May want to change to online
         Resources resources = getResources();
         competitionName = resources.getStringArray(R.array.competitionNamesArray);
         discipline = resources.getStringArray(R.array.disciplines);
         level = resources.getStringArray(R.array.levels);
         segment = resources.getStringArray(R.array.segments);
+
         //Create an instance of ArrayAdapter containing competition names
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_competition_name, competitionName);
+
         //Get instance of Autocomplete
-        AutoCompleteTextView actv = findViewById(R.id.autoCompleteCompetitionName);
+        actv = findViewById(R.id.autoCompleteCompetitionName);
         actv.setThreshold(1);  //Will start from int characters
         actv.setAdapter(adapter);
         actv.setTextColor(Color.BLACK);
@@ -88,11 +115,27 @@ public class AddProgramActivity extends AppCompatActivity
 
     // Listen for Button Bar
     @Override
-    public String ButtonBarInteraction(String tempCode2) {
+    public String ButtonBarInteraction(String tempCodeReturned) {
         // Act of returned code
-        Toast.makeText(getApplicationContext(), "Button Bar Retrun: " + tempCode2, Toast.LENGTH_LONG).show();
-        return tempCode2;
-        //mTextViewTest.setText(tempCode2);
+        //Toast.makeText(getApplicationContext(), "Button Bar Retrun: " + tempCode2, Toast.LENGTH_LONG).show();
+        //mTextViewGetData.setText(tempCode2);
+        switch (tempCodeReturned){
+            case "Cancel":
+                //cancel and return
+                finish();
+                break;
+
+            case "Maybe":
+                //Probably hide this one, or make it return without save
+                break;
+
+            case "OK":
+                //Save
+                addProgram();
+                break;
+
+        }
+        return tempCodeReturned;
     }
 
     //Make the description string
@@ -108,5 +151,33 @@ public class AddProgramActivity extends AppCompatActivity
         }
 
     }
+    //Method to add/update program
+    private void addProgram() {
+        //Need to verify an event has been selected
+        mCompetitionName = actv.getText().toString();
+        Toast.makeText(AddProgramActivity.this, "Event Name imported: " + mCompetitionName,Toast.LENGTH_SHORT).show();
+
+        //mCompetitionNameIndex = Arrays.asList(CompetitionsList).indexOf(mCompetitionName);
+        //if(mCompetitionNameIndex > 0) {
+            Map<String, Object> mProgram = new HashMap<>();
+            mProgram.put("Competition", mCompetitionName);
+            mProgram.put("Discipline", discipline[programIndexes[1]]);
+            mProgram.put("Level", level[programIndexes[2]]);
+            mProgram.put("Segement", segment[programIndexes[3]]);
+            mProgram.put("userID", mCurrentUserUID);
+            programRef.document()
+                    .set(mProgram)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        //} else {
+            //Toast.makeText(AddProgramActivity.this, "Unsuccessful - Select an Event", Toast.LENGTH_SHORT).show();
+        //}
+
+    }
+
 
 }

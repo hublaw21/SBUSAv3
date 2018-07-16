@@ -66,4 +66,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"/>
 
+    <TextView
+        android:id="@+id/textViewGetData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:text="TextView" />
+
 </LinearLayout>

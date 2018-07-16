@@ -15,13 +15,12 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ButtonBarFragment extends Fragment {
 
-    private View.OnClickListener mListener1;
-    private View.OnClickListener mListener2;
-    private View.OnClickListener mListener3;
+    private ButtonBarInteractionListener mListener;
     public Button mCancel;
     public Button mMaybe;
     public Button mOK;
     public String tempCode;
+    public int tempCodeID;
 
     public ButtonBarFragment() {
     }
@@ -42,6 +41,7 @@ public class ButtonBarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tempCode="Cancel";
+                onClickedButton(tempCode);
             }
         });
 
@@ -49,6 +49,7 @@ public class ButtonBarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tempCode="Maybe";
+                onClickedButton(tempCode);
             }
         });
 
@@ -56,28 +57,16 @@ public class ButtonBarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tempCode="OK";
-                Toast.makeText(getApplicationContext(), "Button Bar Retrun Top: " + tempCode, Toast.LENGTH_LONG).show();
+                onClickedButton(tempCode);
             }
         });
 
         return view;
     }
 
-    public void onClick(final View view){ // Check which button is pushed
-        switch (view.getId()){
-            case R.id.buttonBarCancel:
-                tempCode="Cancel";
-                break;
-            case R.id.buttonBarMaybe:
-                tempCode="Maybe";
-                Toast.makeText(getApplicationContext(), "Button Bar Retrun: " + tempCode, Toast.LENGTH_LONG).show();
-                break;
-            case R.id.buttonBarOK:
-                tempCode="OK";
-                break;
-            default:
-                Toast.makeText(getApplicationContext(), "Button Bar Default: " + tempCode, Toast.LENGTH_LONG).show();
-                tempCode=null;
+    public void onClickedButton(String mTempCode){
+        if(mListener != null){
+            mListener.ButtonBarInteraction(mTempCode);
         }
     }
 
@@ -85,38 +74,14 @@ public class ButtonBarFragment extends Fragment {
         public String ButtonBarInteraction(String tempCode);
     }
 
-    /*
-    public void onRadioButtonChanged(int id) {
-        //adjust this for selecting or returning skater level
-        tempCode = "test2";
-
-        if (mListener != null) {
-            mListener.onChangeDisciplineRadioButtonInteraction(tempCode);
-        }
-    }
-
-
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context){
         super.onAttach(context);
-        if (context instanceof OnChangeDisciplineRadioButtonInteractionListener) {
-            //mListener = (SelectDisciplineFragment.OnChangeDisciplineRadioButtonInteractionListener) context;
-            mListener = (OnChangeDisciplineRadioButtonInteractionListener) context;
+        if(context instanceof ButtonBarInteractionListener) {
+            mListener = (ButtonBarInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + "must implement OnChangeLevelRadioButtonInteractionListener");
+                    + "must implement OnChangeJumpRadioButtonInteractionListener");
         }
     }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnChangeDisciplineRadioButtonInteractionListener {
-        public void onChangeDisciplineRadioButtonInteraction(String tempCode);
-    }
-    */
-
 }
