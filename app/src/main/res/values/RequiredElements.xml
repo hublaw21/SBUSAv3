@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define the required elements by Level, Discipline, Segment -->
+    <string-array name="requiredElementsArray">
+        <!-- Each digit is an index for an array, in order: Level, Discipline, Segment -->
+        <!-- The last digit is total required for that specific, can later be expanded for details of each type -->
+        <item>0007</item>
+        <item>1007</item>
+        <item>2006</item>
+        <item>3006</item>
+        <item>4000</item>
+        <item>0107</item>
+        <item>1107</item>
+        <item>2106</item>
+        <item>3106</item>
+        <item>4100</item>
+        <item>0207</item>
+        <item>1207</item>
+        <item>2207</item>
+        <item>3200</item>
+        <item>4200</item>
+    </string-array>
+</resources>

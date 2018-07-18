@@ -41,7 +41,6 @@
             android:gravity="center_vertical"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:checked="true"
             android:text="@string/spin_Layback" />
 
         <RadioButton
@@ -55,7 +54,6 @@
             android:gravity="center_vertical"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:checked="true"
             android:text="@string/spin_Sit" />
 
         <RadioButton
@@ -69,7 +67,6 @@
             android:gravity="center_vertical"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:checked="true"
             android:text="@string/spin_Upright" />
 
         <RadioButton
@@ -83,7 +80,6 @@
             android:gravity="center_vertical"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:checked="true"
             android:text="@string/spin_Combination" />
 
     </RadioGroup>

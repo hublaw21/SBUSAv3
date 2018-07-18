@@ -41,7 +41,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public TextView textViewElementCode;
     public TextView textViewElementDetailBaseValue;
     public TextView[] textViewElementDetailGOE = new TextView[11];
-    public String elementCode;
+    public String elementCode = "1T"; //Preset to Single Toe
     public String[] elementCodeParts = new String[4];
     public String[] SOVCode;
     public String[] SOVName;
@@ -166,7 +166,6 @@ public class ElementLookupActivity extends AppCompatActivity implements
             }
         });
 
-
         // Set up textviews for element detail fragment
         textViewElementDetailName = findViewById(R.id.textViewElementDetailName);
         textViewElementCode = findViewById(R.id.textViewElementCode);
@@ -179,6 +178,9 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 textViewElementDetailGOE[i] = findViewById(resID);
             }
         }
+
+        //Initialize display for opening
+        ElementTypeChange(elementTypePointer);
     }
 
 
@@ -441,7 +443,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[0] = "";
                 elementCodeParts[1] = "";
                 elementCodeParts[2] = "1";
-                elementCodeParts[3] = "T";
+                elementCodeParts[3] = "TTh";
                 fragment[0] = new SelectRevolutionsFragment();
                 fragment[1] = new SelectJumpFragment();
                 fragment[2] = new EmptyFragment();

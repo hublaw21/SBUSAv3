@@ -4,7 +4,38 @@
     android:id="@+id/program_select_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_margin="8dp">
+
+    <!--
+    <TextView
+        android:id="@+id/program_select_competition_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        tools:text="Competition Name" />
+
+    <TextView
+        android:id="@+id/program_select_discipline_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        tools:text="Discipline" />
+
+    <TextView
+        android:id="@+id/program_select_level_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        tools:text="Level" />
+
+    <TextView
+        android:id="@+id/program_select_segment_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        tools:text="Segment" />
+    -->
 
     <TableLayout
         android:layout_width="match_parent"
@@ -63,4 +94,5 @@
 
         </TableRow>
     </TableLayout>
+
 </LinearLayout>

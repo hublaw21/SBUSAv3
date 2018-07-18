@@ -56,6 +56,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="1"/>
+
+
                 <Button
                     android:id="@+id/buttonRow00"
                     android:layout_width="0dp"
@@ -88,6 +98,15 @@
                 android:id="@+id/elementRow01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="2"/>
 
                 <Button
                     android:id="@+id/buttonRow01"
@@ -122,6 +141,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="3"/>
+
                 <Button
                     android:id="@+id/buttonRow02"
                     android:layout_width="0dp"
@@ -154,6 +182,15 @@
                 android:id="@+id/elementRow03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="4"/>
 
                 <Button
                     android:id="@+id/buttonRow03"
@@ -188,6 +225,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="5"/>
+
                 <Button
                     android:id="@+id/buttonRow04"
                     android:layout_width="0dp"
@@ -220,6 +266,15 @@
                 android:id="@+id/elementRow05"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="6"/>
 
                 <Button
                     android:id="@+id/buttonRow05"
@@ -254,6 +309,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="7"/>
+
                 <Button
                     android:id="@+id/buttonRow06"
                     android:layout_width="0dp"
@@ -286,6 +350,15 @@
                 android:id="@+id/elementRow07"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="8"/>
 
                 <Button
                     android:id="@+id/buttonRow07"
@@ -320,6 +393,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="9"/>
+
                 <Button
                     android:id="@+id/buttonRow08"
                     android:layout_width="0dp"
@@ -352,6 +434,15 @@
                 android:id="@+id/elementRow09"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="10"/>
 
                 <Button
                     android:id="@+id/buttonRow09"
@@ -386,6 +477,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="11"/>
+
                 <Button
                     android:id="@+id/buttonRow10"
                     android:layout_width="0dp"
@@ -419,6 +519,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="12"/>
+
                 <Button
                     android:id="@+id/buttonRow11"
                     android:layout_width="0dp"
@@ -451,6 +560,15 @@
                 android:id="@+id/elementRow12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginRight="0dp"
+                    android:textColor="@color/black"
+                    android:text="13"/>
 
                 <Button
                     android:id="@+id/buttonRow12"

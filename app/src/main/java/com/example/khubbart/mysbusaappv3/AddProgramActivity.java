@@ -36,7 +36,7 @@ public class AddProgramActivity extends AppCompatActivity
     public int mCompetitionNameIndex;
     public TextView textViewSkaterName;
     public TextView mTextViewProgramDescription;
-    public TextView mTextViewGetData;
+    //public TextView mTextViewGetData;
     public AutoCompleteTextView actv;
     public int[] programIndexes = new int[4]; // 0-competition, 1-discipline, 2-level, 3-segment
     public String[] programDescription = new String[4]; // 0-competition, 1-discipline, 2-level, 3-segment
@@ -56,7 +56,7 @@ public class AddProgramActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_program);
         textViewSkaterName = findViewById(R.id.textViewProgramAddSkaterName);
         mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
-        mTextViewGetData = findViewById(R.id.textViewGetData);
+        //mTextViewGetData = findViewById(R.id.textViewGetData);
         db = FirebaseFirestore.getInstance();
         programRef = db.collection("Programs");
 
