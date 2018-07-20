@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
+    android:textColor="@color/black"
+
     tools:context=".ProfileActivity">
 
     <TextView
         android:id="@+id/textViewName"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textLarge"
         android:hint="Your Name" />
 
     <TableLayout
@@ -37,6 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/mediumTable"
                 android:layout_weight="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textMedium"
                 android:text="Club:"
                 android:textAlignment="textEnd" />
 
@@ -44,6 +50,8 @@
                 android:id="@+id/textViewClub"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textMedium"
                 android:hint="Your Club"
                 android:textAlignment="textStart" />
 
@@ -59,13 +67,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/mediumTable"
                 android:layout_weight="2"
-                android:hint="Your Coach:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textMedium"
+                android:text="Your Coach:"
                 android:textAlignment="textEnd" />
 
             <TextView
                 android:id="@+id/textViewCoach"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textMedium"
                 android:hint="Your Coach"
                 android:textAlignment="textStart" />
 
@@ -81,6 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/mediumTable"
                 android:layout_weight="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textMedium"
                 android:text="email:"
                 android:textAlignment="textEnd" />
 
@@ -88,13 +102,20 @@
                 android:id="@+id/textVieweMail"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textMedium"
                 android:hint="Your email"
                 android:textAlignment="textStart" />
 
         </TableRow>
 
-
     </TableLayout>
+
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.example.khubbart.mysbusaappv3.ButtonBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

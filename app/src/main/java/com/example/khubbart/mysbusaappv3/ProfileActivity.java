@@ -25,7 +25,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements
+        ButtonBarFragment.ButtonBarInteractionListener{
 
     private FirebaseFirestore db;
     private CollectionReference collectionReference;
@@ -83,5 +84,29 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+    // Listen for Button Bar
+    @Override
+    public String ButtonBarInteraction(String tempCodeReturned) {
+        // Act of returned code
+        //Toast.makeText(getApplicationContext(), "Button Bar Retrun: " + tempCode2, Toast.LENGTH_LONG).show();
+        //mTextViewGetData.setText(tempCode2);
+        switch (tempCodeReturned){
+            case "Cancel":
+                //cancel and return
+                finish();
+                break;
+
+            case "Maybe":
+                //Probably hide this one, or make it return without save
+                break;
+
+            case "OK":
+                //Save
+                break;
+
+        }
+        return tempCodeReturned;
+    }
+
 }
 

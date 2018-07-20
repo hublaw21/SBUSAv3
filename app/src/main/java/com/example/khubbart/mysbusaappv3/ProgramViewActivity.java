@@ -52,6 +52,7 @@ public class ProgramViewActivity extends AppCompatActivity {
     public int requiredElements;
     public int resID;
     public int i;
+    public int tempInt;
     public int num;
     public int eStart;
     public int eEnd;
@@ -74,7 +75,10 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
+    public String[] RequiredElementsKey;
+    public int[] RequiredElementsValue;
     public double technicalTotal;
+    public String progPointer;
     public String tempString;
     public String tempTrimmedString;
     public Double tempComboTotal;
@@ -98,6 +102,7 @@ public class ProgramViewActivity extends AppCompatActivity {
         mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
         mTechnicalTotalTextView = findViewById(R.id.technicalTotal);
         saveButton = findViewById(R.id.buttonSaveProgram);
+
         requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
         final LinearLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
 
@@ -270,6 +275,9 @@ public class ProgramViewActivity extends AppCompatActivity {
                     program.add(qProgram);
                     mCompetitionNameTextView.setText(program.get(0).getCompetition());
                     String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
+                    progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
+                    tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
+                    requiredElements = RequiredElementsValue[tempInt];
                     mCompetitionDescriptionTextView.setText(tempText);
                     elementID = program.get(0).getElementsID();
                     elementRef = db.collection("Elements").document(elementID);
@@ -443,6 +451,8 @@ public class ProgramViewActivity extends AppCompatActivity {
         SOVCode = resources.getStringArray(R.array.SOV_Code);
         SOVName = resources.getStringArray(R.array.SOV_Name);
         SOVBase = resources.getStringArray(R.array.SOV_Base);
+        RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
+        RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
     }
 
     public void getElementInfo(String tElementCode, int gNum) {

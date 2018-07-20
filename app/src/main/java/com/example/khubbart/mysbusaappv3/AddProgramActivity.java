@@ -21,10 +21,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddProgramActivity extends AppCompatActivity
-    implements SelectSkaterLevelFragment.OnChangeSkaterLevelRadioButtonInteractionListener,
+        implements SelectSkaterLevelFragment.OnChangeSkaterLevelRadioButtonInteractionListener,
         SelectDisciplineFragment.OnChangeDisciplineRadioButtonInteractionListener,
         SelectSegmentFragment.OnChangeSegmentRadioButtonInteractionListener,
-        ButtonBarFragment.ButtonBarInteractionListener{
+        ButtonBarFragment.ButtonBarInteractionListener {
 
     public String tempCode;
     public String mProgramDescription;
@@ -46,8 +46,9 @@ public class AddProgramActivity extends AppCompatActivity
     public String[] segment = new String[2];
     private FirebaseFirestore db;
     private CollectionReference programRef;
+    private CollectionReference elementRef;
+    public String mCurrentProgramDocumentID;
     public Resources resources;
-
 
 
     @Override
@@ -59,6 +60,7 @@ public class AddProgramActivity extends AppCompatActivity
         //mTextViewGetData = findViewById(R.id.textViewGetData);
         db = FirebaseFirestore.getInstance();
         programRef = db.collection("Programs");
+        elementRef = db.collection("Elements");
 
         //Get array data from resources.  May want to change to online
         Resources resources = getResources();
@@ -77,7 +79,7 @@ public class AddProgramActivity extends AppCompatActivity
         actv.setTextColor(Color.BLACK);
 
         // Get current userID - for fetching if using Global Class
-        GlobalClass globalClass = ((GlobalClass)getApplicationContext());
+        GlobalClass globalClass = ((GlobalClass) getApplicationContext());
         mCurrentUserUID = globalClass.getCurrentUserUID();
         mSkaterName = globalClass.getSkaterName();
         textViewSkaterName.setText(mSkaterName);
@@ -98,7 +100,7 @@ public class AddProgramActivity extends AppCompatActivity
     // Get Skater Level
     @Override
     public void onChangeSkaterLevelRadioButtonInteraction(int tempIndex) {
-       // Get skater level
+        // Get skater level
         programIndexes[2] = tempIndex;
         programDescription[2] = level[tempIndex];
         makeProgramDescription();
@@ -119,7 +121,7 @@ public class AddProgramActivity extends AppCompatActivity
         // Act of returned code
         //Toast.makeText(getApplicationContext(), "Button Bar Retrun: " + tempCode2, Toast.LENGTH_LONG).show();
         //mTextViewGetData.setText(tempCode2);
-        switch (tempCodeReturned){
+        switch (tempCodeReturned) {
             case "Cancel":
                 //cancel and return
                 finish();
@@ -139,42 +141,73 @@ public class AddProgramActivity extends AppCompatActivity
     }
 
     //Make the description string
-    public void makeProgramDescription(){
+    public void makeProgramDescription() {
         mProgramDescription = "";
         mProgramDescription += level[programIndexes[2]] + " ";
         mProgramDescription += discipline[programIndexes[1]] + " ";
         mProgramDescription += segment[programIndexes[3]];
-        if(mProgramDescription != null) {
+        if (mProgramDescription != null) {
             mTextViewProgramDescription.setText(mProgramDescription);
         } else {
             mTextViewProgramDescription.setText("Empty");
         }
 
     }
+
     //Method to add/update program
     private void addProgram() {
         //Need to verify an event has been selected
         mCompetitionName = actv.getText().toString();
-        Toast.makeText(AddProgramActivity.this, "Event Name imported: " + mCompetitionName,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddProgramActivity.this, "Event Name imported: " + mCompetitionName, Toast.LENGTH_SHORT).show();
 
         //mCompetitionNameIndex = Arrays.asList(CompetitionsList).indexOf(mCompetitionName);
         //if(mCompetitionNameIndex > 0) {
-            Map<String, Object> mProgram = new HashMap<>();
-            mProgram.put("Competition", mCompetitionName);
-            mProgram.put("Discipline", discipline[programIndexes[1]]);
-            mProgram.put("Level", level[programIndexes[2]]);
-            mProgram.put("Segement", segment[programIndexes[3]]);
-            mProgram.put("userID", mCurrentUserUID);
-            programRef.document()
-                    .set(mProgram)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        final Map<String, Object> mProgram = new HashMap<>();
+        mProgram.put("Competition", mCompetitionName);
+        mProgram.put("Discipline", discipline[programIndexes[1]]);
+        mProgram.put("Level", level[programIndexes[2]]);
+        mProgram.put("Segement", segment[programIndexes[3]]);
+        mProgram.put("userID", mCurrentUserUID);
+        //programRef.document()
+        //        .set(mProgram)
+        programRef.add(mProgram)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        // Need to also set up an element document to avoid errors, but not until we can get the document ID for the new program
+                        mCurrentProgramDocumentID = documentReference.getId();
+                        Map<String, Object> mElement = new HashMap<>();
+                        //mElement.put();
+                        mElement.put("E00", null);
+                        mElement.put("E01", null);
+                        mElement.put("E02", null);
+                        mElement.put("E03", null);
+                        mElement.put("E04", null);
+                        mElement.put("E05", null);
+                        mElement.put("E06", null);
+                        mElement.put("E07", null);
+                        mElement.put("E08", null);
+                        mElement.put("E09", null);
+                        mElement.put("E10", null);
+                        mElement.put("E11", null);
+                        mElement.put("E12", null);
+                        mElement.put("ProgramDocumentID", mCurrentProgramDocumentID);
+                        elementRef.document().set(mElement);
+        /*
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                */
+
+                        Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
         //} else {
-            //Toast.makeText(AddProgramActivity.this, "Unsuccessful - Select an Event", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddProgramActivity.this, "Unsuccessful - Select an Event", Toast.LENGTH_SHORT).show();
         //}
 
     }
