@@ -47,7 +47,7 @@ public class AddProgramActivity extends AppCompatActivity
     private FirebaseFirestore db;
     private CollectionReference programRef;
     private CollectionReference elementRef;
-    public String mCurrentProgramDocumentID;
+    public String mCurrentElementDocumentID;
     public Resources resources;
 
 
@@ -162,19 +162,36 @@ public class AddProgramActivity extends AppCompatActivity
 
         //mCompetitionNameIndex = Arrays.asList(CompetitionsList).indexOf(mCompetitionName);
         //if(mCompetitionNameIndex > 0) {
+        // Must creat element document first, so we can get an id to put in program
+        Map<String, Object> mElement = new HashMap<>();
+        mElement.put("E00", null);
+        mElement.put("E01", null);
+        mElement.put("E02", null);
+        mElement.put("E03", null);
+        mElement.put("E04", null);
+        mElement.put("E05", null);
+        mElement.put("E06", null);
+        mElement.put("E07", null);
+        mElement.put("E08", null);
+        mElement.put("E09", null);
+        mElement.put("E10", null);
+        mElement.put("E11", null);
+        mElement.put("E12", null);
+        elementRef.add(mElement)
+        /*
         final Map<String, Object> mProgram = new HashMap<>();
         mProgram.put("Competition", mCompetitionName);
         mProgram.put("Discipline", discipline[programIndexes[1]]);
         mProgram.put("Level", level[programIndexes[2]]);
-        mProgram.put("Segement", segment[programIndexes[3]]);
+        mProgram.put("Segment", segment[programIndexes[3]]);
         mProgram.put("userID", mCurrentUserUID);
-        //programRef.document()
-        //        .set(mProgram)
         programRef.add(mProgram)
+        */
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         // Need to also set up an element document to avoid errors, but not until we can get the document ID for the new program
+                        /*
                         mCurrentProgramDocumentID = documentReference.getId();
                         Map<String, Object> mElement = new HashMap<>();
                         //mElement.put();
@@ -193,6 +210,15 @@ public class AddProgramActivity extends AppCompatActivity
                         mElement.put("E12", null);
                         mElement.put("ProgramDocumentID", mCurrentProgramDocumentID);
                         elementRef.document().set(mElement);
+                        */
+                        mCurrentElementDocumentID = documentReference.getId();
+                        final Map<String, Object> mProgram = new HashMap<>();
+                        mProgram.put("Competition", mCompetitionName);
+                        mProgram.put("Discipline", discipline[programIndexes[1]]);
+                        mProgram.put("Level", level[programIndexes[2]]);
+                        mProgram.put("Segment", segment[programIndexes[3]]);
+                        mProgram.put("userID", mCurrentUserUID);
+                        programRef.add(mProgram);
         /*
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

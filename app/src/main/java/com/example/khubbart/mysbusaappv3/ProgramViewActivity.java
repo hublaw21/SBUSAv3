@@ -276,8 +276,10 @@ public class ProgramViewActivity extends AppCompatActivity {
                     mCompetitionNameTextView.setText(program.get(0).getCompetition());
                     String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
                     progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
+                    Toast.makeText(getApplicationContext(), "progPointer: " + progPointer, Toast.LENGTH_LONG).show();
                     tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
                     requiredElements = RequiredElementsValue[tempInt];
+                    //requiredElements = 12;
                     mCompetitionDescriptionTextView.setText(tempText);
                     elementID = program.get(0).getElementsID();
                     elementRef = db.collection("Elements").document(elementID);
