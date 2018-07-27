@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -268,7 +269,9 @@ public class ProgramViewActivity extends AppCompatActivity {
         } else {
             //Get program basics
             programRef = db.collection("Programs").document(mCurrentProgramID);
-            Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            Log.i("*******************programRef: ", mCurrentProgramID);
+            //Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(final DocumentSnapshot documentSnapshot) {
                     Program qProgram = documentSnapshot.toObject(Program.class);
@@ -276,12 +279,13 @@ public class ProgramViewActivity extends AppCompatActivity {
                     mCompetitionNameTextView.setText(program.get(0).getCompetition());
                     String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
                     progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
+                    Log.i("*******************progPointer: ", progPointer);
                     tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
                     requiredElements = RequiredElementsValue[tempInt];
                     mCompetitionDescriptionTextView.setText(tempText);
                     elementID = program.get(0).getElementsID();
+                    Log.i("*******************elementID: ", elementID);
                     elementRef = db.collection("Elements").document(elementID);
-
                     elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {

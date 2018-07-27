@@ -48,6 +48,7 @@ public class AddProgramActivity extends AppCompatActivity
     private CollectionReference programRef;
     private CollectionReference elementRef;
     public String mCurrentProgramDocumentID;
+    public String mCurrentElementDocumentID;
     public Resources resources;
 
 
@@ -159,6 +160,9 @@ public class AddProgramActivity extends AppCompatActivity
         //Need to verify an event has been selected
         mCompetitionName = actv.getText().toString();
         //Toast.makeText(AddProgramActivity.this, "Event Name imported: " + mCompetitionName, Toast.LENGTH_SHORT).show();
+        //Create a blank element document so we can pull id to put into
+
+
 
         //mCompetitionNameIndex = Arrays.asList(CompetitionsList).indexOf(mCompetitionName);
         //if(mCompetitionNameIndex > 0) {
@@ -166,7 +170,8 @@ public class AddProgramActivity extends AppCompatActivity
         mProgram.put("Competition", mCompetitionName);
         mProgram.put("Discipline", discipline[programIndexes[1]]);
         mProgram.put("Level", level[programIndexes[2]]);
-        mProgram.put("Segement", segment[programIndexes[3]]);
+        mProgram.put("Segment", segment[programIndexes[3]]);
+        mProgram.put("elementsID", null);
         mProgram.put("userID", mCurrentUserUID);
         //programRef.document()
         //        .set(mProgram)
@@ -192,15 +197,18 @@ public class AddProgramActivity extends AppCompatActivity
                         mElement.put("E11", null);
                         mElement.put("E12", null);
                         mElement.put("ProgramDocumentID", mCurrentProgramDocumentID);
-                        elementRef.document().set(mElement);
-        /*
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                        elementRef.add(mElement)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                // Need to put element document reference into program document
+                                @Override
+                                public void onSuccess(DocumentReference elementDocumentReference) {
+                                    mCurrentElementDocumentID = elementDocumentReference.getId();
+                                    mProgram.put("elementsID", mCurrentElementDocumentID);
+                                    programRef.document(mCurrentProgramDocumentID).update("elementsID", mCurrentElementDocumentID);
+                                    //Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
                     }
                 });
-                */
+
 
                         Toast.makeText(AddProgramActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
                     }
