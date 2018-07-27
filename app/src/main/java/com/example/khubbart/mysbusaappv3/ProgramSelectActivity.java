@@ -50,6 +50,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     private static List documentIdList;
     public String mCurrentUserUID;
     public String selectedProgramID;
+    public String selectedProgramID2;
     public String mSkaterName;
     private int position;
     public int programCount;
@@ -138,8 +139,9 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                                 program.setDocumentID(documentSnapshot.getId());
                                 programList.add(program);
                             }
-                            //programCount = documentSnapshots.size();
+                            programCount = documentSnapshots.size();
                             //selectedProgramID = documentSnapshots.toString();
+                            //Toast.makeText(getApplicationContext(), "Size: " + programCount, Toast.LENGTH_LONG).show();
                             //Toast.makeText(getApplicationContext(), "Results: " + selectedProgramID, Toast.LENGTH_LONG).show();
                             initRecycler(); //call here to force it to load the first time to activity
                             // Trying to save DocumentID for programs
@@ -174,8 +176,12 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         intentBundle.putExtras(bundle);
         startActivity(intentBundle);
         */
-        this.position = position;
+        //this.position = position;
         selectedProgramID = programList.get(position).getDocumentID();
+        //selectedProgramID = programList.get(0).getDocumentID();
+        //selectedProgramID2 = programList.get(1).getDocumentID();
+        //Toast.makeText(this, "ID1: " + selectedProgramID + " ID2: " + selectedProgramID2 + " pos: " + position, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "ID: " + selectedProgramID, Toast.LENGTH_LONG).show();
         Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("userID",mCurrentUserUID);

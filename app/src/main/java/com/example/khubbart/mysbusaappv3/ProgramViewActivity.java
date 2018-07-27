@@ -144,6 +144,8 @@ public class ProgramViewActivity extends AppCompatActivity {
             // get the info
             mCurrentUserID = extrasBundle.getString("userID");
             mCurrentProgramID = extrasBundle.getString("programID");
+            //Log.i("*******************programID: ", mCurrentProgramID);
+
             //Might want to implement as a separate thread
             init(mCurrentProgramID);  // Call the initiation method here, to ensure the IDs have been pulled
         }
@@ -261,85 +263,140 @@ public class ProgramViewActivity extends AppCompatActivity {
 
     // Initialize database, pull program and elements
     public void init(String iCurrentProgramID) {
-        // Do I neeed these?
+        /* Do I need these?
         final SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         final SharedPreferences.Editor editor = sp.edit();
-        if (iCurrentProgramID == null) {
+        //if (iCurrentProgramID == null) {
+        */
+        if (mCurrentProgramID == null) {
             // Deal with new/null program
         } else {
             //Get program basics
             programRef = db.collection("Programs").document(mCurrentProgramID);
-            Log.i("*******************programRef: ", mCurrentProgramID);
+            Log.i("*******************programID: ", mCurrentProgramID);
             //Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            //programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            //programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onSuccess(final DocumentSnapshot documentSnapshot) {
-                    Program qProgram = documentSnapshot.toObject(Program.class);
-                    program.add(qProgram);
-                    mCompetitionNameTextView.setText(program.get(0).getCompetition());
-                    String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
-                    progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
-                    Log.i("*******************progPointer: ", progPointer);
-                    tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
-                    requiredElements = RequiredElementsValue[tempInt];
-                    mCompetitionDescriptionTextView.setText(tempText);
-                    elementID = program.get(0).getElementsID();
-                    Log.i("*******************elementID: ", elementID);
-                    elementRef = db.collection("Elements").document(elementID);
-                    elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                Elements qElements = documentSnapshot.toObject(Elements.class);
-                                elements.add(qElements);
-                                int eCount = 0;
-                                mElementCode[0] = elements.get(0).getE00();
-                                mElementCode[1] = elements.get(0).getE01();
-                                mElementCode[2] = elements.get(0).getE02();
-                                mElementCode[3] = elements.get(0).getE03();
-                                mElementCode[4] = elements.get(0).getE04();
-                                mElementCode[5] = elements.get(0).getE05();
-                                mElementCode[6] = elements.get(0).getE06();
-                                mElementCode[7] = elements.get(0).getE07();
-                                mElementCode[8] = elements.get(0).getE08();
-                                mElementCode[9] = elements.get(0).getE09();
-                                mElementCode[10] = elements.get(0).getE10();
-                                mElementCode[11] = elements.get(0).getE11();
-                                mElementCode[12] = elements.get(0).getE12();
-                                technicalTotal = 0;
-                                for (int i = 0; i < requiredElements; i++) {
-                                    if (mElementCode[i] != null) {
-                                        getElementInfo(mElementCode[i], i);
+                //public void onComplete(final DocumentSnapshot documentSnapshot) {
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        Program qProgram = documentSnapshot.toObject(Program.class);
+                        program.add(qProgram);
+                        mCompetitionNameTextView.setText(program.get(0).getCompetition());
+                        String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
+                        progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
+                        //Log.i("*******************programRef: ", mCurrentProgramID);
+                        //Log.i("*******************progPointer: ", progPointer);
+                        tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
+                        requiredElements = RequiredElementsValue[tempInt];
+                        mCompetitionDescriptionTextView.setText(tempText);
+                        elementID = program.get(0).getElementsID();
+                        //Log.i("*******************elementID: ", elementID);
+                        elementRef = db.collection("Elements").document(elementID);
+                        elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot documentSnapshot = task.getResult();
+                                    Elements qElements = documentSnapshot.toObject(Elements.class);
+                                    elements.add(qElements);
+                                    int eCount = 0;
+                                    mElementCode[0] = elements.get(0).getE00();
+                                    mElementCode[1] = elements.get(0).getE01();
+                                    mElementCode[2] = elements.get(0).getE02();
+                                    mElementCode[3] = elements.get(0).getE03();
+                                    mElementCode[4] = elements.get(0).getE04();
+                                    mElementCode[5] = elements.get(0).getE05();
+                                    mElementCode[6] = elements.get(0).getE06();
+                                    mElementCode[7] = elements.get(0).getE07();
+                                    mElementCode[8] = elements.get(0).getE08();
+                                    mElementCode[9] = elements.get(0).getE09();
+                                    mElementCode[10] = elements.get(0).getE10();
+                                    mElementCode[11] = elements.get(0).getE11();
+                                    mElementCode[12] = elements.get(0).getE12();
+                                    technicalTotal = 0;
+                                    for (int i = 0; i < requiredElements; i++) {
+                                        if (mElementCode[i] != null) {
+                                            getElementInfo(mElementCode[i], i);
+                                        }
                                     }
-                                }
-                                // Set the initial totalTechnical
-                                tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
-                                mTechnicalTotalTextView.setText(tempString);
-                                // Hide rows not used for the program
-                                for (i = requiredElements; i < 13; i++) {
-                                    if (i < 10) {
-                                        tempString = "elementRow0" + i;
-                                    } else {
-                                        tempString = "elementRow" + i;
+                                    // Set the initial totalTechnical
+                                    tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
+                                    mTechnicalTotalTextView.setText(tempString);
+                                    // Hide rows not used for the program
+                                    for (i = requiredElements; i < 13; i++) {
+                                        if (i < 10) {
+                                            tempString = "elementRow0" + i;
+                                        } else {
+                                            tempString = "elementRow" + i;
+                                        }
+                                        int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+                                        TableRow tr = findViewById(resID);
+                                        tr.setVisibility(View.GONE);
                                     }
-                                    int resID = getResources().getIdentifier(tempString, "id", getPackageName());
-                                    TableRow tr = findViewById(resID);
-                                    tr.setVisibility(View.GONE);
                                 }
                             }
-                        }
-                    });
-                    // Why do I need to save this here?
+                        });
+                        // Why do I need to save this here?
                     /*
                     editor.putString(ELEMENT_ID_KEY, elementID);
                     editor.apply();
                     getElements();
                     */
-                }
-            });
+                    }
+                });
+
         }
     }
+
+    public void pullElements(String mElementsID){
+        elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    Elements qElements = documentSnapshot.toObject(Elements.class);
+                    elements.add(qElements);
+                    int eCount = 0;
+                    mElementCode[0] = elements.get(0).getE00();
+                    mElementCode[1] = elements.get(0).getE01();
+                    mElementCode[2] = elements.get(0).getE02();
+                    mElementCode[3] = elements.get(0).getE03();
+                    mElementCode[4] = elements.get(0).getE04();
+                    mElementCode[5] = elements.get(0).getE05();
+                    mElementCode[6] = elements.get(0).getE06();
+                    mElementCode[7] = elements.get(0).getE07();
+                    mElementCode[8] = elements.get(0).getE08();
+                    mElementCode[9] = elements.get(0).getE09();
+                    mElementCode[10] = elements.get(0).getE10();
+                    mElementCode[11] = elements.get(0).getE11();
+                    mElementCode[12] = elements.get(0).getE12();
+                    technicalTotal = 0;
+                    for (int i = 0; i < requiredElements; i++) {
+                        if (mElementCode[i] != null) {
+                            getElementInfo(mElementCode[i], i);
+                        }
+                    }
+                    // Set the initial totalTechnical
+                    tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
+                    mTechnicalTotalTextView.setText(tempString);
+                    // Hide rows not used for the program
+                    for (i = requiredElements; i < 13; i++) {
+                        if (i < 10) {
+                            tempString = "elementRow0" + i;
+                        } else {
+                            tempString = "elementRow" + i;
+                        }
+                        int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+                        TableRow tr = findViewById(resID);
+                        tr.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
 
     private void UpdateElements() {
         //elementRef should still be good
