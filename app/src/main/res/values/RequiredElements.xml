@@ -17,6 +17,21 @@
         <item>NoviceMenShort</item>
         <item>IntermediateMenShort</item>
         <item>JuvenileMenShort</item>
+        <item>SeniorLadiesFree Skate</item>
+        <item>JuniorLadiesFree Skate</item>
+        <item>NoviceLadiesFree Skate</item>
+        <item>IntermediateLadiesFree Skate</item>
+        <item>JuvenileLadiesFree Skate</item>
+        <item>SeniorMenFree Skate</item>
+        <item>JuniorMenFree Skate</item>
+        <item>NoviceMenFree Skate</item>
+        <item>IntermediateMenFree Skate</item>
+        <item>JuvenileMenFree Skate</item>
+        <item>SeniorPairsFree Skate</item>
+        <item>JuniorPairsFree Skate</item>
+        <item>NovicePairsFree Skate</item>
+        <item>IntermediatePairsFree Skate</item>
+        <item>JuvenilePairsFree Skate</item>
     </string-array>
     <integer-array name="requiredElementsValueArray">
         <item>7</item>
@@ -34,5 +49,20 @@
         <item>6</item>
         <item>6</item>
         <item>6</item>
+        <item>12</item>
+        <item>11</item>
+        <item>10</item>
+        <item>9</item>
+        <item>8</item>
+        <item>12</item>
+        <item>11</item>
+        <item>11</item>
+        <item>9</item>
+        <item>8</item>
+        <item>11</item>
+        <item>10</item>
+        <item>11</item>
+        <item>10</item>
+        <item>8</item>
     </integer-array>
 </resources>

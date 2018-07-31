@@ -96,15 +96,11 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         // Set up db, recycler and get initial list of programs
         init();
         getListPrograms();
-        //initRecycler();
     }
-
-    // Need to setup on click for selecting a program
 
     // Initialize database and recyclerview
     private void init() {
         // Access Firestore
-
         db = FirebaseFirestore.getInstance();
         skatersCollectionDb = db.collection("Skaters");
         programCollectionDb = db.collection("Programs");
@@ -140,9 +136,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
                                 programList.add(program);
                             }
                             programCount = documentSnapshots.size();
-                            //selectedProgramID = documentSnapshots.toString();
-                            //Toast.makeText(getApplicationContext(), "Size: " + programCount, Toast.LENGTH_LONG).show();
-                            //Toast.makeText(getApplicationContext(), "Results: " + selectedProgramID, Toast.LENGTH_LONG).show();
                             initRecycler(); //call here to force it to load the first time to activity
                             // Trying to save DocumentID for programs
                         }
@@ -181,7 +174,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         //selectedProgramID = programList.get(0).getDocumentID();
         //selectedProgramID2 = programList.get(1).getDocumentID();
         //Toast.makeText(this, "ID1: " + selectedProgramID + " ID2: " + selectedProgramID2 + " pos: " + position, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "ID: " + selectedProgramID, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "ID: " + selectedProgramID, Toast.LENGTH_LONG).show();
         Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("userID",mCurrentUserUID);

@@ -159,13 +159,19 @@ public class AddProgramActivity extends AppCompatActivity
     private void addProgram() {
         //Need to verify an event has been selected
         mCompetitionName = actv.getText().toString();
+        //Check to be sure competition has been elected
+        mCompetitionNameIndex = mCompetitionName.length();
+        //Toast.makeText(AddProgramActivity.this, "Length: " + mCompetitionNameIndex, Toast.LENGTH_SHORT).show();
+        if (mCompetitionNameIndex >0){
+            //Check to verify one of the actual comps, not just letters
+            Toast.makeText(AddProgramActivity.this, "??Length: " + mCompetitionNameIndex, Toast.LENGTH_SHORT).show();
+        } else {
+            mCompetitionName = "Template"; // Eventually,point to the temaplte in the competitions collection
+        }
         //Toast.makeText(AddProgramActivity.this, "Event Name imported: " + mCompetitionName, Toast.LENGTH_SHORT).show();
         //Create a blank element document so we can pull id to put into
-
-
-
-        //mCompetitionNameIndex = Arrays.asList(CompetitionsList).indexOf(mCompetitionName);
         //if(mCompetitionNameIndex > 0) {
+        //if(mCompetitionNameIndex == -1) mCompetitionName = "Template";
         final Map<String, Object> mProgram = new HashMap<>();
         mProgram.put("Competition", mCompetitionName);
         mProgram.put("Discipline", discipline[programIndexes[1]]);

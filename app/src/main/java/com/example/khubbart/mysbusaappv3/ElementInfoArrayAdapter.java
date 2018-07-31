@@ -9,12 +9,16 @@ import android.widget.TextView;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class ElementInfoArrayAdapter extends RecyclerView.Adapter<ElementInfoArrayAdapter.ViewHolder> {
     //All methods in this adapter are required for a bare minimum recyclerview adapter
     private int listElementInfoLayout;
     private ArrayList<ElementInfo> elementInfoList;
+    public String tempString;
+    NumberFormat numberFormat = new DecimalFormat("###.00");
 
     // Constructor of the class
     public ElementInfoArrayAdapter(int layoutId, ArrayList<ElementInfo> elementInfoList) {
@@ -45,7 +49,7 @@ public class ElementInfoArrayAdapter extends RecyclerView.Adapter<ElementInfoArr
         TextView elementBaseValueTV = holder.elementBaseValueTV;
         elementCodeTV.setText(elementInfoList.get(listPosition).getElementCode());
         elementNameTV.setText(elementInfoList.get(listPosition).getElementName());
-        elementBaseValueTV.setText(elementInfoList.get(listPosition).getElementBaseValue());
+        elementBaseValueTV.setText(numberFormat.format(elementInfoList.get(listPosition).getElementBaseValue()));
     }
 
     // Static inner class to initialize the views of rows

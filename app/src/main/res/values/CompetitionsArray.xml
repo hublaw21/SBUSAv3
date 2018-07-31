@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="competitionNamesArray">
-        <item>Template - For generic entry</item>
+        <item>Template</item>
         <item>Cannon TX Open</item>
         <item>Skate Milwaukee </item>
         <item>Kathy Slack Troy Summer Comp</item>

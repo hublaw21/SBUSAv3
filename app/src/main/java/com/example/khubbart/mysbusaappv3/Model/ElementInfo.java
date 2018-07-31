@@ -4,16 +4,16 @@ public class ElementInfo {
 
     private String ElementCode;
     private String ElementName;
-    private String ElementBaseValue;
+    private Double ElementBaseValue;
 
     //Required No Argument Constructor
     ElementInfo(){
         this.ElementCode = " ";
         this.ElementName = " ";
-        this.ElementBaseValue = " ";
+        this.ElementBaseValue = 0.0;
     }
 
-    public ElementInfo(String elementCode, String elementName, String elementBaseValue){
+    public ElementInfo(String elementCode, String elementName, Double elementBaseValue){
         this.ElementCode = elementCode;
         this.ElementName = elementName;
         this.ElementBaseValue = elementBaseValue;
@@ -35,11 +35,11 @@ public class ElementInfo {
         ElementName = elementName;
     }
 
-    public String getElementBaseValue() {
+    public Double getElementBaseValue() {
         return ElementBaseValue;
     }
 
-    public void setElementBaseValue(String elementBaseValue) {
+    public void setElementBaseValue(Double elementBaseValue) {
         ElementBaseValue = elementBaseValue;
     }
 }

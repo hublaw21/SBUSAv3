@@ -36,6 +36,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.DoubleStream;
 
 public class ProgramViewActivity extends AppCompatActivity {
 
@@ -72,7 +73,7 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String mCurrentProgramID;
     public String[] mElementCode = new String[13];
     public String[] mElementName = new String[13];
-    public String[] mElementBaseValue = new String[13];
+    public Double[] mElementBaseValue = new Double[13];
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
@@ -295,6 +296,8 @@ public class ProgramViewActivity extends AppCompatActivity {
                         mCompetitionDescriptionTextView.setText(tempText);
                         elementID = program.get(0).getElementsID();
                         //Log.i("*******************elementID: ", elementID);
+                        pullElements(elementID);
+                        /*
                         elementRef = db.collection("Elements").document(elementID);
                         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -320,7 +323,7 @@ public class ProgramViewActivity extends AppCompatActivity {
                                     technicalTotal = 0;
                                     for (int i = 0; i < requiredElements; i++) {
                                         if (mElementCode[i] != null) {
-                                            getElementInfo(mElementCode[i], i);
+                                            pullElementInfo(mElementCode[i], i);
                                         }
                                     }
                                     // Set the initial totalTechnical
@@ -339,7 +342,8 @@ public class ProgramViewActivity extends AppCompatActivity {
                                     }
                                 }
                             }
-                        });
+                                                });
+                                                */
                         // Why do I need to save this here?
                     /*
                     editor.putString(ELEMENT_ID_KEY, elementID);
@@ -347,12 +351,13 @@ public class ProgramViewActivity extends AppCompatActivity {
                     getElements();
                     */
                     }
-                });
-
+                }
+            });
         }
-    }
+    };
 
-    public void pullElements(String mElementsID){
+    public void pullElements(String mElementsID) {
+        elementRef = db.collection("Elements").document(mElementsID);
         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -377,11 +382,11 @@ public class ProgramViewActivity extends AppCompatActivity {
                     technicalTotal = 0;
                     for (int i = 0; i < requiredElements; i++) {
                         if (mElementCode[i] != null) {
-                            getElementInfo(mElementCode[i], i);
+                            pullElementInfo(mElementCode[i], i);
                         }
                     }
                     // Set the initial totalTechnical
-                    tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
+                    tempString = "Total Base Value: " + numberFormat.format(sumTech());
                     mTechnicalTotalTextView.setText(tempString);
                     // Hide rows not used for the program
                     for (i = requiredElements; i < 13; i++) {
@@ -397,30 +402,31 @@ public class ProgramViewActivity extends AppCompatActivity {
                 }
             }
         });
-
-    private void UpdateElements() {
-        //elementRef should still be good
-        elementRef.update("E00", mElementCode[0]);
-        elementRef.update("E01", mElementCode[1]);
-        elementRef.update("E02", mElementCode[2]);
-        elementRef.update("E03", mElementCode[3]);
-        elementRef.update("E04", mElementCode[4]);
-        elementRef.update("E05", mElementCode[5]);
-        elementRef.update("E06", mElementCode[6]);
-        elementRef.update("E07", mElementCode[7]);
-        elementRef.update("E08", mElementCode[8]);
-        elementRef.update("E09", mElementCode[9]);
-        elementRef.update("E10", mElementCode[10]);
-        elementRef.update("E11", mElementCode[11]);
-        elementRef.update("E12", mElementCode[12])
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(ProgramViewActivity.this, "Updated Successfully",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
+
+        private void UpdateElements () {
+            //elementRef should still be good
+            elementRef.update("E00", mElementCode[0]);
+            elementRef.update("E01", mElementCode[1]);
+            elementRef.update("E02", mElementCode[2]);
+            elementRef.update("E03", mElementCode[3]);
+            elementRef.update("E04", mElementCode[4]);
+            elementRef.update("E05", mElementCode[5]);
+            elementRef.update("E06", mElementCode[6]);
+            elementRef.update("E07", mElementCode[7]);
+            elementRef.update("E08", mElementCode[8]);
+            elementRef.update("E09", mElementCode[9]);
+            elementRef.update("E10", mElementCode[10]);
+            elementRef.update("E11", mElementCode[11]);
+            elementRef.update("E12", mElementCode[12])
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(ProgramViewActivity.this, "Updated Successfully",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
 
     /*
     public void getElements() {
@@ -462,7 +468,7 @@ public class ProgramViewActivity extends AppCompatActivity {
                     technicalTotal = 0;
                     for (int i = 0; i < requiredElements; i++) {
                         if (mElementCode[i] != null) {
-                            getElementInfo(mElementCode[i], i);
+                            pullElementInfo(mElementCode[i], i);
                             /*
                             // Get the index to look up the element
                             int currentSOVIndex = Arrays.asList(SOVCode).indexOf(mElementCode[i]);
@@ -506,35 +512,39 @@ public class ProgramViewActivity extends AppCompatActivity {
     }
     */
 
-    public void getSOV() {
-        //Get SOV Table 2018 - Three matched arrays
-        Resources resources = getResources();
-        SOVCode = resources.getStringArray(R.array.SOV_Code);
-        SOVName = resources.getStringArray(R.array.SOV_Name);
-        SOVBase = resources.getStringArray(R.array.SOV_Base);
-        RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
-        RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
-    }
+        public void getSOV () {
+            //Get SOV Table 2018 - Three matched arrays
+            Resources resources = getResources();
+            SOVCode = resources.getStringArray(R.array.SOV_Code);
+            SOVName = resources.getStringArray(R.array.SOV_Name);
+            SOVBase = resources.getStringArray(R.array.SOV_Base);
+            RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
+            RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
+        }
 
-    public void getElementInfo(String tElementCode, int gNum) {
-        int currentSOVIndex = Arrays.asList(SOVCode).indexOf(tElementCode);
-        // Need to add error checker for code not found
-        if (currentSOVIndex > 0) {
-            mElementName[gNum] = Arrays.asList(SOVName).get(currentSOVIndex);
-            if (mElementBaseValue[gNum] != null)
-                technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
-            mElementBaseValue[gNum] = Arrays.asList(SOVBase).get(currentSOVIndex);
-            technicalTotal += Double.valueOf(mElementBaseValue[gNum]); // Add in new value
-            mElementCode[gNum] = tElementCode;
-            changeButton(gNum, tElementCode);
-            mElementNameTextView[gNum].setText(mElementName[gNum]);
-            mElementBaseValueTextView[gNum].setText(mElementBaseValue[gNum]);
-            elementInfoList.add(new ElementInfo(mElementCode[gNum], mElementName[gNum], mElementBaseValue[gNum]));
-        } else {
-            //Check for combo or change to unfound
-            checkForComboJump(tElementCode, gNum);
-
-            //Add info for unentered required elements
+        public void pullElementInfo(String pElementCode, int pNum){
+            int currentSOVIndex = Arrays.asList(SOVCode).indexOf(pElementCode);
+            // Need to add error checker for code not found
+            if (currentSOVIndex > 0) {
+                mElementName[pNum] = Arrays.asList(SOVName).get(currentSOVIndex);
+                mElementBaseValue[pNum] = Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
+                /*
+                if (mElementBaseValue[pNum] != null)
+                    technicalTotal -= Double.valueOf(mElementBaseValue[pNum]); // Subtract old value
+                mElementBaseValue[pNum] = Arrays.asList(SOVBase).get(currentSOVIndex);
+                technicalTotal += Double.valueOf(mElementBaseValue[pNum]); // Add in new value
+                */
+                mElementCode[pNum] = pElementCode;
+                changeButton(pNum, pElementCode);
+                mElementNameTextView[pNum].setText(mElementName[pNum]);
+                tempString = numberFormat.format(mElementBaseValue[pNum]);
+                mElementBaseValueTextView[pNum].setText(tempString);
+                elementInfoList.add(new ElementInfo(mElementCode[pNum], mElementName[pNum], mElementBaseValue[pNum]));
+            } else {
+                //Check for combo or change to unfound////
+                Log.i("*******************pElementCode: ", pElementCode);
+                if(pElementCode != null) checkForComboJump(pElementCode, pNum);
+                //Add info for unentered required elements
             /*
             mElementCode[gNum] = null;
             tElementCode = "Add";
@@ -543,122 +553,133 @@ public class ProgramViewActivity extends AppCompatActivity {
             technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
             mElementBaseValueTextView[gNum].setText("0.00");
             */
-            //elementInfoList.add(new ElementInfo(mElementCode[num], mElementName, mElementBaseValue)); // Do I keep adding or replace, do I even need if I am putting in array?
+                //elementInfoList.add(new ElementInfo(mElementCode[num], mElementName, mElementBaseValue)); // Do I keep adding or replace, do I even need if I am putting in array?
+            }
+            tempString = "Total Base Value: " + numberFormat.format(sumTech());
+            mTechnicalTotalTextView.setText(tempString);
         }
-        tempString = "Total Base Value: " + numberFormat.format(technicalTotal);
-        mTechnicalTotalTextView.setText(tempString);
-    }
 
-    public void checkForComboJump(String tElementCode, int gNum) {
-        tempTrimmedString = tElementCode.replaceAll("\\s+", ""); //Trim any spaces
-        elementCodeCArray = tempTrimmedString.toCharArray();
-        num = 0;
-        eStart = 0;
-        eEnd = 0;
-        tempComboTotal = 0.0;
-        for (i = 0; i < elementCodeCArray.length; i++) {
-            tempString = String.copyValueOf(elementCodeCArray, i, 1);
-            if (tempString.equals("+")) {
-                //We have a combo
-                eEnd = i; // IN substring, end position is not included in extract
-                comboCode[num] = tempTrimmedString.substring(eStart, eEnd);
+        public void checkForComboJump(String cElementCode, int cNum){
+            //Toast.makeText(ProgramViewActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
+            tempTrimmedString = cElementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
+            elementCodeCArray = tempTrimmedString.toCharArray();
+            num = 0;
+            eStart = 0;
+            eEnd = 0;
+            tempComboTotal = 0.0;
+            for (i = 0; i < elementCodeCArray.length; i++) {
+                tempString = String.copyValueOf(elementCodeCArray, i, 1);
+                if (tempString.equals("+")) {
+                    //We have a combo
+                    eEnd = i; // IN substring, end position is not included in extract
+                    comboCode[num] = tempTrimmedString.substring(eStart, eEnd);
+                    int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
+                    if (currentSOVIndex > 0)
+                        tempComboTotal += Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
+                    num = num + 1;
+                    eStart = i + 1;
+                }
+            }
+            if (tempComboTotal > 0) {
+                //Add last item of combo
+                comboCode[num] = tempTrimmedString.substring(eStart); // This should take it thru the end
                 int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
                 if (currentSOVIndex > 0)
                     tempComboTotal += Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
-                num = num + 1;
-                eStart = i + 1;
+                mElementCode[cNum] = tempTrimmedString;
+                cElementCode = "Combo";
+                mElementName[cNum] = tempTrimmedString;
+                mElementBaseValue[cNum] = tempComboTotal;
+            } else {
+                //Add info for non-combo and not found code
+                mElementCode[cNum] = null;
+                mElementName[cNum] = cElementCode + " not found";
+                cElementCode = "Add";
+                changeButton(cNum, cElementCode);
+                mElementBaseValueTextView[cNum].setText("0.00");
             }
-        }
-        if (tempComboTotal > 0) {
-            //Add last item of combo
-            comboCode[num] = tempTrimmedString.substring(eStart); // This should take it thru the end
-            int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
-            if (currentSOVIndex > 0)
-                tempComboTotal += Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
-            mElementCode[gNum] = "Combo";
-            tElementCode = "Combo";
-            mElementName[gNum] = tempTrimmedString;
-            mElementBaseValue[gNum] = String.valueOf(tempComboTotal);
-        } else {
-            //Add info for non-combo and not found code
-            mElementCode[gNum] = null;
-            mElementName[gNum] = tElementCode + " not found";
-            tElementCode = "Add";
-            changeButton(gNum, tElementCode);
-            technicalTotal -= Double.valueOf(mElementBaseValue[gNum]); // Subtract old value
-            mElementBaseValueTextView[gNum].setText("0.00");
+
+            changeButton(cNum, cElementCode);
+            mElementNameTextView[cNum].setText(mElementName[cNum]);
+            mElementBaseValueTextView[cNum].setText(numberFormat.format(mElementBaseValue[cNum]));
         }
 
-        changeButton(gNum, tElementCode);
-        mElementNameTextView[gNum].setText(mElementName[gNum]);
-        mElementBaseValueTextView[gNum].setText(mElementBaseValue[gNum]);
-    }
-
-    public void changeButton(int cNum, String tElementCode) {
-        // Change the button text to match element code
-        if (cNum < 10) {
-            tempString = "buttonRow0" + cNum;
-        } else {
-            tempString = "buttonRow" + cNum;
+        //A basic method to get total technical value
+        public Double sumTech(){
+            double sumTech = 0;
+            for (int i = 0; i<13; i++) {
+                if(mElementBaseValue[i] != null) {
+                    sumTech += mElementBaseValue[i];
+                }
+            }
+            return sumTech;
         }
-        int resID = getResources().getIdentifier(tempString, "id", getPackageName());
-        tempButton = findViewById(resID);
-        if (tempButton != null) tempButton.setText(tElementCode);
-        // put button in here
+
+        public void changeButton ( int cNum, String tElementCode){
+            // Change the button text to match element code
+            if (cNum < 10) {
+                tempString = "buttonRow0" + cNum;
+            } else {
+                tempString = "buttonRow" + cNum;
+            }
+            int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+            tempButton = findViewById(resID);
+            if (tempButton != null) tempButton.setText(tElementCode);
+            // put button in here
+        }
+
+        public void changeButtonDialog ( final int tNum){
+            // Build an AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.alertdialog_change_element, null);
+
+            // Specify alert dialog is not cancelable/not ignorable
+            builder.setCancelable(false);
+
+            // Set the custom layout as alert dialog view
+            builder.setView(dialogView);
+
+            // Get the custom alert dialog view widgets reference
+            Button submitButton = (Button) dialogView.findViewById(R.id.dialog_change_element_submit_button);
+            Button lookupButton = (Button) dialogView.findViewById(R.id.dialog_change_element_lookup_button);
+            Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_change_element_cancel_button);
+            final EditText editTextElementCode = (EditText) dialogView.findViewById(R.id.edittext_change_element_code);
+
+            // Create the alert dialog
+            final AlertDialog dialog = builder.create();
+
+            // Set submit button click listener
+            submitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                    String tElementCode = editTextElementCode.getText().toString();
+                    //int ttNum = tNum; // needs to track element number from list
+                    pullElementInfo(tElementCode, tNum);
+                }
+            });
+
+            // Set lookup button click listener
+            lookupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Need to add looup routine here
+
+                    // Dismiss/cancel the alert dialog
+                    dialog.dismiss();
+                }
+            });
+
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            // Display the custom alert dialog on interface
+            dialog.show();
+        }
     }
-
-    public void changeButtonDialog(final int tNum) {
-        // Build an AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.alertdialog_change_element, null);
-
-        // Specify alert dialog is not cancelable/not ignorable
-        builder.setCancelable(false);
-
-        // Set the custom layout as alert dialog view
-        builder.setView(dialogView);
-
-        // Get the custom alert dialog view widgets reference
-        Button submitButton = (Button) dialogView.findViewById(R.id.dialog_change_element_submit_button);
-        Button lookupButton = (Button) dialogView.findViewById(R.id.dialog_change_element_lookup_button);
-        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_change_element_cancel_button);
-        final EditText editTextElementCode = (EditText) dialogView.findViewById(R.id.edittext_change_element_code);
-
-        // Create the alert dialog
-        final AlertDialog dialog = builder.create();
-
-        // Set submit button click listener
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.cancel();
-                String tElementCode = editTextElementCode.getText().toString();
-                //int ttNum = tNum; // needs to track element number from list
-                getElementInfo(tElementCode, tNum);
-            }
-        });
-
-        // Set lookup button click listener
-        lookupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Need to add looup routine here
-
-                // Dismiss/cancel the alert dialog
-                dialog.dismiss();
-            }
-        });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        // Display the custom alert dialog on interface
-        dialog.show();
-    }
-}
