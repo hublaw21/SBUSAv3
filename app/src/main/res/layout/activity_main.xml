@@ -46,6 +46,15 @@
     -->
 
     <Button
+        android:id="@+id/buttonMainSDG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_box_default"
+        android:text="Test Scoring Page"
+        android:textSize="@dimen/textLarge" />
+
+    <Button
         android:id="@+id/buttonMainProgramSelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

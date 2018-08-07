@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonMain01 = (Button) findViewById(R.id.buttonMain01);
         buttonMainProfile = (Button) findViewById(R.id.buttonMainProfile);
-        //buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
+        buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
         buttonMainProgramSelect = (Button) findViewById(R.id.buttonMainProgramSelect);
         buttonMainLogOut = (Button) findViewById(R.id.buttonMainLogOut);
         textViewSkaterName = findViewById(R.id.textViewSkaterName);
@@ -79,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         */
+
+        buttonMainGenerateSampleData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, ProgramScoringViewActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
 
         buttonMainProgramSelect.setOnClickListener(new View.OnClickListener() {
             @Override

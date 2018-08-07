@@ -175,7 +175,8 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         //selectedProgramID2 = programList.get(1).getDocumentID();
         //Toast.makeText(this, "ID1: " + selectedProgramID + " ID2: " + selectedProgramID2 + " pos: " + position, Toast.LENGTH_LONG).show();
         //Toast.makeText(this, "ID: " + selectedProgramID, Toast.LENGTH_LONG).show();
-        Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+        Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+        //Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("userID",mCurrentUserUID);
         bundle.putString("programID",selectedProgramID);

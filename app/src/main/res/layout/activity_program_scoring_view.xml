@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProgramScoringViewActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".ProgramScoringViewActivity">
+
+        <TextView
+            android:id="@+id/textViewProgramDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/elementTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:background="@drawable/dark_box_default_shape"
+            android:text="Elements:"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textMedium" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/programElementsTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:id="@+id/elementHeaderRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="Element"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:text="Base"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:text="GOE Slider"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="GOE"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:text="Score"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow00"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow00"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow00"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow00"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement00"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow00"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow00"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow01"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow01"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow01"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.01"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="101"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow01"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow01"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow02"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow02"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow02"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow02"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement02"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow02"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow02"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow03"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow03"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow03"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow03"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow03"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow03"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow04"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow04"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow04"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow04"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow04"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement04"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow04"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow04"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow05"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow05"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow05"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow05"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement05"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow05"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow05"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow06"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow06"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow06"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow06"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow06"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement06"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow06"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow06"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow07"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow07"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow07"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow07"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow07"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement07"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow07"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow07"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow08"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow08"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow08"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow08"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement08"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow08"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow08"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow09"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow09"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow09"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow09"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow09"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement09"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow09"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow09"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow10"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow10"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow10"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow10"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow10"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow11"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow11"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow11"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow11"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow11"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/elementRow12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/elementIdRow12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="3"
+                        android:text="3T" />
+
+                    <TextView
+                        android:id="@+id/elementTicRow12"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBonusRow12"
+                        android:layout_width="0dp"
+                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/elementBaseRow12"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarElement12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:max="100"
+                        android:progress="50" />
+
+                    <TextView
+                        android:id="@+id/elementGOERow12"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="2"
+                        android:text="0.0"
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/elementScoreRow12"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="3"
+                        android:text="0.00"
+                        android:textAlignment="textEnd" />
+
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

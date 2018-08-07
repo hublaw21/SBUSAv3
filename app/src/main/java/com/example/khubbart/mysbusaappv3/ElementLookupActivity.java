@@ -273,6 +273,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
 
         } else {
             fragment[1] = new SelectLiftNameFragment();
+            elementCodeParts[2] = "BLi";
             resID = getResources().getIdentifier("container1", "id", getPackageName());
             ft.replace(resID, fragment[1]);
             ft.commit();
@@ -394,7 +395,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 // Spins
                 elementCodeParts[0] = "";
                 elementCodeParts[1] = "";
-                elementCodeParts[2] = "USp";
+                elementCodeParts[2] = "CSp";
                 elementCodeParts[3] = "B";
                 fragment[0] = new SelectFlyingSwitchFragment();
                 fragment[1] = new SelectSpinNameFragment();
@@ -421,7 +422,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
                 elementCodeParts[2] = "Li";
                 elementCodeParts[3] = "B";
                 fragment[0] = new SelectGroupFragment();
-                fragment[1] = new SelectLiftNameFragment();
+                fragment[1] = new EmptyFragment();
                 fragment[2] = new SelectLevelFragment();
                 fragment[3] = new EmptyFragment();
                 break;

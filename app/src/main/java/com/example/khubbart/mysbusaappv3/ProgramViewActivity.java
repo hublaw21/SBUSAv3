@@ -665,10 +665,21 @@ public class ProgramViewActivity extends AppCompatActivity {
             lookupButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Need to add looup routine here
-
                     // Dismiss/cancel the alert dialog
                     dialog.dismiss();
+                    // Add lookup routine here
+                    /*
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    LayoutInflater inflater = getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.activity_element_lookup, null);
+                    builder.setCancelable(false);
+                    builder.setView(dialogView);
+                    Intent intentBundle = new Intent(ProgramViewActivity.this, ElementLookupActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("eleNum",num);
+                    intentBundle.putExtras(bundle);
+                    startActivity(intentBundle);
+                    */
                 }
             });
 
