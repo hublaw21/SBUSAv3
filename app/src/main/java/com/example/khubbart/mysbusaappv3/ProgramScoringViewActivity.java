@@ -183,10 +183,12 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             elementIDTextView[i] = findViewById(resID);
+            /*
             resID = getResources().getIdentifier(tempRowBonus, "id", getPackageName());
             elementBonusTextView[i] = findViewById(resID);
             resID = getResources().getIdentifier(tempRowTic, "id", getPackageName());
             elementBonusTextView[i] = findViewById(resID);
+            */
             resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
             elementBaseTextView[i] = findViewById(resID);
             resID = getResources().getIdentifier(tempRowGOE, "id", getPackageName());

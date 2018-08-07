@@ -23,9 +23,9 @@
             android:id="@+id/elementTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
             android:background="@drawable/dark_box_default_shape"
             android:text="Elements:"
+            android:textAlignment="textEnd"
             android:textColor="@color/white"
             android:textSize="@dimen/textMedium" />
 
@@ -51,21 +51,15 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_marginLeft="@dimen/sideBorder"
+                        android:layout_marginTop="@dimen/mediumBorder"
                         android:layout_weight="3"
                         android:text="Element"
+                        android:textAlignment="textStart"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
-                        android:layout_weight="1"
-                        android:text=""
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
                         android:layout_weight="1"
                         android:text=""
                         android:textColor="@color/black" />
@@ -74,6 +68,13 @@
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:text="Base"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text=""
                         android:textColor="@color/black" />
 
                     <TextView
@@ -81,6 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
                         android:text="GOE Slider"
+                        android:textAlignment="center"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -88,12 +90,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:text="GOE"
+                        android:textAlignment="center"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="0dp"
+                        android:layout_marginRight="@dimen/sideBorder"
                         android:layout_weight="3"
                         android:text="Score"
+                        android:textAlignment="textEnd"
                         android:textColor="@color/black" />
 
                 </TableRow>
@@ -101,40 +106,54 @@
                 <TableRow
                     android:id="@+id/elementRow00"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mediumBorder">
 
                     <TextView
                         android:id="@+id/elementIdRow00"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_marginLeft="@dimen/sideBorder"
                         android:layout_weight="3"
-                        android:text="3T" />
+                        android:textAlignment="textStart" />
 
-                    <TextView
-                        android:id="@+id/elementTicRow00"
+                    <ToggleButton
+                        android:id="@+id/elementTicToggle00"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/elementBonusRow00"
-                        android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn="x"
+                        android:textAlignment="center"
+                        android:background="@drawable/toggle_button_box_small_default"
+                        android:button="@drawable/toggle_button_box_small_default"
+                        android:checked="true"
+                        android:gravity="center_vertical"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBaseRow00"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="0dp"
                         android:layout_weight="3"
                         android:text="0.00"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="center" />
+
+                    <ToggleButton
+                        android:id="@+id/elementBonusToggle00"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn="x"
+                        android:background="@drawable/toggle_button_box_small_default"
+                        android:button="@drawable/toggle_button_box_small_default"
+                        android:checked="true"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1" />
 
                     <SeekBar
                         android:id="@+id/seekBarElement00"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="8"
                         android:max="100"
                         android:progress="50" />
@@ -142,15 +161,16 @@
                     <TextView
                         android:id="@+id/elementGOERow00"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:text="0.0"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/elementScoreRow00"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/sideBorder"
                         android:layout_weight="3"
                         android:text="0.00"
                         android:textAlignment="textEnd" />
@@ -166,20 +186,20 @@
                         android:id="@+id/elementIdRow01"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow01"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow01"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -225,20 +245,20 @@
                         android:id="@+id/elementIdRow02"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow02"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow02"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -284,20 +304,20 @@
                         android:id="@+id/elementIdRow03"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow03"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow03"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -343,20 +363,20 @@
                         android:id="@+id/elementIdRow04"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow04"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow04"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -402,20 +422,20 @@
                         android:id="@+id/elementIdRow05"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow05"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow05"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -461,20 +481,20 @@
                         android:id="@+id/elementIdRow06"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow06"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow06"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -520,20 +540,20 @@
                         android:id="@+id/elementIdRow07"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow07"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow07"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -579,20 +599,20 @@
                         android:id="@+id/elementIdRow08"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow08"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow08"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -638,20 +658,20 @@
                         android:id="@+id/elementIdRow09"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow09"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow09"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -697,20 +717,20 @@
                         android:id="@+id/elementIdRow10"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow10"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow10"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -756,20 +776,20 @@
                         android:id="@+id/elementIdRow11"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow11"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow11"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
@@ -815,20 +835,20 @@
                         android:id="@+id/elementIdRow12"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="3"
                         android:text="3T" />
 
                     <TextView
                         android:id="@+id/elementTicRow12"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/elementBonusRow12"
                         android:layout_width="0dp"
-                        android:layout_margin="@dimen/narrowTable"
+                        android:layout_margin="@dimen/largeTable"
                         android:layout_weight="1" />
 
                     <TextView
