@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static io.fabric.sdk.android.services.concurrency.AsyncTask.init;
+
 public class ProgramScoringViewActivity extends AppCompatActivity {
 
     public SeekBar seekBar00;
@@ -69,6 +71,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     public int requiredElements;
     public int i;
     public int tempInt;
+    public int tempBarId;
     public int num;
     public int eStart;
     public int eEnd;
@@ -83,6 +86,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     public Double tempComboTotal;
     public Double tempDouble1;
     public Double tempDouble2;
+    public SeekBar[] goeBar;
 
     public String[] comboCode = new String[4];
     public char[] elementCodeCArray;
@@ -101,6 +105,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_scoring_view);
         initializeVariables();
+
 
         //Get the userID and programID from sending activity
         Intent intentExtras = getIntent();
@@ -145,10 +150,34 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
         });
     }
 
+    //default listener for all seeker bars
+    @Override
+    public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
+        tempBarId = bar.getId();
+        for (i=0; i<3; i++){
+            seekerBarUpdate(progress);
+        }
+
+
+    }
+
+    //default onClick method
+    /*
+    @Override
+    protected void onClick(View view){
+    }
+    */
 
     // A private method to help us initialize our variables.
     private void initializeVariables() {
-        seekBar00 = (SeekBar) findViewById(R.id.seekBarElement00);
+        //seekBar00 = (SeekBar) findViewById(R.id.seekBarElement00);
+        goeBar[0] = (SeekBar) findViewById(R.id.seekBarElement00);
+        goeBar[0].setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
+        goeBar[1] = (SeekBar) findViewById(R.id.seekBarElement01);
+        goeBar[1].setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
+        goeBar[2] = (SeekBar) findViewById(R.id.seekBarElement02);
+        goeBar[2].setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
+
         textView00 = findViewById(R.id.elementScoreRow00);
         scoresTextView[0] = findViewById(R.id.elementTotal);
 
@@ -199,10 +228,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     }
 
     //Update info based on seeker bar
-    private void seekerBarUpdate(int uProgress) {
+    private void seekerBarUpdate(int uProgress, int uElenum) {
         tempDouble1 = (double) uProgress;
         tempString = String.valueOf((tempDouble1 - 50) / 10);
-        elementGOETextView[0].setText(tempString);
+        elementGOETextView[uElenum].setText(tempString);
+        //I am here on 8/8/18 at 5:00pm, adding seekerbar default listener
     }
 
     //Update all info on Seeker Bar stop
