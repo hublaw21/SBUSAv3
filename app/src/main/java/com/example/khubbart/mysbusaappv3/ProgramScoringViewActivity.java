@@ -2,23 +2,19 @@ package com.example.khubbart.mysbusaappv3;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.Elements;
 import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,9 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.fabric.sdk.android.services.concurrency.AsyncTask.init;
-
-public class ProgramScoringViewActivity extends AppCompatActivity {
+public class ProgramScoringViewActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     public SeekBar seekBar00;
     public TextView textView00;
@@ -43,8 +37,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     public TextView[] elementBaseTextView = new TextView[13];
     public TextView[] elementGOETextView = new TextView[13];
     public TextView[] elementScoreTextView = new TextView[13];
+    public TextView[] componentFactorTextView = new TextView[5];
+    public TextView[] componentRawTextView = new TextView[5];
+    public TextView[] componentScoreTextView = new TextView[5];
 
-    public int progress = 50;
+    public int progress = 50; // the midway point, zeroed.  Need to set up for adjustable
     public int resID;
 
     public String tempString;
@@ -62,6 +59,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     public Double[] elementBase = new Double[13];
     public Double[] elementGOE = new Double[13];
     public Double[] elementScore = new Double[13];
+    public Double[] componentFactor = new Double[5];
+    public Double[] componentScore = new Double[5];
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
@@ -78,15 +77,17 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     public String progPointer;
     public String[] RequiredElementsKey;
     public int[] RequiredElementsValue;
-    public double technicalTotal;
+    public double elementTotal;
     public double componentTotal;
     public double deductionTotal;
-    public double grandTotal;
+    public double segmentTotal;
     public String tempTrimmedString;
     public Double tempComboTotal;
     public Double tempDouble1;
     public Double tempDouble2;
-    public SeekBar[] goeBar;
+    public SeekBar[] goeBar = new SeekBar[13];
+    public SeekBar[] compBar = new SeekBar[5];
+    public int[] goeBarId = new int[13];
 
     public String[] comboCode = new String[4];
     public char[] elementCodeCArray;
@@ -104,8 +105,10 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_scoring_view);
-        initializeVariables();
 
+        db = FirebaseFirestore.getInstance();
+        // Nset up arrays with view names, seekbars etc
+        initializeVariables();
 
         //Get the userID and programID from sending activity
         Intent intentExtras = getIntent();
@@ -121,45 +124,36 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
             //Might want to implement as a separate thread
             init();  // Call the initiation method here, to ensure the IDs have been pulled
         }
-
-
-        // Set up seekbar
-        seekBar00.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
-                progress = progressValue;
-                //Update GOE Value Only
-                seekerBarUpdate(progress);
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //Update score upon stop
-                //progress = seekBar.getMax();
-                seekerBarStopUpdate(progress);
-                //textView00.setText("Covered: " + progress + "/" + );
-                //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     //default listener for all seeker bars
     @Override
-    public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
-        tempBarId = bar.getId();
-        for (i=0; i<3; i++){
-            seekerBarUpdate(progress);
+    public void onProgressChanged(SeekBar bar, int progressValue, boolean fromUser) {
+        for (i = 0; i < requiredElements; i++) {
+            if (bar == goeBar[i]) {
+                seekerBarUpdate(progressValue, i);
+            }
         }
-
-
+        for (i = 0; i < 5; i++) {
+            if (bar == compBar[i]) {
+                compBarUpdate(progressValue, i);
+            }
+        }
     }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar bar) {
+        //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar bar) {
+        //Update score upon stop
+        seekerBarStopUpdate();
+        //textView00.setText("Covered: " + progress + "/" + );
+        //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+    }
+
 
     //default onClick method
     /*
@@ -170,19 +164,10 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
 
     // A private method to help us initialize our variables.
     private void initializeVariables() {
-        //seekBar00 = (SeekBar) findViewById(R.id.seekBarElement00);
-        goeBar[0] = (SeekBar) findViewById(R.id.seekBarElement00);
-        goeBar[0].setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
-        goeBar[1] = (SeekBar) findViewById(R.id.seekBarElement01);
-        goeBar[1].setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
-        goeBar[2] = (SeekBar) findViewById(R.id.seekBarElement02);
-        goeBar[2].setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
-
-        textView00 = findViewById(R.id.elementScoreRow00);
         scoresTextView[0] = findViewById(R.id.elementTotal);
-
-        db = FirebaseFirestore.getInstance();
-
+        scoresTextView[1] = findViewById(R.id.componentTotal);
+        scoresTextView[2] = findViewById(R.id.deductionsTotal);
+        scoresTextView[3] = findViewById(R.id.segmentTotal);
 
         //Get SOV Table 2018 - Three matched arrays
         Resources resources = getResources();
@@ -191,6 +176,28 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
         SOVBase = resources.getStringArray(R.array.SOV_Base);
         RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
         RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
+
+        //default listener for all seeker bars
+        for (i = 0; i < 13; i++) {
+            if (i < 10) {
+                tempString = "seekBarElement0" + i;
+            } else {
+                tempString = "seekBarElement" + i;
+            }
+            resID = getResources().getIdentifier(tempString, "id", getPackageName());
+            goeBar[i] = (SeekBar) this.findViewById(resID);
+            goeBar[i].setOnSeekBarChangeListener(this);
+        }
+        compBar[0] = this.findViewById(R.id.seekBarComponentSkills);
+        compBar[2] = this.findViewById(R.id.seekBarComponentPerformance);
+        compBar[1] = this.findViewById(R.id.seekBarComponentTransitions);
+        compBar[3] = this.findViewById(R.id.seekBarComponentComposition);
+        compBar[4] = this.findViewById(R.id.seekBarComponentInterpretation);
+        compBar[0].setOnSeekBarChangeListener(this);
+        compBar[1].setOnSeekBarChangeListener(this);
+        compBar[2].setOnSeekBarChangeListener(this);
+        compBar[3].setOnSeekBarChangeListener(this);
+        compBar[4].setOnSeekBarChangeListener(this);
 
         //Set view variables
         for (int i = 0; i < 13; i++) {
@@ -225,28 +232,53 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
             resID = getResources().getIdentifier(tempRowScore, "id", getPackageName());
             elementScoreTextView[i] = findViewById(resID);
         }
+        //tempString = ""
+        //resID = getResources().getIdentifier(tempString, "id", getPackageName());
+        componentRawTextView[0] = findViewById(R.id.componentSkillsValue);
+        componentRawTextView[1] = findViewById(R.id.componentTransitionsValue);
+        componentRawTextView[2] = findViewById(R.id.componentPerformanceValue);
+        componentRawTextView[3] = findViewById(R.id.componentCompositionValue);
+        componentRawTextView[4] = findViewById(R.id.componentInterpretationValue);
+        componentScoreTextView[0] = findViewById(R.id.componentSkillsScore);
+        componentScoreTextView[1] = findViewById(R.id.componentTransitionsScore);
+        componentScoreTextView[2] = findViewById(R.id.componentPerformanceScore);
+        componentScoreTextView[3] = findViewById(R.id.componentCompositionScore);
+        componentScoreTextView[4] = findViewById(R.id.componentInterpretationScore);
     }
 
-    //Update info based on seeker bar
+    //Update info based on seeker bar - elements
     private void seekerBarUpdate(int uProgress, int uElenum) {
         tempDouble1 = (double) uProgress;
         tempString = String.valueOf((tempDouble1 - 50) / 10);
         elementGOETextView[uElenum].setText(tempString);
-        //I am here on 8/8/18 at 5:00pm, adding seekerbar default listener
     }
 
-    //Update all info on Seeker Bar stop
-    private void seekerBarStopUpdate(int uProgress) {
+    //Update info based on seeker bar - components
+    private void compBarUpdate(int uProgress, int uCompNum) {
         tempDouble1 = (double) uProgress;
-        tempDouble2 = (tempDouble1 -50)/10;
-        elementGOE[0] = tempDouble2;
-        tempString = String.valueOf(elementGOE[0]);
-        elementGOETextView[0].setText(tempString);
-        elementScore[0] = elementBase[0]*(1+tempDouble2/10);
-        tempString = numberFormat.format(elementScore[0]);
-        elementScoreTextView[0].setText(tempString);
-        tempString = numberFormat.format(sumTech());
+        tempDouble2 = tempDouble1 / 10;
+        tempString = String.valueOf(tempDouble2);
+        componentRawTextView[uCompNum].setText(tempString);
+        componentFactor[uCompNum] = 1.0; // Temp until I set up factor table
+        componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum];
+        tempString = String.valueOf(componentScore[uCompNum]);
+        componentScoreTextView[uCompNum].setText(tempString);
+    }
+
+
+    //Update all info on Seeker Bar stop
+    private void seekerBarStopUpdate() {
+        for (i = 0; i < requiredElements; i++) {
+            tempString = elementGOETextView[i].getText().toString();
+            tempDouble1 = Double.parseDouble(tempString);
+            elementGOE[i] = tempDouble1;
+            elementScore[i] = elementBase[i] * (1 + (tempDouble1 / 10));
+            tempString = numberFormat.format(elementScore[i]);
+            elementScoreTextView[i].setText(tempString);
+        }
+        tempString = numberFormat.format(sumElements());
         scoresTextView[0].setText(tempString);
+        sumSegment();
     }
 
     // Initialize database, pull program and elements
@@ -308,14 +340,14 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
                     elementCode[10] = elements.get(0).getE10();
                     elementCode[11] = elements.get(0).getE11();
                     elementCode[12] = elements.get(0).getE12();
-                    technicalTotal = 0;
+                    //technicalTotal = 0;
                     for (int i = 0; i < requiredElements; i++) {
                         if (elementCode[i] != null) {
                             pullElementInfo(elementCode[i], i);
                         }
                     }
                     // Set initial totals
-                    tempString = numberFormat.format(sumTech());
+                    tempString = numberFormat.format(sumElements());
                     //mTechnicalTotalTextView.setText(tempString);
                     // Hide rows not used for the program
                     for (i = requiredElements; i < 13; i++) {
@@ -351,7 +383,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
             Log.i("*******************pElementCode: ", pElementCode);
             if (pElementCode != null) checkForComboJump(pElementCode, pNum);
         }
-        tempString = numberFormat.format(sumTech());
+        tempString = numberFormat.format(sumElements());
         scoresTextView[0].setText(tempString);
         // mTechnicalTotalTextView.setText(tempString);
     }
@@ -396,15 +428,51 @@ public class ProgramScoringViewActivity extends AppCompatActivity {
     }
 
     //A basic method to get total technical value
-    public Double sumTech() {
-        double sumTech = 0;
-        for (int i = 0; i < 13; i++) {
+    public Double sumElements() {
+        double sumElements = 0;
+        for (int i = 0; i < requiredElements; i++) {
             if (elementScore[i] != null) {
-                sumTech += elementScore[i];
+                sumElements += elementScore[i];
             }
         }
-        return sumTech;
+        return sumElements;
     }
 
+    //A basic method to get total component value
+    public Double sumComponents() {
+        double sumComponents = 0;
+        for (i=0; i<5; i++){
+            if(componentScore[i] != null) sumComponents += componentScore[i];
+        }
+        tempString = numberFormat.format(sumComponents);
+        scoresTextView[1].setText(tempString);
+        return sumComponents;
+    }
+
+    //A basic method to get total deduction value
+    public Double sumDeductions() {
+        double sumDeductions = 0;
+            /*
+            for (int i = 0; i < requiredElements; i++) {
+                if (elementScore[i] != null) {
+                    sumElements += elementScore[i];
+                }
+            }
+            */
+        return sumDeductions;
+    }
+
+    //A basic method to get total segment score
+    public Double sumSegment() {
+        double sumSegment = sumElements() + sumComponents() - sumDeductions();
+        tempString = numberFormat.format(sumSegment);
+        scoresTextView[3].setText(tempString);
+        return sumSegment;
+    }
+/*
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+    }
+    */
 }
 
