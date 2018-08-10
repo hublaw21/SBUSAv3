@@ -92,6 +92,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     public String[] comboCode = new String[4];
     public char[] elementCodeCArray;
 
+    public GlobalClass globalClass;
+
     NumberFormat numberFormat = new DecimalFormat("###.00");
     NumberFormat numberFormatGOE = new DecimalFormat("#.0");
 
@@ -105,6 +107,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_scoring_view);
+
+        //Set up GlobalClass for shared constants and methods
+        globalClass = ((GlobalClass)getApplicationContext());
 
         db = FirebaseFirestore.getInstance();
         // Nset up arrays with view names, seekbars etc
@@ -209,7 +214,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                 tempRowGOE = "elementGOERow0" + i;
                 tempRowScore = "elementScoreRow0" + i;
             } else {
-                tempRowID = "elementIDRow" + i;
+                tempRowID = "elementIdRow" + i;
                 tempRowBonus = "elementBonusRow" + i;
                 tempRowTic = "elementTicRow" + i;
                 tempRowBase = "elementBaseRow" + i;
@@ -218,6 +223,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             }
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
+            Log.i("*******************tempRowID: ", tempRowID);
             elementIDTextView[i] = findViewById(resID);
             /*
             resID = getResources().getIdentifier(tempRowBonus, "id", getPackageName());
@@ -372,7 +378,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             elementBase[pNum] = Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
             elementScore[pNum] = elementBase[pNum];
             elementCode[pNum] = pElementCode; //Why do I need this?
-            Log.i("*******************pElementCode: ", pElementCode);
+            Log.i("*******************pElementCode: ", pNum + " " + elementCode[pNum]);
             tempString = elementCode[pNum];
             elementIDTextView[pNum].setText(elementCode[pNum]);
             tempString = numberFormat.format(elementBase[pNum]);

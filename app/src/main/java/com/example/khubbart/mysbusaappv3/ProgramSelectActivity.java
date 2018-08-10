@@ -60,7 +60,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_select);
 
-
         mTextViewName = findViewById(R.id.textViewProgramSelectSkaterName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
         mAddProgram = findViewById(R.id.newProgramButton);
