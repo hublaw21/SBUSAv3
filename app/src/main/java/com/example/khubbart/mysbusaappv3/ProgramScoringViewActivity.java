@@ -30,6 +30,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
 
     public SeekBar seekBar00;
     public TextView textView00;
+    public TextView programDescriptionTextView;
     public TextView[] scoresTextView = new TextView[4];
     public TextView[] elementIDTextView = new TextView[13];
     public TextView[] elementBonusTextView = new TextView[13];
@@ -53,6 +54,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     public String tempRowScore;
     public String mCurrentUserID;
     public String mCurrentProgramID;
+    public String programDescription;
     public String[] elementCode = new String[13];
     public String[] elementBonus = new String[13];
     public String[] elementTic = new String[13];
@@ -60,10 +62,12 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     public Double[] elementGOE = new Double[13];
     public Double[] elementScore = new Double[13];
     public Double[] componentFactor = new Double[5];
+    public Double[] factors = new Double[8];
     public Double[] componentScore = new Double[5];
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
+    public String[][] factorTable = new String[30][11];
     public List<Program> program = new ArrayList<>();
     public List<Elements> elements = new ArrayList<>();
     public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
@@ -109,7 +113,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         setContentView(R.layout.activity_program_scoring_view);
 
         //Set up GlobalClass for shared constants and methods
-        globalClass = ((GlobalClass)getApplicationContext());
+        globalClass = ((GlobalClass) getApplicationContext());
 
         db = FirebaseFirestore.getInstance();
         // Nset up arrays with view names, seekbars etc
@@ -173,6 +177,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         scoresTextView[1] = findViewById(R.id.componentTotal);
         scoresTextView[2] = findViewById(R.id.deductionsTotal);
         scoresTextView[3] = findViewById(R.id.segmentTotal);
+        programDescriptionTextView = findViewById(R.id.textViewProgramDescription);
 
         //Get SOV Table 2018 - Three matched arrays
         Resources resources = getResources();
@@ -250,6 +255,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         componentScoreTextView[2] = findViewById(R.id.componentPerformanceScore);
         componentScoreTextView[3] = findViewById(R.id.componentCompositionScore);
         componentScoreTextView[4] = findViewById(R.id.componentInterpretationScore);
+        componentFactorTextView[0] = findViewById(R.id.componentSkillsFactor);
+        componentFactorTextView[1] = findViewById(R.id.componentTransitionsFactor);
+        componentFactorTextView[2] = findViewById(R.id.componentPerformanceFactor);
+        componentFactorTextView[3] = findViewById(R.id.componentCompositionFactor);
+        componentFactorTextView[4] = findViewById(R.id.componentInterpretationFactor);
     }
 
     //Update info based on seeker bar - elements
@@ -265,8 +275,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         tempDouble2 = tempDouble1 / 10;
         tempString = String.valueOf(tempDouble2);
         componentRawTextView[uCompNum].setText(tempString);
-        componentFactor[uCompNum] = 1.0; // Temp until I set up factor table
-        componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum];
+        componentFactor[uCompNum] = factors[uCompNum];
+        componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum]*factors[6]; // factors[6] is general prgram component
         tempString = String.valueOf(componentScore[uCompNum]);
         componentScoreTextView[uCompNum].setText(tempString);
     }
@@ -293,9 +303,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             // Deal with new/null program
         } else {
             //Get program basics
-            Log.i("*******************programID: ", mCurrentProgramID);
             programRef = db.collection("Programs").document(mCurrentProgramID);
-            //Log.i("*******************programID: ", mCurrentProgramID);
             programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 //public void onComplete(final DocumentSnapshot documentSnapshot) {
@@ -306,6 +314,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                         program.add(qProgram);
                         //mCompetitionNameTextView.setText(program.get(0).getCompetition());
                         String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
+                        programDescriptionTextView.setText(tempText);
+                        programDescription = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
+                        factors = globalClass.getFactors(programDescription);
                         progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
                         //Log.i("*******************programRef: ", mCurrentProgramID);
                         //Log.i("*******************progPointer: ", progPointer);
@@ -369,6 +380,13 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                 }
             }
         });
+        //Set initial value totals
+        for (int i = 0; i < 5; i++) {
+            //tempString = String.valueOf(i);
+            //Log.i("*******************factors: ", tempString);
+            if(factors[i+1] != null){componentFactorTextView[i].setText(numberFormat.format(factors[i+1]));}
+        }
+        sumSegment();
     }
 
     public void pullElementInfo(String pElementCode, int pNum) {
@@ -447,8 +465,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     //A basic method to get total component value
     public Double sumComponents() {
         double sumComponents = 0;
-        for (i=0; i<5; i++){
-            if(componentScore[i] != null) sumComponents += componentScore[i];
+        double tempComp;
+        for (i = 0; i < 5; i++) {
+            if (componentScore[i] != null){
+                sumComponents += componentScore[i];
+}
         }
         tempString = numberFormat.format(sumComponents);
         scoresTextView[1].setText(tempString);

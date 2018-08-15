@@ -2,33 +2,33 @@
 <resources>
     <!-- Create factors table array to be parsed based on spacing -->
     <string-array name="Factors">
+        <item>SeniorLadiesFree Skate,1.00,1.00,1.00,1.00,1.00,1.00,1.60,1.00</item>
+        <item>SeniorMenFree Skate,1.00,1.00,1.00,1.00,1.00,1.00,2.00,1.00</item>
+        <item>JuniorLadiesFree Skate,1.00,1.00,1.00,1.00,1.00,1.00,1.60,1.00</item>
+        <item>JuniorMenFree Skate,1.00,1.00,1.00,1.00,1.00,1.00,2.00,1.00</item>
+        <item>NoviceLadiesFree Skate,1.00,1.71,0.38,0.57,0.57,0.57,1.00,0.50</item>
+        <item>NoviceMenFree Skate,1.00,1.71,0.38,0.57,0.57,0.57,2.00,0.50</item>
+        <item>IntermediateLadiesFree Skate,1.00,1.98,0.54,0.54,0.54,0.54,1.00,0.50</item>
+        <item>IntermediateMenFree Skate,1.00,1.98,0.54,0.54,0.54,0.54,2.00,0.50</item>
+        <item>JuvenileLadiesFree Skate,1.00,3.75,0.00,1.25,0.00,1.25,1.00,0.50</item>
+        <item>JuvenileMenFree Skate,1.00,3.75,0.00,1.25,0.00,1.25,1.00,0.50</item>
+        <item>SeniorPairsFree Skate,1.00,1.00,1.00,1.00,1.00,1.00,1.60,1.00</item>
+        <item>JuniorPairsFree Skate,1.00,1.00,1.00,1.00,1.00,1.00,2.00,1.00</item>
+        <item>NovicePairsFree Skate,1.00,1.60,1.60,0.40,0.80,0.60,2.00,0.50</item>
+        <item>IntermediatePairsFree Skate,1.00,2.70,0.00,1.08,0.81,0.81,1.40,0.50</item>
+        <item>JuvenilePairsFree Skate,1.00,3.00,0.00,1.25,0.00,0.75,1.10,0.50</item>
+        <item>SeniorLadiesShort,1.00,1.00,1.00,1.00,1.00,1.00,0.80,1.00</item>
+        <item>SeniorMenShort,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00</item>
+        <item>JuniorLadiesShort,1.00,1.00,1.00,1.00,1.00,1.00,0.80,1.00</item>
+        <item>JuniorMenShort,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00</item>
+        <item>NoviceLadiesShort,1.00,1.71,0.38,0.57,0.57,0.57,1.00,0.50</item>
+        <item>NoviceMenShort,1.00,2.07,0.46,0.69,0.69,0.69,2.00,0.50</item>
+        <item>IntermediateLadiesShort,1.00,1.98,0.54,0.54,0.54,0.54,1.00,0.50</item>
+        <item>IntermediateMenShort,1.00,1.98,0.54,0.54,0.54,0.54,2.00,0.50</item>
+        <item>SeniorPairsShort,1.00,1.00,1.00,1.00,1.00,1.00,0.80,1.00</item>
+        <item>JuniorPairsShort,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00</item>
+        <item>NovicePairsShort,1.00,1.60,1.60,0.40,0.80,0.60,0.60,0.50</item>
 
-    <item>Senior      ,Ladies,SP,1.00,1.00,1.00,1.00,1.00,1.00,0.80,1.00</item>
-    <item>Senior      ,Men   ,SP,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00</item>
-    <item>Senior      ,Ladies,FS,1.00,1.00,1.00,1.00,1.00,1.00,1.60,1.00</item>
-    <item>Senior      ,Men   ,FS,1.00,1.00,1.00,1.00,1.00,1.00,2.00,1.00</item>
-    <item>Junior      ,Ladies,SP,1.00,1.00,1.00,1.00,1.00,1.00,0.80,1.00</item>
-    <item>Junior      ,Men   ,SP,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00</item>
-    <item>Junior      ,Ladies,FS,1.00,1.00,1.00,1.00,1.00,1.00,1.60,1.00</item>
-    <item>Junior      ,Men   ,FS,1.00,1.00,1.00,1.00,1.00,1.00,2.00,1.00</item>
-    <item>Novice      ,Ladies,SP,1.00,1.71,0.38,0.57,0.57,0.57,1.00,0.50</item>
-    <item>Novice      ,Men   ,SP,1.00,2.07,0.46,0.69,0.69,0.69,2.00,0.50</item>
-    <item>Novice      ,Ladies,FS,1.00,1.71,0.38,0.57,0.57,0.57,1.00,0.50</item>
-    <item>Novice      ,Men   ,FS,1.00,1.71,0.38,0.57,0.57,0.57,2.00,0.50</item>
-    <item>Intermediate,Ladies,SP,1.00,1.98,0.54,0.54,0.54,0.54,1.00,0.50</item>
-    <item>Intermediate,Men   ,SP,1.00,1.98,0.54,0.54,0.54,0.54,2.00,0.50</item>
-    <item>Intermediate,Ladies,FS,1.00,1.98,0.54,0.54,0.54,0.54,1.00,0.50</item>
-    <item>Intermediate,Men   ,FS,1.00,1.98,0.54,0.54,0.54,0.54,2.00,0.50</item>
-    <item>Juvenile    ,Ladies,FS,1.00,3.75,0.00,1.25,0.00,1.25,1.00,0.50</item>
-    <item>Juvenile    ,Men   ,FS,1.00,3.75,0.00,1.25,0.00,1.25,1.00,0.50</item>
-    <item>Senior      ,Pairs ,FS,1.00,1.00,1.00,1.00,1.00,1.00,1.60,1.00</item>
-    <item>Junior      ,Pairs ,FS,1.00,1.00,1.00,1.00,1.00,1.00,2.00,1.00</item>
-    <item>Novice      ,Pairs ,FS,1.00,1.60,1.60,0.40,0.80,0.60,2.00,0.50</item>
-    <item>Intermediate,Pairs ,FS,1.00,2.70,0.00,1.08,0.81,0.81,1.40,0.50</item>
-    <item>Juvenile    ,Pairs ,FS,1.00,3.00,0.00,1.25,0.00,0.75,1.10,0.50</item>
-    <item>Senior      ,Pairs ,SP,1.00,1.00,1.00,1.00,1.00,1.00,0.80,1.00</item>
-    <item>Junior      ,Pairs ,SP,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00</item>
-    <item>Novice      ,Pairs ,SP,1.00,1.60,1.60,0.40,0.80,0.60,0.60,0.50</item>
     </string-array>
 
 </resources>

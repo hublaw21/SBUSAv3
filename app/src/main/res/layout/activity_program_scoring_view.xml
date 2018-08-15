@@ -10,6 +10,8 @@
         android:id="@+id/textViewProgramDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/textMidSmall"
         android:textColor="@color/black" />
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -255,7 +257,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle00"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -275,12 +277,13 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle00"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
                         android:checked="true"
                         android:gravity="center_vertical"
+                        android:textAlignment="center"
                         android:textOff=""
                         android:textOn="x" />
 
@@ -316,7 +319,7 @@
                     android:id="@+id/elementRow01"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/mediumBorder">
+                    android:layout_marginTop="@dimen/sideBorder">
 
                     <TextView
                         android:id="@+id/elementIdRow01"
@@ -329,7 +332,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle01"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -349,12 +352,13 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle01"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
                         android:checked="true"
                         android:gravity="center_vertical"
+                        android:textAlignment="center"
                         android:textOff=""
                         android:textOn="x" />
 
@@ -389,7 +393,7 @@
                     android:id="@+id/elementRow02"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/mediumBorder">
+                    android:layout_marginTop="@dimen/sideBorder">
 
                     <TextView
                         android:id="@+id/elementIdRow02"
@@ -402,7 +406,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle02"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -422,12 +426,13 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle02"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
                         android:checked="true"
                         android:gravity="center_vertical"
+                        android:textAlignment="center"
                         android:textOff=""
                         android:textOn="x" />
 
@@ -1262,7 +1267,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
-                        android:id="@+id/elementSkillsFactor"
+                        android:id="@+id/componentSkillsFactor"
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:text="0.00"
@@ -1310,7 +1315,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
-                        android:id="@+id/elementTransitionsFactor"
+                        android:id="@+id/componentTransitionsFactor"
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:text="0.00"
@@ -1358,7 +1363,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
-                        android:id="@+id/elementPerformanceFactor"
+                        android:id="@+id/componentPerformanceFactor"
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:text="0.00"
@@ -1406,7 +1411,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
-                        android:id="@+id/elementCompositionFactor"
+                        android:id="@+id/componentCompositionFactor"
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:text="0.00"
@@ -1453,7 +1458,7 @@
                         android:textAlignment="textStart" />
 
                     <TextView
-                        android:id="@+id/elementInterpretationFactor"
+                        android:id="@+id/componentInterpretationFactor"
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:text="0.00"
