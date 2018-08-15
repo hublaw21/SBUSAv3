@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row_element_scoring_list"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/mediumTable">
+
+    <TextView
+        android:id="@+id/elementIdRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sideBorder"
+        android:layout_weight="3"
+        android:textAlignment="textStart" />
+
+    <ToggleButton
+        android:id="@+id/elementTicToggle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textMedium"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_button_box_small_default"
+        android:button="@drawable/toggle_button_box_small_default"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textOff="x"
+        android:textOn="x" />
+
+    <TextView
+        android:id="@+id/elementBaseRow"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:text="0.00"
+        android:textAlignment="center" />
+
+    <ToggleButton
+        android:id="@+id/elementBonusToggle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textMedium"
+        android:layout_weight="1"
+        android:background="@drawable/toggle_button_box_small_default"
+        android:button="@drawable/toggle_button_box_small_default"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textOff="x"
+        android:textOn="x"
+        android:textColor="@drawable/color_selector"/>
+
+    <SeekBar
+        android:id="@+id/seekBarElement"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="8"
+        android:max="100"
+        android:progress="50" />
+
+    <TextView
+        android:id="@+id/elementGOERow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="0.0"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/elementScoreRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/sideBorder"
+        android:layout_weight="3"
+        android:text="0.00"
+        android:textAlignment="textEnd" />
+
+
+</LinearLayout>

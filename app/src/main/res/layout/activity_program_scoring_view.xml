@@ -177,6 +177,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/elementScoreRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+<!--
             <TableLayout
                 android:id="@+id/programElementsTable"
                 android:layout_width="match_parent"
@@ -264,7 +271,7 @@
                         android:checked="true"
                         android:gravity="center_vertical"
                         android:textAlignment="center"
-                        android:textOff=""
+                        android:textOff="x"
                         android:textOn="x" />
 
                     <TextView
@@ -284,8 +291,9 @@
                         android:checked="true"
                         android:gravity="center_vertical"
                         android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                        android:textOff="x"
+                        android:textOn="x"
+                        android:textColor="@drawable/color_selector"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement00"
@@ -1095,7 +1103,7 @@
                         android:button="@drawable/toggle_button_box_small_default"
                         android:checked="true"
                         android:gravity="center_vertical"
-                        android:textOff=""
+                        android:textOff="x"
                         android:textOn="x" />
 
                     <SeekBar
@@ -1201,7 +1209,7 @@
 
 
             </TableLayout>
-
+-->
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
