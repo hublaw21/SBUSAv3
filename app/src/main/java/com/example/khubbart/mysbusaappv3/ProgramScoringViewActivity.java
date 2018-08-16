@@ -114,6 +114,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     private DocumentReference programRef;
     private DocumentReference elementRef;
     private String elementID;
+    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
 
 
     @Override
@@ -152,10 +153,14 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         }
     }
 
+    public interface OnSeekerChangeClickListener {
+        void onProgressChanged(SeekBar bar, int paramInt, boolean paramBoolean) ;
+    }
+
     //default listener for all seeker bars
     @Override
     public void onProgressChanged(SeekBar bar, int progressValue, boolean fromUser) {
-        Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
         for (i = 0; i < requiredElements; i++) {
             if (bar == goeBar[i]) {
                 seekerBarUpdate(progressValue, i);
@@ -170,7 +175,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
 
     @Override
     public void onStartTrackingTouch(SeekBar bar) {
-        Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -178,7 +183,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         //Update score upon stop
         seekerBarStopUpdate();
         //textView00.setText("Covered: " + progress + "/" + );
-        Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -283,6 +288,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         componentFactorTextView[4] = findViewById(R.id.componentInterpretationFactor);
     }
 
+    //Try to use the interface for seekerbar clicks in recyclerview
+
+
     //Update info based on seeker bar - elements
     private void seekerBarUpdate(int uProgress, int uElenum) {
         tempDouble1 = (double) uProgress;
@@ -306,6 +314,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
 
     //Update all info on Seeker Bar stop
     private void seekerBarStopUpdate() {
+        /*
         for (i = 0; i < requiredElements; i++) {
             tempString = elementGOETextView[i].getText().toString();
             tempDouble1 = Double.parseDouble(tempString);
@@ -317,6 +326,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         tempString = numberFormat.format(sumElements());
         scoresTextView[0].setText(tempString);
         sumSegment();
+        */
     }
 
     // Initialize database, pull program and elements

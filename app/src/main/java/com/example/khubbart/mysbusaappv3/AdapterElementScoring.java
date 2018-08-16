@@ -19,12 +19,16 @@ import com.example.khubbart.mysbusaappv3.Model.ElementItem;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementScoring.ElementScoringViewHolder>{
+public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementScoring.ElementScoringViewHolder> {
 
     private List<ElementItem> elementScores;
+    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
+    public void setOnSeekBarChangeListener (SeekBar.OnSeekBarChangeListener onSeekBarChangeListener){
+        this.onSeekBarChangeListener = onSeekBarChangeListener;
+    }
 
     //Constructor
-    public AdapterElementScoring(List<ElementItem> elementScores){
+    public AdapterElementScoring(List<ElementItem> elementScores) {
         this.elementScores = elementScores;
     }
 
@@ -91,11 +95,11 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ElementScoringViewHolder holder, final int position) {
+    public void onBindViewHolder(final ElementScoringViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        NumberFormat numberFormat = new DecimalFormat("###.00");
-        NumberFormat numberFormatGOE = new DecimalFormat("#.0");
+        final NumberFormat numberFormat = new DecimalFormat("##0.00");
+        final NumberFormat numberFormatGOE = new DecimalFormat("0.0");
 
         final int pos = position;
 
@@ -103,9 +107,12 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
         //holder.ticToggle.setText(elementScores.get(position).isTicToggle());
         holder.elementBase.setText(numberFormat.format(elementScores.get(position).getElementBase()));
         //holder.bonusToggle.setText(elementScores.get(position).isBonusToggle());
-        int tempInt = 5;
-        holder.elementGOEbar.setProgress(tempInt);
-        holder.elementGOE.setText(numberFormat.format(elementScores.get(position).getElementGOE()));
+        int tempInt = 50;
+        holder.elementGOEbar.setMax(100); // need to set initial location of seeker bar
+        holder.elementGOEbar.setProgress(tempInt); // need to set initial location of seeker bar
+        double tempDouble = 0.0;
+        elementScores.get(position).setElementGOE(tempDouble); // initialize the value at 0.0
+        holder.elementGOE.setText(numberFormatGOE.format(elementScores.get(position).getElementGOE()));
         holder.elementScore.setText(numberFormat.format(elementScores.get(position).getElementScore()));
         //Do I need this?
         /*
@@ -161,22 +168,17 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
 
         holder.elementGOEbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onStopTrackingTouch(SeekBar bar) {
-                int value = bar.getProgress();
-                Double tempDouble = (double)value;
-                elementScores.get(position).setElementGOE(tempDouble);
+                int progress = bar.getProgress();
+                calcElementScore(progress, position, holder);
             }
-            public void onStartTrackingTouch(SeekBar bar) {
-                Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
-            }
-            public void onProgressChanged(SeekBar bar, int paramInt, boolean paramBoolean) {
-                int value = bar.getProgress();
-                Double tempDouble = (double)value;
-                String tempString = String.valueOf(tempDouble);
-                Toast.makeText(getApplicationContext(), tempString, Toast.LENGTH_SHORT).show();
-                elementScores.get(position).setElementGOE(tempDouble);
 
-                //update textview while dragging seekbar
-                //holder.tvValues.setText("" + paramInt); // here in textView the percent will be shown
+            public void onStartTrackingTouch(SeekBar bar) {
+                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+
+            public void onProgressChanged(SeekBar bar, int paramInt, boolean paramBoolean) {
+                int progress = bar.getProgress();
+                calcElementScore(progress, position, holder);
             }
         });
     }
@@ -185,6 +187,36 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
     @Override
     public int getItemCount() {
         return elementScores.size();
+    }
+
+    //A basic method to get total technical value
+    /*
+    public Double sumElements() {
+        double sumElements = 0;
+        for (int i = 0; i < requiredElements; i++) {
+            if (elementScore[i] != null) {
+                sumElements += elementScore[i];
+            }
+        }
+        return sumElements;
+    }
+    */
+
+    //calculate each elements score
+    public void calcElementScore(int progress, int position, ElementScoringViewHolder holder) {
+        NumberFormat numberFormat = new DecimalFormat("###.00");
+        NumberFormat numberFormatGOE = new DecimalFormat("#.0");
+        //Convert progress to raw GOE +/-
+        Double tempGOE = (double) progress;
+        tempGOE = tempGOE / 10 - 5;
+        //Calc GOE for element
+        Double tempBase = elementScores.get(position).getElementBase();
+        Double tempScore = tempBase*(1 + tempGOE/10);
+        //Update items
+        elementScores.get(position).setElementGOE(tempGOE);
+        holder.elementGOE.setText(numberFormatGOE.format(elementScores.get(position).getElementGOE()));
+        elementScores.get(position).setElementScore(tempScore);
+        holder.elementScore.setText(numberFormat.format(elementScores.get(position).getElementScore()));
     }
 
 }
