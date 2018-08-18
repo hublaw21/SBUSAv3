@@ -127,7 +127,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
 
         //Set up recycler views
         elementScoreRecyclerView = findViewById(R.id.elementScoreRecyclerView);
-        adapterElementScoring = new AdapterElementScoring(elementScoreList);
+        adapterElementScoring = new AdapterElementScoring(elementScoreList, (OnSeekerChangeClickListener) onSeekBarChangeListener);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         elementScoreRecyclerView .setLayoutManager(mLayoutManager);
         elementScoreRecyclerView .setItemAnimator(new DefaultItemAnimator());
@@ -153,14 +153,14 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         }
     }
 
-    public interface OnSeekerChangeClickListener {
+    public interface OnSeekBarChangeClickListener {
         void onProgressChanged(SeekBar bar, int paramInt, boolean paramBoolean) ;
     }
 
     //default listener for all seeker bars
     @Override
     public void onProgressChanged(SeekBar bar, int progressValue, boolean fromUser) {
-        //Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
         for (i = 0; i < requiredElements; i++) {
             if (bar == goeBar[i]) {
                 seekerBarUpdate(progressValue, i);
@@ -553,6 +553,26 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         scoresTextView[3].setText(tempString);
         return sumSegment;
     }
+
+    /*
+    //calculate each elements score after progress bar change
+    //public void calcElementScore(int progress, int position, ElementScoringViewHolder holder) {
+    public void calcElementScore(int progress, int position) {
+            NumberFormat numberFormat = new DecimalFormat("###.00");
+        NumberFormat numberFormatGOE = new DecimalFormat("#.0");
+        //Convert progress to raw GOE +/-
+        Double tempGOE = (double) progress;
+        tempGOE = tempGOE / 10 - 5;
+        //Calc GOE for element
+        Double tempBase = elementScores.get(position).getElementBase();
+        Double tempScore = tempBase * (1 + tempGOE / 10);
+        //Update items
+        elementScores.get(position).setElementGOE(tempGOE);
+        holder.elementGOE.setText(numberFormatGOE.format(elementScores.get(position).getElementGOE()));
+        elementScores.get(position).setElementScore(tempScore);
+        holder.elementScore.setText(numberFormat.format(elementScores.get(position).getElementScore()));
+    }
+    */
 /*
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

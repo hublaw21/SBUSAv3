@@ -2,34 +2,39 @@ package com.example.khubbart.mysbusaappv3;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementItem;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
+import static android.widget.SeekBar.*;
 
 public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementScoring.ElementScoringViewHolder> {
 
     private List<ElementItem> elementScores;
+    private final OnSeekerChangeClickListener onSeekerChangeClickListener;
+
+    /*
     private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
     public void setOnSeekBarChangeListener (SeekBar.OnSeekBarChangeListener onSeekBarChangeListener){
         this.onSeekBarChangeListener = onSeekBarChangeListener;
     }
-
+    */
+    /*
+    public interface OnSeekBarChangeListener {
+        void onSeekBarChange(ElementItem elementItem);
+    }
+    */
     //Constructor
-    public AdapterElementScoring(List<ElementItem> elementScores) {
+    public AdapterElementScoring(List<ElementItem> elementScores, OnSeekerChangeClickListener onSeekerChangeClickListener) {
         this.elementScores = elementScores;
+        this.onSeekerChangeClickListener = onSeekerChangeClickListener;
     }
 
     // Provide a reference to the views for each data item
@@ -52,19 +57,38 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
         NumberFormat numberFormatGOE = new DecimalFormat("#.0");
 
 
-        public ElementScoringViewHolder(View v) {
-            super(v);
-            layout = v;
-            elementID = v.findViewById(R.id.elementIdRow);
-            ticToggle = v.findViewById(R.id.elementTicToggle);
-            elementBase = v.findViewById(R.id.elementBaseRow);
-            bonusToggle = v.findViewById(R.id.elementBonusToggle);
-            elementGOEbar = v.findViewById(R.id.seekBarElement);
-            elementGOE = v.findViewById(R.id.elementGOERow);
-            elementScore = v.findViewById(R.id.elementScoreRow);
+        public ElementScoringViewHolder(View itemView) {
+            super(itemView);
+            layout = itemView;
+            elementID = itemView.findViewById(R.id.elementIdRow);
+            ticToggle = itemView.findViewById(R.id.elementTicToggle);
+            elementBase = itemView.findViewById(R.id.elementBaseRow);
+            bonusToggle = itemView.findViewById(R.id.elementBonusToggle);
+            elementGOEbar = itemView.findViewById(R.id.seekBarElement);
+            elementGOE = itemView.findViewById(R.id.elementGOERow);
+            elementScore = itemView.findViewById(R.id.elementScoreRow);
+        }
+
+        //Try to set up method for binding/passing seekbar changes to activity
+        public void bind(final ElementItem elementItem, final int position, final boolean paramBoolean, final OnSeekerChangeClickListener onSeekChangeClickListener) {
+            elementGOEbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    onSeekChangeClickListener.onProgressChanged(elementGOEbar, position, false);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
         }
     }
-
     //DO I need this?
     /*
     public void add(String elementID, boolean ticToggle, Double elementBase, boolean bonusToggle, Double elementGOEbar, Double elementGOE, Double elementScore) {
@@ -96,12 +120,14 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ElementScoringViewHolder holder, final int position) {
+        holder.bind(elementScores.get(position), position, false, onSeekerChangeClickListener);
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         final NumberFormat numberFormat = new DecimalFormat("##0.00");
         final NumberFormat numberFormatGOE = new DecimalFormat("0.0");
 
-        final int pos = position;
+        //Trying to set up listener for seekerbars
+
 
         holder.elementID.setText(elementScores.get(position).getElementID());
         //holder.ticToggle.setText(elementScores.get(position).isTicToggle());
@@ -166,7 +192,9 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
         });
         */
 
-        holder.elementGOEbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+        /* temp hide to see if we can get listener from activity
+        holder.elementGOEbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             public void onStopTrackingTouch(SeekBar bar) {
                 int progress = bar.getProgress();
                 calcElementScore(progress, position, holder);
@@ -181,6 +209,7 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
                 calcElementScore(progress, position, holder);
             }
         });
+        */
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -201,7 +230,7 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
         return sumElements;
     }
     */
-
+/*
     //calculate each elements score
     public void calcElementScore(int progress, int position, ElementScoringViewHolder holder) {
         NumberFormat numberFormat = new DecimalFormat("###.00");
@@ -211,12 +240,12 @@ public class AdapterElementScoring extends RecyclerView.Adapter<AdapterElementSc
         tempGOE = tempGOE / 10 - 5;
         //Calc GOE for element
         Double tempBase = elementScores.get(position).getElementBase();
-        Double tempScore = tempBase*(1 + tempGOE/10);
+        Double tempScore = tempBase * (1 + tempGOE / 10);
         //Update items
         elementScores.get(position).setElementGOE(tempGOE);
         holder.elementGOE.setText(numberFormatGOE.format(elementScores.get(position).getElementGOE()));
         elementScores.get(position).setElementScore(tempScore);
         holder.elementScore.setText(numberFormat.format(elementScores.get(position).getElementScore()));
     }
-
+*/
 }
