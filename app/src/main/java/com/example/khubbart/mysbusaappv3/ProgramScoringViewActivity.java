@@ -33,8 +33,6 @@ import java.util.List;
 
 public class ProgramScoringViewActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
-    public SeekBar seekBar00;
-    public TextView textView00;
     public TextView programDescriptionTextView;
     public TextView[] scoresTextView = new TextView[4];
     public TextView[] elementIDTextView = new TextView[13];
@@ -48,8 +46,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     public TextView[] componentScoreTextView = new TextView[5];
 
     private List<ElementItem> elementScoreList = new ArrayList<>();
-    private RecyclerView elementScoreRecyclerView;
-    private AdapterElementScoring adapterElementScoring;
 
     public int progress = 50; // the midway point, zeroed.  Need to set up for adjustable
     public int resID;
@@ -114,7 +110,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     private DocumentReference programRef;
     private DocumentReference elementRef;
     private String elementID;
-    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
 
 
     @Override
@@ -124,14 +119,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
 
         //Set up GlobalClass for shared constants and methods
         globalClass = ((GlobalClass) getApplicationContext());
-
-        //Set up recycler views
-        elementScoreRecyclerView = findViewById(R.id.elementScoreRecyclerView);
-        adapterElementScoring = new AdapterElementScoring(elementScoreList, (OnSeekerChangeClickListener) onSeekBarChangeListener);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        elementScoreRecyclerView .setLayoutManager(mLayoutManager);
-        elementScoreRecyclerView .setItemAnimator(new DefaultItemAnimator());
-        elementScoreRecyclerView .setAdapter(adapterElementScoring);
 
         db = FirebaseFirestore.getInstance();
         // Nset up arrays with view names, seekbars etc
@@ -153,19 +140,19 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         }
     }
 
-    public interface OnSeekBarChangeClickListener {
-        void onProgressChanged(SeekBar bar, int paramInt, boolean paramBoolean) ;
-    }
-
     //default listener for all seeker bars
     @Override
     public void onProgressChanged(SeekBar bar, int progressValue, boolean fromUser) {
-        Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
         for (i = 0; i < requiredElements; i++) {
             if (bar == goeBar[i]) {
-                seekerBarUpdate(progressValue, i);
+                //seekerBarUpdate(progressValue, i);
+                tempString = String.valueOf(i);
+                Log.i("*******************seeker bar matched:: ", tempString);
+                calcElementScore(progressValue, i);
             }
         }
+        Log.i("------------------finished loop: ", tempString);
         for (i = 0; i < 5; i++) {
             if (bar == compBar[i]) {
                 compBarUpdate(progressValue, i);
@@ -181,25 +168,18 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     @Override
     public void onStopTrackingTouch(SeekBar bar) {
         //Update score upon stop
-        seekerBarStopUpdate();
+        //seekerBarStopUpdate();
         //textView00.setText("Covered: " + progress + "/" + );
         //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+        Log.i("-------------------Seeker Bar Stop", tempString);
     }
-
-
-    //default onClick method
-    /*
-    @Override
-    protected void onClick(View view){
-    }
-    */
 
     // A private method to help us initialize our variables.
     private void initializeVariables() {
-        scoresTextView[0] = findViewById(R.id.elementTotal);
-        scoresTextView[1] = findViewById(R.id.componentTotal);
-        scoresTextView[2] = findViewById(R.id.deductionsTotal);
-        scoresTextView[3] = findViewById(R.id.segmentTotal);
+        scoresTextView[1] = findViewById(R.id.elementTotal);
+        scoresTextView[2] = findViewById(R.id.componentTotal);
+        scoresTextView[3] = findViewById(R.id.deductionsTotal);
+        scoresTextView[0] = findViewById(R.id.segmentTotal);
         programDescriptionTextView = findViewById(R.id.textViewProgramDescription);
 
         //Get SOV Table 2018 - Three matched arrays
@@ -211,8 +191,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
 
         //default listener for all seeker bars
-        //temp blok while working on recycler
-        /*
         for (i = 0; i < 13; i++) {
             if (i < 10) {
                 tempString = "seekBarElement0" + i;
@@ -223,7 +201,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             goeBar[i] = (SeekBar) this.findViewById(resID);
             goeBar[i].setOnSeekBarChangeListener(this);
         }
-        */
+
         compBar[0] = this.findViewById(R.id.seekBarComponentSkills);
         compBar[2] = this.findViewById(R.id.seekBarComponentPerformance);
         compBar[1] = this.findViewById(R.id.seekBarComponentTransitions);
@@ -254,7 +232,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             }
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
-            Log.i("*******************tempRowID: ", tempRowID);
+            //Log.i("*******************tempRowID: ", tempRowID);
             elementIDTextView[i] = findViewById(resID);
             /*
             resID = getResources().getIdentifier(tempRowBonus, "id", getPackageName());
@@ -288,9 +266,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         componentFactorTextView[4] = findViewById(R.id.componentInterpretationFactor);
     }
 
-    //Try to use the interface for seekerbar clicks in recyclerview
-
-
     //Update info based on seeker bar - elements
     private void seekerBarUpdate(int uProgress, int uElenum) {
         tempDouble1 = (double) uProgress;
@@ -309,6 +284,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum]; // factors[6] is general prgram component
         tempString = String.valueOf(componentScore[uCompNum]);
         componentScoreTextView[uCompNum].setText(tempString);
+        scoresTextView[2].setText(numberFormat.format(sumComponents()));
+        scoresTextView[0].setText(numberFormat.format(sumSegment()));
     }
 
 
@@ -356,7 +333,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                         requiredElements = RequiredElementsValue[tempInt];
                         //mCompetitionDescriptionTextView.setText(tempText);
                         elementID = program.get(0).getElementsID();
-                        //Log.i("*******************elementID: ", elementID);
+                        tempString = String.valueOf(requiredElements);
+                        Log.i("******************* required elements: ", tempString);
                         pullElements(elementID);
                     }
                 }
@@ -375,7 +353,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                     DocumentSnapshot documentSnapshot = task.getResult();
                     Elements qElements = documentSnapshot.toObject(Elements.class);
                     elements.add(qElements);
-                    int eCount = 0;
                     elementCode[0] = elements.get(0).getE00();
                     elementCode[1] = elements.get(0).getE01();
                     elementCode[2] = elements.get(0).getE02();
@@ -389,17 +366,14 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                     elementCode[10] = elements.get(0).getE10();
                     elementCode[11] = elements.get(0).getE11();
                     elementCode[12] = elements.get(0).getE12();
-                    //technicalTotal = 0;
                     for (int i = 0; i < requiredElements; i++) {
                         if (elementCode[i] != null) {
                             pullElementInfo(elementCode[i], i);
                         }
                     }
                     // Set initial totals
-                    tempString = numberFormat.format(sumElements());
-                    //mTechnicalTotalTextView.setText(tempString);
+                    //tempString = numberFormat.format(sumElements());
                     // Hide rows not used for the program
-                    /* temp hide while working on recycler view
                     for (i = requiredElements; i < 13; i++) {
                         if (i < 10) {
                             tempString = "elementRow0" + i;
@@ -410,25 +384,26 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                         TableRow tr = findViewById(resID);
                         tr.setVisibility(View.GONE);
                     }
-                    */
                 }
+                scoresTextView[1].setText(numberFormat.format(sumElements()));
             }
         });
         //Set initial comp scores too
         for (int i = 0; i < 5; i++) {
             //tempString = String.valueOf(i);
             //Log.i("*******************factors: ", tempString);
-            if(factors[i+1] != null){
+            if (factors[i + 1] != null) {
                 tempDouble2 = 5.0;
                 tempString = String.valueOf(tempDouble2);
                 componentRawTextView[i].setText(tempString);
-                componentScore[i] = tempDouble2 * factors[i+1] * factors[6]; // comp factors start at 1, factors[6] is general program component
+                componentScore[i] = tempDouble2 * factors[i + 1] * factors[6]; // comp factors start at 1, factors[6] is general program component
                 tempString = String.valueOf(componentScore[i]);
                 componentScoreTextView[i].setText(tempString);
-                componentFactorTextView[i].setText(numberFormat.format(factors[i+1]));}
+                componentFactorTextView[i].setText(numberFormat.format(factors[i + 1]));
+            }
         }
-        sumComponents();
-        sumSegment();
+        scoresTextView[0].setText(numberFormat.format(sumSegment()));
+        scoresTextView[2].setText(numberFormat.format(sumComponents()));
     }
 
     public void pullElementInfo(String pElementCode, int pNum) {
@@ -440,25 +415,18 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             elementCode[pNum] = pElementCode;
             elementGOE[pNum] = 0.0; //Must initialize a value
             Log.i("*******************pElementCode: ", pNum + " " + elementCode[pNum]);
-            /*
             tempString = elementCode[pNum];
             elementIDTextView[pNum].setText(elementCode[pNum]);
             tempString = numberFormat.format(elementBase[pNum]);
             elementBaseTextView[pNum].setText(tempString);
-            elementScoreTextView[pNum].setText(tempString);
-            */
-            //Push data into Arraylist for Recyclerview
-           ElementItem elementScoreListItem = new ElementItem(elementCode[pNum], false, elementBase[pNum], false, 0.0, elementGOE[pNum], elementScore[pNum]);
-           elementScoreList.add(elementScoreListItem);
+            elementScoreTextView[pNum].setText(tempString);//Can initialize to both becasue GOE is initially 0
         } else {
             //Check for combo or change to unfound////
-            Log.i("*******************pElementCode: ", pElementCode);
             if (pElementCode != null) checkForComboJump(pElementCode, pNum);
         }
-        adapterElementScoring.notifyDataSetChanged();
-        tempString = numberFormat.format(sumElements());
-        scoresTextView[0].setText(tempString);
-        // mTechnicalTotalTextView.setText(tempString);
+        //scoresTextView[1].setText(numberFormat.format(sumElements()));
+        //scoresTextView[0].setText(numberFormat.format(sumSegment()));
+
     }
 
     public void checkForComboJump(String cElementCode, int cNum) {
@@ -497,23 +465,19 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
             //Add info for non-combo and not found code
             elementCode[cNum] = null;
         }
-        //Push data into Arraylist for Recyclerview
-        ElementItem elementScoreListItem = new ElementItem(elementCode[cNum], false, elementBase[cNum], false, 0.0, elementGOE[cNum], elementScore[cNum]);
-        elementScoreList.add(elementScoreListItem);
-
-        /*
         elementIDTextView[cNum].setText(elementCode[cNum]);
         elementBaseTextView[cNum].setText(numberFormat.format(elementBase[cNum]));
-        elementScoreTextView[cNum].setText(numberFormat.format(elementBase[cNum]));
-        */
+        //scoresTextView[1].setText(numberFormat.format(sumElements()));
+        //scoresTextView[0].setText(numberFormat.format(sumSegment()));
+
     }
 
     //A basic method to get total technical value
     public Double sumElements() {
         double sumElements = 0;
-        for (int i = 0; i < requiredElements; i++) {
-            if (elementScore[i] != null) {
-                sumElements += elementScore[i];
+        for (int qe = 0; qe < requiredElements; qe++) {
+            if (elementScore[qe] != null) {
+                sumElements += elementScore[qe];
             }
         }
         return sumElements;
@@ -522,14 +486,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
     //A basic method to get total component value
     public Double sumComponents() {
         double sumComponents = 0;
-        double tempComp;
-        for (i = 0; i < 5; i++) {
-            if (componentScore[i] != null){
-                sumComponents += componentScore[i];
-}
+        for (int qc = 0; qc < 5; qc++) {
+            if (componentScore[qc] != null) {
+                sumComponents += componentScore[qc];
+            }
         }
-        tempString = numberFormat.format(sumComponents);
-        scoresTextView[1].setText(tempString);
         return sumComponents;
     }
 
@@ -548,31 +509,25 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
 
     //A basic method to get total segment score
     public Double sumSegment() {
-        double sumSegment = sumElements() + sumComponents() - sumDeductions();
-        tempString = numberFormat.format(sumSegment);
-        scoresTextView[3].setText(tempString);
+        Double sumSegment = sumElements() + sumComponents() - sumDeductions();
         return sumSegment;
     }
 
-    /*
-    //calculate each elements score after progress bar change
-    //public void calcElementScore(int progress, int position, ElementScoringViewHolder holder) {
+
     public void calcElementScore(int progress, int position) {
-            NumberFormat numberFormat = new DecimalFormat("###.00");
-        NumberFormat numberFormatGOE = new DecimalFormat("#.0");
         //Convert progress to raw GOE +/-
         Double tempGOE = (double) progress;
-        tempGOE = tempGOE / 10 - 5;
-        //Calc GOE for element
-        Double tempBase = elementScores.get(position).getElementBase();
-        Double tempScore = tempBase * (1 + tempGOE / 10);
+        elementGOE[position] = tempGOE / 10 - 5;
+        //Ultimately, put raw GOE in slider thumb and the actual GOE score in elementGOE
+        //Need to check for ChSq and Combo, which are not 10% increments
+        elementScore[position] = elementBase[position] * (1 + elementGOE[position] / 10);
         //Update items
-        elementScores.get(position).setElementGOE(tempGOE);
-        holder.elementGOE.setText(numberFormatGOE.format(elementScores.get(position).getElementGOE()));
-        elementScores.get(position).setElementScore(tempScore);
-        holder.elementScore.setText(numberFormat.format(elementScores.get(position).getElementScore()));
+        elementGOETextView[position].setText(numberFormat.format(elementGOE[position]));
+        elementScoreTextView[position].setText(numberFormat.format(elementScore[position]));
+        scoresTextView[1].setText(numberFormat.format(sumElements()));
+        scoresTextView[0].setText(numberFormat.format(sumSegment()));
     }
-    */
+
 /*
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
