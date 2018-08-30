@@ -281,9 +281,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
         componentRawTextView[uCompNum].setText(tempString);
         componentFactor[uCompNum] = factors[uCompNum];
         //componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum]*factors[6]; // factors[6] is general prgram component
-        componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum]; // factors[6] is general prgram component
+        componentScore[uCompNum] = tempDouble2 * factors[uCompNum+1]*factors[6]; // factors[6] is general program component
         tempString = String.valueOf(componentScore[uCompNum]);
         componentScoreTextView[uCompNum].setText(tempString);
+        tempString = String.valueOf(factors[uCompNum+1]);
+        Log.i("-------------------compBarUpdate Factor Vaue: ", tempString);
         scoresTextView[2].setText(numberFormat.format(sumComponents()));
         scoresTextView[0].setText(numberFormat.format(sumSegment()));
     }
@@ -491,6 +493,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements See
                 sumComponents += componentScore[qc];
             }
         }
+        //sumComponents = sumComponents*factors[6];  //should not need this here, being added at raw score to score level
         return sumComponents;
     }
 

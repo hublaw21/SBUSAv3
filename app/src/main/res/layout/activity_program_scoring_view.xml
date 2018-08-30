@@ -496,7 +496,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle03"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -516,7 +516,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle03"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -569,7 +569,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle04"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -589,7 +589,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle04"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -643,7 +643,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle05"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -663,7 +663,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle05"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -716,7 +716,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle06"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -736,7 +736,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle06"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -790,7 +790,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle07"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -810,7 +810,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle07"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -863,7 +863,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle08"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -883,7 +883,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle08"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -937,7 +937,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle09"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -957,7 +957,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle09"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -1010,7 +1010,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle10"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -1030,7 +1030,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle10"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -1084,7 +1084,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle11"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -1104,7 +1104,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle11"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -1157,7 +1157,7 @@
                     <ToggleButton
                         android:id="@+id/elementTicToggle12"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
@@ -1177,7 +1177,7 @@
                     <ToggleButton
                         android:id="@+id/elementBonusToggle12"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/textMedium"
                         android:layout_weight="1"
                         android:background="@drawable/toggle_button_box_small_default"
                         android:button="@drawable/toggle_button_box_small_default"
