@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -159,6 +162,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
     //Get program selected
     @Override
     public void userItemClick(int position) {
+
         //Send to program view activity with data
         /*
         Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
@@ -170,6 +174,8 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         */
         //this.position = position;
         selectedProgramID = programList.get(position).getDocumentID();
+        selectOptionButtonDialog(selectedProgramID);
+        /*
         //selectedProgramID = programList.get(0).getDocumentID();
         //selectedProgramID2 = programList.get(1).getDocumentID();
         //Toast.makeText(this, "ID1: " + selectedProgramID + " ID2: " + selectedProgramID2 + " pos: " + position, Toast.LENGTH_LONG).show();
@@ -182,5 +188,70 @@ public class ProgramSelectActivity extends AppCompatActivity implements ProgramS
         intentBundle.putExtras(bundle);
         startActivity(intentBundle);
         //Toast.makeText(this, "Clicked: " + programList.get(position).getDocumentID(), Toast.LENGTH_LONG).show();
+        */
+    }
+
+    //Choose to Edit or Score
+    public void selectOptionButtonDialog (final String selectedProgramID2){
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
+        Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
+        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+
+        // Set add/edit button click listener
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                //go to edit page
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID",mCurrentUserUID);
+                bundle.putString("programID",selectedProgramID2);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
+
+        // Set score button click listener
+        scoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss/cancel the alert dialog
+                dialog.dismiss();
+                // go to scoring page
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID",mCurrentUserUID);
+                bundle.putString("programID",selectedProgramID2);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // Display the custom alert dialog on interface
+        dialog.show();
     }
 }

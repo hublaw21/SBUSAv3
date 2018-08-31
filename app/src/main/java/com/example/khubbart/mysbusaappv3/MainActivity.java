@@ -1,10 +1,13 @@
 package com.example.khubbart.mysbusaappv3;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Button buttonMain01;
     Button buttonMainProfile;
     Button buttonMainGenerateSampleData;
-    Button buttonMainProgramSelect;
+    Button buttonEditProgram;
+    Button buttonScoreProgram;
     Button buttonMainLogOut;
     public TextView textViewSkaterName;
     public String mCurrentUserUID;
@@ -41,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         buttonMain01 = (Button) findViewById(R.id.buttonMain01);
         buttonMainProfile = (Button) findViewById(R.id.buttonMainProfile);
-        buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
-        buttonMainProgramSelect = (Button) findViewById(R.id.buttonMainProgramSelect);
+        //buttonMainGenerateSampleData = (Button) findViewById(R.id.buttonMainSDG);
+        buttonEditProgram = (Button) findViewById(R.id.buttonEditProgram);
+        buttonScoreProgram = (Button) findViewById(R.id.buttonScoreProgram);
         buttonMainLogOut = (Button) findViewById(R.id.buttonMainLogOut);
         textViewSkaterName = findViewById(R.id.textViewSkaterName);
 
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
         */
 
+        /*
         buttonMainGenerateSampleData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
+        */
 
-
-        buttonMainProgramSelect.setOnClickListener(new View.OnClickListener() {
+        buttonEditProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentBundle = new Intent(MainActivity.this, ProgramSelectActivity.class);
@@ -99,6 +105,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentBundle);
             }
         });
+
+        buttonScoreProgram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentBundle = new Intent(MainActivity.this, ProgramSelectActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID",mCurrentUserUID);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
+
 
 
         buttonMainLogOut.setOnClickListener(new View.OnClickListener(){
