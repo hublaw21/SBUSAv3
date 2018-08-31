@@ -12,7 +12,7 @@
     <color name="branding_color_primary_dark">#303F9F</color>
     <color name="button_text_default">#ffffff</color>
     <color name="buttonOn">#000000</color>
-    <color name="buttonOff">#878787</color>
+    <color name="buttonOff">#000000</color>
 
     <color name="material_deep_purple_50">#EDE7F6</color>
     <color name="material_deep_purple_500">#673AB7</color>

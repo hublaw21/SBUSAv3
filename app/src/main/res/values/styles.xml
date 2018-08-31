@@ -27,6 +27,34 @@
         <item name="colorAccent">@color/material_purple_a700</item>
         <item name="android:windowBackground">@color/material_green_50</item>
     </style>
+    
+    <style name="BonusToggleButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/textMedium</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/toggle_button_box_small_default</item>
+        <item name="android:button">@drawable/toggle_button_box_small_default</item>
+        <item name="android:checked">false</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/textSmall</item>
+        <item name="android:textOff">\uFFEE</item>
+        <item name="android:textOn">x</item>
+        <item name="android:textColor">@drawable/color_selector</item>
+    </style>
+
+    <style name="TicButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/textMedium</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/toggle_button_box_small_default</item>
+        <item name="android:button">@drawable/toggle_button_box_small_default</item>
+         <item name="android:gravity">center_vertical</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/textSmall</item>
+        <item name="android:text">\uFFEE</item>
+        <item name="android:textColor">@drawable/color_selector</item>
+    </style>
 
     <!--
     <style name="WarnButton" parent="Widget.AppCompat.Button.Colored">

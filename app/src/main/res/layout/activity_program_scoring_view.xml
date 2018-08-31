@@ -269,17 +269,8 @@
                         android:textAlignment="textStart" />
 
                     <ToggleButton
-                        android:id="@+id/elementTicToggle00"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff="x"
-                        android:textOn="x" />
+                        android:id="@+id/elementTicButton00"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow00"
@@ -290,17 +281,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle00"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff="x"
-                        android:textOn="x"
-                        android:textColor="@drawable/color_selector"/>
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement00"
@@ -366,16 +347,8 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle01"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
+
 
                     <SeekBar
                         android:id="@+id/seekBarElement01"
@@ -440,16 +413,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle02"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement02"
@@ -515,15 +479,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle03"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement03"
@@ -588,15 +544,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle04"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement04"
@@ -662,15 +610,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle05"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement05"
@@ -735,15 +675,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle06"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement06"
@@ -809,15 +741,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle07"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement07"
@@ -882,15 +806,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle08"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement08"
@@ -956,15 +872,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle09"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement09"
@@ -1029,15 +937,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle10"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement10"
@@ -1103,15 +1003,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle11"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff="x"
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement11"
@@ -1176,15 +1068,7 @@
 
                     <ToggleButton
                         android:id="@+id/elementBonusToggle12"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textOff=""
-                        android:textOn="x" />
+                        style="@style/BonusToggleButton"/>
 
                     <SeekBar
                         android:id="@+id/seekBarElement12"

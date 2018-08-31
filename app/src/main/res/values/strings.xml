@@ -67,6 +67,8 @@
     <string name="maybe">Maybe</string>
     <string name="okay">OK</string>
 
+    <string name="specialCharacter1"></string>
+
 
     <string-array name="segments">
         <item>@string/shortprogram</item>
@@ -87,6 +89,15 @@
     <string name="novice">Novice</string>
     <string name="intermediate">Intermediate</string>
     <string name="juvenile">Juvenile</string>
+
+    <string-array name="tics">
+        <item>\uFFEE</item>
+        <item>!</item>
+        <item>e</item>
+        <item>\u60</item>
+        <item>\u60\u60</item>
+    </string-array>
+
 
     <!-- Testing for syncing button names -->
     <string name="toggle_Button_Jump">toggle_Button_Jump</string>

@@ -17,6 +17,15 @@
         android:text="Skaters Name" />
 
     <Button
+        android:id="@+id/buttonEditProgram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_box_default"
+        android:text="Programs"
+        android:textSize="@dimen/textLarge" />
+
+    <Button
         android:id="@+id/buttonMain01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,15 +63,6 @@
         android:background="@drawable/button_box_default"
         android:text="Test Scoring Page"
         android:textSize="@dimen/textLarge" />
-     -->
-    <Button
-        android:id="@+id/buttonEditProgram"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/button_box_default"
-        android:text="Add or Edit a Program"
-        android:textSize="@dimen/textLarge" />
 
     <Button
         android:id="@+id/buttonScoreProgram"
@@ -72,6 +72,7 @@
         android:background="@drawable/button_box_default"
         android:text="Select a Program to Score"
         android:textSize="@dimen/textLarge" />
+        -->
 
     <Button
         android:id="@+id/buttonMainLogOut"
