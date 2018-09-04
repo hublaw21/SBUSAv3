@@ -268,7 +268,7 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
+                    <Button
                         android:id="@+id/elementTicButton00"
                         style="@style/TicButton"/>
 

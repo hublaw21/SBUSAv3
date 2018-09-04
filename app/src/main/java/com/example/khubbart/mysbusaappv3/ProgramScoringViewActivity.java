@@ -7,14 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -92,7 +88,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
-    public String[][] factorTable = new String[30][11];
     public List<Program> program = new ArrayList<>();
     public List<Elements> elements = new ArrayList<>();
     public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
@@ -154,7 +149,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             // get the info
             mCurrentUserID = extrasBundle.getString("userID");
             mCurrentProgramID = extrasBundle.getString("programID");
-            //Log.i("*******************programID: ", mCurrentProgramID);
 
             //Might want to implement as a separate thread
             init();  // Call the initiation method here, to ensure the IDs have been pulled
@@ -166,8 +160,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public void onClick(View view) {
         //Determine which button was pushed
         buttonPointer = 0;
+        tempInt = view.getId();
         for (i = 0; i < requiredElements; i++) {
-            tempInt = view.getId();
             if (findViewById(tempInt) == elementBonusButton[i]) {
                 buttonPointer = i;
                 elementBonusButtonStatus[i] = elementBonusButton[i].isChecked();
@@ -182,18 +176,23 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 calcElementScore(buttonPointer); //Update element's score
             } else {
                 if (findViewById(tempInt) == elementTicButton[i]) {
-                    ticDialog(i);
-                    //Add button text
+                    //Cycle thru tic options
+                    elementTicIndex[i] += 1;
+                    if(elementTicIndex[i] > 4) elementTicIndex[i] = 0;  //Need to make max index dynamic
+                    elementTicButton[i].setText(ticArray[elementTicIndex[i]]);
+                    /*
                     if (i < 10) {
                         tempString = "elementTicButton0" + i;
                     } else {
                         tempString = "elementTicButton" + i;
                     }
+                    /*
                     resID = getResources().getIdentifier(tempString, "id", getPackageName());
                     tempButton = findViewById(resID);
                     if (tempButton != null) {
                         tempButton.setText(ticArray[elementTicIndex[i]]);
                     }
+                    */
                 }
             }
         }
@@ -202,7 +201,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     //default listener for all seeker bars
     @Override
     public void onProgressChanged(SeekBar bar, int progressValue, boolean fromUser) {
-        //Toast.makeText(getApplicationContext(), "SeekerBar Moved", Toast.LENGTH_SHORT).show();
         for (i = 0; i < requiredElements; i++) {
             if (bar == goeBar[i]) {
                 calcElementGOE(progressValue, i);
@@ -217,26 +215,21 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
     @Override
     public void onStartTrackingTouch(SeekBar bar) {
-        //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+        //No action needed on starting to track
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar bar) {
-        //Update score upon stop
-        //seekerBarStopUpdate();
-        //textView00.setText("Covered: " + progress + "/" + );
-        //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
-        Log.i("-------------------Seeker Bar Stop", tempString);
+        //No update needed, the last progress should have covered it
     }
 
     // A private method to help us initialize our variables.
     private void initializeVariables() {
+        scoresTextView[0] = findViewById(R.id.segmentTotal);
         scoresTextView[1] = findViewById(R.id.elementTotal);
         scoresTextView[2] = findViewById(R.id.componentTotal);
         scoresTextView[3] = findViewById(R.id.deductionsTotal);
-        scoresTextView[0] = findViewById(R.id.segmentTotal);
         programDescriptionTextView = findViewById(R.id.textViewProgramDescription);
-
 
         //Get SOV Table 2018 - Three matched arrays
         Resources resources = getResources();
@@ -246,19 +239,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         ticArray = resources.getStringArray(R.array.tics);
         RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
         RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
-
-        /*
-        //Get array for tics dropdown
-        ticArray = resources.getStringArray(R.array.tics);
-        ArrayAdapter ticSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.tics, R.layout.spinner_tics);
-        tempString ="ticSpinner00";
-        resID = getResources().getIdentifier(tempString, "id", getPackageName());
-        ticSpinner[0] = (Spinner) this.findViewById(resID);
-        ticSpinner[0].setOnItemSelectedListener(this);
-        ticSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_tics);
-        ticSpinner[0].setAdapter(ticSpinnerArrayAdapter);
-        */
-
 
         //default listener for all seeker bars
         for (i = 0; i < 13; i++) {
@@ -303,7 +283,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             elementIDTextView[i] = findViewById(resID);
-            Log.i("*******************tempRowID: ", tempRowBonus);
             resID = getResources().getIdentifier(tempRowBonus, "id", getPackageName());
             elementBonusButton[i] = findViewById(resID);
             elementBonusButton[i].setOnClickListener(this);
@@ -321,7 +300,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             elementScoreTextView[i] = findViewById(resID);
         }
         //tempString = ""
-        //resID = getResources().getIdentifier(tempString, "id", getPackageName());
         componentRawTextView[0] = findViewById(R.id.componentSkillsValue);
         componentRawTextView[1] = findViewById(R.id.componentTransitionsValue);
         componentRawTextView[2] = findViewById(R.id.componentPerformanceValue);
@@ -353,32 +331,12 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         tempString = String.valueOf(tempDouble2);
         componentRawTextView[uCompNum].setText(tempString);
         componentFactor[uCompNum] = factors[uCompNum];
-        //componentScore[uCompNum] = tempDouble2 * componentFactor[uCompNum]*factors[6]; // factors[6] is general prgram component
         componentScore[uCompNum] = tempDouble2 * factors[uCompNum + 1] * factors[6]; // factors[6] is general program component
         tempString = String.valueOf(componentScore[uCompNum]);
         componentScoreTextView[uCompNum].setText(tempString);
         tempString = String.valueOf(factors[uCompNum + 1]);
-        Log.i("-------------------compBarUpdate Factor Vaue: ", tempString);
         scoresTextView[2].setText(numberFormat.format(sumComponents()));
         scoresTextView[0].setText(numberFormat.format(sumSegment()));
-    }
-
-
-    //Update all info on Seeker Bar stop
-    private void seekerBarStopUpdate() {
-        /*
-        for (i = 0; i < requiredElements; i++) {
-            tempString = elementGOETextView[i].getText().toString();
-            tempDouble1 = Double.parseDouble(tempString);
-            elementGOE[i] = tempDouble1;
-            elementScore[i] = elementBase[i] * (1 + (tempDouble1 / 10));
-            tempString = numberFormat.format(elementScore[i]);
-            elementScoreTextView[i].setText(tempString);
-        }
-        tempString = numberFormat.format(sumElements());
-        scoresTextView[0].setText(tempString);
-        sumSegment();
-        */
     }
 
     // Initialize database, pull program and elements
@@ -390,27 +348,21 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             programRef = db.collection("Programs").document(mCurrentProgramID);
             programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                //public void onComplete(final DocumentSnapshot documentSnapshot) {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
                         Program qProgram = documentSnapshot.toObject(Program.class);
                         program.add(qProgram);
-                        //mCompetitionNameTextView.setText(program.get(0).getCompetition());
                         String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
                         programDescriptionTextView.setText(tempText);
                         programDescription = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
                         factors = globalClass.getFactors(programDescription);
                         progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
-                        //Log.i("*******************programRef: ", mCurrentProgramID);
-                        //Log.i("*******************progPointer: ", progPointer);
                         tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
                         requiredElements = RequiredElementsValue[tempInt];
-                        //mCompetitionDescriptionTextView.setText(tempText);
                         elementID = program.get(0).getElementsID();
                         tempString = String.valueOf(requiredElements);
-                        Log.i("******************* required elements: ", tempString);
-                        pullElements(elementID);
+                        pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
                     }
                 }
             });
@@ -446,8 +398,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                             pullElementInfo(elementCode[i], i);
                         }
                     }
-                    // Set initial totals
-                    //tempString = numberFormat.format(sumElements());
                     // Hide rows not used for the program
                     for (i = requiredElements; i < 13; i++) {
                         if (i < 10) {
@@ -465,10 +415,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         });
         //Set initial comp scores too
         for (int i = 0; i < 5; i++) {
-            //tempString = String.valueOf(i);
-            //Log.i("*******************factors: ", tempString);
             if (factors[i + 1] != null) {
-                tempDouble2 = 5.0;
+                tempDouble2 = 5.0; // This could be an option for users
                 tempString = String.valueOf(tempDouble2);
                 componentRawTextView[i].setText(tempString);
                 componentScore[i] = tempDouble2 * factors[i + 1] * factors[6]; // comp factors start at 1, factors[6] is general program component
@@ -490,7 +438,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             elementCode[pNum] = pElementCode;
             elementGOE[pNum] = 0.0; //Must initialize a value
             jumpBase[pNum] = 0.0; //Must initialize a value
-            Log.i("*******************pElementCode: ", pNum + " " + elementCode[pNum]);
             tempString = elementCode[pNum];
             elementIDTextView[pNum].setText(elementCode[pNum]);
             tempString = numberFormat.format(elementBase[pNum]);
@@ -505,7 +452,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     }
 
     public void checkForComboJump(String cElementCode, int cNum) {
-        //Toast.makeText(ProgramViewActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
         tempTrimmedString = cElementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
         elementCodeCArray = tempTrimmedString.toCharArray();
         num = 0;
@@ -517,7 +463,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             tempString = String.copyValueOf(elementCodeCArray, i, 1);
             if (tempString.equals("+")) {
                 //We have a combo
-                eEnd = i; // IN substring, end position is not included in extract
+                eEnd = i; // In substring, end position is not included in extract
                 comboCode[num] = tempTrimmedString.substring(eStart, eEnd);
                 int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
                 if (currentSOVIndex > 0)
@@ -546,9 +492,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         }
         elementIDTextView[cNum].setText(elementCode[cNum]);
         elementBaseTextView[cNum].setText(numberFormat.format(elementBase[cNum]));
-        //scoresTextView[1].setText(numberFormat.format(sumElements()));
-        //scoresTextView[0].setText(numberFormat.format(sumSegment()));
-
     }
 
     //A basic method to get total technical value
@@ -570,20 +513,13 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 sumComponents += componentScore[qc];
             }
         }
-        //sumComponents = sumComponents*factors[6];  //should not need this here, being added at raw score to score level
         return sumComponents;
     }
 
     //A basic method to get total deduction value
     public Double sumDeductions() {
         double sumDeductions = 0;
-            /*
-            for (int i = 0; i < requiredElements; i++) {
-                if (elementScore[i] != null) {
-                    sumElements += elementScore[i];
-                }
-            }
-            */
+        //Add here
         return sumDeductions;
     }
 
@@ -625,60 +561,40 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         sumSegment();
     }
 
+    //Do I need these adapter views?
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
-/*
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-    }
-    */
 
-    //Dialog for element tics and other erros
+    //Dialog for element tics and other errors
     public void ticDialog(final int tNum) {
         // Build an AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
+        builder.setTitle("Title");
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.alertdialog_tics, null);
-
-        // Specify alert dialog is not cancelable/not ignorable
-        builder.setCancelable(false);
-
-        // Set the custom layout as alert dialog view
-        builder.setView(dialogView);
-
         // Get the custom alert dialog view widgets reference
         ticDialogButton[0] = dialogView.findViewById(R.id.tic_element_check_button);
         ticDialogButton[1] = dialogView.findViewById(R.id.tic_element_edge_button);
         ticDialogButton[2] = dialogView.findViewById(R.id.tic_element_downgrade_button);
         ticDialogButton[3] = dialogView.findViewById(R.id.tic_element_double_downgrade_button);
         ticDialogButton[4] = dialogView.findViewById(R.id.tic_element_cancel_button);
-
-        // Create the alert dialog
         final AlertDialog dialog = builder.create();
-
-
         for (i = 0; i < 5; i++) {
-            ticDialogButton[i].setOnClickListener(this);
+            ticDialogButton[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    elementTicIndex[tNum] = i;
+                    tempString = String.valueOf(i);
+                    Toast.makeText(getApplicationContext(), "Tic: " + tempString, Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
         }
-
-        new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int position) {
-                elementTicIndex[tNum] = position;
-                dialog.dismiss();
-            }
-        };
-
-        // Display the custom alert dialog on interface
-        dialog.show();
     }
 }
