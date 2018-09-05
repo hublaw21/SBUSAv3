@@ -59,7 +59,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
     public int progress = 50; // the midway point, zeroed.  Need to set up for adjustable
     public int resID;
-    public Button[] ticDialogButton = new Button[5];
+    public Button[] ticDialogButton = new Button[6];
 
     public String tempString;
     public String tempRowID;
@@ -75,11 +75,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String[] elementCode = new String[13];
     public boolean[] elementBonusButtonStatus = new boolean[13];
     public String[] elementTic = new String[13];
-    public String[] ticArray = new String[4];
+    public String[] ticArray = new String[6];
     public Double[] elementBase = new Double[13];
     public Double[] jumpBase = new Double[13];
     public Double[] elementGOE = new Double[13];
-    public int[] elementTicIndex = new int[5];
+    public int[] elementTicIndex = new int[13];
     public Double[] elementBonus = new Double[13]; // Calculate and add in the value when loading the element
     public Double[] elementScore = new Double[13];
     public Double[] componentFactor = new Double[5];
@@ -110,6 +110,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public Double tempComboTotal;
     public Double tempDouble1;
     public Double tempDouble2;
+    public Double tempBase;
+    public Double tempGOE;
     public SeekBar[] goeBar = new SeekBar[13];
     public SeekBar[] compBar = new SeekBar[5];
     public int[] goeBarId = new int[13];
@@ -162,6 +164,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         buttonPointer = 0;
         tempInt = view.getId();
         for (i = 0; i < requiredElements; i++) {
+            //Check for bonus button clicked
             if (findViewById(tempInt) == elementBonusButton[i]) {
                 buttonPointer = i;
                 elementBonusButtonStatus[i] = elementBonusButton[i].isChecked();
@@ -174,26 +177,13 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                     elementBaseTextView[i].setText(tempString);
                 }
                 calcElementScore(buttonPointer); //Update element's score
-            } else {
-                if (findViewById(tempInt) == elementTicButton[i]) {
-                    //Cycle thru tic options
-                    elementTicIndex[i] += 1;
-                    if(elementTicIndex[i] > 4) elementTicIndex[i] = 0;  //Need to make max index dynamic
-                    elementTicButton[i].setText(ticArray[elementTicIndex[i]]);
-                    /*
-                    if (i < 10) {
-                        tempString = "elementTicButton0" + i;
-                    } else {
-                        tempString = "elementTicButton" + i;
-                    }
-                    /*
-                    resID = getResources().getIdentifier(tempString, "id", getPackageName());
-                    tempButton = findViewById(resID);
-                    if (tempButton != null) {
-                        tempButton.setText(ticArray[elementTicIndex[i]]);
-                    }
-                    */
-                }
+            }
+            //Check/Verify tic button clicked
+            if (findViewById(tempInt) == elementTicButton[i]) {
+                tempString = String.valueOf(tempInt);
+                Log.i("*******************ticClick ", tempString);
+                tempInt = 0; // have to reset or alert dialog buttons cause a loop
+                ticDialog(i);
             }
         }
     }
@@ -268,14 +258,14 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             if (i < 10) {
                 tempRowID = "elementIdRow0" + i;
                 tempRowBonus = "elementBonusToggle0" + i;
-                tempRowTic = "elementTicRow0" + i;
+                tempRowTic = "elementTicButton0" + i;
                 tempRowBase = "elementBaseRow0" + i;
                 tempRowGOE = "elementGOERow0" + i;
                 tempRowScore = "elementScoreRow0" + i;
             } else {
                 tempRowID = "elementIdRow" + i;
                 tempRowBonus = "elementBonusToggle" + i;
-                tempRowTic = "elementTicRow" + i;
+                tempRowTic = "elementTicButton" + i;
                 tempRowBase = "elementBaseRow" + i;
                 tempRowGOE = "elementGOERow" + i;
                 tempRowScore = "elementScoreRow" + i;
@@ -283,19 +273,21 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             elementIDTextView[i] = findViewById(resID);
+
             resID = getResources().getIdentifier(tempRowBonus, "id", getPackageName());
             elementBonusButton[i] = findViewById(resID);
             elementBonusButton[i].setOnClickListener(this);
 
-            //Change 0 to i when all are in place
-            resID = getResources().getIdentifier("elementTicButton00", "id", getPackageName());
-            elementTicButton[0] = findViewById(resID);
-            elementTicButton[0].setOnClickListener(this);
+            resID = getResources().getIdentifier(tempRowTic, "id", getPackageName());
+            elementTicButton[i] = findViewById(resID);
+            elementTicButton[i].setOnClickListener(this);
 
             resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
             elementBaseTextView[i] = findViewById(resID);
+
             resID = getResources().getIdentifier(tempRowGOE, "id", getPackageName());
             elementGOETextView[i] = findViewById(resID);
+
             resID = getResources().getIdentifier(tempRowScore, "id", getPackageName());
             elementScoreTextView[i] = findViewById(resID);
         }
@@ -443,8 +435,22 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             tempString = numberFormat.format(elementBase[pNum]);
             elementBaseTextView[pNum].setText(tempString);
             elementScoreTextView[pNum].setText(tempString);//Can initialize to both because GOE is initially 0
-            if (currentSOVIndex > 23)
+            tempString = String.valueOf(currentSOVIndex);
+            Log.i("**************SOV Index: ", tempString);
+            if (currentSOVIndex > 23) {
+                //Hide and disables tic and bonus notation
+                elementTicButton[pNum].setText("");
+                elementTicIndex[pNum] = 0;
+                elementBonusButton[pNum].setText("");
                 elementBonusButton[pNum].setEnabled(false); // Disable buttons for non-jumps.   Jumps are 0-24 in array
+                elementTicButton[pNum].setEnabled(false); // Disable buttons for non-jumps.   Jumps are 0-24 in array
+            } else {
+                //Initiate tic button for jumps
+                elementTicButton[pNum].setText(ticArray[0]);
+                elementTicIndex[pNum] = 0;
+                elementBonusButton[pNum].setEnabled(true); // Enable buttons for non-jumps.   Jumps are 0-24 in array
+                elementTicButton[pNum].setEnabled(true);
+            }
         } else {
             //Check for combo or change to unfound////
             if (pElementCode != null) checkForComboJump(pElementCode, pNum);
@@ -556,7 +562,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             elementScore[position] = elementBase[position] + elementGOE[position];
         }
         //Update items
-        elementScoreTextView[position].setText(numberFormat.format(elementScore[position])); //Update specifci element's score
+        elementScoreTextView[position].setText(numberFormat.format(elementScore[position])); //Update specific element's score
         scoresTextView[1].setText(numberFormat.format(sumElements())); //Update elements total score
         sumSegment();
     }
@@ -578,23 +584,136 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         builder.setTitle("Title");
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.alertdialog_tics, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
         // Get the custom alert dialog view widgets reference
-        ticDialogButton[0] = dialogView.findViewById(R.id.tic_element_check_button);
-        ticDialogButton[1] = dialogView.findViewById(R.id.tic_element_edge_button);
-        ticDialogButton[2] = dialogView.findViewById(R.id.tic_element_downgrade_button);
-        ticDialogButton[3] = dialogView.findViewById(R.id.tic_element_double_downgrade_button);
-        ticDialogButton[4] = dialogView.findViewById(R.id.tic_element_cancel_button);
+        ticDialogButton[0] = dialogView.findViewById(R.id.tic_element_none_button);
+        ticDialogButton[1] = dialogView.findViewById(R.id.tic_element_check_button);
+        ticDialogButton[2] = dialogView.findViewById(R.id.tic_element_edge_button);
+        ticDialogButton[3] = dialogView.findViewById(R.id.tic_element_downgrade_button);
+        ticDialogButton[4] = dialogView.findViewById(R.id.tic_element_double_downgrade_button);
+        ticDialogButton[5] = dialogView.findViewById(R.id.tic_element_cancel_button);
+
+        tempString = String.valueOf(tNum);
+        Log.i("********DIALOG*********** ", tempString);
+
+        // Create the alert dialog
         final AlertDialog dialog = builder.create();
-        for (i = 0; i < 5; i++) {
-            ticDialogButton[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    elementTicIndex[tNum] = i;
-                    tempString = String.valueOf(i);
-                    Toast.makeText(getApplicationContext(), "Tic: " + tempString, Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            });
+
+        // Set none button click listener
+        ticDialogButton[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                changeTicButton(tNum, 0);
+            }
+        });
+
+        // Set check button click listener
+        ticDialogButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                changeTicButton(tNum, 1);
+            }
+
+        });
+
+        // Set edge button click listener
+        ticDialogButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                changeTicButton(tNum, 2);
+            }
+        });
+
+        // Set downgrade button click listener
+        ticDialogButton[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                changeTicButton(tNum, 3);
+            }
+        });
+        // Set doubledowngrade button click listener
+        ticDialogButton[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                changeTicButton(tNum, 4);
+            }
+        });
+        // Set cancel button click listener
+        ticDialogButton[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        // Display the custom alert dialog on interface
+        dialog.show();
+    }
+
+    public void changeTicButton(int eleNum, int ticNum) {
+        // Change the tic button after selecting dialog
+        if (eleNum < 10) {
+            tempString = "elementTicButton0" + eleNum;
+        } else {
+            tempString = "elementTicButton" + eleNum;
         }
+        elementTicIndex[eleNum] = ticNum;
+        resID = getResources().getIdentifier(tempString, "id", getPackageName());
+        tempButton = findViewById(resID);
+        tempString = ticArray[elementTicIndex[eleNum]];
+        if (tempButton != null) tempButton.setText(tempString);
+        //Recalculate Base and GOE Value
+        tempInt = Arrays.asList(SOVCode).indexOf(elementCode[eleNum]); //Get SOV index of current element
+        if (tempInt > 0)
+            tempBase = Double.valueOf(Arrays.asList(SOVBase).get(tempInt)); //Get Base Value from SOV
+        //Need to check combo jumps here, might change which is highest, so might change GOE
+        if (jumpBase[eleNum] > 0) {
+            tempBase = jumpBase[eleNum];
+            tempDouble1 = elementBase[eleNum] - jumpBase[eleNum]; //Saving value of combo without biggest jump
+        }
+        tempGOE = elementGOE[eleNum] / tempBase; //This is GOE ratio only for recalculating (saving progress point)
+
+        switch (ticNum) {
+            case 2:
+                tempBase = Math.round(tempBase * 75.0) / 100.0; //Need to round to two digits
+                if (jumpBase[eleNum] > 0) jumpBase[eleNum] = tempBase;
+                break;
+            case 3:
+                tempBase = Math.round(tempBase * 75.0) / 100.0; //Need to round to two digits
+                if (jumpBase[eleNum] > 0) jumpBase[eleNum] = tempBase;
+                break;
+            default:
+                if (jumpBase[eleNum] > 0) {
+                    //Need to see about restoring jumpbase when turning off downgrade
+                    checkForComboJump(elementCode[eleNum], eleNum);
+                }
+                break;
+        }
+        //Do these for all, so if we reset to no tic, it goes to basic value
+        elementGOE[eleNum] = Math.round(tempBase * tempGOE * 100.0) / 100.0;
+        elementGOETextView[eleNum].setText(numberFormat.format(elementGOE[eleNum]));
+        //tempString = String.valueOf(tempBase);
+        //Toast.makeText(this, "We have a Combo " + tempString, Toast.LENGTH_SHORT).show();
+
+        //
+        if (jumpBase[eleNum] > 0) {
+            elementBase[eleNum] = tempDouble1 + tempBase;
+        } else {
+            elementBase[eleNum] = tempBase;
+        }
+        elementBaseTextView[eleNum].setText(numberFormat.format(elementBase[eleNum])); //Update specific element's base value
+
+        // Recalculate element score
+        calcElementScore(eleNum);
     }
 }

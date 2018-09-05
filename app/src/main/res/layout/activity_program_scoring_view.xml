@@ -325,18 +325,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle01"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton01"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow01"
@@ -391,18 +382,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle02"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton02"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow02"
@@ -457,18 +439,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle03"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton03"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow03"
@@ -522,18 +495,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle04"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton04"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow04"
@@ -588,18 +552,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle05"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton05"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow05"
@@ -653,18 +608,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle06"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton06"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow06"
@@ -719,18 +665,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle07"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton07"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow07"
@@ -784,18 +721,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle08"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton08"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow08"
@@ -850,18 +778,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle09"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton09"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow09"
@@ -915,18 +834,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle10"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton10"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow10"
@@ -981,18 +891,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle11"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton11"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow11"
@@ -1046,18 +947,9 @@
                         android:layout_weight="3"
                         android:textAlignment="textStart" />
 
-                    <ToggleButton
-                        android:id="@+id/elementTicToggle12"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/textMedium"
-                        android:layout_weight="1"
-                        android:background="@drawable/toggle_button_box_small_default"
-                        android:button="@drawable/toggle_button_box_small_default"
-                        android:checked="true"
-                        android:gravity="center_vertical"
-                        android:textAlignment="center"
-                        android:textOff=""
-                        android:textOn="x" />
+                    <Button
+                        android:id="@+id/elementTicButton12"
+                        style="@style/TicButton"/>
 
                     <TextView
                         android:id="@+id/elementBaseRow12"
