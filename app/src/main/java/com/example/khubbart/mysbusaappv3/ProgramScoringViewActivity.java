@@ -295,7 +295,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         compBar[1] = this.findViewById(R.id.seekBarComponentTransitions);
         compBar[3] = this.findViewById(R.id.seekBarComponentComposition);
         compBar[4] = this.findViewById(R.id.seekBarComponentInterpretation);
-        //compBar[0].setOnSeekBarChangeListener(this);
+        compBar[0].setOnSeekBarChangeListener(this);
         compBar[1].setOnSeekBarChangeListener(this);
         compBar[2].setOnSeekBarChangeListener(this);
         compBar[3].setOnSeekBarChangeListener(this);

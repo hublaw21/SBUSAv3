@@ -283,7 +283,7 @@
                         android:id="@+id/elementBonusToggle00"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement00"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -341,7 +341,7 @@
                         style="@style/BonusToggleButton" />
 
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement01"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -397,7 +397,7 @@
                         android:id="@+id/elementBonusToggle02"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement02"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -454,7 +454,7 @@
                         android:id="@+id/elementBonusToggle03"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement03"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -510,7 +510,7 @@
                         android:id="@+id/elementBonusToggle04"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement04"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -567,7 +567,7 @@
                         android:id="@+id/elementBonusToggle05"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement05"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -623,7 +623,7 @@
                         android:id="@+id/elementBonusToggle06"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement06"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -680,7 +680,7 @@
                         android:id="@+id/elementBonusToggle07"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement07"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -736,7 +736,7 @@
                         android:id="@+id/elementBonusToggle08"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement08"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -793,7 +793,7 @@
                         android:id="@+id/elementBonusToggle09"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement09"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -849,7 +849,7 @@
                         android:id="@+id/elementBonusToggle10"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement10"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -906,7 +906,7 @@
                         android:id="@+id/elementBonusToggle11"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement11"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -962,7 +962,7 @@
                         android:id="@+id/elementBonusToggle12"
                         style="@style/BonusToggleButton" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.GOESeekBar
                         android:id="@+id/seekBarElement12"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1066,12 +1066,11 @@
                         android:text="0.00"
                         android:textAlignment="center" />
 
-                    <com.example.khubbart.mysbusaappv3.GOESeekBar
+                    <com.example.khubbart.mysbusaappv3.ComponentSeekBar
                         android:id="@+id/seekBarComponentSkills"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:thumb="@drawable/seekerbar_thumb_vector"
                         android:background="@null"
                         android:splitTrack="false"
                         android:layout_weight="10"
@@ -1118,7 +1117,7 @@
                         android:text="0.00"
                         android:textAlignment="center" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.ComponentSeekBar
                         android:id="@+id/seekBarComponentTransitions"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1167,7 +1166,7 @@
                         android:text="0.00"
                         android:textAlignment="center" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.ComponentSeekBar
                         android:id="@+id/seekBarComponentPerformance"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1216,7 +1215,7 @@
                         android:text="0.00"
                         android:textAlignment="center" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.ComponentSeekBar
                         android:id="@+id/seekBarComponentComposition"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1265,7 +1264,7 @@
                         android:text="0.00"
                         android:textAlignment="center" />
 
-                    <SeekBar
+                    <com.example.khubbart.mysbusaappv3.ComponentSeekBar
                         android:id="@+id/seekBarComponentInterpretation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

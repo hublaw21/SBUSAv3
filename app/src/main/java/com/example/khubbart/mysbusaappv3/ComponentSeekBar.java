@@ -6,15 +6,18 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.support.graphics.drawable.Animatable2Compat;
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.SeekBar;
 
-public class GOESeekBar extends android.support.v7.widget.AppCompatSeekBar {
+public class ComponentSeekBar extends android.support.v7.widget.AppCompatSeekBar {
     private TextPaint mTextPaint;
     private boolean isTextVisible;
     private int multiplier = 1;
@@ -35,7 +38,7 @@ public class GOESeekBar extends android.support.v7.widget.AppCompatSeekBar {
     AnimatedVectorDrawableCompat seekBarThumbBackwards;
     VectorDrawableCompat seekBarThumbNotAnimated;
 
-    public GOESeekBar(final Context context, AttributeSet attrs) {
+    public ComponentSeekBar(final Context context, AttributeSet attrs) {
         super(context, attrs);
         isTextVisible = false;
 
@@ -101,7 +104,7 @@ public class GOESeekBar extends android.support.v7.widget.AppCompatSeekBar {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         float normalizedProgress = (float) getProgress()/getMax();
-        tempDouble = (Double) (normalizedProgress*100.0 -50.0);
+        tempDouble = (Double)(normalizedProgress*100.0);
         tempDouble = Math.round(tempDouble)/10.0;
         progressText = Double.toString(tempDouble);
         Rect bounds = new Rect();
