@@ -68,11 +68,7 @@
 
                 <Button
                     android:id="@+id/buttonRow00"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow00elementName"
@@ -110,11 +106,7 @@
 
                 <Button
                     android:id="@+id/buttonRow01"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow01elementName"
@@ -152,11 +144,7 @@
 
                 <Button
                     android:id="@+id/buttonRow02"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow02elementName"
@@ -194,11 +182,7 @@
 
                 <Button
                     android:id="@+id/buttonRow03"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow03elementName"
@@ -236,11 +220,7 @@
 
                 <Button
                     android:id="@+id/buttonRow04"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow04elementName"
@@ -278,11 +258,7 @@
 
                 <Button
                     android:id="@+id/buttonRow05"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow05elementName"
@@ -320,11 +296,7 @@
 
                 <Button
                     android:id="@+id/buttonRow06"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow06elementName"
@@ -362,11 +334,7 @@
 
                 <Button
                     android:id="@+id/buttonRow07"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow07elementName"
@@ -404,11 +372,7 @@
 
                 <Button
                     android:id="@+id/buttonRow08"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow08elementName"
@@ -446,11 +410,7 @@
 
                 <Button
                     android:id="@+id/buttonRow09"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow09elementName"
@@ -488,11 +448,7 @@
 
                 <Button
                     android:id="@+id/buttonRow10"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    astyle="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow10elementName"
@@ -530,11 +486,7 @@
 
                 <Button
                     android:id="@+id/buttonRow11"
-                    android:layout_width="0dp"
-                     android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow11elementName"
@@ -572,11 +524,7 @@
 
                 <Button
                     android:id="@+id/buttonRow12"
-                    android:layout_width="0dp"
-                    android:layout_margin="@dimen/narrowTable"
-                    android:layout_weight="3"
-                    android:background="@drawable/button_box_default"
-                    android:text="Add"/>
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow12elementName"
