@@ -3,6 +3,7 @@ package com.example.khubbart.mysbusaappv3;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TableRow;
@@ -129,25 +131,71 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     private DocumentReference elementRef;
     private String elementID;
 
+    private GOESeekBar bar;
+    private TextView textView;
+    private int oldLocation = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_scoring_view);
 
+        /*
+        //Testing Seekerbar with thumbtext
+        bar = (GOESeekBar) findViewById(R.id.seekBarComponentSkills);
+        textView = (TextView) findViewById(R.id.text);
+        bar.setMax(100);
+        bar.setProgress(0);
+        //bar.setThumb(ProgramScoringViewActivity.this.getResources().getDrawable(R.drawable.small_bronze_fly));
+        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+
+                RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+                p.addRule(RelativeLayout.ABOVE, seekBar.getId());
+                Rect thumbRect = bar.getSeekBarThumb().getBounds();
+                p.setMargins(
+                        thumbRect.centerX(), 0, 0, 0);
+                textView.setLayoutParams(p);
+                textView.setText(String.valueOf(progress) + " ft.");
+            }
+        });
+        //End seekerbar Testing
+        */
+
         //Set up GlobalClass for shared constants and methods
-        globalClass = ((GlobalClass) getApplicationContext());
+        globalClass = ((GlobalClass)
+
+                getApplicationContext());
 
         db = FirebaseFirestore.getInstance();
+
         // Nset up arrays with view names, seekbars etc
         initializeVariables();
 
         //Get the userID and programID from sending activity
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
-        if (extrasBundle.isEmpty()) {
+        if (extrasBundle.isEmpty())
+
+        {
             // deal with empty bundle
-        } else {
+        } else
+
+        {
             // get the info
             mCurrentUserID = extrasBundle.getString("userID");
             mCurrentProgramID = extrasBundle.getString("programID");
@@ -247,7 +295,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         compBar[1] = this.findViewById(R.id.seekBarComponentTransitions);
         compBar[3] = this.findViewById(R.id.seekBarComponentComposition);
         compBar[4] = this.findViewById(R.id.seekBarComponentInterpretation);
-        compBar[0].setOnSeekBarChangeListener(this);
+        //compBar[0].setOnSeekBarChangeListener(this);
         compBar[1].setOnSeekBarChangeListener(this);
         compBar[2].setOnSeekBarChangeListener(this);
         compBar[3].setOnSeekBarChangeListener(this);
