@@ -1,9 +1,6 @@
 package com.example.khubbart.mysbusaappv3;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -15,18 +12,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
-import com.example.khubbart.mysbusaappv3.Model.Elements;
+import com.example.khubbart.mysbusaappv3.Model.PlannedProgramContent;
 import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,7 +31,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.DoubleStream;
 
 public class ProgramViewActivity extends AppCompatActivity {
 
@@ -48,7 +42,7 @@ public class ProgramViewActivity extends AppCompatActivity {
     private static final String SHARED_PREF_NAME = "mysharedpref";
     private static final String ELEMENT_ID_KEY = "elementIdKey";
     public List<Program> program = new ArrayList<>();
-    public List<Elements> elements = new ArrayList<>();
+    public List<PlannedProgramContent> elements = new ArrayList<>();
     public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
 
     public int requiredElements;
@@ -92,6 +86,8 @@ public class ProgramViewActivity extends AppCompatActivity {
     public String tElementCode;
     public String[] comboCode = new String[4];
     public char[] elementCodeCArray;
+    public GlobalClass globalClass;
+    public ElementInfo elementInfo;
 
     NumberFormat numberFormat = new DecimalFormat("###.00");
 
@@ -108,6 +104,8 @@ public class ProgramViewActivity extends AppCompatActivity {
         requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
         final LinearLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
 
+        //Set up GlobalClass for shared constants and methods
+        globalClass = ((GlobalClass) getApplicationContext());
         db = FirebaseFirestore.getInstance();
 
         //Set view variables
@@ -298,13 +296,13 @@ public class ProgramViewActivity extends AppCompatActivity {
                         //Log.i("*******************elementID: ", elementID);
                         pullElements(elementID);
                         /*
-                        elementRef = db.collection("Elements").document(elementID);
+                        elementRef = db.collection("PlannedProgramContent").document(elementID);
                         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot documentSnapshot = task.getResult();
-                                    Elements qElements = documentSnapshot.toObject(Elements.class);
+                                    PlannedProgramContent qElements = documentSnapshot.toObject(PlannedProgramContent.class);
                                     elements.add(qElements);
                                     int eCount = 0;
                                     mElementCode[0] = elements.get(0).getE00();
@@ -363,8 +361,8 @@ public class ProgramViewActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
-                    Elements qElements = documentSnapshot.toObject(Elements.class);
-                    elements.add(qElements);
+                    PlannedProgramContent qPlannedProgramContent = documentSnapshot.toObject(PlannedProgramContent.class);
+                    elements.add(qPlannedProgramContent);
                     int eCount = 0;
                     mElementCode[0] = elements.get(0).getE00();
                     mElementCode[1] = elements.get(0).getE01();
@@ -381,8 +379,29 @@ public class ProgramViewActivity extends AppCompatActivity {
                     mElementCode[12] = elements.get(0).getE12();
                     technicalTotal = 0;
                     for (int i = 0; i < requiredElements; i++) {
+                        Log.i("**************elementCode", mElementCode[i]);
                         if (mElementCode[i] != null) {
-                            pullElementInfo(mElementCode[i], i);
+                            //pullElementInfo(mElementCode[i], i);
+                            elementInfo = new ElementInfo();
+                            elementInfo.setElementCode("Code");
+                            elementInfo.setElementName("");
+                            elementInfo.setElementBaseValue(0.0);
+                            //elementInfo = globalClass.elementInfoLookUp(mElementCode[i]);
+                            //tempString = elementInfo.getElementCode();
+                            tempString = globalClass.elementInfoLookUp(mElementCode[i]);
+                            Log.i("**************tempString", tempString);
+                            if (tempString != null) {
+                                mElementCode[i] = tempString;
+                                changeButton(i, tempString);
+
+                                mElementName[i] = elementInfo.getElementName();
+                                mElementNameTextView[i].setText(mElementName[i]);
+
+                                mElementBaseValue[i] = elementInfo.getElementBaseValue();
+                                tempString = numberFormat.format(mElementBaseValue[i]);
+                                mElementBaseValueTextView[i].setText(tempString);
+                                elementInfoList.add(new ElementInfo(mElementCode[i], mElementName[i], mElementBaseValue[i]));
+                            }
                         }
                     }
                     // Set the initial totalTechnical
@@ -442,14 +461,14 @@ public class ProgramViewActivity extends AppCompatActivity {
             textViewForTesting.setText("No elementID value");
         }
 
-        elementRef = db.collection("Elements").document(elementID);
+        elementRef = db.collection("PlannedProgramContent").document(elementID);
 
         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
-                    Elements qElements = documentSnapshot.toObject(Elements.class);
+                    PlannedProgramContent qElements = documentSnapshot.toObject(PlannedProgramContent.class);
                     elements.add(qElements);
                     int eCount = 0;
                     mElementCode[0] = elements.get(0).getE00();

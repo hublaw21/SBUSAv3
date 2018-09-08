@@ -14,6 +14,16 @@
         android:textSize="@dimen/textMidSmall"
         android:textColor="@color/black" />
 
+
+    <fragment
+        android:id="@+id/totalScoresFragment"
+        android:name="com.example.khubbart.mysbusaappv3.Fragments.TotalScoresFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sideBorder"
+        android:background="@drawable/button_box_default_shape"/>
+
+    <!-- Replacing with above fragment
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -167,6 +177,7 @@
         </TableRow>
 
     </TableLayout>
+    -->
 
     <TableLayout
         android:id="@+id/programElementsTable"

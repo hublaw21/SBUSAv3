@@ -7,7 +7,7 @@ public class ElementInfo {
     private Double ElementBaseValue;
 
     //Required No Argument Constructor
-    ElementInfo(){
+    public ElementInfo(){
         this.ElementCode = " ";
         this.ElementName = " ";
         this.ElementBaseValue = 0.0;

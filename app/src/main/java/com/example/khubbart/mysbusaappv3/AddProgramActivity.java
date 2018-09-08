@@ -61,7 +61,7 @@ public class AddProgramActivity extends AppCompatActivity
         //mTextViewGetData = findViewById(R.id.textViewGetData);
         db = FirebaseFirestore.getInstance();
         programRef = db.collection("Programs");
-        elementRef = db.collection("Elements");
+        elementRef = db.collection("PlannedProgramContent");
 
         //Get array data from resources.  May want to change to online
         Resources resources = getResources();

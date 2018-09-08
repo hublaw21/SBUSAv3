@@ -1,6 +1,6 @@
 package com.example.khubbart.mysbusaappv3.Model;
 
-public class Elements {
+public class PlannedProgramContent {
     private String ProgramDocumentID;
     private String E00;
     private String E01;
@@ -17,7 +17,7 @@ public class Elements {
     private String E12;
 
 // Required No Argument Constructor
-     Elements() {
+     PlannedProgramContent() {
          this.ProgramDocumentID = "";
          this.E00 =  null;
         this.E01 =  null;
@@ -34,8 +34,8 @@ public class Elements {
         this.E12 = null;
     }
 
-    Elements(String programDocumentID, String e00, String e01,String e02,String e03,String e04,String e05,
-                 String e06, String e07,String e08,String e09,String e10,String e11, String e12) {
+    PlannedProgramContent(String programDocumentID, String e00, String e01, String e02, String e03, String e04, String e05,
+                          String e06, String e07, String e08, String e09, String e10, String e11, String e12) {
         this.ProgramDocumentID = programDocumentID;
         this.E00 = e00;
         this.E00 = e01;

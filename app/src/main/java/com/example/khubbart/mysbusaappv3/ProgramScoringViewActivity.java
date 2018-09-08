@@ -1,9 +1,9 @@
 package com.example.khubbart.mysbusaappv3;
 
-import android.content.DialogInterface;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -13,19 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.ElementItem;
-import com.example.khubbart.mysbusaappv3.Model.Elements;
+import com.example.khubbart.mysbusaappv3.Model.PlannedProgramContent;
 import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.example.khubbart.mysbusaappv3.ViewModels.TotalScoresViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -91,7 +89,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String[] SOVName;
     public String[] SOVBase;
     public List<Program> program = new ArrayList<>();
-    public List<Elements> elements = new ArrayList<>();
+    public List<PlannedProgramContent> elements = new ArrayList<>();
     public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
     public int requiredElements;
     public int i;
@@ -122,6 +120,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public char[] elementCodeCArray;
 
     public GlobalClass globalClass;
+    public ViewModel totalScoreViewModel;
 
     NumberFormat numberFormat = new DecimalFormat("###.00");
     NumberFormat numberFormatGOE = new DecimalFormat("#.0");
@@ -139,7 +138,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        totalScoreViewModel = ViewModelProviders.of(this).get(TotalScoresViewModel.class);
         setContentView(R.layout.activity_program_scoring_view);
+
 
         /*
         //Testing Seekerbar with thumbtext
@@ -412,14 +413,14 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     ;
 
     public void pullElements(String mElementsID) {
-        elementRef = db.collection("Elements").document(mElementsID);
+        elementRef = db.collection("PlannedProgramContent").document(mElementsID);
         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
-                    Elements qElements = documentSnapshot.toObject(Elements.class);
-                    elements.add(qElements);
+                    PlannedProgramContent qPlannedProgramContent = documentSnapshot.toObject(PlannedProgramContent.class);
+                    elements.add(qPlannedProgramContent);
                     elementCode[0] = elements.get(0).getE00();
                     elementCode[1] = elements.get(0).getE01();
                     elementCode[2] = elements.get(0).getE02();

@@ -448,7 +448,7 @@
 
                 <Button
                     android:id="@+id/buttonRow10"
-                    astyle="@style/ElementCodeButton" />
+                    style="@style/ElementCodeButton" />
 
                 <TextView
                     android:id="@+id/elementRow10elementName"
