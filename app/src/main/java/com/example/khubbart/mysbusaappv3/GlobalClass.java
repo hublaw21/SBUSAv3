@@ -72,7 +72,7 @@ public class GlobalClass extends Application {
     //Get SOV Base and Element Name for element code
     //public ElementInfo elementInfoLookUp(String elementCode) {
     public String elementInfoLookUp(String elementCode) {
-            SOVCode = getResources().getStringArray(R.array.SOV_Code);
+        SOVCode = getResources().getStringArray(R.array.SOV_Code);
         SOVName = getResources().getStringArray(R.array.SOV_Name);
         SOVBase = getResources().getStringArray(R.array.SOV_Base);
         currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
@@ -83,7 +83,7 @@ public class GlobalClass extends Application {
             //elementInfo.setElementCode(elementCode);
             //elementInfo.setElementName(elementName);
             //elementInfo.setElementBaseValue(elementBaseValue);
-            elementInfo = elementCode + ","+elementName + "," + Arrays.asList(SOVBase).get(currentSOVIndex);
+            elementInfo = elementCode + "," + elementName + "," + Arrays.asList(SOVBase).get(currentSOVIndex);
         } else {  //Check for combo or change to unfound////
             if (elementCode != null) { //check for combo jump
                 tempTrimmedString = elementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
@@ -111,6 +111,42 @@ public class GlobalClass extends Application {
         }
         return elementInfo;
     }
+
+    public int ElementIndexLookUp(String elementCode) {
+        SOVCode = getResources().getStringArray(R.array.SOV_Code);
+        currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
+        // Need to add error checker for code not found
+        return currentSOVIndex;
+    }
+
+    public String ElementNameLookUp(int elementIndex) {
+        SOVName = getResources().getStringArray(R.array.SOV_Name);
+        elementName = Arrays.asList(SOVName).get(currentSOVIndex);
+        return elementName;
+    }
+
+    public Double ElementBaseLookUp(int elementIndex) {
+        SOVBase = getResources().getStringArray(R.array.SOV_Base);
+        elementBaseValue = Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
+        return elementBaseValue;
+    }
+
+    public String ElementCheckForCombo(String elementCode) {
+        //if (elementCode != null) { //check for combo jump
+        tempTrimmedString = elementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
+        elementCodeCArray = tempTrimmedString.toCharArray();
+        j = elementCodeCArray.length;
+                for (i = 0; i < j; i++) {
+                    tempString = String.copyValueOf(elementCodeCArray, i, 1);
+                    if (tempString.equals("+")) {
+                        //We have a combo - But handled value elsewhere for using this to just get value of one element and will need to call it in cmbo check
+                        elementInfo = "Combo";
+                        i = j; //Jump to end once we find the "+" sign
+                    }
+                }
+        return elementInfo;
+    }
+
 
     //Get Factor Table
     public Double[] getFactors(String tProgramDescription) {

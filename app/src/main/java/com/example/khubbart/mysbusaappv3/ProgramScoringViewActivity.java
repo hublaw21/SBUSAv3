@@ -60,9 +60,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public int progress = 50; // the midway point, zeroed.  Need to set up for adjustable
     public int resID;
     public Button[] ticDialogButton = new Button[6];
+    public Button[] elementCodeButton = new Button[13];
 
     public String tempString;
     public String tempRowID;
+    public String tempRowCodeButton;
     public String tempRowBonus;
     public String tempRowTic;
     public String tempRowBase;
@@ -141,42 +143,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         totalScoreViewModel = ViewModelProviders.of(this).get(TotalScoresViewModel.class);
         setContentView(R.layout.activity_program_scoring_view);
 
-
-        /*
-        //Testing Seekerbar with thumbtext
-        bar = (GOESeekBar) findViewById(R.id.seekBarComponentSkills);
-        textView = (TextView) findViewById(R.id.text);
-        bar.setMax(100);
-        bar.setProgress(0);
-        //bar.setThumb(ProgramScoringViewActivity.this.getResources().getDrawable(R.drawable.small_bronze_fly));
-        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-
-                RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-                p.addRule(RelativeLayout.ABOVE, seekBar.getId());
-                Rect thumbRect = bar.getSeekBarThumb().getBounds();
-                p.setMargins(
-                        thumbRect.centerX(), 0, 0, 0);
-                textView.setLayoutParams(p);
-                textView.setText(String.valueOf(progress) + " ft.");
-            }
-        });
-        //End seekerbar Testing
-        */
-
         //Set up GlobalClass for shared constants and methods
         globalClass = ((GlobalClass)
 
@@ -184,7 +150,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
         db = FirebaseFirestore.getInstance();
 
-        // Nset up arrays with view names, seekbars etc
+        // Set up arrays with view names, seekbars etc
         initializeVariables();
 
         //Get the userID and programID from sending activity
@@ -306,6 +272,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         for (int i = 0; i < 13; i++) {
             if (i < 10) {
                 tempRowID = "elementIdRow0" + i;
+                tempRowCodeButton = "elementCodeButton0" + i;
                 tempRowBonus = "elementBonusToggle0" + i;
                 tempRowTic = "elementTicButton0" + i;
                 tempRowBase = "elementBaseRow0" + i;
@@ -313,12 +280,17 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 tempRowScore = "elementScoreRow0" + i;
             } else {
                 tempRowID = "elementIdRow" + i;
+                tempRowCodeButton = "elementCodeButton" + i;
                 tempRowBonus = "elementBonusToggle" + i;
                 tempRowTic = "elementTicButton" + i;
                 tempRowBase = "elementBaseRow" + i;
                 tempRowGOE = "elementGOERow" + i;
                 tempRowScore = "elementScoreRow" + i;
             }
+
+
+            resID = getResources().getIdentifier(tempRowCodeButton, "id", getPackageName());
+            elementCodeButton[0] = findViewById(resID); //Change 0 to i when full
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             elementIDTextView[i] = findViewById(resID);
@@ -413,7 +385,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     ;
 
     public void pullElements(String mElementsID) {
-        elementRef = db.collection("PlannedProgramContent").document(mElementsID);
+        elementRef = db.collection("Elements").document(mElementsID);
         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -477,6 +449,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             elementBase[pNum] = Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
             elementScore[pNum] = elementBase[pNum];
             elementCode[pNum] = pElementCode;
+            Log.i("**************elementCode ", elementCode[pNum]);
             elementGOE[pNum] = 0.0; //Must initialize a value
             jumpBase[pNum] = 0.0; //Must initialize a value
             tempString = elementCode[pNum];
