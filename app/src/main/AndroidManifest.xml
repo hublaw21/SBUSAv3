@@ -41,7 +41,6 @@
         <activity android:name=".AddProgramActivity" />
         <activity android:name=".TestArrayActivity" />
         <activity android:name=".ProgramScoringViewActivity" />
-
     </application>
 
 </manifest>

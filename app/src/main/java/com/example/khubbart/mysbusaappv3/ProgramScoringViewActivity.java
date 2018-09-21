@@ -1,12 +1,13 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -193,6 +194,21 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 }
                 calcElementScore(buttonPointer); //Update element's score
             }
+            //Check/Verify Element Code Button clicked
+            if (findViewById(tempInt) == elementCodeButton[i]) {
+                tempString = String.valueOf(tempInt);
+                Log.i("*******************elementCodeClick ", tempString);
+                //Call Change Button Dialog from Global
+                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+                ElementButtonChangeDialogCaller elementButtonChangeDialogCaller =
+                        ElementButtonChangeDialogCaller.newInstance(i);
+                elementButtonChangeDialogCaller.show(fm, "dialog");
+                /*
+                GeneralDialogFragment generalDialogFragment =
+                        GeneralDialogFragment.newInstance("title", "message");
+                generalDialogFragment.show(getSupportFragmentManager(),"dialog");
+                */
+            }
             //Check/Verify tic button clicked
             if (findViewById(tempInt) == elementTicButton[i]) {
                 tempString = String.valueOf(tempInt);
@@ -291,6 +307,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
             resID = getResources().getIdentifier(tempRowCodeButton, "id", getPackageName());
             elementCodeButton[0] = findViewById(resID); //Change 0 to i when full
+            if(i>0) elementCodeButton[i] = null;
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             elementIDTextView[i] = findViewById(resID);
@@ -621,8 +638,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         ticDialogButton[4] = dialogView.findViewById(R.id.tic_element_double_downgrade_button);
         ticDialogButton[5] = dialogView.findViewById(R.id.tic_element_cancel_button);
 
-        tempString = String.valueOf(tNum);
-        Log.i("********DIALOG*********** ", tempString);
+        //tempString = String.valueOf(tNum);
 
         // Create the alert dialog
         final AlertDialog dialog = builder.create();

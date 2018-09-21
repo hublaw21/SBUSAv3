@@ -1,8 +1,14 @@
 package com.example.khubbart.mysbusaappv3;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Resources;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 
@@ -187,5 +193,73 @@ public class GlobalClass extends Application {
             Log.i("*******************factors: ", tempString);
         }
         return factors;
+    }
+
+    //Change the Element Code Button with a Dialog
+    public void changeButtonDialog(final int tNum) {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //LayoutInflater inflater = getLayoutInflater();
+        LayoutInflater inflater = LayoutInflater.from(getBaseContext());
+        View dialogView = inflater.inflate(R.layout.alertdialog_change_element, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        Button submitButton = (Button) dialogView.findViewById(R.id.dialog_change_element_submit_button);
+        Button lookupButton = (Button) dialogView.findViewById(R.id.dialog_change_element_lookup_button);
+        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_change_element_cancel_button);
+        final EditText editTextElementCode = (EditText) dialogView.findViewById(R.id.edittext_change_element_code);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+
+        // Set submit button click listener
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                String tElementCode = editTextElementCode.getText().toString();
+                //int ttNum = tNum; // needs to track element number from list
+                //pullElementInfo(tElementCode, tNum); - 9/10/18 - I will need this
+            }
+        });
+
+        // Set lookup button click listener
+        lookupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss/cancel the alert dialog
+                dialog.dismiss();
+                // Add lookup routine here
+                    /*
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    LayoutInflater inflater = getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.activity_element_lookup, null);
+                    builder.setCancelable(false);
+                    builder.setView(dialogView);
+                    Intent intentBundle = new Intent(ProgramViewActivity.this, ElementLookupActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("eleNum",num);
+                    intentBundle.putExtras(bundle);
+                    startActivity(intentBundle);
+                    */
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // Display the custom alert dialog on interface
+        dialog.show();
     }
 }
