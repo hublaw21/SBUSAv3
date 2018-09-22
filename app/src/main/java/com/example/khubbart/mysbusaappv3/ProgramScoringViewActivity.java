@@ -614,7 +614,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
-
+    //
 
     //Dialog for element tics and other errors
     public void ticDialog(final int tNum) {
