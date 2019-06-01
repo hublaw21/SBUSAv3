@@ -4,8 +4,12 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +28,12 @@ public class AddProgramActivity extends AppCompatActivity
         implements SelectSkaterLevelFragment.OnChangeSkaterLevelRadioButtonInteractionListener,
         SelectDisciplineFragment.OnChangeDisciplineRadioButtonInteractionListener,
         SelectSegmentFragment.OnChangeSegmentRadioButtonInteractionListener,
-        ButtonBarFragment.ButtonBarInteractionListener {
+        ButtonBarFragment.ButtonBarInteractionListener,
+        AdapterView.OnItemSelectedListener {
 
     public String tempCode;
+    public String selectedItem;
+    public String selectedDisciplpine = "Senior"; // should probably use the reources for this
     public String mProgramDescription;
     public String mCurrentUserUID;
     public String mSkaterName;
@@ -50,6 +57,8 @@ public class AddProgramActivity extends AppCompatActivity
     public String mCurrentProgramDocumentID;
     public String mCurrentElementDocumentID;
     public Resources resources;
+    public RadioGroup mRGDiscipline;
+
 
 
     @Override
@@ -73,6 +82,13 @@ public class AddProgramActivity extends AppCompatActivity
         //Create an instance of ArrayAdapter containing competition names
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_competition_name, competitionName);
 
+        // Set Spinners
+        Spinner spinnerDiscipline = findViewById(R.id.spinnerDiscipline);
+        spinnerDiscipline.setOnItemSelectedListener(this);
+        ArrayAdapter<String> spinnerDisciplineAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, discipline); // Creating adapter for spinner
+        spinnerDisciplineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
+        spinnerDiscipline.setAdapter(spinnerDisciplineAdapter); // attaching data adapter to spinner
+
         //Get instance of Autocomplete
         actv = findViewById(R.id.autoCompleteCompetitionName);
         actv.setThreshold(1);  //Will start from int characters
@@ -85,7 +101,18 @@ public class AddProgramActivity extends AppCompatActivity
         mSkaterName = globalClass.getSkaterName();
         textViewSkaterName.setText(mSkaterName);
 
+        // Set up listener for Discipline Radio Button
+        /*
+        mRGDiscipline = view.findViewById(R.id.radioGroupDisciplines);
 
+        mRGDiscipline.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId = mRGDiscipline.getCheckedRadioButtonId();
+                onRadioButtonChanged(selectedId);  //I only need this for manipulations before returning info
+            }
+        });
+        */
     }
 
     // Get Skater Discipline
@@ -96,6 +123,24 @@ public class AddProgramActivity extends AppCompatActivity
         programIndexes[1] = tempIndex;
         programDescription[1] = discipline[tempIndex];
         makeProgramDescription();
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> spinnerUsed, View view, int position, long id) {
+        // On selecting a spinner item, set value to string, as we will be using the text
+        selectedItem = spinnerUsed.getItemAtPosition(position).toString();
+
+        // Assign to the proper variable for naming convention
+        switch(spinnerUsed.getId()){
+            case R.id.spinnerDiscipline:
+                selectedDisciplpine = selectedItem;
+                break;
+
+        }
+        // Showing selected spinner item
+        Toast.makeText(spinnerUsed.getContext(), "Selected: " + selectedItem, Toast.LENGTH_LONG).show();
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
     }
 
     // Get Skater Level

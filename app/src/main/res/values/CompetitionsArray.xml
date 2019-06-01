@@ -2,6 +2,7 @@
 <resources>
     <string-array name="competitionNamesArray">
         <item>Template</item>
+        <item>Template-Alt</item>
         <item>Cannon TX Open</item>
         <item>Skate Milwaukee </item>
         <item>Kathy Slack Troy Summer Comp</item>
@@ -47,6 +48,7 @@
     </string-array>
 
     <string-array name="competitionLocationArray">
+        <item>Anywhere</item>
         <item>Anywhere</item>
         <item>Farmers Branch TX</item>
         <item>Milwaukee WI</item>
@@ -94,6 +96,7 @@
 
     <string-array name="competitionDatesArray">
         <item>Anytime</item>
+        <item>Anytime</item>
         <item>Jul 13-15</item>
         <item>Jul 11-15</item>
         <item>Jul 12-15</item>
@@ -139,6 +142,7 @@
     </string-array>
 
     <string-array name="competitionsHostArray">
+        <item>Anyone</item>
         <item>Anyone</item>
         <item>Lone Star FSC</item>
         <item>Wisconsin FSC</item>
