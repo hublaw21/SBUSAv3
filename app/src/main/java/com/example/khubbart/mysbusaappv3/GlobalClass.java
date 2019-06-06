@@ -20,15 +20,25 @@ public class GlobalClass extends Application {
     // Use this activity to save application wide data that rarely change, but is not always the same, such as user information
 
     //Upon login, establish the current user's UID
-    private String currentUserUID;
+    //Need to have skater create a username, save in profile, use as lead into all ids.  Call skaterID globally
 
+    private String gSkaterID;
+    public String getgSkaterID() {
+        return gSkaterID;
+    }
+    public void setgSkaterID(String mSkaterID) {
+        gSkaterID = mSkaterID;
+    }
+
+    //Skaterid for all documents
+    private String currentUserUID;
     public String getCurrentUserUID() {
         return currentUserUID;
     }
-
     public void setCurrentUserUID(String sCurrentUserUID) {
         currentUserUID = sCurrentUserUID;
     }
+
 
     //Skater/User data
     private String skaterName;

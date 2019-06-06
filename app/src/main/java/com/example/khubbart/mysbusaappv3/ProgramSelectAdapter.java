@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.example.khubbart.mysbusaappv3.Model.Programv2;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.ref.WeakReference;
@@ -22,20 +23,20 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdapter.PSViewHolder> {
 
-    private List<Program> programs;
+    private List<Programv2> programs;
     WeakReference<Context> mContextWeakReference;
     //private final OnViewHolderClickListener mItemClickListener;
     //abstract protected int getItemView();
     //abstract protected int[] getResIdOfInflatedViews();
 
     // Needed constructor for Adapter
-    public ProgramSelectAdapter(List<Program> programs, Context context){
+    public ProgramSelectAdapter(List<Programv2> programs, Context context){
         this.programs = programs;
         this.mContextWeakReference = new WeakReference<Context>(context);
         //this.mItemClickListener = itemClickListener;
     }
 
-    protected final Program getItem(int position){
+    protected final Programv2 getItem(int position){
         return this.programs.get(position);
     }
 
@@ -91,7 +92,7 @@ public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdap
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((ProgramSelectActivity) context).userItemClick(getAdapterPosition());
+                    //((ProgramSelectActivity) context).userItemClick(getAdapterPosition());
                 }
             });
         }
@@ -110,7 +111,7 @@ public class ProgramSelectAdapter extends RecyclerView.Adapter<ProgramSelectAdap
         // - get element at thi sposition from dataset
         // - raplce the contents of that view element
         //final String name = programs.get(position);
-        pSViewHolder.programSelectCompetitionTextView.setText(programs.get(position).getCompetition());
+        //pSViewHolder.programSelectCompetitionTextView.setText(programs.get(position).getCompetition());
         pSViewHolder.programSelectDisciplineTextView.setText(programs.get(position).getDiscipline());
         pSViewHolder.programSelectLevelTextView.setText(programs.get(position).getLevel());
         pSViewHolder.programSelectSegmentTextView.setText(programs.get(position).getSegment());

@@ -5,7 +5,7 @@ public class Skater {
     private String Club;
     private String Coach;
     private String email;
-    private String userID;
+    private String skaterID;
 
     // Required No Argument Constructor
 
@@ -14,15 +14,15 @@ public class Skater {
         this.Club = "Club";
         this.Coach = "Coach";
         this.email = "email";
-        this.userID = "userID";
+        this.skaterID = "SkaterID";
     }
 
-    public Skater(String Name, String Club, String Coach, String email, String userID) {
+    public Skater(String Name, String Club, String Coach, String email, String skaterID) {
         this.Name = Name;
         this.Club = Club;
         this.Coach = Coach;
         this.email = email;
-        this.userID = userID;
+        this.skaterID = skaterID;
     }
 
     public String getName() {
@@ -57,11 +57,11 @@ public class Skater {
         this.email = email;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getSkaterID() {
+        return skaterID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setSkaterID(String skaterID) {
+        this.skaterID = skaterID;
     }
 }

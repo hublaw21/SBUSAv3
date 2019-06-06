@@ -58,6 +58,25 @@
     <string name="men">Men</string>
     <string name="pairs">Pairs</string>
 
+    <string-array name="programNames">
+        <item>@string/program1</item>
+        <item>@string/program2</item>
+        <item>@string/program3</item>
+        <item>@string/program4</item>
+        <item>@string/program5</item>
+        <item>@string/program6</item>
+        <item>@string/program7</item>
+        <item>@string/program8</item>
+    </string-array>
+    <string name="program1">Program 1</string>
+    <string name="program2">Program 2</string>
+    <string name="program3">Program 3</string>
+    <string name="program4">Program 4</string>
+    <string name="program5">Program 5</string>
+    <string name="program6">Program 3</string>
+    <string name="program7">Program 4</string>
+    <string name="program8">Program 5</string>
+
     <string-array name="options">
         <item>@string/cancel</item>
         <item>@string/maybe</item>

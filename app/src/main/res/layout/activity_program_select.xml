@@ -33,10 +33,62 @@
         android:text="Or Select a Program to View"
         android:textAlignment="center" />
 
+    <TextView
+        android:id="@+id/textViewProgram1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textViewProgram8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumBorder"
+        android:textAlignment="center" />
+
+
+    <!--
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewProgramSelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:layout_margin="@dimen/mediumBorder" />
+    -->
 </LinearLayout>

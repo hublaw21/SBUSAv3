@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public String mCurrentUserUID;
     public String mUID;
     public String mSkaterName;
+    public String mSkaterID;
     private FirebaseFirestore db;
     private CollectionReference skatersCollectionDb;
     public Skater skater;
@@ -159,8 +160,14 @@ public class MainActivity extends AppCompatActivity {
                 mName = skater.getName();
                 globalClass.setSkaterName(mName);
                 textViewSkaterName.setText(mName);
+                //Get skaterID, crucial
+                //mSkaterID = skater.getClub();
+                //textViewSkaterName.setText(mSkaterID);
+                //globalClass.setgSkaterID(mSkaterID);
+
             }
         });
+        //Toast.makeText(this, "skaterID: " + mSkaterID + mName+mUID, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "Login - Name: " + mName + " UID: " + mUID, Toast.LENGTH_SHORT).show();
     }
 }

@@ -29,6 +29,17 @@
         <requestFocus/>
     </AutoCompleteTextView>
 
+    <Spinner
+        android:id="@+id/spinnerProgramName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/mediumBorder"
+        android:drawSelectorOnTop="true"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:spinnerMode="dialog"
+        android:visibility="visible" />
+
     <TextView
         android:id="@+id/textViewProgramAddDescription"
         android:layout_width="match_parent"
@@ -69,6 +80,36 @@
         android:spinnerMode="dialog"
         android:visibility="visible" />
 
+    <Spinner
+        android:id="@+id/spinnerLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/mediumBorder"
+        android:drawSelectorOnTop="true"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:spinnerMode="dialog"
+        android:visibility="visible" />
+    <Spinner
+        android:id="@+id/spinnerSegment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/mediumBorder"
+        android:drawSelectorOnTop="true"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:spinnerMode="dialog"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonSaveProgram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_box_default"
+        android:text="Save Program"
+        android:textSize="@dimen/textLarge" />
+    <!--
     <RadioGroup
         android:id="@+id/radioGroupDisciplines"
         android:layout_width="match_parent"
@@ -119,14 +160,13 @@
 
     </RadioGroup>
 
-    <!--
     <fragment
         android:id="@+id/fragmentSKaterLevel"
         android:name="com.example.khubbart.mysbusaappv3.SelectSkaterLevelFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"/>
-     -->
+
     <TextView
         android:id="@+id/textLevelHeader"
         android:layout_width="match_parent"
@@ -219,14 +259,13 @@
         </TableLayout>
     </RadioGroup>
 
-    <!--
     <fragment
         android:id="@+id/fragmentSegment"
         android:name="com.example.khubbart.mysbusaappv3.SelectSegmentFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"/>
-    -->
+
     <TextView
         android:id="@+id/textSegmentHeader"
         android:layout_width="match_parent"
@@ -271,6 +310,7 @@
             android:textAlignment="center"
             android:textColor="@color/white" />
     </RadioGroup>
+    -->
 
     <!--
     <fragment

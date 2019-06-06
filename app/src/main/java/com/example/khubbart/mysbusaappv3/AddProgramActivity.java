@@ -1,5 +1,6 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.Competition;
 import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.example.khubbart.mysbusaappv3.Model.Programv2;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,17 +28,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddProgramActivity extends AppCompatActivity
-        implements SelectSkaterLevelFragment.OnChangeSkaterLevelRadioButtonInteractionListener,
-        SelectDisciplineFragment.OnChangeDisciplineRadioButtonInteractionListener,
-        SelectSegmentFragment.OnChangeSegmentRadioButtonInteractionListener,
-        ButtonBarFragment.ButtonBarInteractionListener,
-        AdapterView.OnItemSelectedListener {
+        implements AdapterView.OnItemSelectedListener {
 
+    Button buttonSaveProgram;
     public String tempCode;
     public String selectedItem;
-    public String selectedDisciplpine = "Senior"; // should probably use the reources for this
+    public String selectedCompetition;
+    public String selectedProgram;
+    public String selectedDiscipline;
+    public String selectedLevel;
+    public String selectedSegment;
     public String mProgramDescription;
+    public String programID;
     public String mCurrentUserUID;
+    public String skaterID;
     public String mSkaterName;
     public String mCompetitionName;
     public String[] CompetitionsList;
@@ -51,6 +57,7 @@ public class AddProgramActivity extends AppCompatActivity
     public String[] discipline = new String[3];
     public String[] level = new String[5];
     public String[] segment = new String[2];
+    public String[] programName = new String [8];
     private FirebaseFirestore db;
     private CollectionReference programRef;
     private CollectionReference elementRef;
@@ -65,6 +72,8 @@ public class AddProgramActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_program);
+        buttonSaveProgram = findViewById(R.id.buttonSaveProgram);
+
         textViewSkaterName = findViewById(R.id.textViewProgramAddSkaterName);
         mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
         //mTextViewGetData = findViewById(R.id.textViewGetData);
@@ -76,8 +85,13 @@ public class AddProgramActivity extends AppCompatActivity
         Resources resources = getResources();
         competitionName = resources.getStringArray(R.array.competitionNamesArray);
         discipline = resources.getStringArray(R.array.disciplines);
+        selectedDiscipline = discipline[0];
         level = resources.getStringArray(R.array.levels);
+        selectedLevel = level[0];
         segment = resources.getStringArray(R.array.segments);
+        selectedSegment = segment[0];
+        programName = resources.getStringArray(R.array.programNames);
+        selectedProgram = programName[0];
 
         //Create an instance of ArrayAdapter containing competition names
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_competition_name, competitionName);
@@ -88,6 +102,25 @@ public class AddProgramActivity extends AppCompatActivity
         ArrayAdapter<String> spinnerDisciplineAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, discipline); // Creating adapter for spinner
         spinnerDisciplineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
         spinnerDiscipline.setAdapter(spinnerDisciplineAdapter); // attaching data adapter to spinner
+
+        Spinner spinnerLevel = findViewById(R.id.spinnerLevel);
+        spinnerLevel.setOnItemSelectedListener(this);
+        ArrayAdapter<String> spinnerLevelAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, level); // Creating adapter for spinner
+        spinnerLevelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
+        spinnerLevel.setAdapter(spinnerLevelAdapter); // attaching data adapter to spinner
+
+        Spinner spinnerSegment = findViewById(R.id.spinnerSegment);
+        spinnerSegment.setOnItemSelectedListener(this);
+        ArrayAdapter<String> spinnerSegmentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, segment); // Creating adapter for spinner
+        spinnerSegmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
+        spinnerSegment.setAdapter(spinnerSegmentAdapter); // attaching data adapter to spinner
+
+        Spinner spinnerProgramName = findViewById(R.id.spinnerProgramName);
+        spinnerSegment.setOnItemSelectedListener(this);
+        ArrayAdapter<String> spinnerProgramAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, programName); // Creating adapter for spinner
+        spinnerSegmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
+        spinnerProgramName.setAdapter(spinnerProgramAdapter); // attaching data adapter to spinner
+
 
         //Get instance of Autocomplete
         actv = findViewById(R.id.autoCompleteCompetitionName);
@@ -113,9 +146,18 @@ public class AddProgramActivity extends AppCompatActivity
             }
         });
         */
+        buttonSaveProgram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Do what you need to do to save it
+                saveProgram();
+            }
+        });
+
     }
 
     // Get Skater Discipline
+    /*
     @Override
     //public void onChangeDisciplineRadioButtonInteraction(String tempCode) {
     public void onChangeDisciplineRadioButtonInteraction(int tempIndex) {
@@ -124,6 +166,7 @@ public class AddProgramActivity extends AppCompatActivity
         programDescription[1] = discipline[tempIndex];
         makeProgramDescription();
     }
+    */
     @Override
     public void onItemSelected(AdapterView<?> spinnerUsed, View view, int position, long id) {
         // On selecting a spinner item, set value to string, as we will be using the text
@@ -132,17 +175,26 @@ public class AddProgramActivity extends AppCompatActivity
         // Assign to the proper variable for naming convention
         switch(spinnerUsed.getId()){
             case R.id.spinnerDiscipline:
-                selectedDisciplpine = selectedItem;
+                selectedDiscipline = selectedItem;
                 break;
-
+            case R.id.spinnerLevel:
+                selectedLevel = selectedItem;
+                break;
+            case R.id.spinnerSegment:
+                selectedSegment = selectedItem;
+                break;
+            case R.id.spinnerProgramName:
+            selectedProgram = selectedItem;
+                break;
         }
         // Showing selected spinner item
-        Toast.makeText(spinnerUsed.getContext(), "Selected: " + selectedItem, Toast.LENGTH_LONG).show();
+        Toast.makeText(spinnerUsed.getContext(), "Selected: " + selectedProgram + " " + selectedLevel + " " + selectedSegment, Toast.LENGTH_LONG).show();
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
 
+    /*
     // Get Skater Level
     @Override
     public void onChangeSkaterLevelRadioButtonInteraction(int tempIndex) {
@@ -185,6 +237,7 @@ public class AddProgramActivity extends AppCompatActivity
         }
         return tempCodeReturned;
     }
+    */
 
     //Make the description string
     public void makeProgramDescription() {
@@ -199,7 +252,37 @@ public class AddProgramActivity extends AppCompatActivity
         }
 
     }
+    // Method to add all in one prgram with inegrated id
+    private void saveProgram(){
+        //Test to be sure all fields entered
+    /*
+        //Set programID
+        selectedCompetition = actv.getText().toString();
+        programID = mCurrentUserUID+selectedProgram+selectedDiscipline+selectedLevel+selectedSegment;
+        //map of program
+        Programv2 programv2 = new Programv2(
+            selectedDiscipline,
+            selectedLevel,
+            selectedSegment,
+            //Create 13 empty elements, so we can pull by that and leave psaces while working
+            Arrays.asList(" ", " "," ", " "," ", " "," ", " "," ", " "," ", " "," ")
+        );
 
+        //Add to Firestore
+        programRef.document(programID).set(programv2)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AddProgramActivity.this, "Program Saved", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        */
+    }
+
+
+
+
+    /*
     //Method to add/update program
     private void addProgram() {
         //Need to verify an event has been selected
@@ -270,6 +353,6 @@ public class AddProgramActivity extends AppCompatActivity
         //}
 
     }
-
+    */
 
 }
