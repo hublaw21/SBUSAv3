@@ -67,5 +67,13 @@ public class Programv2 {
     public void setUserID(String userID) {
         UserID = userID;
     }
+
+    public String getProgramDescription() {
+        return ProgramDescription;
+    }
+
+    public void setProgramDescription(String programDescription) {
+        ProgramDescription = programDescription;
+    }
 }
 

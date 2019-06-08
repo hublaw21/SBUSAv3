@@ -13,8 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +43,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 //public class ProgramSelectActivity extends AppCompatActivity implements ProgramSelectItem {
-public class ProgramSelectActivity extends AppCompatActivity {
+public class ProgramSelectActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseFirestore db;
     private CollectionReference skatersCollectionDb;
@@ -47,18 +51,23 @@ public class ProgramSelectActivity extends AppCompatActivity {
     public TextView mTextViewName;
     public TextView mTextViewID;
     public TextView textViewPrograms[] = new TextView[10];
+    public RadioButton buttonSelectProgram[] = new RadioButton[8];
+    public Button cancel;
+    public Button edit;
+    public Button score;
     public Button mAddProgram;
+    public RadioGroup radioGroupPrograms;
+
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    //private static List<Program> programs = new ArrayList<>();
-    //private List<Program> programs;
-    private static List<Programv2> programList = new ArrayList<>();
+    //private static List<Programv2> programList = new ArrayList<>();
     private List<Programv2> programs;
     private List<Programv2> programv2List;
     private static List documentIdList;
     public ArrayList<Programv2> programsv2 = new ArrayList<>();
+    public ArrayList programList = new ArrayList();
     public String mCurrentUserUID;
     public String selectedProgramID;
     public String[] programName = new String[8];
@@ -66,7 +75,11 @@ public class ProgramSelectActivity extends AppCompatActivity {
     public String mSkaterName;
     public String tempString;
     private int position;
+    public int i;
     public int programCount;
+    public int resID;
+    public int programLimit;
+    public int buttonID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,52 +88,49 @@ public class ProgramSelectActivity extends AppCompatActivity {
 
         mTextViewName = findViewById(R.id.textViewProgramSelectSkaterName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
-        mAddProgram = findViewById(R.id.newProgramButton);
-        textViewPrograms[0] = findViewById(R.id.textViewProgram8);
-        textViewPrograms[1] = findViewById(R.id.textViewProgram1);
-        textViewPrograms[2] = findViewById(R.id.textViewProgram2);
-        textViewPrograms[3] = findViewById(R.id.textViewProgram3);
-        textViewPrograms[4] = findViewById(R.id.textViewProgram4);
-        textViewPrograms[5] = findViewById(R.id.textViewProgram5);
-        textViewPrograms[6] = findViewById(R.id.textViewProgram6);
-        textViewPrograms[7] = findViewById(R.id.textViewProgram7);
-        //textViewPrograms[8] = findViewById(R.id.textViewProgram8);
 
+        cancel = findViewById(R.id.buttonCancel);
+        edit = findViewById(R.id.buttonAddEdit);
+        score = findViewById(R.id.buttonScore);
+        cancel.setOnClickListener(this);
+        edit.setOnClickListener(this);
+        score.setOnClickListener(this);
+
+        //Set up Radio Group and listener
+        radioGroupPrograms = findViewById(R.id.radioGroupPrograms);
+        //ViewGroup radioGroupLayout = findViewById(R.id.radioGroupPrograms);
+        //radioGroupPrograms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){});
+
+        /*for (i = 0; i<4; i++){
+            tempString = "radioButtonProgram" + i;
+            resID = getResources().getIdentifier(tempString, "id", getPackageName());
+            buttonSelectProgram[i] = findViewById(resID);
+            };
+        */
         // Get current userID - for fetching if using Global Class
         GlobalClass globalClass = ((GlobalClass) getApplicationContext());
         mCurrentUserUID = globalClass.getCurrentUserUID();
         mSkaterName = globalClass.getSkaterName();
         mTextViewName.setText(mSkaterName);
 
-        //Toast.makeText(this, "Name: " + mSkaterName, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, "Name: " + mSkaterName + " UID: " + mCurrentUserUID, Toast.LENGTH_SHORT).show();
-
-        /*
-        //Get the userID
-        Intent intentExtras = getIntent();
-        Bundle extrasBundle = intentExtras.getExtras();
-        if (extrasBundle.isEmpty()) {
-            // deal with empty bundle
-        } else {
-            // get the UID
-            mCurrentUserUID = extrasBundle.getString("userID");
-        }
-        */
-
-        mAddProgram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //addProgram();
-            }
-        });
-
 
         // Set up db, recycler and get initial list of programs
         init();
         getListPrograms();
-        textViewPrograms[0].setText("Baseball");
-        //tempString = programsv2.get(0).getUserID();
-        textViewPrograms[1].setText(tempString);
+    }
+
+    public void onRadioButtonClicked(View view) {
+        resID = radioGroupPrograms.getCheckedRadioButtonId();
+        //Could use switch for all of them, but coding may work
+        Toast.makeText(getApplicationContext(), "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    //Handle click of buttons
+    @Override
+    public void onClick(View view) {
+        resID = radioGroupPrograms.getCheckedRadioButtonId();
+        //Could use switch for all of them, but coding may work
+        Toast.makeText(this, "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     // Initialize database and recyclerview
@@ -147,26 +157,56 @@ public class ProgramSelectActivity extends AppCompatActivity {
     private void getListPrograms() {
         //query
         Query query = programCollectionDb.whereEqualTo("UserID", mCurrentUserUID);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot>task) {
-                //usersPrograms = querySnapshot.docs.map(doc = > doc.data());
-                for (QueryDocumentSnapshot document : task.getResult()){
-                    //programs.add(document.toObject(Programv2.class));
-                    //programsv2.add(programs);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
                     programsv2.add(document.toObject(Programv2.class));
-                    programCount = programsv2.size();
-                    tempString = "Program Count = " + String.valueOf(programCount);
-                    tempString = "String " + programsv2.get(0).getUserID();
-                    textViewPrograms[1].setText(tempString);
-                    textViewPrograms[2].setText(programsv2.get(0).getUserID());
-                    //programv2List.add(Programv2 programs.getUserID());
-                    //programv2List.add(programs);
+                    programList.add(document.getId());
                 }
+                programCount = programsv2.size();
+                //List programs on screen
+                //for (i = 0; i < programCount; i++){
+                //First button always has something.  If no programs entered, then add/edit
+                buttonSelectProgram[0] = findViewById(R.id.radioButtonProgram0);
+                if (programCount == 0) {
+                    buttonSelectProgram[0].setText("Add/Edit");
+                } else {
+                    tempString = i + " - " + programsv2.get(i).getProgramDescription() + " "
+                            + programsv2.get(i).getLevel() + " "
+                            + programsv2.get(i).getDiscipline() + " "
+                            + programsv2.get(i).getSegment();
+                    buttonSelectProgram[0].setText(tempString);
+                }
+                if (programCount > 7) {
+                    programLimit = 8;
+                } else {
+                    programLimit = programCount;
+                }
+
+                for (i = 1; i < programLimit; i++) {  //Remeber array starts at 0, but we always have one button
+                    //if(i < programCount) {
+                    tempString = i + " - " + programsv2.get(i).getProgramDescription() + " "
+                            + programsv2.get(i).getLevel() + " "
+                            + programsv2.get(i).getDiscipline() + " "
+                            + programsv2.get(i).getSegment();
+                    //textViewPrograms[i].setText(tempString);
+                    buttonSelectProgram[i].setId(i);
+                    buttonSelectProgram[i].setText(tempString);
+                    if (i == 0) buttonSelectProgram[i].setChecked(true);
+                    radioGroupPrograms.addView(buttonSelectProgram[i]);
+                    //} else {
+                    //textViewPrograms[i].setText(i + " - Empty");
+                    //    buttonSelectProgram[i].setText("Add/Edit");
+                }
+                if (programCount <8) makeRadioButton(programCount);
+
             }
 
-                                              ;
-        /*
+            ;
+
+
+            /*
         public void onSuccess(QuerySnapshot querySnapshot) {
                 usersPrograms = querySnapshot.docs.map(doc => doc.data());
                     //this works
@@ -190,13 +230,19 @@ public class ProgramSelectActivity extends AppCompatActivity {
             });
             */
 
-        //Set into textViews
-        //textViewPrograms[0].setText(usersPrograms[0])
+            //Set into textViews
+            //textViewPrograms[0].setText(usersPrograms[0])
             //textViewPrograms[0].setText("Baseball");
-       });
+        });
     }
 
-
+    public void makeRadioButton(int i){
+        buttonSelectProgram[i] = new RadioButton(this,null, R.style.styleButtonSelect);
+        buttonSelectProgram[i].setId(programCount);
+        buttonSelectProgram[i].setText("Add/Edit");
+        //buttonSelectProgram[i].setBu
+        radioGroupPrograms.addView(buttonSelectProgram[i]);
+    }
     /*
     private void getListPrograms() {
         //query
@@ -252,9 +298,9 @@ public class ProgramSelectActivity extends AppCompatActivity {
         intentBundle.putExtras(bundle);
         startActivity(intentBundle);
         */
-            //this.position = position;
-            //selectedProgramID = programList.get(position).getDocumentID();
-            //selectOptionButtonDialog(selectedProgramID);
+    //this.position = position;
+    //selectedProgramID = programList.get(position).getDocumentID();
+    //selectOptionButtonDialog(selectedProgramID);
         /*
         //selectedProgramID = programList.get(0).getDocumentID();
         //selectedProgramID2 = programList.get(1).getDocumentID();
@@ -269,69 +315,69 @@ public class ProgramSelectActivity extends AppCompatActivity {
         startActivity(intentBundle);
         //Toast.makeText(this, "Clicked: " + programList.get(position).getDocumentID(), Toast.LENGTH_LONG).show();
         */
-        //}
+    //}
 
-        //Choose to Edit or Score
-        public void selectOptionButtonDialog ( final String selectedProgramID2){
-            // Build an AlertDialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    //Choose to Edit or Score
+    public void selectOptionButtonDialog(final String selectedProgramID2) {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
 
-            // Specify alert dialog is not cancelable/not ignorable
-            builder.setCancelable(false);
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
 
-            // Set the custom layout as alert dialog view
-            builder.setView(dialogView);
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
 
-            // Get the custom alert dialog view widgets reference
-            Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
-            Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
-            Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
+        // Get the custom alert dialog view widgets reference
+        Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
+        Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
+        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
 
-            // Create the alert dialog
-            final AlertDialog dialog = builder.create();
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
 
-            // Set add/edit button click listener
-            editButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.cancel();
-                    //go to edit page
-                    Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userID", mCurrentUserUID);
-                    bundle.putString("programID", selectedProgramID2);
-                    intentBundle.putExtras(bundle);
-                    startActivity(intentBundle);
-                }
-            });
+        // Set add/edit button click listener
+        editButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                //go to edit page
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", mCurrentUserUID);
+                bundle.putString("programID", selectedProgramID2);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
 
-            // Set score button click listener
-            scoreButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Dismiss/cancel the alert dialog
-                    dialog.dismiss();
-                    // go to scoring page
-                    Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userID", mCurrentUserUID);
-                    bundle.putString("programID", selectedProgramID2);
-                    intentBundle.putExtras(bundle);
-                    startActivity(intentBundle);
-                }
-            });
+        // Set score button click listener
+        scoreButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss/cancel the alert dialog
+                dialog.dismiss();
+                // go to scoring page
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", mCurrentUserUID);
+                bundle.putString("programID", selectedProgramID2);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
 
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
-            // Display the custom alert dialog on interface
-            dialog.show();
-        }
+        // Display the custom alert dialog on interface
+        dialog.show();
     }
+}

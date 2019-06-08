@@ -12,83 +12,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textSize="@dimen/textLarge"
         android:text="Skater Name Here"
         android:textAlignment="center" />
-
-    <Button
-        android:id="@+id/newProgramButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_box_default"
-        android:layout_margin="@dimen/largeTable"
-        android:textAlignment="center"
-        android:text="Add a New Program" />
 
     <TextView
         android:id="@+id/textViewProgramSelectTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
-        android:text="Or Select a Program to View"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textSize="@dimen/textMedium"
+        android:text="Select a Program to Enter, Edit or Score"
         android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/textViewProgram1"
+    <RadioGroup
+        android:id="@+id/radioGroupPrograms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/textViewProgram8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:textAlignment="center" />
+        android:layout_margin="@dimen/mediumBorder">
 
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram0"
+            android:checked="true"/>
+            <!--
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram1" />
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram2"/>
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram3"/>
+ -->
+    </RadioGroup>
 
-    <!--
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewProgramSelect"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_margin="@dimen/mediumBorder" />
-    -->
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/styleButtonChoice"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/buttonAddEdit"
+            style="@style/styleButtonChoice"
+            android:text="Add/Edit" />
+
+        <Button
+            android:id="@+id/buttonScore"
+            style="@style/styleButtonChoice"
+            android:text="Score" />
+    </LinearLayout>
+
 </LinearLayout>
