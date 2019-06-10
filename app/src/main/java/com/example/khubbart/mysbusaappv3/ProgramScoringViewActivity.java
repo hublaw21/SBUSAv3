@@ -27,6 +27,7 @@ import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.example.khubbart.mysbusaappv3.ViewModels.TotalScoresViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,6 +55,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public TextView[] componentFactorTextView = new TextView[5];
     public TextView[] componentRawTextView = new TextView[5];
     public TextView[] componentScoreTextView = new TextView[5];
+    private CollectionReference programCollectionDb;
+    public TextView mTextViewName;
+    public String currentUserUID;
+    public String currentSkaterName;
+    public String currentProgramID;
 
     private List<ElementItem> elementScoreList = new ArrayList<>();
     public Spinner[] ticSpinner = new Spinner[13];
@@ -144,12 +150,15 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         totalScoreViewModel = ViewModelProviders.of(this).get(TotalScoresViewModel.class);
         setContentView(R.layout.activity_program_scoring_view);
 
-        //Set up GlobalClass for shared constants and methods
-        globalClass = ((GlobalClass)
-
-                getApplicationContext());
-
+        // Set up Firestore access
         db = FirebaseFirestore.getInstance();
+        programCollectionDb = db.collection("Programs");
+
+        //Set up GlobalClass for shared constants and methods
+        globalClass = ((GlobalClass)getApplicationContext());
+        currentUserUID = globalClass.getCurrentUserUID();
+        currentSkaterName = globalClass.getSkaterName();
+        mTextViewName.setText(currentSkaterName);
 
         // Set up arrays with view names, seekbars etc
         initializeVariables();

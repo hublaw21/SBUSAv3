@@ -39,6 +39,12 @@ public class GlobalClass extends Application {
         currentUserUID = sCurrentUserUID;
     }
 
+    //Programid for current selected program
+    private String currentProgramID;
+    public String getCurrentProgramID() {
+        return currentProgramID;
+    }
+    public void setCurrentProgramID(String tCurrentProgramID) {currentProgramID = tCurrentProgramID;}
 
     //Skater/User data
     private String skaterName;

@@ -28,26 +28,19 @@
         android:textAlignment="center" />
 
     <RadioGroup
-        android:id="@+id/radioGroupPrograms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder">
-
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram0"
-            android:checked="true"/>
-            <!--
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram1" />
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram2"/>
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram3"/>
- -->
+        style="@style/styleRadioGroup"
+        android:id="@+id/radioGroupPrograms">
+        <!--
+    <RadioButton
+        style="@style/styleRadioButtonPrograms"
+        android:id="@+id/radioButtonProgram1" />
+    <RadioButton
+        style="@style/styleRadioButtonPrograms"
+        android:id="@+id/radioButtonProgram2"/>
+    <RadioButton
+        style="@style/styleRadioButtonPrograms"
+        android:id="@+id/radioButtonProgram3"/>
+-->
     </RadioGroup>
 
     <LinearLayout

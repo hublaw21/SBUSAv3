@@ -48,6 +48,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     private FirebaseFirestore db;
     private CollectionReference skatersCollectionDb;
     private CollectionReference programCollectionDb;
+    private DocumentReference docRef;
     public TextView mTextViewName;
     public TextView mTextViewID;
     public TextView textViewPrograms[] = new TextView[10];
@@ -57,7 +58,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public Button score;
     public Button mAddProgram;
     public RadioGroup radioGroupPrograms;
-
+    public GlobalClass globalClass;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -67,9 +68,9 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     private List<Programv2> programv2List;
     private static List documentIdList;
     public ArrayList<Programv2> programsv2 = new ArrayList<>();
-    public ArrayList programList = new ArrayList();
+    public ArrayList programIDList = new ArrayList();
     public String mCurrentUserUID;
-    public String selectedProgramID;
+    public String currentProgramID;
     public String[] programName = new String[8];
     public String[] usersPrograms = new String[10];
     public String mSkaterName;
@@ -86,9 +87,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_select);
 
+        // Access Firestore
+        db = FirebaseFirestore.getInstance();
+        skatersCollectionDb = db.collection("Skaters");
+        programCollectionDb = db.collection("Programs");
+
+        //Set up basic view stuff
         mTextViewName = findViewById(R.id.textViewProgramSelectSkaterName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
-
         cancel = findViewById(R.id.buttonCancel);
         edit = findViewById(R.id.buttonAddEdit);
         score = findViewById(R.id.buttonScore);
@@ -98,24 +104,12 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
 
         //Set up Radio Group and listener
         radioGroupPrograms = findViewById(R.id.radioGroupPrograms);
-        //ViewGroup radioGroupLayout = findViewById(R.id.radioGroupPrograms);
-        //radioGroupPrograms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){});
-
-        /*for (i = 0; i<4; i++){
-            tempString = "radioButtonProgram" + i;
-            resID = getResources().getIdentifier(tempString, "id", getPackageName());
-            buttonSelectProgram[i] = findViewById(resID);
-            };
-        */
-        // Get current userID - for fetching if using Global Class
-        GlobalClass globalClass = ((GlobalClass) getApplicationContext());
+        // Get current userID and skater name
+        globalClass = ((GlobalClass) getApplicationContext());
         mCurrentUserUID = globalClass.getCurrentUserUID();
         mSkaterName = globalClass.getSkaterName();
         mTextViewName.setText(mSkaterName);
 
-
-        // Set up db, recycler and get initial list of programs
-        init();
         getListPrograms();
     }
 
@@ -130,28 +124,20 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         resID = radioGroupPrograms.getCheckedRadioButtonId();
         //Could use switch for all of them, but coding may work
+        switch (view.getId()) {
+            case R.id.buttonCancel:
+                // do nothing for now
+                break;
+            case R.id.buttonAddEdit:
+                // check for whether add or edit
+                break;
+            case R.id.buttonScore:
+                // Retrieve and save programID
+                // go to scoring page
+                break;
+        }
         Toast.makeText(this, "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
     }
-
-    // Initialize database and recyclerview
-    private void init() {
-        // Access Firestore
-        db = FirebaseFirestore.getInstance();
-        skatersCollectionDb = db.collection("Skaters");
-        programCollectionDb = db.collection("Programs");
-    }
-
-    /*
-    private void initRecycler() {
-        // Setup recyclerview for selecting program
-        recyclerView = findViewById(R.id.recyclerViewProgramSelect);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new ProgramSelectAdapter(programs, this);
-        //adapter = new ProgramSelectAdapter(programList, this); // using this causes duplicate entries in list
-        recyclerView.setAdapter(adapter);
-    }
-    */
 
     // Query and load skaters programs
     private void getListPrograms() {
@@ -162,45 +148,23 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     programsv2.add(document.toObject(Programv2.class));
-                    programList.add(document.getId());
+                    programIDList.add(document.getId()); //Need this for accessing the proper program
                 }
                 programCount = programsv2.size();
-                //List programs on screen
-                //for (i = 0; i < programCount; i++){
-                //First button always has something.  If no programs entered, then add/edit
-                buttonSelectProgram[0] = findViewById(R.id.radioButtonProgram0);
-                if (programCount == 0) {
-                    buttonSelectProgram[0].setText("Add/Edit");
-                } else {
-                    tempString = i + " - " + programsv2.get(i).getProgramDescription() + " "
-                            + programsv2.get(i).getLevel() + " "
-                            + programsv2.get(i).getDiscipline() + " "
-                            + programsv2.get(i).getSegment();
-                    buttonSelectProgram[0].setText(tempString);
-                }
                 if (programCount > 7) {
                     programLimit = 8;
                 } else {
                     programLimit = programCount;
                 }
 
-                for (i = 1; i < programLimit; i++) {  //Remeber array starts at 0, but we always have one button
-                    //if(i < programCount) {
-                    tempString = i + " - " + programsv2.get(i).getProgramDescription() + " "
+                for (i = 0; i < programLimit; i++) {  //Remember array starts at 0, but we always have one button
+                    tempString = programsv2.get(i).getProgramDescription() + " "
                             + programsv2.get(i).getLevel() + " "
                             + programsv2.get(i).getDiscipline() + " "
                             + programsv2.get(i).getSegment();
-                    //textViewPrograms[i].setText(tempString);
-                    buttonSelectProgram[i].setId(i);
-                    buttonSelectProgram[i].setText(tempString);
-                    if (i == 0) buttonSelectProgram[i].setChecked(true);
-                    radioGroupPrograms.addView(buttonSelectProgram[i]);
-                    //} else {
-                    //textViewPrograms[i].setText(i + " - Empty");
-                    //    buttonSelectProgram[i].setText("Add/Edit");
+                    makeRadioButton(i, tempString);
                 }
-                if (programCount <8) makeRadioButton(programCount);
-
+                if (programCount < 8) makeRadioButton(programCount, "Add a Program");
             }
 
             ;
@@ -236,148 +200,101 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-    public void makeRadioButton(int i){
-        buttonSelectProgram[i] = new RadioButton(this,null, R.style.styleButtonSelect);
-        buttonSelectProgram[i].setId(programCount);
-        buttonSelectProgram[i].setText("Add/Edit");
-        //buttonSelectProgram[i].setBu
-        radioGroupPrograms.addView(buttonSelectProgram[i]);
-    }
-    /*
-    private void getListPrograms() {
-        //query
-        programCollectionDb.whereEqualTo("userID", mCurrentUserUID).get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot documentSnapshots) {
-                        if (documentSnapshots.isEmpty()) {
-                            // Handle empty
-                            Toast.makeText(getApplicationContext(), "Error getting data but Success!!!", Toast.LENGTH_LONG).show();
-                        } else {
-                            //this works
-                            programs = documentSnapshots.toObjects(Program.class); // load for adapter
-                            // load for selecting
-                            for (DocumentSnapshot documentSnapshot : documentSnapshots){
-                                Program program = documentSnapshot.toObject(Program.class);
-                                program.setDocumentID(documentSnapshot.getId());
-                                programList.add(program);
-                            }
-                            programCount = documentSnapshots.size();
-                            initRecycler(); //call here to force it to load the first time to activity
-                            // Trying to save DocumentID for programs
-                        }
+    // Pull program by selected program
+    private void getSelectedProgram(int Pos) {
+        //Should be able to generate program id from data saved in Programv2
+        tempString = programsv2.get(Pos).getProgramDescription()
+                + programsv2.get(Pos).getLevel()
+                + programsv2.get(Pos).getDiscipline()
+                + programsv2.get(Pos).getSegment();
+        docRef = programCollectionDb.document(tempString);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        //Grab program data
+                        currentProgramID = document.getId();
+                        //Set it in Global
+                        globalClass.setCurrentProgramID(currentProgramID);
+                    } else {
+                        //No document found
                     }
-                    // Add persistent data to sharedpreferences
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
-                    }
-                });
+                }
+            }
+        });
     }
-    */
-    /*
-                //Add new program
-        public void addProgram () {
-            //Call routine to set up new program
-            Intent myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
-            startActivity(myIntent);
+
+        public void makeRadioButton ( int i, String tempString){
+            buttonSelectProgram[i] = (RadioButton) getLayoutInflater().inflate(R.layout.button_custom_style, null); //had to inflate to be able to reference the button style
+            buttonSelectProgram[i].setId(i);
+            buttonSelectProgram[i].setText(tempString);
+            if (i == 0) buttonSelectProgram[i].setChecked(true);
+            radioGroupPrograms.addView(buttonSelectProgram[i]);
         }
 
-        //Get program selected
-        @Override
-        public void userItemClick ( int position){
+        //Choose to Edit or Score
+        public void selectOptionButtonDialog ( final String selectedProgramID2){
+            // Build an AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            //Send to program view activity with data
-        /*
-        Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("userID",mCurrentUserUID);
-        bundle.putString("userID",mCurrentUserUID);
-        intentBundle.putExtras(bundle);
-        startActivity(intentBundle);
-        */
-    //this.position = position;
-    //selectedProgramID = programList.get(position).getDocumentID();
-    //selectOptionButtonDialog(selectedProgramID);
-        /*
-        //selectedProgramID = programList.get(0).getDocumentID();
-        //selectedProgramID2 = programList.get(1).getDocumentID();
-        //Toast.makeText(this, "ID1: " + selectedProgramID + " ID2: " + selectedProgramID2 + " pos: " + position, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, "ID: " + selectedProgramID, Toast.LENGTH_LONG).show();
-        Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
-        //Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("userID",mCurrentUserUID);
-        bundle.putString("programID",selectedProgramID);
-        intentBundle.putExtras(bundle);
-        startActivity(intentBundle);
-        //Toast.makeText(this, "Clicked: " + programList.get(position).getDocumentID(), Toast.LENGTH_LONG).show();
-        */
-    //}
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
 
-    //Choose to Edit or Score
-    public void selectOptionButtonDialog(final String selectedProgramID2) {
-        // Build an AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            // Specify alert dialog is not cancelable/not ignorable
+            builder.setCancelable(false);
 
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
+            // Set the custom layout as alert dialog view
+            builder.setView(dialogView);
 
-        // Specify alert dialog is not cancelable/not ignorable
-        builder.setCancelable(false);
+            // Get the custom alert dialog view widgets reference
+            Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
+            Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
+            Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
 
-        // Set the custom layout as alert dialog view
-        builder.setView(dialogView);
+            // Create the alert dialog
+            final AlertDialog dialog = builder.create();
 
-        // Get the custom alert dialog view widgets reference
-        Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
-        Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
-        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
+            // Set add/edit button click listener
+            editButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                    //go to edit page
+                    Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userID", mCurrentUserUID);
+                    bundle.putString("programID", selectedProgramID2);
+                    intentBundle.putExtras(bundle);
+                    startActivity(intentBundle);
+                }
+            });
 
-        // Create the alert dialog
-        final AlertDialog dialog = builder.create();
+            // Set score button click listener
+            scoreButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Dismiss/cancel the alert dialog
+                    dialog.dismiss();
+                    // go to scoring page
+                    Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userID", mCurrentUserUID);
+                    bundle.putString("programID", selectedProgramID2);
+                    intentBundle.putExtras(bundle);
+                    startActivity(intentBundle);
+                }
+            });
 
-        // Set add/edit button click listener
-        editButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.cancel();
-                //go to edit page
-                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userID", mCurrentUserUID);
-                bundle.putString("programID", selectedProgramID2);
-                intentBundle.putExtras(bundle);
-                startActivity(intentBundle);
-            }
-        });
+            cancelButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
 
-        // Set score button click listener
-        scoreButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Dismiss/cancel the alert dialog
-                dialog.dismiss();
-                // go to scoring page
-                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userID", mCurrentUserUID);
-                bundle.putString("programID", selectedProgramID2);
-                intentBundle.putExtras(bundle);
-                startActivity(intentBundle);
-            }
-        });
-
-        cancelButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        // Display the custom alert dialog on interface
-        dialog.show();
+            // Display the custom alert dialog on interface
+            dialog.show();
+        }
     }
-}
