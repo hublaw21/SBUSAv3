@@ -24,7 +24,9 @@ import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.ElementItem;
 import com.example.khubbart.mysbusaappv3.Model.PlannedProgramContent;
 import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.example.khubbart.mysbusaappv3.Model.Programv2;
 import com.example.khubbart.mysbusaappv3.ViewModels.TotalScoresViewModel;
+import com.facebook.internal.CollectionMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -36,7 +38,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class ProgramScoringViewActivity extends AppCompatActivity implements
         SeekBar.OnSeekBarChangeListener,
@@ -82,6 +86,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String mCurrentProgramID;
     public String programDescription;
     public String[] elementCode = new String[13];
+    public String[] currentProgramElements = new String[13];
     public boolean[] elementBonusButtonStatus = new boolean[13];
     public String[] elementTic = new String[13];
     public String[] ticArray = new String[6];
@@ -97,7 +102,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String[] SOVCode;
     public String[] SOVName;
     public String[] SOVBase;
-    public List<Program> program = new ArrayList<>();
+    //public List<Program> program = new ArrayList<>();
+    public List<Programv2> program = new ArrayList<>();
+    public List<String> elementList = new ArrayList<>();
     public List<PlannedProgramContent> elements = new ArrayList<>();
     public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
     public int requiredElements;
@@ -158,28 +165,26 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         globalClass = ((GlobalClass)getApplicationContext());
         currentUserUID = globalClass.getCurrentUserUID();
         currentSkaterName = globalClass.getSkaterName();
+        currentProgramID = globalClass.getCurrentProgramID();
         mTextViewName.setText(currentSkaterName);
 
         // Set up arrays with view names, seekbars etc
         initializeVariables();
 
         //Get the userID and programID from sending activity
+        /*Should not need this
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
-        if (extrasBundle.isEmpty())
-
-        {
+        if (extrasBundle.isEmpty()){
             // deal with empty bundle
-        } else
-
-        {
+        } else {
             // get the info
             mCurrentUserID = extrasBundle.getString("userID");
             mCurrentProgramID = extrasBundle.getString("programID");
-
             //Might want to implement as a separate thread
             init();  // Call the initiation method here, to ensure the IDs have been pulled
         }
+        */
     }
 
     //default listener for all buttons
@@ -380,16 +385,36 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
     // Initialize database, pull program and elements
     public void init() {
-        if (mCurrentProgramID == null) {
+        if (currentProgramID == null) {
             // Deal with new/null program
+            //Should not get one, since sent here from selection screen
         } else {
             //Get program basics
-            programRef = db.collection("Programs").document(mCurrentProgramID);
+            programRef = db.collection("Programs").document(currentProgramID);
             programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
+                        Programv2 qProgram = documentSnapshot.toObject(Programv2.class);
+                        program.add(qProgram);
+                        programDescription = program.get(0).getProgramDescription();
+                        programDescriptionTextView.setText(programDescription);
+                        //factors = globalClass.getFactors(programDescription); Fro old model, be sure we get factors into the application now
+                        //progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
+                        //tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
+                        //requiredElements = RequiredElementsValue[tempInt];
+                        //Try to set elements to an element
+                            Map<Integer, String> sourceMap = createMap();
+                            Collection<String> values = sourceMap.values();
+                        elementList = program.get(0).getElements();
+                        currentProgramElements = values.toArray(elementList);
+                        //currentProgramElements = values.toArray(program.get(0).getElements());
+
+                        tempString = String.valueOf(requiredElements);
+                        pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
+
+                        /* Old program model
                         Program qProgram = documentSnapshot.toObject(Program.class);
                         program.add(qProgram);
                         String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
@@ -402,6 +427,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                         elementID = program.get(0).getElementsID();
                         tempString = String.valueOf(requiredElements);
                         pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
+                        */
                     }
                 }
             });

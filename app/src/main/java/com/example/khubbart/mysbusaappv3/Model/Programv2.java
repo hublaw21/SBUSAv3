@@ -10,7 +10,7 @@ public class Programv2 {
     private String Segment;
     private String UserID;
     private String ProgramDescription;
-    private List<String> Elements; // Until Firestore supports subcolelction arrays, need to make this the id to the seperate collection
+    private List<String> Elements; // Until Firestore supports subcollection arrays, need to make this the id to the seperate collection
 
     // Required No Argument Constructor
 
