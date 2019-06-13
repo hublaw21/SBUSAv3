@@ -105,6 +105,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
 
         //Set up Radio Group and listener
         radioGroupPrograms = findViewById(R.id.radioGroupPrograms);
+        radioGroupPrograms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int resID) {
+                //Set it in Global, need to do here, not when selecting score because it is too fast
+                currentProgramID = programIDList.get(resID);
+                globalClass.setCurrentProgramID(currentProgramID);
+            }
+        });
         // Get current userID and skater name
         globalClass = ((GlobalClass) getApplicationContext());
         mCurrentUserUID = globalClass.getCurrentUserUID();
@@ -112,12 +120,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         mTextViewName.setText(mSkaterName);
 
         getListPrograms();
-    }
-
-    public void onRadioButtonClicked(View view) {
-        resID = radioGroupPrograms.getCheckedRadioButtonId();
-        //Could use switch for all of them, but coding may work
-        //Toast.makeText(getApplicationContext(), "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     //Handle click of buttons
@@ -128,14 +130,17 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.buttonCancel:
                 // do nothing for now
-                //Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "currentProgramID: " + currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonAddEdit:
                 // check for whether add or edit
                 break;
             case R.id.buttonScore:
+                Intent myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                startActivity(myIntent);
+
                 // Retrieve and save programID
-                getSelectedProgram(resID);
+                //getSelectedProgram(resID);
                 //Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -207,7 +212,8 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     // Pull program by selected program
     private void getSelectedProgram(int Pos) {
         //Should be able to generate program id from data saved in Programv2
-        tempString = programIDList.get(Pos);
+        //tempString = programIDList.get(Pos);
+        tempString = currentProgramID;
         /*
         tempString = programsv2.get(Pos).getUserID()
                 + programsv2.get(Pos).getProgramDescription()
@@ -230,7 +236,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                         //Toast.makeText(getApplicationContext(), "No Match", Toast.LENGTH_LONG).show();
                         Log.i("ProgramID ==> ", tempString);
                     }
-                    Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
                     if (document != null) {
                         //Grab program data
                         currentProgramID = document.getId();
@@ -248,75 +254,75 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         startActivity(myIntent);
     }
 
-        public void makeRadioButton ( int i, String tempString){
-            buttonSelectProgram[i] = (RadioButton) getLayoutInflater().inflate(R.layout.button_custom_style, null); //had to inflate to be able to reference the button style
-            buttonSelectProgram[i].setId(i);
-            buttonSelectProgram[i].setText(tempString);
-            if (i == 0) buttonSelectProgram[i].setChecked(true);
-            radioGroupPrograms.addView(buttonSelectProgram[i]);
-        }
-
-        //Choose to Edit or Score
-        public void selectOptionButtonDialog ( final String selectedProgramID2){
-            // Build an AlertDialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
-
-            // Specify alert dialog is not cancelable/not ignorable
-            builder.setCancelable(false);
-
-            // Set the custom layout as alert dialog view
-            builder.setView(dialogView);
-
-            // Get the custom alert dialog view widgets reference
-            Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
-            Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
-            Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
-
-            // Create the alert dialog
-            final AlertDialog dialog = builder.create();
-
-            // Set add/edit button click listener
-            editButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.cancel();
-                    //go to edit page
-                    Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userID", mCurrentUserUID);
-                    bundle.putString("programID", selectedProgramID2);
-                    intentBundle.putExtras(bundle);
-                    startActivity(intentBundle);
-                }
-            });
-
-            // Set score button click listener
-            scoreButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Dismiss/cancel the alert dialog
-                    dialog.dismiss();
-                    // go to scoring page
-                    Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userID", mCurrentUserUID);
-                    bundle.putString("programID", selectedProgramID2);
-                    intentBundle.putExtras(bundle);
-                    startActivity(intentBundle);
-                }
-            });
-
-            cancelButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            // Display the custom alert dialog on interface
-            dialog.show();
-        }
+    public void makeRadioButton(int i, String tempString) {
+        buttonSelectProgram[i] = (RadioButton) getLayoutInflater().inflate(R.layout.button_custom_style, null); //had to inflate to be able to reference the button style
+        buttonSelectProgram[i].setId(i);
+        buttonSelectProgram[i].setText(tempString);
+        if (i == 0) buttonSelectProgram[i].setChecked(true);
+        radioGroupPrograms.addView(buttonSelectProgram[i]);
     }
+
+    //Choose to Edit or Score
+    public void selectOptionButtonDialog(final String selectedProgramID2) {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_select_program, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        Button editButton = (Button) dialogView.findViewById(R.id.dialog_edit_program_button);
+        Button scoreButton = (Button) dialogView.findViewById(R.id.dialog_score_program_button);
+        Button cancelButton = (Button) dialogView.findViewById(R.id.dialog_cancel_button);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+
+        // Set add/edit button click listener
+        editButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                //go to edit page
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", mCurrentUserUID);
+                bundle.putString("programID", selectedProgramID2);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
+
+        // Set score button click listener
+        scoreButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss/cancel the alert dialog
+                dialog.dismiss();
+                // go to scoring page
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userID", mCurrentUserUID);
+                bundle.putString("programID", selectedProgramID2);
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
+            }
+        });
+
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // Display the custom alert dialog on interface
+        dialog.show();
+    }
+}

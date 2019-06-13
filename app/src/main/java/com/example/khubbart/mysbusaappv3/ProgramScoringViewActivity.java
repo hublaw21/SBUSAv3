@@ -7,6 +7,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +25,7 @@ import android.widget.ToggleButton;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.ElementItem;
+import com.example.khubbart.mysbusaappv3.Model.Factors;
 import com.example.khubbart.mysbusaappv3.Model.PlannedProgramContent;
 import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.example.khubbart.mysbusaappv3.Model.Programv2;
@@ -67,6 +70,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String currentProgramID;
 
     private List<ElementItem> elementScoreList = new ArrayList<>();
+    public List<Factors> programFactors = new ArrayList<>();
     public Spinner[] ticSpinner = new Spinner[13];
 
     public int progress = 50; // the midway point, zeroed.  Need to set up for adjustable
@@ -168,27 +172,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         currentUserUID = globalClass.getCurrentUserUID();
         currentSkaterName = globalClass.getSkaterName();
         currentProgramID = globalClass.getCurrentProgramID();
-        Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
-        //mTextViewName.setText(currentSkaterName);
         requiredElements = 13; //Temporary, this needs to be set for each
 
         // Set up arrays with view names, seekbars etc
-        init();
-
-        //Get the userID and programID from sending activity
-        /*Should not need this
-        Intent intentExtras = getIntent();
-        Bundle extrasBundle = intentExtras.getExtras();
-        if (extrasBundle.isEmpty()){
-            // deal with empty bundle
-        } else {
-            // get the info
-            mCurrentUserID = extrasBundle.getString("userID");
-            mCurrentProgramID = extrasBundle.getString("programID");
-            //Might want to implement as a separate thread
-            init();  // Call the initiation method here, to ensure the IDs have been pulled
-        }
-        */
+        //init();
+        initializeVariables();
     }
 
     //default listener for all buttons
@@ -240,6 +228,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     //default listener for all seeker bars
     @Override
     public void onProgressChanged(SeekBar bar, int progressValue, boolean fromUser) {
+        //maybe do a switch here instead?  Or peel off the digit and do by logic, avoid the loops
         for (i = 0; i < requiredElements; i++) {
             if (bar == goeBar[i]) {
                 calcElementGOE(progressValue, i);
@@ -276,6 +265,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         SOVName = resources.getStringArray(R.array.SOV_Name);
         SOVBase = resources.getStringArray(R.array.SOV_Base);
         ticArray = resources.getStringArray(R.array.tics);
+        //Find where this is used, once program identified, calculate required elements value
         RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
         RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
 
@@ -290,7 +280,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             goeBar[i] = (SeekBar) this.findViewById(resID);
             goeBar[i].setOnSeekBarChangeListener(this);
         }
-
         compBar[0] = this.findViewById(R.id.seekBarComponentSkills);
         compBar[2] = this.findViewById(R.id.seekBarComponentPerformance);
         compBar[1] = this.findViewById(R.id.seekBarComponentTransitions);
@@ -321,8 +310,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 tempRowGOE = "elementGOERow" + i;
                 tempRowScore = "elementScoreRow" + i;
             }
-
-
             resID = getResources().getIdentifier(tempRowCodeButton, "id", getPackageName());
             elementCodeButton[0] = findViewById(resID); //Change 0 to i when full
             if (i > 0) elementCodeButton[i] = null;
@@ -347,7 +334,6 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             resID = getResources().getIdentifier(tempRowScore, "id", getPackageName());
             elementScoreTextView[i] = findViewById(resID);
         }
-        //tempString = ""
         componentRawTextView[0] = findViewById(R.id.componentSkillsValue);
         componentRawTextView[1] = findViewById(R.id.componentTransitionsValue);
         componentRawTextView[2] = findViewById(R.id.componentPerformanceValue);
@@ -363,7 +349,29 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         componentFactorTextView[2] = findViewById(R.id.componentPerformanceFactor);
         componentFactorTextView[3] = findViewById(R.id.componentCompositionFactor);
         componentFactorTextView[4] = findViewById(R.id.componentInterpretationFactor);
+
+        //And now get program info
+        init();
     }
+
+    //Set initial comp scores too
+    //I won't know factor values until we know what program
+    public void initializeComps() {
+        for (int i = 0; i < 5; i++) {
+            if (factors[i + 1] != null) {
+                tempDouble2 = 5.0; // This could be an option for users
+                tempString = String.valueOf(tempDouble2);
+                componentRawTextView[i].setText(tempString);
+                componentScore[i] = tempDouble2 * factors[i + 1] * factors[6]; // comp factors start at 1, factors[6] is general program component
+                tempString = String.valueOf(componentScore[i]);
+                componentScoreTextView[i].setText(tempString);
+                componentFactorTextView[i].setText(numberFormat.format(factors[i + 1]));
+            }
+        }
+        scoresTextView[0].setText(numberFormat.format(sumSegment()));
+        scoresTextView[2].setText(numberFormat.format(sumComponents()));
+    }
+
 
     //Update info based on seeker bar - elements
     private void seekerBarUpdate(int uProgress, int uElenum) {
@@ -392,6 +400,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         if (currentProgramID == null) {
             // Deal with new/null program
             //Should not get one, since sent here from selection screen
+            Toast.makeText(getApplicationContext(), "Scoring - ProgID Null", Toast.LENGTH_LONG).show();
+
         } else {
             //Get program basics
             programRef = db.collection("Programs").document(currentProgramID);
@@ -399,67 +409,75 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
+                        Log.i("Scoring - ProgramID => ", currentProgramID);
                         DocumentSnapshot document = task.getResult();
                         currentProgram = document.toObject(Programv2.class);
-                        Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
-                        /*
+                        Log.i("Scoring - ProgDesc => ", currentProgram.getProgramDescription());
+                        Toast.makeText(getApplicationContext(), "Description " + currentProgram.getProgramDescription(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
                         //program.add(qProgram);
                         programDescription = currentProgram.getProgramDescription();
                         programDescriptionTextView.setText(programDescription);
                         elementList = currentProgram.getElements();
                         elementList.toArray(currentProgramElements); // This should be my usable list of elements in an array
-
+                        //Get factors for this program
+                        tempString = currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment();
+                        factors = globalClass.getFactors(tempString);
+                        initializeComps();
                         //Where do I get this now?
-                        tempString = String.valueOf(requiredElements);
 
+
+                        tempString = String.valueOf(requiredElements);
+                        requiredElements = 6;
                         //6-12-19 Do I need this now, isn't currentProgramElements giving me what I need?  May still need to initialize comp scores
                         //pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
 
                         // Initialize or hide elements rows - this should eleminate need for pullElements
-                        for (i = 0; i < 13; i++) {
+                        for (i = 0; i < 13; i++) { // ******Chnage back to 13 after fixing dealing with null elements
+                            /*
                             if (i < 10) {
                                 tempString = "elementRow0" + i;
                             } else {
                                 tempString = "elementRow" + i;
                             }
+                            */
                             if (i < requiredElements) {
                                 //Initialize element info
-                                pullElementInfo(currentProgramElements[i], i);
+                                if(elementList.get(i) != null){
+                                    tempString = elementList.get(i);
+                                    if(tempString.length()<2) tempString = "1S";
+                                } else {
+                                    tempString = "1S";
+                                }
+                                //tempString = elementList.get(i);
+                                Log.i("tempString => ", tempString);
+                                elementIDTextView[i].setText(tempString);
+                                //if (tempString != null) {
+                                //    if (tempString.length() < 2) tempString = "1T";
+                                    pullElementInfo(tempString, i);
+                                //}
+                                ;
+                                //deal with null tempString
                             } else {
                                 //Hide unused rows
+                                if (i < 10) {
+                                    tempString = "elementRow0" + i;
+                                } else {
+                                    tempString = "elementRow" + i;
+                                }
                                 int resID = getResources().getIdentifier(tempString, "id", getPackageName());
                                 TableRow tr = findViewById(resID);
                                 tr.setVisibility(View.GONE);
                             }
                         }
-
                         scoresTextView[1].setText(numberFormat.format(sumElements()));
-                        */
-                        /* Old program model
-                        Program qProgram = documentSnapshot.toObject(Program.class);
-                        program.add(qProgram);
-                        String tempText = program.get(0).getLevel() + " " + program.get(0).getDiscipline() + " " + program.get(0).getSegment() + " Program";
-                        programDescriptionTextView.setText(tempText);
-                        programDescription = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
-                        factors = globalClass.getFactors(programDescription);
-                        progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
-                        tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
-                        requiredElements = RequiredElementsValue[tempInt];
-                        elementID = program.get(0).getElementsID();
-                        tempString = String.valueOf(requiredElements);
-                        pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
-                        */
                     }
                 }
             });
         }
-        //Initial all variables and fields, now that we have program info
-        //initializeVariables();
-
     }
 
-    ;
-
+    /*
     public void pullElements(String mElementsID) {
         elementRef = db.collection("Elements").document(mElementsID);
         elementRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -484,7 +502,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                     elementCode[12] = elements.get(0).getE12();
                     for (int i = 0; i < requiredElements; i++) {
                         if (elementCode[i] != null) {
-                            pullElementInfo(elementCode[i], i);
+                           pullElementInfo(elementCode[i], i);
                         }
                     }
                     // Hide rows not used for the program
@@ -520,6 +538,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         scoresTextView[2].setText(numberFormat.format(sumComponents()));
     }
 
+    */
     public void pullElementInfo(String pElementCode, int pNum) {
         int currentSOVIndex = Arrays.asList(SOVCode).indexOf(pElementCode);
         // Need to add error checker for code not found

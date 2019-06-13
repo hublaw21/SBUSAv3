@@ -11,9 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
+import com.example.khubbart.mysbusaappv3.Model.Factors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GlobalClass extends Application {
 
@@ -172,6 +174,8 @@ public class GlobalClass extends Application {
 
     //Get Factor Table
     public Double[] getFactors(String tProgramDescription) {
+        //0 - Segment factor
+        //1 - Skating skills
         Resources resources = getResources();
         String tempString;
         String[] factorTemp;
@@ -206,7 +210,7 @@ public class GlobalClass extends Application {
         for (int i = 0; i < 8; i++) {
             factors[i] = Double.valueOf(factorTable[progDescrPointer][i + 1]);
             tempString = String.valueOf(i) + " " + String.valueOf(factors[i]);
-            Log.i("*******************factors: ", tempString);
+            Log.i("********factors: ", tempString);
         }
         return factors;
     }

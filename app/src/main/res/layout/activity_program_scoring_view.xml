@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="@dimen/textMidSmall"
+        android:text="Program Description"
         android:textColor="@color/black" />
 
 
@@ -270,10 +271,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
-
+                    <!--
                     <Button
                         android:id="@+id/elementCodeButton00"
                         style="@style/ElementCodeButton" />
+                        -->
 
                     <TextView
                         android:id="@+id/elementIdRow00"
