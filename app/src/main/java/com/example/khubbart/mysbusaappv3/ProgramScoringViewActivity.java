@@ -18,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
@@ -86,6 +87,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public String mCurrentProgramID;
     public String programDescription;
     public String[] elementCode = new String[13];
+    public Programv2 currentProgram;
     public String[] currentProgramElements = new String[13];
     public boolean[] elementBonusButtonStatus = new boolean[13];
     public String[] elementTic = new String[13];
@@ -162,14 +164,16 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         programCollectionDb = db.collection("Programs");
 
         //Set up GlobalClass for shared constants and methods
-        globalClass = ((GlobalClass)getApplicationContext());
+        globalClass = ((GlobalClass) getApplicationContext());
         currentUserUID = globalClass.getCurrentUserUID();
         currentSkaterName = globalClass.getSkaterName();
         currentProgramID = globalClass.getCurrentProgramID();
-        mTextViewName.setText(currentSkaterName);
+        Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
+        //mTextViewName.setText(currentSkaterName);
+        requiredElements = 13; //Temporary, this needs to be set for each
 
         // Set up arrays with view names, seekbars etc
-        initializeVariables();
+        init();
 
         //Get the userID and programID from sending activity
         /*Should not need this
@@ -211,7 +215,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             //Check/Verify Element Code Button clicked
             if (findViewById(tempInt) == elementCodeButton[i]) {
                 tempString = String.valueOf(tempInt);
-                Log.i("*******************elementCodeClick ", tempString);
+                Log.i("******elementCodeClick ", tempString);
                 //Call Change Button Dialog from Global
                 android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
                 ElementButtonChangeDialogCaller elementButtonChangeDialogCaller =
@@ -226,7 +230,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             //Check/Verify tic button clicked
             if (findViewById(tempInt) == elementTicButton[i]) {
                 tempString = String.valueOf(tempInt);
-                Log.i("*******************ticClick ", tempString);
+                Log.i("***********ticClick ", tempString);
                 tempInt = 0; // have to reset or alert dialog buttons cause a loop
                 ticDialog(i);
             }
@@ -321,7 +325,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
             resID = getResources().getIdentifier(tempRowCodeButton, "id", getPackageName());
             elementCodeButton[0] = findViewById(resID); //Change 0 to i when full
-            if(i>0) elementCodeButton[i] = null;
+            if (i > 0) elementCodeButton[i] = null;
 
             resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
             elementIDTextView[i] = findViewById(resID);
@@ -395,25 +399,42 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
-                        DocumentSnapshot documentSnapshot = task.getResult();
-                        Programv2 qProgram = documentSnapshot.toObject(Programv2.class);
-                        program.add(qProgram);
-                        programDescription = program.get(0).getProgramDescription();
+                        DocumentSnapshot document = task.getResult();
+                        currentProgram = document.toObject(Programv2.class);
+                        Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
+                        /*
+                        //program.add(qProgram);
+                        programDescription = currentProgram.getProgramDescription();
                         programDescriptionTextView.setText(programDescription);
-                        //factors = globalClass.getFactors(programDescription); Fro old model, be sure we get factors into the application now
-                        //progPointer = program.get(0).getLevel() + program.get(0).getDiscipline() + program.get(0).getSegment();
-                        //tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
-                        //requiredElements = RequiredElementsValue[tempInt];
-                        //Try to set elements to an element
-                            Map<Integer, String> sourceMap = createMap();
-                            Collection<String> values = sourceMap.values();
-                        elementList = program.get(0).getElements();
-                        currentProgramElements = values.toArray(elementList);
-                        //currentProgramElements = values.toArray(program.get(0).getElements());
+                        elementList = currentProgram.getElements();
+                        elementList.toArray(currentProgramElements); // This should be my usable list of elements in an array
 
+                        //Where do I get this now?
                         tempString = String.valueOf(requiredElements);
-                        pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
 
+                        //6-12-19 Do I need this now, isn't currentProgramElements giving me what I need?  May still need to initialize comp scores
+                        //pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
+
+                        // Initialize or hide elements rows - this should eleminate need for pullElements
+                        for (i = 0; i < 13; i++) {
+                            if (i < 10) {
+                                tempString = "elementRow0" + i;
+                            } else {
+                                tempString = "elementRow" + i;
+                            }
+                            if (i < requiredElements) {
+                                //Initialize element info
+                                pullElementInfo(currentProgramElements[i], i);
+                            } else {
+                                //Hide unused rows
+                                int resID = getResources().getIdentifier(tempString, "id", getPackageName());
+                                TableRow tr = findViewById(resID);
+                                tr.setVisibility(View.GONE);
+                            }
+                        }
+
+                        scoresTextView[1].setText(numberFormat.format(sumElements()));
+                        */
                         /* Old program model
                         Program qProgram = documentSnapshot.toObject(Program.class);
                         program.add(qProgram);
@@ -432,6 +453,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 }
             });
         }
+        //Initial all variables and fields, now that we have program info
+        //initializeVariables();
+
     }
 
     ;
@@ -478,6 +502,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 scoresTextView[1].setText(numberFormat.format(sumElements()));
             }
         });
+
+
         //Set initial comp scores too
         for (int i = 0; i < 5; i++) {
             if (factors[i + 1] != null) {
@@ -501,7 +527,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             elementBase[pNum] = Double.valueOf(Arrays.asList(SOVBase).get(currentSOVIndex));
             elementScore[pNum] = elementBase[pNum];
             elementCode[pNum] = pElementCode;
-            Log.i("**************elementCode ", elementCode[pNum]);
+            Log.i("**********elementCode ", elementCode[pNum]);
             elementGOE[pNum] = 0.0; //Must initialize a value
             jumpBase[pNum] = 0.0; //Must initialize a value
             tempString = elementCode[pNum];
@@ -510,7 +536,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             elementBaseTextView[pNum].setText(tempString);
             elementScoreTextView[pNum].setText(tempString);//Can initialize to both because GOE is initially 0
             tempString = String.valueOf(currentSOVIndex);
-            Log.i("**************SOV Index: ", tempString);
+            Log.i("**********SOV Index: ", tempString);
             if (currentSOVIndex > 23) {
                 //Hide and disables tic and bonus notation
                 elementTicButton[pNum].setText("");

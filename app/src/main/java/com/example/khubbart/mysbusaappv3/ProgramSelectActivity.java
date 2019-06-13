@@ -68,7 +68,8 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     private List<Programv2> programv2List;
     private static List documentIdList;
     public ArrayList<Programv2> programsv2 = new ArrayList<>();
-    public ArrayList programIDList = new ArrayList();
+    //public ArrayList programIDList = new ArrayList();
+    public List<String> programIDList = new ArrayList<>();
     public String mCurrentUserUID;
     public String currentProgramID;
     public String[] programName = new String[8];
@@ -116,7 +117,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public void onRadioButtonClicked(View view) {
         resID = radioGroupPrograms.getCheckedRadioButtonId();
         //Could use switch for all of them, but coding may work
-        Toast.makeText(getApplicationContext(), "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     //Handle click of buttons
@@ -127,16 +128,18 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.buttonCancel:
                 // do nothing for now
+                //Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonAddEdit:
                 // check for whether add or edit
                 break;
             case R.id.buttonScore:
                 // Retrieve and save programID
-                // go to scoring page
+                getSelectedProgram(resID);
+                //Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
         }
-        Toast.makeText(this, "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     // Query and load skaters programs
@@ -149,6 +152,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     programsv2.add(document.toObject(Programv2.class));
                     programIDList.add(document.getId()); //Need this for accessing the proper program
+                    //Toast.makeText(getApplicationContext(), document.getId() + "** => " + document.getData(), Toast.LENGTH_LONG).show();
                 }
                 programCount = programsv2.size();
                 if (programCount > 7) {
@@ -203,16 +207,30 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     // Pull program by selected program
     private void getSelectedProgram(int Pos) {
         //Should be able to generate program id from data saved in Programv2
-        tempString = programsv2.get(Pos).getProgramDescription()
+        tempString = programIDList.get(Pos);
+        /*
+        tempString = programsv2.get(Pos).getUserID()
+                + programsv2.get(Pos).getProgramDescription()
                 + programsv2.get(Pos).getLevel()
                 + programsv2.get(Pos).getDiscipline()
                 + programsv2.get(Pos).getSegment();
+        tempString = "ZXY7IcjKivaqLGk4mJ8ykVMPcT13Alt01SeniorMenFree";
+        */
         docRef = programCollectionDb.document(tempString);
+        final int sPos = Pos;
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
+                    String test = "ZXY7IcjKivaqLGk4mJ8ykVMPcT13Alt01SeniorMenFree";
+                    if (tempString == test) {
+                        Toast.makeText(getApplicationContext(), "Match", Toast.LENGTH_LONG).show();
+                    } else {
+                        //Toast.makeText(getApplicationContext(), "No Match", Toast.LENGTH_LONG).show();
+                        Log.i("ProgramID ==> ", tempString);
+                    }
+                    Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
                     if (document != null) {
                         //Grab program data
                         currentProgramID = document.getId();
@@ -220,10 +238,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                         globalClass.setCurrentProgramID(currentProgramID);
                     } else {
                         //No document found
+                        currentProgramID = "not found";
                     }
                 }
             }
         });
+        // go to scoring page
+        Intent myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+        startActivity(myIntent);
     }
 
         public void makeRadioButton ( int i, String tempString){

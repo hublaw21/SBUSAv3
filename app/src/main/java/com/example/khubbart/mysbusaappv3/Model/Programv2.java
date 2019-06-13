@@ -19,15 +19,18 @@ public class Programv2 {
         this.Level = "Level";
         this.Segment = "Segment";
         this.UserID = "UserID";
+        this.ProgramDescription=null;
         this.Elements = null;
 
     }
 
-    public Programv2(String UserID, String ProgramDescription, String Discipline, String Level, String Segment, List<String> elements) {
+    public Programv2(String userID, String programDescription, String Discipline, String Level, String Segment, List<String> elements) {
         this.Discipline = Discipline;
         this.Level = Level;
         this.Segment = Segment;
         this.Elements = elements;
+        this.ProgramDescription = programDescription;
+        this.UserID = userID;
     }
 
     public String getDiscipline() {
