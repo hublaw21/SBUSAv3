@@ -423,12 +423,10 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                         //Get factors for this program
                         tempString = currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment();
                         factors = globalClass.getFactors(tempString);
+                        requiredElements = globalClass.calcRequiredElements(tempString);
                         initializeComps();
                         //Where do I get this now?
-
-
-                        tempString = String.valueOf(requiredElements);
-                        requiredElements = 6;
+                        //requiredElements = 6;
                         //6-12-19 Do I need this now, isn't currentProgramElements giving me what I need?  May still need to initialize comp scores
                         //pullElements(elementID); // Needs to be here because cannot pull elements until program is pulled from database
 

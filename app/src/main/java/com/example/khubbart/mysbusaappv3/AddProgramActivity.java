@@ -5,11 +5,14 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,15 +35,17 @@ public class AddProgramActivity extends AppCompatActivity
 
     Button buttonSaveProgram;
     public String tempCode;
+    public String tempString;
     public String selectedItem;
     public String selectedCompetition;
     public String selectedProgram;
     public String selectedDiscipline;
     public String selectedLevel;
     public String selectedSegment;
-    public String mProgramDescription;
+    public String currentProgramDescription;
     public String programID;
-    public String mCurrentUserUID;
+    public String currentUserUID;
+    public String currentProgramID;
     public String skaterID;
     public String mSkaterName;
     public String mCompetitionName;
@@ -49,6 +54,7 @@ public class AddProgramActivity extends AppCompatActivity
     public int mCompetitionNameIndex;
     public TextView textViewSkaterName;
     public TextView mTextViewProgramDescription;
+    public EditText editTextProgramDescriptionView;
     //public TextView mTextViewGetData;
     public AutoCompleteTextView actv;
     public int[] programIndexes = new int[4]; // 0-competition, 1-discipline, 2-level, 3-segment
@@ -65,6 +71,7 @@ public class AddProgramActivity extends AppCompatActivity
     public String mCurrentElementDocumentID;
     public Resources resources;
     public RadioGroup mRGDiscipline;
+    public Intent myIntent;
 
 
 
@@ -75,6 +82,16 @@ public class AddProgramActivity extends AppCompatActivity
         buttonSaveProgram = findViewById(R.id.buttonSaveProgram);
 
         textViewSkaterName = findViewById(R.id.textViewProgramAddSkaterName);
+        editTextProgramDescriptionView = findViewById(R.id.editTextProgramDescription);
+        //Do I need this or just do it when I need to pull it?
+        editTextProgramDescriptionView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                currentProgramDescription = editTextProgramDescriptionView.getText().toString();
+                return false;
+            }
+        });
+
         mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
         //mTextViewGetData = findViewById(R.id.textViewGetData);
         db = FirebaseFirestore.getInstance();
@@ -92,10 +109,12 @@ public class AddProgramActivity extends AppCompatActivity
         selectedSegment = segment[0];
         programName = resources.getStringArray(R.array.programNames);
         selectedProgram = programName[0];
+        currentProgramDescription = "New";
 
         //Create an instance of ArrayAdapter containing competition names
+        /* For now, don't worry about names
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_competition_name, competitionName);
-
+        */
         // Set Spinners
         Spinner spinnerDiscipline = findViewById(R.id.spinnerDiscipline);
         spinnerDiscipline.setOnItemSelectedListener(this);
@@ -123,14 +142,16 @@ public class AddProgramActivity extends AppCompatActivity
 
 
         //Get instance of Autocomplete
+        /*
         actv = findViewById(R.id.autoCompleteCompetitionName);
         actv.setThreshold(1);  //Will start from int characters
         actv.setAdapter(adapter);
         actv.setTextColor(Color.BLACK);
-
+        */
         // Get current userID - for fetching if using Global Class
         GlobalClass globalClass = ((GlobalClass) getApplicationContext());
-        mCurrentUserUID = globalClass.getCurrentUserUID();
+        currentUserUID = globalClass.getCurrentUserUID();
+        currentProgramID = globalClass.getCurrentProgramID();
         mSkaterName = globalClass.getSkaterName();
         textViewSkaterName.setText(mSkaterName);
 
@@ -194,6 +215,7 @@ public class AddProgramActivity extends AppCompatActivity
         // TODO Auto-generated method stub
     }
 
+
     /*
     // Get Skater Level
     @Override
@@ -238,7 +260,7 @@ public class AddProgramActivity extends AppCompatActivity
         return tempCodeReturned;
     }
     */
-
+    /*
     //Make the description string
     public void makeProgramDescription() {
         mProgramDescription = "";
@@ -250,33 +272,42 @@ public class AddProgramActivity extends AppCompatActivity
         } else {
             mTextViewProgramDescription.setText("Empty");
         }
-
     }
+    */
     // Method to add all in one prgram with inegrated id
     private void saveProgram(){
         //Test to be sure all fields entered
-    /*
+        //Generate name using naming convention of USerID + Program # + level + discipline + segment
+        currentProgramID = currentUserUID+"Program "+currentProgramID.substring(3)+" "+selectedLevel+" " + selectedDiscipline+" "+selectedSegment;
         //Set programID
+        /* Only use if I am including the compeition name
         selectedCompetition = actv.getText().toString();
         programID = mCurrentUserUID+selectedProgram+selectedDiscipline+selectedLevel+selectedSegment;
+        */
         //map of program
+        //Create 13 empty elements, so we can pull by that and leave spaces while working
         Programv2 programv2 = new Programv2(
+            currentUserUID,
+            currentProgramDescription,
             selectedDiscipline,
             selectedLevel,
             selectedSegment,
-            //Create 13 empty elements, so we can pull by that and leave psaces while working
             Arrays.asList(" ", " "," ", " "," ", " "," ", " "," ", " "," ", " "," ")
         );
 
         //Add to Firestore
-        programRef.document(programID).set(programv2)
+        //programRef.document(programID).set(programv2)
+        programRef.document().set(programv2)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddProgramActivity.this, "Program Saved", Toast.LENGTH_SHORT).show();
                     }
                 });
-        */
+
+        //Go to editting
+        myIntent = new Intent(AddProgramActivity.this, ProgramViewActivity.class);
+        startActivity(myIntent);
     }
 
 

@@ -16,7 +16,7 @@
         android:textSize="@dimen/textLarge"
         android:text="Skater Name Here"
         android:textAlignment="center" />
-
+<!--
     <AutoCompleteTextView
         android:id="@+id/autoCompleteCompetitionName"
         android:layout_width="match_parent"
@@ -28,6 +28,12 @@
         android:textAlignment="center">
         <requestFocus/>
     </AutoCompleteTextView>
+-->
+    <EditText
+        android:id="@+id/editTextProgramDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Program Description"/>
 
     <Spinner
         android:id="@+id/spinnerProgramName"
@@ -107,8 +113,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/button_box_default"
-        android:text="Save Program"
-        android:textSize="@dimen/textLarge" />
+        android:text="Save Program and Go To Editting"
+        android:textSize="@dimen/textMedium" />
     <!--
     <RadioGroup
         android:id="@+id/radioGroupDisciplines"

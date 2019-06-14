@@ -82,6 +82,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public int resID;
     public int programLimit;
     public int buttonID;
+    public Intent myIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int resID) {
                 //Set it in Global, need to do here, not when selecting score because it is too fast
-                currentProgramID = programIDList.get(resID);
+                int testCount = resID; //It throws an error if I try to compare directly
+                if (testCount < programCount) {
+                    //If an actual program
+                    currentProgramID = programIDList.get(resID);
+                } else {
+                    //Last option is a new program, which does not have an ID
+                    currentProgramID = "New" + programCount;
+                }
                 globalClass.setCurrentProgramID(currentProgramID);
             }
         });
@@ -134,9 +142,20 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.buttonAddEdit:
                 // check for whether add or edit
+                int testCount = resID; //It throws an error if I try to compare directly
+                if (testCount < programCount) {
+                    //If an actual program
+                    myIntent = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                } else {
+                    //Last option is a new program, which does not have an ID
+                    currentProgramID = "New" + programCount;
+                    myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
+                }
+                startActivity(myIntent);
+
                 break;
             case R.id.buttonScore:
-                Intent myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
                 startActivity(myIntent);
 
                 // Retrieve and save programID
@@ -150,13 +169,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     // Query and load skaters programs
     private void getListPrograms() {
         //query
-        Query query = programCollectionDb.whereEqualTo("UserID", mCurrentUserUID);
+        Query query = programCollectionDb.whereEqualTo("userID", mCurrentUserUID);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     programsv2.add(document.toObject(Programv2.class));
                     programIDList.add(document.getId()); //Need this for accessing the proper program
+                    Log.i("****ProgramID", document.getId());
                     //Toast.makeText(getApplicationContext(), document.getId() + "** => " + document.getData(), Toast.LENGTH_LONG).show();
                 }
                 programCount = programsv2.size();

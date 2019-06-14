@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.PlannedProgramContent;
 import com.example.khubbart.mysbusaappv3.Model.Program;
+import com.example.khubbart.mysbusaappv3.Model.Programv2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +34,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProgramViewActivity extends AppCompatActivity {
+public class ProgramViewActivity extends AppCompatActivity implements
+        View.OnClickListener{
 
     private FirebaseFirestore db;
     private DocumentReference programRef;
@@ -52,12 +54,16 @@ public class ProgramViewActivity extends AppCompatActivity {
     public int eStart;
     public int eEnd;
     public int tempElementIndex;
+    public String currentUserUID;
+    public String currentProgramID;
+    public String currentSkaterName;
+    public Programv2 currentProgram;
 
     public Button elementButton[] = new Button[13];
     public Button saveButton;
     public Button tempButton;
     public TextView mCompetitionNameTextView;
-    public TextView mCompetitionDescriptionTextView;
+    public TextView textViewProgramDescription;
     public TextView mTechnicalTotalTextView;
     public TextView[] mElementIDTextView = new TextView[13];
     public TextView[] mElementNameTextView = new TextView[13];
@@ -93,43 +99,33 @@ public class ProgramViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_view);
         mCompetitionNameTextView = findViewById(R.id.textViewCompetition);
-        mCompetitionDescriptionTextView = findViewById(R.id.textViewProgramDescription);
+        textViewProgramDescription = findViewById(R.id.textViewProgramDescription);
         mTechnicalTotalTextView = findViewById(R.id.technicalTotal);
         saveButton = findViewById(R.id.buttonSaveProgram);
 
-        requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
-        final LinearLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
-
-        //Set up GlobalClass for shared constants and methods
+        //Set up GlobalClass and retrieve shared constants and methods
         globalClass = ((GlobalClass) getApplicationContext());
         db = FirebaseFirestore.getInstance();
+        currentUserUID = globalClass.getCurrentUserUID();
+        currentProgramID = globalClass.getCurrentProgramID();
+        currentSkaterName = globalClass.getSkaterName();
+        //This is trowing an error because we do not get the value of current ProgramID fast enough
+        currentProgram = globalClass.retrieveCurrentProgram(globalClass.getCurrentProgramID());
 
-        //Set view variables
-        for (int i = 0; i < 13; i++) {
-            if (i < 10) {
-                tempRowID = "elementRow0" + i + "elementID";
-                tempRowName = "elementRow0" + i + "elementName";
-                tempRowBase = "elementRow0" + i + "elementBaseValue";
-                tempElementButton = "buttonRow0" + i;
-            } else {
-                tempRowID = "elementRow" + i + "elementID";
-                tempRowName = "elementRow" + i + "elementName";
-                tempRowBase = "elementRow" + i + "elementBaseValue";
-                tempElementButton = "buttonRow" + i;
-            }
-            resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
-            mElementIDTextView[i] = findViewById(resID);
-            resID = getResources().getIdentifier(tempRowName, "id", getPackageName());
-            mElementNameTextView[i] = findViewById(resID);
-            resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
-            mElementBaseValueTextView[i] = findViewById(resID);
-            resID = getResources().getIdentifier(tempElementButton, "id", getPackageName());
-            elementButton[i] = findViewById(resID);
-        }
+        tempString = currentProgram.getProgramDescription();
+        textViewProgramDescription.setText(tempString);
 
-        //Load SOV
-        getSOV();
+        /*
+        //Get everything set up
+        initializeVariable();  //Set view variables
+        getSOV(); //Load SOV
+        prepareButtons(); //Set up the buttions, define one click listener for all
+        requiredElements = 12; // For final version, this must be imported with program to establish how many rows to hide
+        */
+        //Might still need this
+        //final LinearLayout relativeLayout = findViewById(R.id.dialog_change_element); // For element change dialog
 
+    /*
         //Get the userID and programID from sending activity
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
@@ -144,6 +140,7 @@ public class ProgramViewActivity extends AppCompatActivity {
             //Might want to implement as a separate thread
             init(mCurrentProgramID);  // Call the initiation method here, to ensure the IDs have been pulled
         }
+        */
 
         //Set up button listeners for changing elements
 
@@ -255,7 +252,75 @@ public class ProgramViewActivity extends AppCompatActivity {
         });
     }
 
+    //Prep buttons
+    public void prepareButtons() {
+        //Set up button listeners for changing elements
+        for (i = 0; i < 13; i++) {
+            //Ultimtately, oly set up for number of required elements
+            if (i < 10) {
+                tempString = "buttonRow0" + i;
+            } else {
+                tempString = "buttonRow" + i;
+            }
+            resID = getResources().getIdentifier(tempString, "id", getPackageName());
+            elementButton[i] = findViewById(resID);
+            elementButton[i].setOnClickListener(this);
+        }
+        //Setup Save Button
+        saveButton.setOnClickListener(this);
+    }
 
+    //default listener for all buttons
+    @Override
+    public void onClick(View view) {
+        //Determine which button was pushed
+        /*
+        buttonPointer = 0;
+        tempInt = view.getId();
+        for (i = 0; i < requiredElements; i++) {
+            //Check for bonus button clicked
+            if (findViewById(tempInt) == elementBonusButton[i]) {
+                buttonPointer = i;
+                elementBonusButtonStatus[i] = elementBonusButton[i].isChecked();
+                if (elementBonusButtonStatus[i]) {
+                    //Update base value TEXTVIEW ONLY
+                    tempString = numberFormat.format(elementBase[i] * 1.1);
+                    elementBaseTextView[i].setText(tempString);
+                } else {
+                    tempString = numberFormat.format(elementBase[i]);
+                    elementBaseTextView[i].setText(tempString);
+                }
+                calcElementScore(buttonPointer); //Update element's score
+            }
+            //Check/Verify Element Code Button clicked
+            if (findViewById(tempInt) == elementCodeButton[i]) {
+                tempString = String.valueOf(tempInt);
+                Log.i("******elementCodeClick ", tempString);
+                //Call Change Button Dialog from Global
+                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+                ElementButtonChangeDialogCaller elementButtonChangeDialogCaller =
+                        ElementButtonChangeDialogCaller.newInstance(i);
+                elementButtonChangeDialogCaller.show(fm, "dialog");
+            }
+            */
+        //Samples
+        elementButton[12].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                num = 12;
+                changeButtonDialog(num);
+            }
+        });
+
+        //Setup Save Button
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Save elements to firestore
+                UpdateElements();
+            }
+        });
+    }
     // Initialize database, pull program and elements
     public void init(String iCurrentProgramID) {
         // Do I need these?
@@ -267,7 +332,7 @@ public class ProgramViewActivity extends AppCompatActivity {
         } else {
             //Get program basics
             programRef = db.collection("Programs").document(mCurrentProgramID);
-            Log.i("*******************programID: ", mCurrentProgramID);
+            Log.i("*******programID: ", mCurrentProgramID);
             //Task<DocumentSnapshot> documentSnapshotTask = programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             //programRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             //programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -286,7 +351,7 @@ public class ProgramViewActivity extends AppCompatActivity {
                         //Log.i("*******************progPointer: ", progPointer);
                         tempInt = Arrays.asList(RequiredElementsKey).indexOf(progPointer);
                         requiredElements = RequiredElementsValue[tempInt];
-                        mCompetitionDescriptionTextView.setText(tempText);
+                        textViewProgramDescription.setText(tempText);
                         elementID = program.get(0).getElementsID();
                         //Log.i("*******************elementID: ", elementID);
                         pullElements(elementID);
@@ -294,7 +359,34 @@ public class ProgramViewActivity extends AppCompatActivity {
                 }
             });
         }
-    };
+    }
+
+    ;
+
+    public void initializeVariable() {
+        //Set view variables
+        for (int i = 0; i < 13; i++) {
+            if (i < 10) {
+                tempRowID = "elementRow0" + i + "elementID";
+                tempRowName = "elementRow0" + i + "elementName";
+                tempRowBase = "elementRow0" + i + "elementBaseValue";
+                tempElementButton = "buttonRow0" + i;
+            } else {
+                tempRowID = "elementRow" + i + "elementID";
+                tempRowName = "elementRow" + i + "elementName";
+                tempRowBase = "elementRow" + i + "elementBaseValue";
+                tempElementButton = "buttonRow" + i;
+            }
+            resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
+            mElementIDTextView[i] = findViewById(resID);
+            resID = getResources().getIdentifier(tempRowName, "id", getPackageName());
+            mElementNameTextView[i] = findViewById(resID);
+            resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
+            mElementBaseValueTextView[i] = findViewById(resID);
+            resID = getResources().getIdentifier(tempElementButton, "id", getPackageName());
+            elementButton[i] = findViewById(resID);
+        }
+    }
 
     public void pullElements(String mElementsID) {
         elementRef = db.collection("Elements").document(mElementsID);
@@ -320,7 +412,7 @@ public class ProgramViewActivity extends AppCompatActivity {
                     mElementCode[11] = elements.get(0).getE11();
                     mElementCode[12] = elements.get(0).getE12();
                     for (int i = 0; i < requiredElements; i++) {
-                        Log.i("**************elementCode", mElementCode[i]);
+                        Log.i("****elementCode", mElementCode[i]);
                         if (mElementCode[i] != null) {
                             tempElementIndex = globalClass.ElementIndexLookUp(mElementCode[i]);
                             if (tempElementIndex > 0) {
@@ -409,7 +501,7 @@ public class ProgramViewActivity extends AppCompatActivity {
         RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
     }
     */
-        public void getSOV() {
+    public void getSOV() {
         Resources resources = getResources();
         RequiredElementsKey = resources.getStringArray(R.array.requiredElementsKeyArray);
         RequiredElementsValue = resources.getIntArray(R.array.requiredElementsValueArray);
@@ -460,7 +552,7 @@ public class ProgramViewActivity extends AppCompatActivity {
                 int currentSOVIndex = globalClass.ElementIndexLookUp(comboCode[num]);
                 if (currentSOVIndex > 0)
                     tempComboTotal += globalClass.ElementBaseLookUp(currentSOVIndex);
-                    Log.i("*********************tempTotal", numberFormat.format(tempComboTotal));
+                Log.i("*******tempTotal", numberFormat.format(tempComboTotal));
                 num = num + 1;
                 eStart = j + 1;
             }

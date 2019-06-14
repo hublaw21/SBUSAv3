@@ -65,4 +65,33 @@
         <item>10</item>
         <item>8</item>
     </integer-array>
+    <string-array name="RequiredElements2019">
+        <!--LevelDisciplineSegment,Jumps,Spins,Steps,Lift,Twist,Throw,Death Spiral-->
+        <item>SeniorPairsFree,2,1,1,3,1,2,1</item>
+        <item>JuniorPairsFree,2,1,1,2,1,2,1</item>
+        <item>NovicePairsFree,2,1,1,2,1,2,1</item>
+        <item>IntermediatePairsFree,2,1,1,2,1,2,1</item>
+        <item>JuvenilePairsFree,2,2,1,1,0,1,1</item>
+        <item>SeniorPairsShort,1,1,1,1,1,1,1</item>
+        <item>JuniorPairsShort,1,1,1,1,1,1,1</item>
+        <item>NovicePairsShort,1,1,1,1,1,1,1</item>
+        <item>SeniorMenFree,7,3,2,0,0,0,0</item>
+        <item>JuniorMenFree,7,3,1,0,0,0,0</item>
+        <item>NoviceMenFree,7,3,1,0,0,0,0</item>
+        <item>IntermediateMenFree,6,2,1,0,0,0,0</item>
+        <item>JuvenileMenFree,5,2,1,0,0,0,0</item>
+        <item>SeniorMenShort,3,3,1,0,0,0,0</item>
+        <item>JuniorMenShort,3,3,1,0,0,0,0</item>
+        <item>NoviceMenShort,3,2,1,0,0,0,0</item>
+        <item>IntermediateMenShort,3,2,1,0,0,0,0</item>
+        <item>SeniorLadiesFree,7,3,2,0,0,0,0</item>
+        <item>JuniorLadiesFree,7,3,1,0,0,0,0</item>
+        <item>NoviceLadiesFree,7,3,1,0,0,0,0</item>
+        <item>IntermediateLadiesFree,6,2,1,0,0,0,0</item>
+        <item>JuvenileLadiesFree,5,2,1,0,0,0,0</item>
+        <item>SeniorLadiesShort,3,3,1,0,0,0,0</item>
+        <item>JuniorLadiesShort,3,3,1,0,0,0,0</item>
+        <item>NoviceLadiesShort,3,2,1,0,0,0,0</item>
+        <item>IntermediateLadiesShort,3,2,1,0,0,0,0</item>
+    </string-array>
 </resources>

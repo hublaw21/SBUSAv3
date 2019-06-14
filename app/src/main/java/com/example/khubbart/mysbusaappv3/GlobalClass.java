@@ -3,15 +3,25 @@ package com.example.khubbart.mysbusaappv3;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableRow;
+import android.widget.Toast;
 
 import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.Factors;
+import com.example.khubbart.mysbusaappv3.Model.Programv2;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,29 +34,43 @@ public class GlobalClass extends Application {
     //Upon login, establish the current user's UID
     //Need to have skater create a username, save in profile, use as lead into all ids.  Call skaterID globally
 
+    private FirebaseFirestore db;
+    private DocumentReference programRef;
+    private DocumentReference elementRef;
+    public Programv2 currentProgram;
+
+
     private String gSkaterID;
+
     public String getgSkaterID() {
         return gSkaterID;
     }
+
     public void setgSkaterID(String mSkaterID) {
         gSkaterID = mSkaterID;
     }
 
     //Skaterid for all documents
     private String currentUserUID;
+
     public String getCurrentUserUID() {
         return currentUserUID;
     }
+
     public void setCurrentUserUID(String sCurrentUserUID) {
         currentUserUID = sCurrentUserUID;
     }
 
     //Programid for current selected program
     private String currentProgramID;
+
     public String getCurrentProgramID() {
         return currentProgramID;
     }
-    public void setCurrentProgramID(String tCurrentProgramID) {currentProgramID = tCurrentProgramID;}
+
+    public void setCurrentProgramID(String tCurrentProgramID) {
+        currentProgramID = tCurrentProgramID;
+    }
 
     //Skater/User data
     private String skaterName;
@@ -160,17 +184,51 @@ public class GlobalClass extends Application {
         tempTrimmedString = elementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
         elementCodeCArray = tempTrimmedString.toCharArray();
         j = elementCodeCArray.length;
-                for (i = 0; i < j; i++) {
-                    tempString = String.copyValueOf(elementCodeCArray, i, 1);
-                    if (tempString.equals("+")) {
-                        //We have a combo - But handled value elsewhere for using this to just get value of one element and will need to call it in cmbo check
-                        elementInfo = "Combo";
-                        i = j; //Jump to end once we find the "+" sign
-                    }
-                }
+        for (i = 0; i < j; i++) {
+            tempString = String.copyValueOf(elementCodeCArray, i, 1);
+            if (tempString.equals("+")) {
+                //We have a combo - But handled value elsewhere for using this to just get value of one element and will need to call it in cmbo check
+                elementInfo = "Combo";
+                i = j; //Jump to end once we find the "+" sign
+            }
+        }
         return elementInfo;
     }
 
+    //Determine Required Elements
+    public int calcRequiredElements(String programType) {
+        //Given programType of LevelDisciplineSegemt will return maximum number of elements
+        Resources resources = getResources();
+        String[] requiredElements;
+        char[] reqEleLine;
+        int eCount;
+        int totalElements = 0;
+        requiredElements = resources.getStringArray(R.array.RequiredElements2019);
+        int len = requiredElements.length;
+        for (int i = 0; i < len; i++) {
+            //Find proper string
+            if (requiredElements[i].contains(programType)) {
+                reqEleLine = requiredElements[i].toCharArray();
+                int len2 = reqEleLine.length;
+                int k = 0;
+                String tempChar;
+                tempString = "";
+                for (int j = 0; j < len2; j++) {
+                    tempChar = String.copyValueOf(reqEleLine, j, 1);
+                    if (tempChar.equals(",")) {
+                        if (TextUtils.isDigitsOnly(tempString)) {
+                            eCount = Integer.parseInt(tempString);
+                            totalElements = totalElements + eCount;
+                        }
+                        tempString = "";
+                    } else {
+                        tempString = tempString + tempChar;
+                    }
+                }
+            }
+        }
+        return totalElements;
+    }
 
     //Get Factor Table
     public Double[] getFactors(String tProgramDescription) {
@@ -214,6 +272,23 @@ public class GlobalClass extends Application {
         }
         return factors;
     }
+
+    //Pull program information using programID
+    public Programv2 retrieveCurrentProgram(String currentProgramID) {
+        //Get a program from database
+        programRef = db.collection("Programs").document(currentProgramID);
+        programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    currentProgram = document.toObject(Programv2.class);
+                }
+            }
+        });
+        return currentProgram;
+    }
+
 
     //Change the Element Code Button with a Dialog
     public void changeButtonDialog(final int tNum) {
