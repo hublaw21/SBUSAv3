@@ -114,6 +114,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 if (testCount < programCount) {
                     //If an actual program
                     currentProgramID = programIDList.get(resID);
+                    globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
                 } else {
                     //Last option is a new program, which does not have an ID
                     currentProgramID = "New" + programCount;
@@ -145,6 +146,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 int testCount = resID; //It throws an error if I try to compare directly
                 if (testCount < programCount) {
                     //If an actual program
+                    //globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
                     myIntent = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
                 } else {
                     //Last option is a new program, which does not have an ID
@@ -155,6 +157,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
 
                 break;
             case R.id.buttonScore:
+                globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
                 myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
                 startActivity(myIntent);
 

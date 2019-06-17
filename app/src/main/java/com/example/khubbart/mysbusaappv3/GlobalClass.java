@@ -34,55 +34,10 @@ public class GlobalClass extends Application {
     //Upon login, establish the current user's UID
     //Need to have skater create a username, save in profile, use as lead into all ids.  Call skaterID globally
 
-    private FirebaseFirestore db;
-    private DocumentReference programRef;
+    public FirebaseFirestore db;
+    public DocumentReference programRef;
     private DocumentReference elementRef;
-    public Programv2 currentProgram;
-
-
-    private String gSkaterID;
-
-    public String getgSkaterID() {
-        return gSkaterID;
-    }
-
-    public void setgSkaterID(String mSkaterID) {
-        gSkaterID = mSkaterID;
-    }
-
-    //Skaterid for all documents
-    private String currentUserUID;
-
-    public String getCurrentUserUID() {
-        return currentUserUID;
-    }
-
-    public void setCurrentUserUID(String sCurrentUserUID) {
-        currentUserUID = sCurrentUserUID;
-    }
-
-    //Programid for current selected program
-    private String currentProgramID;
-
-    public String getCurrentProgramID() {
-        return currentProgramID;
-    }
-
-    public void setCurrentProgramID(String tCurrentProgramID) {
-        currentProgramID = tCurrentProgramID;
-    }
-
-    //Skater/User data
-    private String skaterName;
-
-    public String getSkaterName() {
-        return skaterName;
-    }
-
-    public void setSkaterName(String sSkaterName) {
-        skaterName = sSkaterName;
-    }
-
+    public Programv2 rCurrentProgram;
     public int currentSOVIndex;
     public String elementName = "Code";
     public Double elementBaseValue = 0.0;
@@ -98,6 +53,57 @@ public class GlobalClass extends Application {
     public int j;
     public int tempInt;
     public String elementInfo;
+
+    //Skaterid for all documents
+    private String gSkaterID;
+    public String getgSkaterID() {
+        return gSkaterID;
+    }
+    public void setgSkaterID(String mSkaterID) {
+        gSkaterID = mSkaterID;
+    }
+
+
+    //currentUserID for all
+    private String currentUserUID;
+    public String getCurrentUserUID() {
+        return currentUserUID;
+    }
+    public void setCurrentUserUID(String sCurrentUserUID) {
+        currentUserUID = sCurrentUserUID;
+    }
+
+    //Programid for current selected program
+    private String currentProgramID;
+    public String getCurrentProgramID() {
+        return currentProgramID;
+    }
+    public void setCurrentProgramID(String tCurrentProgramID) {
+        currentProgramID = tCurrentProgramID;
+    }
+
+    //Skater/User data
+    private String skaterName;
+    public String getSkaterName() {
+        return skaterName;
+    }
+    public void setSkaterName(String sSkaterName) {
+        skaterName = sSkaterName;
+    }
+
+    //currentProgram
+    private Programv2 gCurrentProgram;
+        public Programv2 getGCurrentProgram() {
+            return gCurrentProgram;
+    }
+    public void setGCurrentProgram(Programv2 sCurrentProgram){
+        tempString = "     ";
+        Log.i(" ", tempString);
+        Log.i("ProgDesc-Set ", sCurrentProgram.getProgramDescription());
+        Log.i(" ", tempString);
+        gCurrentProgram = sCurrentProgram;
+    }
+
 
 
     /*
@@ -274,19 +280,24 @@ public class GlobalClass extends Application {
     }
 
     //Pull program information using programID
-    public Programv2 retrieveCurrentProgram(String currentProgramID) {
+    public void retrieveCurrentProgram(String rCurrentProgramID) {
         //Get a program from database
-        programRef = db.collection("Programs").document(currentProgramID);
+        Log.i("retriev = ID: ", rCurrentProgramID);
+        db = FirebaseFirestore.getInstance();
+        DocumentReference programRef = db.collection("Programs").document(rCurrentProgramID);
         programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    currentProgram = document.toObject(Programv2.class);
+                    rCurrentProgram = document.toObject(Programv2.class);
+                    Log.i("retriev - Desv ", rCurrentProgram.getProgramDescription());
+
+                    //Save current program to use in all pages.
+                    setGCurrentProgram(rCurrentProgram);
                 }
             }
         });
-        return currentProgram;
     }
 
 

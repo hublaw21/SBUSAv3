@@ -107,13 +107,12 @@ public class ProgramViewActivity extends AppCompatActivity implements
         globalClass = ((GlobalClass) getApplicationContext());
         db = FirebaseFirestore.getInstance();
         currentUserUID = globalClass.getCurrentUserUID();
-        currentProgramID = globalClass.getCurrentProgramID();
+        currentProgramID = globalClass.getCurrentProgramID(); //Need in case we save program later
         currentSkaterName = globalClass.getSkaterName();
-        //This is trowing an error because we do not get the value of current ProgramID fast enough
-        currentProgram = globalClass.retrieveCurrentProgram(globalClass.getCurrentProgramID());
+        currentProgram = globalClass.getGCurrentProgram(); //This should have everything needed
 
-        tempString = currentProgram.getProgramDescription();
-        textViewProgramDescription.setText(tempString);
+        //tempString = currentProgram.getProgramDescription();
+        //textViewProgramDescription.setText(tempString);
 
         /*
         //Get everything set up
@@ -143,6 +142,7 @@ public class ProgramViewActivity extends AppCompatActivity implements
         */
 
         //Set up button listeners for changing elements
+
 
         elementButton[0].setOnClickListener(new View.OnClickListener() {
             @Override

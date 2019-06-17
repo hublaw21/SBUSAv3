@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "434255355546-5kf090nvigul7rn3em1hp1flen8gd817.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.khubbart.mysbusaappv3",
+            "certificate_hash": "85d86cebf97cdfa5003bb113b8b0343622b4e98c"
+          }
+        },
+        {
+          "client_id": "434255355546-0sm71td6etmvp3f5mgmj67j4fe2jf5hm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.khubbart.mysbusaappv3",
+            "certificate_hash": "44f2f2954034f552150e959847ae066f53bb98d1"
+          }
+        },
+        {
           "client_id": "434255355546-98dvtdnk87jbaenoomr5kg4i4ukbg02q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -33,10 +49,6 @@
         {
           "client_id": "434255355546-gsm2jl59haj01pnbkbvla172v76r0aab.apps.googleusercontent.com",
           "client_type": 3
-        },
-        {
-          "client_id": "434255355546-gsm2jl59haj01pnbkbvla172v76r0aab.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -45,20 +57,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "434255355546-gsm2jl59haj01pnbkbvla172v76r0aab.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
