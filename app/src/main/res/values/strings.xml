@@ -94,7 +94,7 @@
         <item>@string/free</item>
     </string-array>
     <string name="shortprogram">Short</string>
-    <string name="free">Free Skate</string>
+    <string name="free">Free</string>
 
     <string-array name="levels">
         <item>@string/senior</item>

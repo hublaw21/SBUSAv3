@@ -118,6 +118,9 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 } else {
                     //Last option is a new program, which does not have an ID
                     currentProgramID = "New" + programCount;
+                    //Send it to Add program
+                    myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
+                    startActivity(myIntent);
                 }
                 globalClass.setCurrentProgramID(currentProgramID);
             }
@@ -153,6 +156,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                     currentProgramID = "New" + programCount;
                     myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
                 }
+                myIntent.putExtra("programID",currentProgramID);
                 startActivity(myIntent);
 
                 break;
@@ -179,7 +183,6 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     programsv2.add(document.toObject(Programv2.class));
                     programIDList.add(document.getId()); //Need this for accessing the proper program
-                    Log.i("****ProgramID", document.getId());
                     //Toast.makeText(getApplicationContext(), document.getId() + "** => " + document.getData(), Toast.LENGTH_LONG).show();
                 }
                 programCount = programsv2.size();
@@ -195,6 +198,9 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                             + programsv2.get(i).getDiscipline() + " "
                             + programsv2.get(i).getSegment();
                     makeRadioButton(i, tempString);
+                    tempString = programsv2.get(i).getElements().toString();
+                    //Log.i("****ProgramID", document.getId());
+                    Log.i("SelFetched",tempString);
                 }
                 if (programCount < 8) makeRadioButton(programCount, "Add a Program");
             }

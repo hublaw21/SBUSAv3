@@ -63,7 +63,7 @@ public class AddProgramActivity extends AppCompatActivity
     public String[] discipline = new String[3];
     public String[] level = new String[5];
     public String[] segment = new String[2];
-    public String[] programName = new String [8];
+    public String[] programName = new String[8];
     private FirebaseFirestore db;
     private CollectionReference programRef;
     private CollectionReference elementRef;
@@ -72,7 +72,7 @@ public class AddProgramActivity extends AppCompatActivity
     public Resources resources;
     public RadioGroup mRGDiscipline;
     public Intent myIntent;
-
+    public GlobalClass globalClass;
 
 
     @Override
@@ -92,23 +92,25 @@ public class AddProgramActivity extends AppCompatActivity
             }
         });
 
-        mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
+        //mTextViewProgramDescription = findViewById(R.id.textViewProgramAddDescription);
         //mTextViewGetData = findViewById(R.id.textViewGetData);
+        globalClass = ((GlobalClass) getApplicationContext());
+
         db = FirebaseFirestore.getInstance();
         programRef = db.collection("Programs");
-        elementRef = db.collection("PlannedProgramContent");
+        //elementRef = db.collection("PlannedProgramContent");
 
         //Get array data from resources.  May want to change to online
         Resources resources = getResources();
-        competitionName = resources.getStringArray(R.array.competitionNamesArray);
+        //competitionName = resources.getStringArray(R.array.competitionNamesArray);
         discipline = resources.getStringArray(R.array.disciplines);
         selectedDiscipline = discipline[0];
         level = resources.getStringArray(R.array.levels);
         selectedLevel = level[0];
         segment = resources.getStringArray(R.array.segments);
         selectedSegment = segment[0];
-        programName = resources.getStringArray(R.array.programNames);
-        selectedProgram = programName[0];
+        //programName = resources.getStringArray(R.array.programNames);
+        //selectedProgram = programName[0];
         currentProgramDescription = "New";
 
         //Create an instance of ArrayAdapter containing competition names
@@ -134,12 +136,13 @@ public class AddProgramActivity extends AppCompatActivity
         spinnerSegmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
         spinnerSegment.setAdapter(spinnerSegmentAdapter); // attaching data adapter to spinner
 
+        /*
         Spinner spinnerProgramName = findViewById(R.id.spinnerProgramName);
         spinnerSegment.setOnItemSelectedListener(this);
         ArrayAdapter<String> spinnerProgramAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, programName); // Creating adapter for spinner
         spinnerSegmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Drop down layout style - list view with radio button
         spinnerProgramName.setAdapter(spinnerProgramAdapter); // attaching data adapter to spinner
-
+        */
 
         //Get instance of Autocomplete
         /*
@@ -151,7 +154,7 @@ public class AddProgramActivity extends AppCompatActivity
         // Get current userID - for fetching if using Global Class
         GlobalClass globalClass = ((GlobalClass) getApplicationContext());
         currentUserUID = globalClass.getCurrentUserUID();
-        currentProgramID = globalClass.getCurrentProgramID();
+        //currentProgramID = globalClass.getCurrentProgramID();
         mSkaterName = globalClass.getSkaterName();
         textViewSkaterName.setText(mSkaterName);
 
@@ -171,7 +174,13 @@ public class AddProgramActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Do what you need to do to save it
-                saveProgram();
+                //check for a name
+                if (currentProgramDescription.length() < 5) {
+                    //How about a longer name
+                    Toast.makeText(AddProgramActivity.this, "That's kind of a short description, let's add a little to it.", Toast.LENGTH_LONG).show();
+                } else {
+                    saveProgram();
+                }
             }
         });
 
@@ -194,7 +203,7 @@ public class AddProgramActivity extends AppCompatActivity
         selectedItem = spinnerUsed.getItemAtPosition(position).toString();
 
         // Assign to the proper variable for naming convention
-        switch(spinnerUsed.getId()){
+        switch (spinnerUsed.getId()) {
             case R.id.spinnerDiscipline:
                 selectedDiscipline = selectedItem;
                 break;
@@ -204,13 +213,14 @@ public class AddProgramActivity extends AppCompatActivity
             case R.id.spinnerSegment:
                 selectedSegment = selectedItem;
                 break;
-            case R.id.spinnerProgramName:
-            selectedProgram = selectedItem;
-                break;
+            //case R.id.spinnerProgramName:
+            //selectedProgram = selectedItem;
+            //    break;
         }
         // Showing selected spinner item
-        Toast.makeText(spinnerUsed.getContext(), "Selected: " + selectedProgram + " " + selectedLevel + " " + selectedSegment, Toast.LENGTH_LONG).show();
+        //Toast.makeText(spinnerUsed.getContext(), "Selected: " + selectedLevel + " " + selectedDiscipline+ " " + selectedSegment, Toast.LENGTH_LONG).show();
     }
+
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
@@ -275,10 +285,10 @@ public class AddProgramActivity extends AppCompatActivity
     }
     */
     // Method to add all in one prgram with inegrated id
-    private void saveProgram(){
+    private void saveProgram() {
         //Test to be sure all fields entered
         //Generate name using naming convention of USerID + Program # + level + discipline + segment
-        currentProgramID = currentUserUID+"Program "+currentProgramID.substring(3)+" "+selectedLevel+" " + selectedDiscipline+" "+selectedSegment;
+        //currentProgramID = currentUserUID+"Program "+currentProgramID.substring(3)+" "+selectedLevel+" " + selectedDiscipline+" "+selectedSegment;
         //Set programID
         /* Only use if I am including the compeition name
         selectedCompetition = actv.getText().toString();
@@ -287,31 +297,34 @@ public class AddProgramActivity extends AppCompatActivity
         //map of program
         //Create 13 empty elements, so we can pull by that and leave spaces while working
         Programv2 programv2 = new Programv2(
-            currentUserUID,
-            currentProgramDescription,
-            selectedDiscipline,
-            selectedLevel,
-            selectedSegment,
-            Arrays.asList(" ", " "," ", " "," ", " "," ", " "," ", " "," ", " "," ")
+                currentUserUID,
+                currentProgramDescription,
+                selectedDiscipline,
+                selectedLevel,
+                selectedSegment,
+                Arrays.asList(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
         );
-
         //Add to Firestore
         //programRef.document(programID).set(programv2)
-        programRef.document().set(programv2)
+        programRef.document()
+                .set(programv2)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddProgramActivity.this, "Program Saved", Toast.LENGTH_SHORT).show();
+                        //Get new programsID and save to global or else send back to select activity
+                        /*
+                        currentProgramID = documentReference.getId();
+                        globalClass.setCurrentProgramID(currentProgramID);
+                        //Go to editing
+                        myIntent = new Intent(AddProgramActivity.this, ProgramViewActivity.class);
+                        */
+                        myIntent = new Intent(AddProgramActivity.this, ProgramSelectActivity.class);
+                        startActivity(myIntent);
                     }
                 });
 
-        //Go to editting
-        myIntent = new Intent(AddProgramActivity.this, ProgramViewActivity.class);
-        startActivity(myIntent);
     }
-
-
-
 
     /*
     //Method to add/update program
@@ -382,8 +395,6 @@ public class AddProgramActivity extends AppCompatActivity
         //} else {
         //Toast.makeText(AddProgramActivity.this, "Unsuccessful - Select an Event", Toast.LENGTH_SHORT).show();
         //}
-
-    }
-    */
+*/
 
 }

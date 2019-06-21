@@ -174,6 +174,9 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         currentProgramID = globalClass.getCurrentProgramID();
         requiredElements = 13; //Temporary, this needs to be set for each
 
+        //6-20-19 change to using intent ot get programID
+
+
         // Set up arrays with view names, seekbars etc
         //init();
         initializeVariables();
@@ -418,7 +421,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                         //program.add(qProgram);
                         programDescription = currentProgram.getProgramDescription();
                         programDescriptionTextView.setText(programDescription);
-                        elementList = currentProgram.getElements();
+                        //elementList = currentProgram.getElements();
                         elementList.toArray(currentProgramElements); // This should be my usable list of elements in an array
                         //Get factors for this program
                         tempString = currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment();

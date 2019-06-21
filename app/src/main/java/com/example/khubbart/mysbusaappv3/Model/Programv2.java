@@ -24,11 +24,12 @@ public class Programv2 {
 
     }
 
-    public Programv2(String userID, String programDescription, String Discipline, String Level, String Segment, List<String> elements) {
+    //public Programv2(String userID, String programDescription, String Discipline, String Level, String Segment, List<String> elements) {
+    public Programv2(String userID, String programDescription, String Discipline, String Level, String Segment, List<String> Elements) {
         this.Discipline = Discipline;
         this.Level = Level;
         this.Segment = Segment;
-        this.Elements = elements;
+        this.Elements = Elements;
         this.ProgramDescription = programDescription;
         this.UserID = userID;
     }

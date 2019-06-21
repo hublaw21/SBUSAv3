@@ -13,99 +13,101 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:backgroundTint="@color/black"
-        android:textSize="@dimen/textLarge"
         android:text="Skater Name Here"
-        android:textAlignment="center" />
-<!--
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteCompetitionName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/light_box_default_shape"
-        android:layout_margin="@dimen/mediumBorder"
-        android:hint="Competition Name Lookup"
-        android:textColorHint="@color/colorAccent"
-        android:textAlignment="center">
-        <requestFocus/>
-    </AutoCompleteTextView>
--->
-    <EditText
-        android:id="@+id/editTextProgramDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Program Description"/>
-
-    <Spinner
-        android:id="@+id/spinnerProgramName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/mediumBorder"
-        android:drawSelectorOnTop="true"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:spinnerMode="dialog"
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@+id/textViewProgramAddDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="@color/black"
-        android:text=""
-        android:textAlignment="center" />
-
+        android:textAlignment="center"
+        android:textSize="@dimen/textMedium" />
     <!--
-    <fragment
-        android:id="@+id/fragmentDiscipline"
-        android:name="com.example.khubbart.mysbusaappv3.SelectDisciplineFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"/>
-     -->
-    <TextView
-        android:id="@+id/textDisciplineHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mediumBorder"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="@color/black"
-        android:text="Select Your Discipline"
-        android:textAlignment="center" />
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteCompetitionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/light_box_default_shape"
+            android:layout_margin="@dimen/mediumBorder"
+            android:hint="Competition Name Lookup"
+            android:textColorHint="@color/colorAccent"
+            android:textAlignment="center">
+            <requestFocus/>
+        </AutoCompleteTextView>
 
+    -->
+    <LinearLayout
+        style="@style/styleGroupBasic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinnerDiscipline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/mediumBorder"
-        android:drawSelectorOnTop="true"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:spinnerMode="dialog"
-        android:visibility="visible" />
+        <TextView
+            android:id="@+id/textViewEnterProgramDescription"
+            style="@style/styleTextViewBasic"
+            android:textSize="@dimen/textMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Enter Program Description" />
 
-    <Spinner
-        android:id="@+id/spinnerLevel"
+        <EditText
+            android:id="@+id/editTextProgramDescription"
+            style="@style/styleTextViewBasic" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        style="@style/styleGroupBasic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/mediumBorder"
-        android:drawSelectorOnTop="true"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:spinnerMode="dialog"
-        android:visibility="visible" />
-    <Spinner
-        android:id="@+id/spinnerSegment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/mediumBorder"
-        android:drawSelectorOnTop="true"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:spinnerMode="dialog"
-        android:visibility="visible" />
+        android:orientation="vertical">
+        <!--
+  <Spinner
+      android:id="@+id/spinnerProgramName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/mediumBorder"
+      android:drawSelectorOnTop="true"
+      android:gravity="center|center_horizontal|center_vertical"
+      android:spinnerMode="dialog"
+      android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textViewProgramAddDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumBorder"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/black"
+            android:text=""
+            android:textAlignment="center" />
+
+        <fragment
+            android:id="@+id/fragmentDiscipline"
+            android:name="com.example.khubbart.mysbusaappv3.SelectDisciplineFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumBorder"/>
+         -->
+        <TextView
+            android:id="@+id/textDisciplineHeader"
+            style="@style/styleTextViewBasic"
+            android:textSize="@dimen/textMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Select Program Type" />
+
+        <Spinner
+            android:id="@+id/spinnerLevel"
+            style="@style/styleSpinnerBasic" />
+
+        <Spinner
+            android:id="@+id/spinnerDiscipline"
+            style="@style/styleSpinnerBasic" />
+
+        <Spinner
+            android:id="@+id/spinnerSegment"
+            style="@style/styleSpinnerBasic" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonSaveProgram"

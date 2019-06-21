@@ -56,7 +56,7 @@
         <Button
             android:id="@+id/buttonAddEdit"
             style="@style/styleButtonChoice"
-            android:text="Add/Edit" />
+            android:text="Edit" />
 
         <Button
             android:id="@+id/buttonScore"

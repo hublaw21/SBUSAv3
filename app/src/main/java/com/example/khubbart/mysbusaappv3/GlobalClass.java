@@ -53,12 +53,15 @@ public class GlobalClass extends Application {
     public int j;
     public int tempInt;
     public String elementInfo;
+    public String jumpFlag;
 
     //Skaterid for all documents
     private String gSkaterID;
+
     public String getgSkaterID() {
         return gSkaterID;
     }
+
     public void setgSkaterID(String mSkaterID) {
         gSkaterID = mSkaterID;
     }
@@ -66,37 +69,45 @@ public class GlobalClass extends Application {
 
     //currentUserID for all
     private String currentUserUID;
+
     public String getCurrentUserUID() {
         return currentUserUID;
     }
+
     public void setCurrentUserUID(String sCurrentUserUID) {
         currentUserUID = sCurrentUserUID;
     }
 
     //Programid for current selected program
     private String currentProgramID;
+
     public String getCurrentProgramID() {
         return currentProgramID;
     }
+
     public void setCurrentProgramID(String tCurrentProgramID) {
         currentProgramID = tCurrentProgramID;
     }
 
     //Skater/User data
     private String skaterName;
+
     public String getSkaterName() {
         return skaterName;
     }
+
     public void setSkaterName(String sSkaterName) {
         skaterName = sSkaterName;
     }
 
     //currentProgram
     private Programv2 gCurrentProgram;
-        public Programv2 getGCurrentProgram() {
-            return gCurrentProgram;
+
+    public Programv2 getGCurrentProgram() {
+        return gCurrentProgram;
     }
-    public void setGCurrentProgram(Programv2 sCurrentProgram){
+
+    public void setGCurrentProgram(Programv2 sCurrentProgram) {
         tempString = "     ";
         Log.i(" ", tempString);
         Log.i("ProgDesc-Set ", sCurrentProgram.getProgramDescription());
@@ -169,13 +180,28 @@ public class GlobalClass extends Application {
     public int ElementIndexLookUp(String elementCode) {
         SOVCode = getResources().getStringArray(R.array.SOV_Code);
         currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
+        Log.i("SOVindex", String.valueOf(currentSOVIndex));
+        if (currentSOVIndex < 0) {
+            if (elementCode.length() < 2) {
+                //THis is a blank, will throw an error if we check it
+            } else {
+                //There is something in elementCode
+                tempString = ElementCheckForCombo(elementCode);
+                if (tempString.equals("Combo")) {
+                    //Flag a combo jump
+                    currentSOVIndex = 999;
+                } else {
+                    //Flag an unrecognized element, may not require any information
+                }
+            }
+        }
         // Need to add error checker for code not found
         return currentSOVIndex;
     }
 
     public String ElementNameLookUp(int elementIndex) {
         SOVName = getResources().getStringArray(R.array.SOV_Name);
-        elementName = Arrays.asList(SOVName).get(currentSOVIndex);
+        elementName = Arrays.asList(SOVName).get(elementIndex);
         return elementName;
     }
 
@@ -194,12 +220,51 @@ public class GlobalClass extends Application {
             tempString = String.copyValueOf(elementCodeCArray, i, 1);
             if (tempString.equals("+")) {
                 //We have a combo - But handled value elsewhere for using this to just get value of one element and will need to call it in cmbo check
-                elementInfo = "Combo";
+                jumpFlag = "Combo";
                 i = j; //Jump to end once we find the "+" sign
+            } else {
+                jumpFlag = "Invalid Element";
             }
         }
-        return elementInfo;
+        //Log.i("jumpFlag",jumpFlag);
+        return jumpFlag;
     }
+
+    public Double calcComboJump(String cElementCode) {
+        //It should already be determiend to be a combo when sent to this method
+        //Toast.makeText(ProgramViewActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
+        tempTrimmedString = cElementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
+        elementCodeCArray = tempTrimmedString.toCharArray();
+        int num = 0;
+        int eStart = 0;
+        int eEnd = 0;
+        int sOVIndex;
+        Double tempComboTotal = 0.0;
+        String comboCode[] = new String[4];
+        for (int j = 0; j < elementCodeCArray.length; j++) {
+            tempString = String.copyValueOf(elementCodeCArray, j, 1);
+            if (tempString.equals("+")) {
+                //We have a combo
+                eEnd = j; // In substring, end position is not included in extract
+                comboCode[num] = tempTrimmedString.substring(eStart, eEnd);
+                Log.i("*************comboCode ", comboCode[num]);
+                //int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
+                //int currentSOVIndex = globalClass.ElementIndexLookUp(comboCode[num]);
+                sOVIndex = ElementIndexLookUp(comboCode[num]);
+                if (sOVIndex > 0)
+                    tempComboTotal += ElementBaseLookUp(sOVIndex);
+                Log.i("*******tempTotal", String.valueOf(tempComboTotal));
+                num = num + 1;
+                eStart = j + 1;
+            }
+        }
+        //Add last item of combo
+        comboCode[num] = tempTrimmedString.substring(eStart); // This should take it thru the end
+        sOVIndex = ElementIndexLookUp(comboCode[num]);
+        if (sOVIndex > 0) tempComboTotal += ElementBaseLookUp(sOVIndex);
+        return tempComboTotal;
+    }
+
 
     //Determine Required Elements
     public int calcRequiredElements(String programType) {
@@ -298,6 +363,24 @@ public class GlobalClass extends Application {
                 }
             }
         });
+    }
+
+    //Pull program information using programID
+    public Programv2 fetchCurrentProgram(String rCurrentProgramID) {
+        //Get a program from database
+        db = FirebaseFirestore.getInstance();
+        DocumentReference programRef = db.collection("Programs").document(rCurrentProgramID);
+        programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    rCurrentProgram = document.toObject(Programv2.class);
+                }
+            }
+        });
+        Log.i("Current", String.valueOf(rCurrentProgram.getElements()));
+        return rCurrentProgram;
     }
 
 
