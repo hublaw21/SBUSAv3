@@ -52,8 +52,11 @@ public class GlobalClass extends Application {
     public int i;
     public int j;
     public int tempInt;
+    public int tempIndex;
+    public Double tempBaseValue;
     public String elementInfo;
     public String jumpFlag;
+    public Boolean tempFlag;
 
     //Skaterid for all documents
     private String gSkaterID;
@@ -109,9 +112,9 @@ public class GlobalClass extends Application {
 
     public void setGCurrentProgram(Programv2 sCurrentProgram) {
         tempString = "     ";
-        Log.i(" ", tempString);
-        Log.i("ProgDesc-Set ", sCurrentProgram.getProgramDescription());
-        Log.i(" ", tempString);
+        //Log.i(" ", tempString);
+        //Log.i("ProgDesc-Set ", sCurrentProgram.getProgramDescription());
+        //Log.i(" ", tempString);
         gCurrentProgram = sCurrentProgram;
     }
 
@@ -176,11 +179,26 @@ public class GlobalClass extends Application {
         }
         return elementInfo;
     }
+    public Double CalcElementBaseValue (String eCode){
+        tempIndex = ElementIndexLookUp(eCode.trim());
+        if (tempIndex > -1) {
+            if (tempIndex < 999) {
+                //Valid, non-combo element
+                tempBaseValue = ElementBaseLookUp(tempIndex);
+            } else {
+                //Combo Jump
+                tempBaseValue = calcComboJump(eCode, Boolean.TRUE);
+            }
+        } else {
+            tempBaseValue = 0.00;
+        }
+        return tempBaseValue;
+    }
 
     public int ElementIndexLookUp(String elementCode) {
         SOVCode = getResources().getStringArray(R.array.SOV_Code);
         currentSOVIndex = Arrays.asList(SOVCode).indexOf(elementCode);
-        Log.i("SOVindex", String.valueOf(currentSOVIndex));
+        //Log.i("SOVindex", String.valueOf(currentSOVIndex));
         if (currentSOVIndex < 0) {
             if (elementCode.length() < 2) {
                 //THis is a blank, will throw an error if we check it
@@ -230,7 +248,7 @@ public class GlobalClass extends Application {
         return jumpFlag;
     }
 
-    public Double calcComboJump(String cElementCode) {
+    public Double calcComboJump(String cElementCode, Boolean cFlag) {
         //It should already be determiend to be a combo when sent to this method
         //Toast.makeText(ProgramViewActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
         tempTrimmedString = cElementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
@@ -239,6 +257,7 @@ public class GlobalClass extends Application {
         int eStart = 0;
         int eEnd = 0;
         int sOVIndex;
+        Double jumpMax = 0.00;
         Double tempComboTotal = 0.0;
         String comboCode[] = new String[4];
         for (int j = 0; j < elementCodeCArray.length; j++) {
@@ -247,13 +266,17 @@ public class GlobalClass extends Application {
                 //We have a combo
                 eEnd = j; // In substring, end position is not included in extract
                 comboCode[num] = tempTrimmedString.substring(eStart, eEnd);
-                Log.i("*************comboCode ", comboCode[num]);
+                //Log.i("*************comboCode ", comboCode[num]);
                 //int currentSOVIndex = Arrays.asList(SOVCode).indexOf(comboCode[num]);
                 //int currentSOVIndex = globalClass.ElementIndexLookUp(comboCode[num]);
                 sOVIndex = ElementIndexLookUp(comboCode[num]);
-                if (sOVIndex > 0)
+                if (sOVIndex > 0) {
                     tempComboTotal += ElementBaseLookUp(sOVIndex);
-                Log.i("*******tempTotal", String.valueOf(tempComboTotal));
+                    //Check for max jump value
+                    if (ElementBaseLookUp(sOVIndex) > jumpMax){
+                        jumpMax = ElementBaseLookUp(sOVIndex);
+                    }
+                }
                 num = num + 1;
                 eStart = j + 1;
             }
@@ -261,8 +284,20 @@ public class GlobalClass extends Application {
         //Add last item of combo
         comboCode[num] = tempTrimmedString.substring(eStart); // This should take it thru the end
         sOVIndex = ElementIndexLookUp(comboCode[num]);
-        if (sOVIndex > 0) tempComboTotal += ElementBaseLookUp(sOVIndex);
-        return tempComboTotal;
+        if (sOVIndex > 0) {
+            tempComboTotal += ElementBaseLookUp(sOVIndex);
+            //Check for max jump value
+            if (ElementBaseLookUp(sOVIndex) > jumpMax){
+                jumpMax = ElementBaseLookUp(sOVIndex);
+            }
+        }
+        if (cFlag){
+            //True Bollean means combo value
+            return tempComboTotal;
+        } else {
+            //False Boolean means base or GOE
+            return jumpMax;
+        }
     }
 
 
@@ -339,7 +374,7 @@ public class GlobalClass extends Application {
         for (int i = 0; i < 8; i++) {
             factors[i] = Double.valueOf(factorTable[progDescrPointer][i + 1]);
             tempString = String.valueOf(i) + " " + String.valueOf(factors[i]);
-            Log.i("********factors: ", tempString);
+            //Log.i("********factors: ", tempString);
         }
         return factors;
     }
@@ -347,7 +382,7 @@ public class GlobalClass extends Application {
     //Pull program information using programID
     public void retrieveCurrentProgram(String rCurrentProgramID) {
         //Get a program from database
-        Log.i("retriev = ID: ", rCurrentProgramID);
+        //Log.i("retriev = ID: ", rCurrentProgramID);
         db = FirebaseFirestore.getInstance();
         DocumentReference programRef = db.collection("Programs").document(rCurrentProgramID);
         programRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -356,7 +391,7 @@ public class GlobalClass extends Application {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     rCurrentProgram = document.toObject(Programv2.class);
-                    Log.i("retriev - Desv ", rCurrentProgram.getProgramDescription());
+                    //Log.i("retriev - Desv ", rCurrentProgram.getProgramDescription());
 
                     //Save current program to use in all pages.
                     setGCurrentProgram(rCurrentProgram);
@@ -379,7 +414,7 @@ public class GlobalClass extends Application {
                 }
             }
         });
-        Log.i("Current", String.valueOf(rCurrentProgram.getElements()));
+        //Log.i("Current", String.valueOf(rCurrentProgram.getElements()));
         return rCurrentProgram;
     }
 

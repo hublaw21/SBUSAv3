@@ -199,7 +199,7 @@ public class ProgramViewActivity extends AppCompatActivity implements
             } else {
                 //Combo Jump
                 currentProgramElementNames[eNum] = "Combo - " + eCode;
-                currentProgramElementValues[eNum] = globalClass.calcComboJump(eCode);
+                currentProgramElementValues[eNum] = globalClass.calcComboJump(eCode, Boolean.TRUE);
             }
         } else {
             currentProgramElementNames[eNum] = "Select an element";

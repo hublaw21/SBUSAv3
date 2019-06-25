@@ -161,8 +161,10 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
 
                 break;
             case R.id.buttonScore:
-                globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
+                //globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
+                currentProgramID = programIDList.get(resID);
                 myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
+                myIntent.putExtra("programID",currentProgramID);
                 startActivity(myIntent);
 
                 // Retrieve and save programID

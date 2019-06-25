@@ -271,19 +271,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
-                    <!--
                     <Button
                         android:id="@+id/elementCodeButton00"
                         style="@style/ElementCodeButton" />
-                        -->
-
-                    <TextView
-                        android:id="@+id/elementIdRow00"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
 
                     <Button
                         android:id="@+id/elementTicButton00"
@@ -334,13 +324,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sideBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow01"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton01"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton01"
@@ -391,13 +377,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sideBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow02"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton02"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton02"
@@ -448,13 +430,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow03"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton03"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton03"
@@ -467,7 +445,7 @@
                         android:text="0.00"
                         android:textAlignment="center" />
 
-                    <ToggleButton
+                   <ToggleButton
                         android:id="@+id/elementBonusToggle03"
                         style="@style/BonusToggleButton" />
 
@@ -504,13 +482,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow04"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton04"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton04"
@@ -561,13 +535,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow05"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton05"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton05"
@@ -617,13 +587,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow06"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton06"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton06"
@@ -674,15 +640,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow07"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
-
                     <Button
+                        android:id="@+id/elementCodeButton07"
+                        style="@style/ElementCodeButton" />
+
+                   <Button
                         android:id="@+id/elementTicButton07"
                         style="@style/TicButton" />
 
@@ -730,15 +692,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow08"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
-
                     <Button
+                        android:id="@+id/elementCodeButton08"
+                        style="@style/ElementCodeButton" />
+
+                   <Button
                         android:id="@+id/elementTicButton08"
                         style="@style/TicButton" />
 
@@ -787,13 +745,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow09"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton09"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton09"
@@ -843,13 +797,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow10"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton10"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton10"
@@ -900,13 +850,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow11"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton11"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton11"
@@ -956,13 +902,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mediumBorder">
 
-                    <TextView
-                        android:id="@+id/elementIdRow12"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/sideBorder"
-                        android:layout_weight="3"
-                        android:textAlignment="textStart" />
+                    <Button
+                        android:id="@+id/elementCodeButton12"
+                        style="@style/ElementCodeButton" />
 
                     <Button
                         android:id="@+id/elementTicButton12"

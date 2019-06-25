@@ -59,6 +59,7 @@
     <style name="ElementCodeButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/sideBorder</item>item>
         <item name="android:layout_weight">3</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/white</item>
