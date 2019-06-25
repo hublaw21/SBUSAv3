@@ -3,6 +3,9 @@ package com.example.khubbart.mysbusaappv3;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -38,11 +41,6 @@ public class ProgramViewActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     private FirebaseFirestore db;
-    /*
-    private DocumentReference programRef;
-    private DocumentReference elementRef;
-    private String elementID;
-*/
     public List<Program> program = new ArrayList<>();
     public List<PlannedProgramContent> elements = new ArrayList<>();
     //public ArrayList<ElementInfo> elementInfoList = new ArrayList<ElementInfo>();
@@ -57,15 +55,7 @@ public class ProgramViewActivity extends AppCompatActivity implements
     public int resID;
     public int i;
     public int tempInt;
-    /*
-    public int tempIndex;
-    public int num;
-    public int eStart;
-    public int eEnd;
-    public int tempElementIndex;
-    */
     public int buttonPointer;
-    //public int dialogButtonPointer;
     public String currentUserUID;
     public String currentProgramID;
     public String currentSkaterName;
@@ -73,37 +63,18 @@ public class ProgramViewActivity extends AppCompatActivity implements
 
     public Button elementButton[] = new Button[13];
     public Button saveButton;
-    //public Button tempButton;
     public TextView textViewCompetitionName;
     public TextView textViewProgramDescription;
     public TextView textViewTechnicalTotal;
     public TextView[] textViewElementID = new TextView[13];
     public TextView[] textViewElementName = new TextView[13];
     public TextView[] textViewElementBaseValue = new TextView[13];
-    /*public String mCurrentUserID;
-    public String mCurrentProgramID;
-    public String[] mElementCode = new String[13];
-    public String[] mElementName = new String[13];
-    public Double[] mElementBaseValue = new Double[13];
-    public String[] RequiredElementsKey;
-    public int[] RequiredElementsValue;
-    public double technicalTotal;
-    public String progPointer;
-    */
     public String tempString;
-    //public String tempTrimmedString;
-    //public Double tempComboTotal;
     public String tempRowID;
     public String tempRowName;
     public String tempRowBase;
-    //public String tempButtonString;
     public String tempElementButton;
-    //public String rawElementInfo;
-    //public String[] comboCode = new String[4];
-    //public char[] elementCodeCArray;
     public GlobalClass globalClass;
-    //public ElementInfo elementInfo;
-
     NumberFormat numberFormat = new DecimalFormat("###.00");
 
 
@@ -139,21 +110,10 @@ public class ProgramViewActivity extends AppCompatActivity implements
         //Set up button listeners for changing elements
         for (i = 0; i < 13; i++) {
             if (i < requiredElements) {
-                //Ultimtately, only set up for number of required elements
-                if (i < 10) {
-                    tempRowID = "elementRow0" + i + "elementID";
-                    tempRowName = "elementRow0" + i + "elementName";
-                    tempRowBase = "elementRow0" + i + "elementBaseValue";
-                    tempElementButton = "buttonRow0" + i;
-                } else {
-                    tempRowID = "elementRow" + i + "elementID";
-                    tempRowName = "elementRow" + i + "elementName";
-                    tempRowBase = "elementRow" + i + "elementBaseValue";
-                    tempElementButton = "buttonRow" + i;
-                }
+                tempRowName = "elementRow" + String.format("%02d", i) + "elementName";
+                tempRowBase = "elementRow" + String.format("%02d", i) + "elementBaseValue";
+                tempElementButton = "buttonRow" + String.format("%02d", i);
                 //Get the ids for the row items
-                resID = getResources().getIdentifier(tempRowID, "id", getPackageName());
-                textViewElementID[i] = findViewById(resID);
                 resID = getResources().getIdentifier(tempRowName, "id", getPackageName());
                 textViewElementName[i] = findViewById(resID);
                 resID = getResources().getIdentifier(tempRowBase, "id", getPackageName());
@@ -161,31 +121,37 @@ public class ProgramViewActivity extends AppCompatActivity implements
                 resID = getResources().getIdentifier(tempElementButton, "id", getPackageName());
                 elementButton[i] = findViewById(resID);
                 elementButton[i].setOnClickListener(this);
-                //Check for anythgin in element code and process
-                if (currentProgramElements[i].length() > 1) {
-                    //send to make row
-                    elementRowUpdate(currentProgramElements[i].trim(), i);
-                } else {
-                    elementButton[i].setText("Add");
-                    currentProgramElementNames[i] = "Select an element";
-                    currentProgramElementValues[i] = 0.00;
-                }
-                //Hide unused rows
             } else {
-                if (i < 10) {
-                    tempString = "elementRow0" + i;
-                } else {
-                    tempString = "elementRow" + i;
-                }
+                //Hide unused rows
+                tempString = "elementRow" + String.format("%02d", i);
                 resID = getResources().getIdentifier(tempString, "id", getPackageName());
                 TableRow tr = findViewById(resID);
                 tr.setVisibility(View.GONE);
             }
         }
+        loadElements();
+
         //Setup Save Button
         saveButton.setOnClickListener(this);
         textViewTechnicalTotal.setText("Total Base Value: " + String.valueOf(sumTech()));
     }
+
+    //Load initial elements from current program
+    public void loadElements() {
+        //Check for anything in element code and process
+        for (i = 0; i < requiredElements; i++) {
+            Log.i("loadE",currentProgramElements[i]);
+            if (currentProgramElements[i].length() > 1) {
+                //send to make row
+                elementRowUpdate(currentProgramElements[i].trim(), i);
+            } else {
+                elementButton[i].setText("Add");
+                currentProgramElementNames[i] = "Select an element";
+                currentProgramElementValues[i] = 0.00;
+            }
+        }
+    }
+
 
     //Lookups for elements
     public void elementRowUpdate(String eCode, int eNum) {
@@ -209,8 +175,9 @@ public class ProgramViewActivity extends AppCompatActivity implements
         elementButton[eNum].setText(currentProgramElements[eNum]);
         textViewElementName[eNum].setText(currentProgramElementNames[eNum]);
         textViewElementBaseValue[eNum].setText(String.valueOf(currentProgramElementValues[eNum]));
-        textViewTechnicalTotal.setText("Total Base Value: " + String.valueOf(sumTech()));
+        textViewTechnicalTotal.setText("Total Base Value: " + numberFormat.format(sumTech()));
     }
+
 
     //default listener for all buttons
     @Override
