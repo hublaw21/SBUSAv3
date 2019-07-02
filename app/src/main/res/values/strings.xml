@@ -86,6 +86,11 @@
     <string name="maybe">Maybe</string>
     <string name="okay">OK</string>
 
+    <!-- Menu items for toolbar -->
+    <string name="action_elementLookup">Look up an element</string>
+    <string name="action_settings">Settings</string>
+
+
     <string name="specialCharacter1"></string>
 
 

@@ -15,6 +15,15 @@
         android:text="Program Description"
         android:textColor="@color/black" />
 
+    <TextView
+        android:id="@+id/textViewProgramInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/textMidSmall"
+        android:text="Program Description"
+        android:textColor="@color/black" />
+
 
     <fragment
         android:id="@+id/totalScoresFragment"

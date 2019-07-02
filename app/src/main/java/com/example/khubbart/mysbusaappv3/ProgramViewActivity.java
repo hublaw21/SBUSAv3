@@ -219,7 +219,7 @@ public class ProgramViewActivity extends AppCompatActivity implements
     public Double sumTech() {
         double sumTech = 0;
         for (int i = 0; i < requiredElements; i++) {
-            Log.i("sumtech", String.valueOf(i));
+            //Log.i("sumtech", String.valueOf(i));
             if (currentProgramElementValues[i] != null) sumTech += currentProgramElementValues[i];
         }
         return sumTech;

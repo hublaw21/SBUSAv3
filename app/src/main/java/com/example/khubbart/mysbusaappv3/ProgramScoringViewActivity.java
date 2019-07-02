@@ -53,6 +53,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     public TextView textViewProgramDescription;
+    public TextView textViewProgramInfo;
     public TextView[] scoresTextView = new TextView[4];
     public TextView[] elementIDTextView = new TextView[13];
     public Button[] elementTicButton = new Button[13];
@@ -166,6 +167,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         totalScoreViewModel = ViewModelProviders.of(this).get(TotalScoresViewModel.class);
         setContentView(R.layout.activity_program_scoring_view);
         textViewProgramDescription = findViewById(R.id.textViewProgramDescription);
+        textViewProgramInfo = findViewById(R.id.textViewProgramInfo);
 
         //Get the programID for the selected program sent from select activity
         Bundle extras = getIntent().getExtras();
@@ -183,10 +185,11 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         currentUserUID = globalClass.getCurrentUserUID();
         currentSkaterName = globalClass.getSkaterName();
         currentProgram.getElements().toArray(currentProgramElements);
-        tempString = currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment();
-        requiredElements = globalClass.calcRequiredElements(tempString);
-        factors = globalClass.getFactors(tempString);
+        //tempString = currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment();
+        requiredElements = globalClass.calcRequiredElements(currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment());
+        factors = globalClass.getFactors(currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment());
         textViewProgramDescription.setText(currentProgram.getProgramDescription());
+        textViewProgramInfo.setText(currentProgram.getLevel() + " " + currentProgram.getDiscipline()+ " " + currentProgram.getSegment());
 
         //Get current SOV Table - Three matched arrays
         Resources resources = getResources();
@@ -207,7 +210,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         //Determine which button was pushed
         buttonPointer = 0;
         tempInt = view.getId();
-        Log.i("tempInt",String.valueOf(tempInt));
+        //Log.i("tempInt",String.valueOf(tempInt));
         for (i = 0; i < requiredElements; i++) {
             //Check for bonus button clicked
             if (findViewById(tempInt) == elementBonusButton[i]) {
@@ -227,7 +230,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             if (findViewById(tempInt) == elementCodeButton[i]) {
                 tempString = String.valueOf(tempInt);
                 changeButtonDialog(i);
-                Log.i("Button Change",tempString);
+                //Log.i("Button Change",tempString);
                 //Call Change Button Dialog from Global
                 /*
                 android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
@@ -351,7 +354,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             //Set or hide tic and bonus buttons
             tempIndex = globalClass.ElementIndexLookUp(currentProgramElements[i].trim());
             // Need to add error checker for code not found
-            Log.i("tempIndex",String.valueOf(tempIndex));
+            //Log.i("tempIndex",String.valueOf(tempIndex));
             if (tempIndex < 0) { //No element
                 disableTicButton(i);
             } else {
@@ -499,6 +502,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
             }
         }
         scoresTextView[0].setText(numberFormat.format(sumSegment()));
+        scoresTextView[1].setText(numberFormat.format(sumElements()));
         scoresTextView[2].setText(numberFormat.format(sumComponents()));
     }
 

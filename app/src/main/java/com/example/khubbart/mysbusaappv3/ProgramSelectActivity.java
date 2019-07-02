@@ -3,6 +3,7 @@ package com.example.khubbart.mysbusaappv3;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -10,8 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -83,11 +88,21 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public int programLimit;
     public int buttonID;
     public Intent myIntent;
+    public String line1;
+    public String line2;
+
+    //Be able to scale button backgrounds when creating programatically
+    //public ScaleDrawable (Drawable drawable, int gravity, float scaleWidth, float scaleHeight);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_select);
+
+        //Set up toolbar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         // Access Firestore
         db = FirebaseFirestore.getInstance();
@@ -194,17 +209,18 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                     programLimit = programCount;
                 }
 
+                String multi = "&#10;";
                 for (i = 0; i < programLimit; i++) {  //Remember array starts at 0, but we always have one button
-                    tempString = programsv2.get(i).getProgramDescription() + " "
-                            + programsv2.get(i).getLevel() + " "
+                    line1 = programsv2.get(i).getProgramDescription();
+                    line2 =  programsv2.get(i).getLevel() + " "
                             + programsv2.get(i).getDiscipline() + " "
                             + programsv2.get(i).getSegment();
-                    makeRadioButton(i, tempString);
-                    tempString = programsv2.get(i).getElements().toString();
+                    makeRadioButton(i, line1, line2);
+                    //tempString = programsv2.get(i).getElements().toString();
                     //Log.i("****ProgramID", document.getId());
-                    Log.i("SelFetched",tempString);
+                    //Log.i("SelFetched",tempString);
                 }
-                if (programCount < 8) makeRadioButton(programCount, "Add a Program");
+                if (programCount < 8) makeRadioButton(programCount, "Add a Program","");
             }
 
             ;
@@ -265,7 +281,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                         Toast.makeText(getApplicationContext(), "Match", Toast.LENGTH_LONG).show();
                     } else {
                         //Toast.makeText(getApplicationContext(), "No Match", Toast.LENGTH_LONG).show();
-                        Log.i("ProgramID ==> ", tempString);
+                        //Log.i("ProgramID ==> ", tempString);
                     }
                     //Toast.makeText(getApplicationContext(), document.getId() + " => " + document.getData(), Toast.LENGTH_LONG).show();
                     if (document != null) {
@@ -285,13 +301,15 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         startActivity(myIntent);
     }
 
-    public void makeRadioButton(int i, String tempString) {
+    public void makeRadioButton(int i, String bLine1, String bLine2) {
         buttonSelectProgram[i] = (RadioButton) getLayoutInflater().inflate(R.layout.button_custom_style, null); //had to inflate to be able to reference the button style
         buttonSelectProgram[i].setId(i);
-        buttonSelectProgram[i].setText(tempString);
+        tempString = bLine1 + "<br/>" + bLine2;
+        buttonSelectProgram[i].setText(Html.fromHtml(tempString));
         if (i == 0) buttonSelectProgram[i].setChecked(true);
         radioGroupPrograms.addView(buttonSelectProgram[i]);
     }
+
 
     //Choose to Edit or Score
     public void selectOptionButtonDialog(final String selectedProgramID2) {
@@ -355,5 +373,33 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
 
         // Display the custom alert dialog on interface
         dialog.show();
+    }
+
+    //Set up the toolbar
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        //Inflate the menu; this adds item to the action
+        //bar if its present
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    //Selecting menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_element_lookup:
+                // User chose the "Element Lookup" item in the toolbar, call the activity
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ElementLookupActivity.class);
+                startActivity(intentBundle);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

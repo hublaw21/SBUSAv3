@@ -348,6 +348,7 @@ public class GlobalClass extends Application {
         ArrayList<String> factorTablePointer = new ArrayList<String>();
         factorTemp = resources.getStringArray(R.array.Factors);
         int len = factorTemp.length;
+        Log.i("Factor table length ",String.valueOf(len));
         for (int i = 0; i < len; i++) {
             //parse factor table from resources intp usable form and return
             char[] factorLine = factorTemp[i].toCharArray();
@@ -374,7 +375,7 @@ public class GlobalClass extends Application {
         for (int i = 0; i < 8; i++) {
             factors[i] = Double.valueOf(factorTable[progDescrPointer][i + 1]);
             tempString = String.valueOf(i) + " " + String.valueOf(factors[i]);
-            //Log.i("********factors: ", tempString);
+            Log.i("********factors: ", tempString);
         }
         return factors;
     }

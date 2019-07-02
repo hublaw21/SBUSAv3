@@ -7,15 +7,24 @@
     android:orientation="vertical"
     tools:context=".ProgramSelectActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <TextView
         android:id="@+id/textViewProgramSelectSkaterName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:textSize="@dimen/textLarge"
         android:text="Skater Name Here"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/textLarge" />
 
     <TextView
         android:id="@+id/textViewProgramSelectTitle"
@@ -23,25 +32,31 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:textSize="@dimen/textMedium"
         android:text="Select a Program to Enter, Edit or Score"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/textMedium" />
 
-    <RadioGroup
-        style="@style/styleRadioGroup"
-        android:id="@+id/radioGroupPrograms">
-        <!--
-    <RadioButton
-        style="@style/styleRadioButtonPrograms"
-        android:id="@+id/radioButtonProgram1" />
-    <RadioButton
-        style="@style/styleRadioButtonPrograms"
-        android:id="@+id/radioButtonProgram2"/>
-    <RadioButton
-        style="@style/styleRadioButtonPrograms"
-        android:id="@+id/radioButtonProgram3"/>
--->
-    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radioGroupPrograms"
+            style="@style/styleRadioGroup">
+            <!--
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram1" />
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram2"/>
+        <RadioButton
+            style="@style/styleRadioButtonPrograms"
+            android:id="@+id/radioButtonProgram3"/>
+    -->
+        </RadioGroup>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
