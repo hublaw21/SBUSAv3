@@ -58,10 +58,10 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public TextView mTextViewID;
     public TextView textViewPrograms[] = new TextView[10];
     public RadioButton buttonSelectProgram[] = new RadioButton[8];
-    public Button cancel;
+    public Button delete;
     public Button edit;
     public Button score;
-    public Button mAddProgram;
+    public Button add;
     public RadioGroup radioGroupPrograms;
     public GlobalClass globalClass;
 
@@ -112,12 +112,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         //Set up basic view stuff
         mTextViewName = findViewById(R.id.textViewProgramSelectSkaterName);
         mTextViewID = findViewById(R.id.textViewProgramSelectTitle); // For checking only, eliminate from final
-        cancel = findViewById(R.id.buttonCancel);
-        edit = findViewById(R.id.buttonAddEdit);
+        edit = findViewById(R.id.buttonEdit);
         score = findViewById(R.id.buttonScore);
-        cancel.setOnClickListener(this);
+        delete = findViewById(R.id.buttonDelete);
+        add = findViewById(R.id.buttonAddProgram);
         edit.setOnClickListener(this);
         score.setOnClickListener(this);
+        add.setOnClickListener(this);
+        delete.setOnClickListener(this);
 
         //Set up Radio Group and listener
         radioGroupPrograms = findViewById(R.id.radioGroupPrograms);
@@ -125,18 +127,21 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int resID) {
                 //Set it in Global, need to do here, not when selecting score because it is too fast
-                int testCount = resID; //It throws an error if I try to compare directly
-                if (testCount < programCount) {
+                //int testCount = resID; //It throws an error if I try to compare directly
+                //if (testCount < programCount) {
                     //If an actual program
                     currentProgramID = programIDList.get(resID);
+                    //Probably do not need the next line anymore
                     globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
-                } else {
+                /*} else {
                     //Last option is a new program, which does not have an ID
                     currentProgramID = "New" + programCount;
                     //Send it to Add program
                     myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
                     startActivity(myIntent);
                 }
+                */
+                //ProgramID gets passed withintent, but saving it just in case
                 globalClass.setCurrentProgramID(currentProgramID);
             }
         });
@@ -155,39 +160,34 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         resID = radioGroupPrograms.getCheckedRadioButtonId();
         //Could use switch for all of them, but coding may work
         switch (view.getId()) {
-            case R.id.buttonCancel:
+            case R.id.buttonDelete:
                 // do nothing for now
                 Toast.makeText(this, "currentProgramID: " + currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.buttonAddEdit:
-                // check for whether add or edit
-                int testCount = resID; //It throws an error if I try to compare directly
-                if (testCount < programCount) {
-                    //If an actual program
-                    //globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
-                    myIntent = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
-                } else {
-                    //Last option is a new program, which does not have an ID
-                    currentProgramID = "New" + programCount;
-                    myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
-                }
-                myIntent.putExtra("programID",currentProgramID);
-                startActivity(myIntent);
 
+            case R.id.buttonEdit:
+                currentProgramID = programIDList.get(resID);
+                myIntent = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                myIntent.putExtra("programID", currentProgramID);
+                startActivity(myIntent);
                 break;
+
+            case R.id.buttonAddProgram:
+                Toast.makeText(this, "Program Add Button: " + currentProgramID, Toast.LENGTH_SHORT).show();
+                currentProgramID = "New" + programCount;
+                myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
+                myIntent.putExtra("programID", currentProgramID);
+                startActivity(myIntent);
+                break;
+
             case R.id.buttonScore:
                 //globalClass.retrieveCurrentProgram(currentProgramID);  //This pulls the current program and saves it for use in the App
                 currentProgramID = programIDList.get(resID);
                 myIntent = new Intent(ProgramSelectActivity.this, ProgramScoringViewActivity.class);
-                myIntent.putExtra("programID",currentProgramID);
+                myIntent.putExtra("programID", currentProgramID);
                 startActivity(myIntent);
-
-                // Retrieve and save programID
-                //getSelectedProgram(resID);
-                //Toast.makeText(this, currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
         }
-        //Toast.makeText(this, "Button " + resID + "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     // Query and load skaters programs
@@ -212,7 +212,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                 String multi = "&#10;";
                 for (i = 0; i < programLimit; i++) {  //Remember array starts at 0, but we always have one button
                     line1 = programsv2.get(i).getProgramDescription();
-                    line2 =  programsv2.get(i).getLevel() + " "
+                    line2 = programsv2.get(i).getLevel() + " "
                             + programsv2.get(i).getDiscipline() + " "
                             + programsv2.get(i).getSegment();
                     makeRadioButton(i, line1, line2);
@@ -220,7 +220,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
                     //Log.i("****ProgramID", document.getId());
                     //Log.i("SelFetched",tempString);
                 }
-                if (programCount < 8) makeRadioButton(programCount, "Add a Program","");
+                //if (programCount < 8) makeRadioButton(programCount, "Add a Program", "");
             }
 
             ;
@@ -377,7 +377,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
 
     //Set up the toolbar
     @Override
-    public boolean onCreateOptionsMenu (Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         //Inflate the menu; this adds item to the action
         //bar if its present
