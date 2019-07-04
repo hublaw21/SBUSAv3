@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -101,6 +101,22 @@
         <item name="android:text">enter here</item>
     </style>
 
+    <style name="styleTextFocus">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:layout_width">0px</item>
+        <item name="android:layout_height">0px</item>
+    </style>
+
+    <style name="styleEditTextBasic">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/largeTable</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/textMedium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="styleGroupBasic">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -129,6 +145,7 @@
         <item name="android:background">@drawable/selector_radiobutton</item>
         <item name="android:padding">10dp</item>
         <item name="android:button">@null</item>
+        <item name="android:layout_margin">@dimen/mediumBorder</item>
         <item name="android:textSize">@dimen/textMedium</item>
         <item name="android:textColor">@color/white</item>
     </style>
@@ -137,7 +154,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:background">@drawable/light_box_default_shape</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_margin">@dimen/largeTable</item>
     </style>

@@ -5,8 +5,11 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -79,6 +82,11 @@ public class AddProgramActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_program);
+
+        //Set up toolbar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarAddProgram);
+        setSupportActionBar(myToolbar);
+
         buttonSaveProgram = findViewById(R.id.buttonSaveProgram);
 
         textViewSkaterName = findViewById(R.id.textViewProgramAddSkaterName);
@@ -317,7 +325,7 @@ public class AddProgramActivity extends AppCompatActivity
                         currentProgramID = documentReference.getId();
                         globalClass.setCurrentProgramID(currentProgramID);
                         //Go to editing
-                        myIntent = new Intent(AddProgramActivity.this, ProgramViewActivity.class);
+                        myIntent = new Intent(AddProgramActivity.this, ProgramEditActivity.class);
                         */
                         myIntent = new Intent(AddProgramActivity.this, ProgramSelectActivity.class);
                         startActivity(myIntent);
@@ -396,5 +404,32 @@ public class AddProgramActivity extends AppCompatActivity
         //Toast.makeText(AddProgramActivity.this, "Unsuccessful - Select an Event", Toast.LENGTH_SHORT).show();
         //}
 */
+    //Set up the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        //Inflate the menu; this adds item to the action
+        //bar if its present
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    //Selecting menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_element_lookup:
+                // User chose the "Element Lookup" item in the toolbar, call the activity
+                Intent intentBundle = new Intent(AddProgramActivity.this, ElementLookupActivity.class);
+                startActivity(intentBundle);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
 }

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="@dimen/mediumTable"
     android:theme="@style/AppTheme.Elements"
-    tools:context=".ProgramViewActivity">
+    tools:context=".ProgramEditActivity">
 
     <TextView
         android:id="@+id/dialog_change_element_title"

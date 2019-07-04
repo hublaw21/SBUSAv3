@@ -1,34 +1,27 @@
 package com.example.khubbart.mysbusaappv3;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.khubbart.mysbusaappv3.Model.ElementInfo;
 import com.example.khubbart.mysbusaappv3.Model.PlannedProgramContent;
 import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.example.khubbart.mysbusaappv3.Model.Programv2;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
@@ -37,7 +30,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProgramViewActivity extends AppCompatActivity implements
+import static com.example.khubbart.mysbusaappv3.R.id.editTextEditProgramDescription;
+
+public class ProgramEditActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     private FirebaseFirestore db;
@@ -59,6 +54,7 @@ public class ProgramViewActivity extends AppCompatActivity implements
     public String currentUserUID;
     public String currentProgramID;
     public String currentSkaterName;
+    public String currentProgramDescription;
     public Programv2 currentProgram;
 
     public Button elementButton[] = new Button[13];
@@ -69,23 +65,37 @@ public class ProgramViewActivity extends AppCompatActivity implements
     public TextView[] textViewElementID = new TextView[13];
     public TextView[] textViewElementName = new TextView[13];
     public TextView[] textViewElementBaseValue = new TextView[13];
+    public EditText editTextEditProgramDescription;
     public String tempString;
     public String tempRowID;
     public String tempRowName;
     public String tempRowBase;
     public String tempElementButton;
     public GlobalClass globalClass;
-    NumberFormat numberFormat = new DecimalFormat("###.00");
+    public Intent myIntent;
+    public DecimalFormat decimalFormat = new DecimalFormat("###.00");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_program_view);
-        textViewCompetitionName = findViewById(R.id.textViewCompetition);
-        textViewProgramDescription = findViewById(R.id.textViewProgramDescription);
+
+        setContentView(R.layout.activity_program_edit);
+
+        //Set up toolbar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarEditProgram);
+        setSupportActionBar(myToolbar);
+
         textViewTechnicalTotal = findViewById(R.id.technicalTotal);
         saveButton = findViewById(R.id.buttonSaveProgram);
+        editTextEditProgramDescription = findViewById(R.id.editTextEditProgramDescription);
+        editTextEditProgramDescription.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                currentProgramDescription = editTextEditProgramDescription.getText().toString();
+                return false;
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
@@ -104,8 +114,8 @@ public class ProgramViewActivity extends AppCompatActivity implements
         currentProgram.getElements().toArray(currentProgramElements);
         tempString = currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment();
         requiredElements = globalClass.calcRequiredElements(tempString);
-        tempString = currentProgram.getProgramDescription();
-        textViewProgramDescription.setText(tempString);
+        currentProgramDescription = currentProgram.getProgramDescription();
+        editTextEditProgramDescription.setText(currentProgramDescription);
 
         //Set up button listeners for changing elements
         for (i = 0; i < 13; i++) {
@@ -133,14 +143,14 @@ public class ProgramViewActivity extends AppCompatActivity implements
 
         //Setup Save Button
         saveButton.setOnClickListener(this);
-        textViewTechnicalTotal.setText("Total Base Value: " + String.valueOf(sumTech()));
+        textViewTechnicalTotal.setText("Total Base Value: " + decimalFormat.format(sumTech()));
     }
 
     //Load initial elements from current program
     public void loadElements() {
         //Check for anything in element code and process
         for (i = 0; i < requiredElements; i++) {
-            Log.i("loadE",currentProgramElements[i]);
+            Log.i("loadE", currentProgramElements[i]);
             if (currentProgramElements[i].length() > 1) {
                 //send to make row
                 elementRowUpdate(currentProgramElements[i].trim(), i);
@@ -175,7 +185,9 @@ public class ProgramViewActivity extends AppCompatActivity implements
         elementButton[eNum].setText(currentProgramElements[eNum]);
         textViewElementName[eNum].setText(currentProgramElementNames[eNum]);
         textViewElementBaseValue[eNum].setText(String.valueOf(currentProgramElementValues[eNum]));
-        textViewTechnicalTotal.setText("Total Base Value: " + numberFormat.format(sumTech()));
+        //tempString = "Total Base Value: " + String.format("%02d", sumTech());
+        tempString = "Total Base Value: " + decimalFormat.format(sumTech());
+        textViewTechnicalTotal.setText(tempString);
     }
 
 
@@ -206,11 +218,12 @@ public class ProgramViewActivity extends AppCompatActivity implements
     private void UpdateElements() {
         //currentProgram is the Programv2 modelled instance from Firestore, we need to add updates of elements
         DocumentReference programRef = db.collection("Programs").document(currentProgramID);
-        programRef.update("elements", currentProgram.getElements())
+        programRef.update("elements", currentProgram.getElements());
+        programRef.update("programDescription", currentProgramDescription)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(ProgramViewActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProgramEditActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -251,9 +264,12 @@ public class ProgramViewActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 String tElementCode = editTextElementCode.getText().toString();
+                updateButton(dialogButtonPointer, tElementCode);
+                /*
                 currentProgramElements[dialogButtonPointer] = tElementCode;
                 currentProgram.setElements(Arrays.asList(currentProgramElements));
                 elementRowUpdate(tElementCode, dialogButtonPointer);
+                */
                 dialog.dismiss();
             }
         });
@@ -262,6 +278,11 @@ public class ProgramViewActivity extends AppCompatActivity implements
         lookupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Send to the Element Lookup Activity
+                myIntent = new Intent(ProgramEditActivity.this, ElementLookupActivity.class);
+                //myIntent.putExtra("elementNumber", dialogButtonPointer);
+                //The buttonDialogPointer is the requestCode returned in results, so we know which element
+                startActivityForResult(myIntent, dialogButtonPointer);
                 // Dismiss/cancel the alert dialog
                 dialog.dismiss();
                 // Add lookup routine here
@@ -271,7 +292,7 @@ public class ProgramViewActivity extends AppCompatActivity implements
                     View dialogView = inflater.inflate(R.layout.activity_element_lookup, null);
                     builder.setCancelable(false);
                     builder.setView(dialogView);
-                    Intent intentBundle = new Intent(ProgramViewActivity.this, ElementLookupActivity.class);
+                    Intent intentBundle = new Intent(ProgramEditActivity.this, ElementLookupActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("eleNum",num);
                     intentBundle.putExtras(bundle);
@@ -289,6 +310,57 @@ public class ProgramViewActivity extends AppCompatActivity implements
 
         // Display the custom alert dialog on interface
         dialog.show();
+    }
+
+    //Handle an element code returned from lookup
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bundle extras = getIntent().getExtras();
+        // Check to be sure we have something
+        if (extras == null) {
+            //Do nothing
+        } else {
+            String tElementCode = data.getStringExtra("elementCode");
+            Toast.makeText(ProgramEditActivity.this, "Element Code " + tElementCode, Toast.LENGTH_LONG).show();
+            updateButton(requestCode, tElementCode);
+        }
+    }
+
+    //@Override
+    //Update the button after changing element code
+    protected void updateButton(int elementNumber, String elementCode) {
+        currentProgramElements[elementNumber] = elementCode;
+        currentProgram.setElements(Arrays.asList(currentProgramElements));
+        elementRowUpdate(elementCode, elementNumber);
+    }
+
+    //Set up the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        super.onCreateOptionsMenu(menu);
+        //Inflate the menu; this adds item to the action
+        //bar if its present
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    //Selecting menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_element_lookup:
+                // User chose the "Element Lookup" item in the toolbar, call the activity
+                Intent intentBundle = new Intent(ProgramEditActivity.this, ElementLookupActivity.class);
+                startActivity(intentBundle);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
 }

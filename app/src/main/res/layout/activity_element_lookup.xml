@@ -595,4 +595,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"></FrameLayout>
 
+    <Button
+        android:id="@+id/buttonUseCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/styleButtonSelect"
+        android:text="Use This Code and Return" />
+
+
 </LinearLayout>

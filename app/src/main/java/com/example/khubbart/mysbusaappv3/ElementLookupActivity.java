@@ -1,5 +1,7 @@
 package com.example.khubbart.mysbusaappv3;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableRow;
@@ -64,6 +67,7 @@ public class ElementLookupActivity extends AppCompatActivity implements
     public Double[] currentGOE = new Double[11];
     public String[] currentGOEString = new String[11];
     public Fragment[] fragment = new Fragment[4];
+    public Button buttonUseCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,19 @@ public class ElementLookupActivity extends AppCompatActivity implements
         SOVCode = resources.getStringArray(R.array.SOV_Code);
         SOVName = resources.getStringArray(R.array.SOV_Name);
         SOVBase = resources.getStringArray(R.array.SOV_Base);
+
+        buttonUseCode =  findViewById(R.id.buttonUseCode);
+        buttonUseCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Save the code to return to edit/add program
+                Toast.makeText(ElementLookupActivity.this, "Element Code" + elementCode, Toast.LENGTH_LONG).show();
+                Intent returnIntent =  new Intent();
+                returnIntent.putExtra("elementCode", elementCode);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
+        });
 
         // Set up Element Type toggle buttons - in array
         elementTypeToggleButton[0] = findViewById(R.id.toggleButtonJump);

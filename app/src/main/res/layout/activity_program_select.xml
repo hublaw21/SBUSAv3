@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ProgramSelectActivity">
 
     <android.support.v7.widget.Toolbar
@@ -24,6 +23,7 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Skater Name Here"
         android:textAlignment="center"
+        android:layout_below="@id/my_toolbar"
         android:textSize="@dimen/textLarge" />
 
     <TextView
@@ -32,62 +32,73 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumBorder"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_below="@id/textViewProgramSelectSkaterName"
         android:text="Select a Program to Enter, Edit or Score"
         android:textAlignment="center"
         android:textSize="@dimen/textMedium" />
 
     <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonEdit"
+                style="@style/styleButtonChoice"
+                android:text="Edit Selected Program" />
+
+            <Button
+                android:id="@+id/buttonScore"
+                style="@style/styleButtonChoice"
+                android:text="Score Selected Program" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonDelete"
+                style="@style/styleButtonChoice"
+                android:text="Delete Selected Program" />
+
+            <Button
+                android:id="@+id/buttonAddProgram"
+                style="@style/styleButtonChoice"
+                android:text="Add a New Program" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/radioScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewProgramSelectTitle"
+        android:layout_above="@id/buttons"
+        android:fadeScrollbars="false"
+        android:layout_margin="@dimen/largeTable">
         <RadioGroup
             android:id="@+id/radioGroupPrograms"
             style="@style/styleRadioGroup">
-            <!--
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram1" />
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram2"/>
-        <RadioButton
-            style="@style/styleRadioButtonPrograms"
-            android:id="@+id/radioButtonProgram3"/>
-    -->
+            //Radio Buttons added programatically
         </RadioGroup>
-    </LinearLayout>
+    </ScrollView>
 
-    <LinearLayout
+    <View
+        android:id="@+id/divider3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="1dp"
+        android:layout_above="@id/buttons"
+        android:background="?android:attr/listDivider" />
 
-         <Button
-            android:id="@+id/buttonEdit"
-            style="@style/styleButtonChoice"
-            android:text="Edit Selected Program" />
 
-        <Button
-            android:id="@+id/buttonScore"
-            style="@style/styleButtonChoice"
-            android:text="Score Selected Program" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonDelete"
-            style="@style/styleButtonChoice"
-            android:text="Delete Selected Program" />
-
-              <Button
-            android:id="@+id/buttonAddProgram"
-            style="@style/styleButtonChoice"
-            android:text="Add a New Program" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

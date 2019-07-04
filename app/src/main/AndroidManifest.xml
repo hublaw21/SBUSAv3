@@ -37,7 +37,7 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" />
         <activity android:name=".ProgramSelectActivity" />
-        <activity android:name=".ProgramViewActivity" />
+        <activity android:name=".ProgramEditActivity" />
         <activity android:name=".AddProgramActivity" />
         <activity android:name=".TestArrayActivity" />
         <activity android:name=".ProgramScoringViewActivity" />

@@ -250,7 +250,7 @@ public class GlobalClass extends Application {
 
     public Double calcComboJump(String cElementCode, Boolean cFlag) {
         //It should already be determiend to be a combo when sent to this method
-        //Toast.makeText(ProgramViewActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ProgramEditActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
         tempTrimmedString = cElementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
         elementCodeCArray = tempTrimmedString.toCharArray();
         int num = 0;
@@ -468,7 +468,7 @@ public class GlobalClass extends Application {
                     View dialogView = inflater.inflate(R.layout.activity_element_lookup, null);
                     builder.setCancelable(false);
                     builder.setView(dialogView);
-                    Intent intentBundle = new Intent(ProgramViewActivity.this, ElementLookupActivity.class);
+                    Intent intentBundle = new Intent(ProgramEditActivity.this, ElementLookupActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("eleNum",num);
                     intentBundle.putExtras(bundle);

@@ -11,8 +11,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -164,10 +167,15 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         totalScoreViewModel = ViewModelProviders.of(this).get(TotalScoresViewModel.class);
         setContentView(R.layout.activity_program_scoring_view);
         textViewProgramDescription = findViewById(R.id.textViewProgramDescription);
         textViewProgramInfo = findViewById(R.id.textViewProgramInfo);
+
+        //Set up toolbar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         //Get the programID for the selected program sent from select activity
         Bundle extras = getIntent().getExtras();
@@ -797,7 +805,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                     View dialogView = inflater.inflate(R.layout.activity_element_lookup, null);
                     builder.setCancelable(false);
                     builder.setView(dialogView);
-                    Intent intentBundle = new Intent(ProgramViewActivity.this, ElementLookupActivity.class);
+                    Intent intentBundle = new Intent(ProgramEditActivity.this, ElementLookupActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("eleNum",num);
                     intentBundle.putExtras(bundle);
@@ -816,4 +824,32 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         // Display the custom alert dialog on interface
         dialog.show();
     }
+    //Set up the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        //Inflate the menu; this adds item to the action
+        //bar if its present
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    //Selecting menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_element_lookup:
+                // User chose the "Element Lookup" item in the toolbar, call the activity
+                Intent intentBundle = new Intent(ProgramScoringViewActivity.this, ElementLookupActivity.class);
+                startActivity(intentBundle);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 }

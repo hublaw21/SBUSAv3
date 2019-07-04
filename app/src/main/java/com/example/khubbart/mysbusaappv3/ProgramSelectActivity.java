@@ -1,19 +1,13 @@
 package com.example.khubbart.mysbusaappv3;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,17 +15,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.khubbart.mysbusaappv3.Model.Program;
 import com.example.khubbart.mysbusaappv3.Model.Programv2;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,11 +31,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Query;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 
 //public class ProgramSelectActivity extends AppCompatActivity implements ProgramSelectItem {
 public class ProgramSelectActivity extends AppCompatActivity implements View.OnClickListener {
@@ -162,18 +149,18 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.buttonDelete:
                 // do nothing for now
-                Toast.makeText(this, "currentProgramID: " + currentProgramID, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "currentProgramID: " + currentProgramID, Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonEdit:
                 currentProgramID = programIDList.get(resID);
-                myIntent = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                myIntent = new Intent(ProgramSelectActivity.this, ProgramEditActivity.class);
                 myIntent.putExtra("programID", currentProgramID);
                 startActivity(myIntent);
                 break;
 
             case R.id.buttonAddProgram:
-                Toast.makeText(this, "Program Add Button: " + currentProgramID, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Program Add Button: " + currentProgramID, Toast.LENGTH_SHORT).show();
                 currentProgramID = "New" + programCount;
                 myIntent = new Intent(ProgramSelectActivity.this, AddProgramActivity.class);
                 myIntent.putExtra("programID", currentProgramID);
@@ -304,8 +291,14 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
     public void makeRadioButton(int i, String bLine1, String bLine2) {
         buttonSelectProgram[i] = (RadioButton) getLayoutInflater().inflate(R.layout.button_custom_style, null); //had to inflate to be able to reference the button style
         buttonSelectProgram[i].setId(i);
-        tempString = bLine1 + "<br/>" + bLine2;
-        buttonSelectProgram[i].setText(Html.fromHtml(tempString));
+        //Set up margins
+        RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(15, 15, 15, 15);
+        buttonSelectProgram[i].setLayoutParams(params);
+        //Two lines is getting a litte busy and too big
+        //tempString = bLine1 + "<br/>" + bLine2;
+        //buttonSelectProgram[i].setText(Html.fromHtml(tempString));
+        buttonSelectProgram[i].setText(line1);
         if (i == 0) buttonSelectProgram[i].setChecked(true);
         radioGroupPrograms.addView(buttonSelectProgram[i]);
     }
@@ -339,7 +332,7 @@ public class ProgramSelectActivity extends AppCompatActivity implements View.OnC
             public void onClick(View v) {
                 dialog.cancel();
                 //go to edit page
-                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramViewActivity.class);
+                Intent intentBundle = new Intent(ProgramSelectActivity.this, ProgramEditActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("userID", mCurrentUserUID);
                 bundle.putString("programID", selectedProgramID2);
