@@ -249,7 +249,8 @@ public class GlobalClass extends Application {
     }
 
     public Double calcComboJump(String cElementCode, Boolean cFlag) {
-        //It should already be determiend to be a combo when sent to this method
+        //It should already be determined to be a combo when sent to this method
+        //Boolen true -
         //Toast.makeText(ProgramEditActivity.this, cElementCode, Toast.LENGTH_SHORT).show();
         tempTrimmedString = cElementCode.replaceAll("\\s+", ""); //Trim any spaces - CAREFUL, throws an error if null
         elementCodeCArray = tempTrimmedString.toCharArray();
@@ -292,7 +293,7 @@ public class GlobalClass extends Application {
             }
         }
         if (cFlag){
-            //True Bollean means combo value
+            //True Boolean means combo value
             return tempComboTotal;
         } else {
             //False Boolean means base or GOE

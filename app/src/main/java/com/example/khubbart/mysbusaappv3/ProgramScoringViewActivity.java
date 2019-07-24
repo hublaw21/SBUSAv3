@@ -60,6 +60,8 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
     public TextView[] scoresTextView = new TextView[4];
     public TextView[] elementIDTextView = new TextView[13];
     public Button[] elementTicButton = new Button[13];
+    public Button resetGOEButton;
+    public Button resetComponentsButton;
     public ToggleButton[] elementBonusButton = new ToggleButton[13];
     public TextView[] elementTicTextView = new TextView[13];
     public TextView[] textViewElementBase = new TextView[13];
@@ -172,6 +174,10 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_program_scoring_view);
         textViewProgramDescription = findViewById(R.id.textViewProgramDescription);
         textViewProgramInfo = findViewById(R.id.textViewProgramInfo);
+        resetGOEButton = findViewById(R.id.resetGOEButton);
+        resetComponentsButton = findViewById(R.id.resetComponentsButton);
+        resetGOEButton.setOnClickListener(this);
+        resetComponentsButton.setOnClickListener(this);
 
         //Set up toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -197,7 +203,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         requiredElements = globalClass.calcRequiredElements(currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment());
         factors = globalClass.getFactors(currentProgram.getLevel() + currentProgram.getDiscipline() + currentProgram.getSegment());
         textViewProgramDescription.setText(currentProgram.getProgramDescription());
-        textViewProgramInfo.setText(currentProgram.getLevel() + " " + currentProgram.getDiscipline()+ " " + currentProgram.getSegment());
+        textViewProgramInfo.setText(currentProgram.getLevel() + " " + currentProgram.getDiscipline() + " " + currentProgram.getSegment());
 
         //Get current SOV Table - Three matched arrays
         Resources resources = getResources();
@@ -218,6 +224,16 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         //Determine which button was pushed
         buttonPointer = 0;
         tempInt = view.getId();
+        //check for GOE reset
+        if (findViewById(tempInt) == resetGOEButton) {
+            resetGOE();
+            }
+        //check for ComponentsGOE reset
+        if (findViewById(tempInt) == resetComponentsButton) {
+            initializeComps();
+        }
+        scoresTextView[2].setText(numberFormat.format(sumComponents()));
+
         //Log.i("tempInt",String.valueOf(tempInt));
         for (i = 0; i < requiredElements; i++) {
             //Check for bonus button clicked
@@ -388,9 +404,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
 
         //Set up components scoring items
-        compBar[0] = this.
-
-                findViewById(R.id.seekBarComponentSkills);
+        compBar[0] = this.findViewById(R.id.seekBarComponentSkills);
 
         compBar[2] = this.
 
@@ -507,11 +521,23 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
                 tempString = String.valueOf(componentScore[i]);
                 componentScoreTextView[i].setText(tempString);
                 componentFactorTextView[i].setText(numberFormat.format(factors[i + 1]));
+                compBar[i].setProgress(50);
             }
         }
         scoresTextView[0].setText(numberFormat.format(sumSegment()));
         scoresTextView[1].setText(numberFormat.format(sumElements()));
         scoresTextView[2].setText(numberFormat.format(sumComponents()));
+    }
+
+    public void resetGOE() {
+        for (int i = 0; i < requiredElements; i++) {
+            elementGOE[i] = 0.0; // This could be an option for users
+            textViewGOEScore[i].setText(numberFormat.format(elementGOE[i]));
+            elementGOE[i] = tempDouble2;
+            goeBar[i].setProgress(50);
+        }
+        scoresTextView[0].setText(numberFormat.format(sumSegment()));
+        scoresTextView[1].setText(numberFormat.format(sumElements()));
     }
 
     //Update info based on seeker bar - components
@@ -646,50 +672,53 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         // Create the alert dialog
         final AlertDialog dialog = builder.create();
 
-        // Set none button click listener
+        // Set button click listener
         ticDialogButton[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
                 changeTicButton(tNum, 0);
             }
+
+            ;
         });
 
-        // Set check button click listener
-        ticDialogButton[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                changeTicButton(tNum, 1);
-            }
+            // Set check button click listener
+            ticDialogButton[1].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    changeTicButton(tNum, 1);
+                }
 
-        });
+            });
 
-        // Set edge button click listener
-        ticDialogButton[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                changeTicButton(tNum, 2);
-            }
-        });
+            // Set edge button click listener
+            ticDialogButton[2].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    changeTicButton(tNum, 2);
+                }
+            });
 
-        // Set downgrade button click listener
-        ticDialogButton[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                changeTicButton(tNum, 3);
-            }
-        });
-        // Set doubledowngrade button click listener
-        ticDialogButton[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                changeTicButton(tNum, 4);
-            }
-        });
+            // Set downgrade button click listener
+            ticDialogButton[3].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    changeTicButton(tNum, 3);
+                }
+            });
+            // Set doubledowngrade button click listener
+            ticDialogButton[4].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    changeTicButton(tNum, 4);
+                }
+            });
+
         // Set cancel button click listener
         ticDialogButton[5].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -703,34 +732,63 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
 
     public void changeTicButton(int eleNum, int ticNum) {
         // Change the tic button after selecting dialog
+        //Identify which button was pushed
         tempString = "elementTicButton" + String.format("%02d", eleNum);
         elementTicIndex[eleNum] = ticNum;
         resID = getResources().getIdentifier(tempString, "id", getPackageName());
         tempButton = findViewById(resID);
+        //Change the tic indicator
         tempString = ticArray[elementTicIndex[eleNum]];
         if (tempButton != null) tempButton.setText(tempString);
         //Recalculate Base and GOE Value
-        //tempInt = Arrays.asList(SOVCode).indexOf(elementCode[eleNum]); //Get SOV index of current element
         tempIndex = globalClass.ElementIndexLookUp(currentProgramElements[eleNum].trim());//Get SOV index of current element
-        if (tempIndex > 0)
-            tempBase = globalClass.ElementBaseLookUp(tempIndex); //Get Base Value from SOV
-        //Need to check combo jumps here, might change which is highest, so might change GOE
-        if (jumpBase[eleNum] > 0) {
-            tempBase = jumpBase[eleNum];
-            tempDouble1 = elementBase[eleNum] - jumpBase[eleNum]; //Saving value of combo without biggest jump
+        if (tempIndex > 0) {
+            if (tempIndex == 999) {
+                //Is a combo jump
+                //Need to check combo jumps here, might change which is highest, so might change GOE
+                //if (jumpBase[eleNum] > 0) {
+                    tempBase = jumpBase[eleNum]; //jumpBase is the base value of highest jump
+                    tempDouble1 = globalClass.calcComboJump(currentProgramElements[eleNum].trim(),Boolean.TRUE);//Get base for combo jump
+                    tempDouble1 = tempDouble1 - jumpBase[eleNum]; //Saving value of combo without biggest jump
+                //}
+            } else {
+                tempBase = globalClass.ElementBaseLookUp(tempIndex); //Get Base Value from SOV
+            }
         }
+
         tempGOE = elementGOE[eleNum] / tempBase; //This is GOE ratio only for recalculating (saving progress point)
 
         switch (ticNum) {
+            //Should make a global varibale set for the ratios, so ewasy to change year to year
+            case 0:
+                //No tics
+                break;
+
+            case 1:
+                //Review - no score change needed
+                break;
+
             case 2:
+                //edge
                 tempBase = Math.round(tempBase * 75.0) / 100.0; //Need to round to two digits
                 if (jumpBase[eleNum] > 0) jumpBase[eleNum] = tempBase;
                 break;
+
             case 3:
+                //downgrade
                 tempBase = Math.round(tempBase * 75.0) / 100.0; //Need to round to two digits
                 if (jumpBase[eleNum] > 0) jumpBase[eleNum] = tempBase;
                 break;
+
+            case 4:
+                //double downgrade
+                break;
+            case 5:
+                //return, no change
+                break;
+
             default:
+                //Why am I doing this? 7-24-19
                 if (jumpBase[eleNum] > 0) {
                     //Need to see about restoring jumpbase when turning off downgrade
                     jumpBase[eleNum] = globalClass.calcComboJump(elementCode[eleNum], Boolean.FALSE);
@@ -743,7 +801,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         //tempString = String.valueOf(tempBase);
         //Toast.makeText(this, "We have a Combo " + tempString, Toast.LENGTH_SHORT).show();
 
-        //
+        //Set element base for scoring
         if (jumpBase[eleNum] > 0) {
             elementBase[eleNum] = tempDouble1 + tempBase;
         } else {
@@ -754,6 +812,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         // Recalculate element score
         calcElementScore(eleNum);
     }
+
     public void changeButtonDialog(final int dialogButtonPointer) {
         // Build an AlertDialog
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
@@ -824,6 +883,7 @@ public class ProgramScoringViewActivity extends AppCompatActivity implements
         // Display the custom alert dialog on interface
         dialog.show();
     }
+
     //Set up the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
